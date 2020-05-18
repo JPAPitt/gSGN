@@ -1,0 +1,73 @@
+Integrand,lower bound of integral,upper bound of integral,Value of Integral,W Term 1,W Term 2,W Term 3,D Term 1,D Term 2
+(1/2 - x/2)**3*(x - 1/2)**2,-1,1,79/120,psijm1o2p,psijm1o2p,psijm1o2p,dphijm1o2,dphijm1o2
+(1/2 - x/2)**2*(x/2 + 1/2)*(x - 1/2)**2,-1,1,13/120,psijp1o2m,psijm1o2p,psijm1o2p,dphijm1o2,dphijm1o2
+(1/2 - x/2)**2*(x/2 + 1/2)*(x - 1/2)**2,-1,1,13/120,psijm1o2p,psijp1o2m,psijm1o2p,dphijm1o2,dphijm1o2
+(1/2 - x/2)*(x/2 + 1/2)**2*(x - 1/2)**2,-1,1,1/24,psijp1o2m,psijp1o2m,psijm1o2p,dphijm1o2,dphijm1o2
+(1/2 - x/2)**2*(x/2 + 1/2)*(x - 1/2)**2,-1,1,13/120,psijm1o2p,psijm1o2p,psijp1o2m,dphijm1o2,dphijm1o2
+(1/2 - x/2)*(x/2 + 1/2)**2*(x - 1/2)**2,-1,1,1/24,psijp1o2m,psijm1o2p,psijp1o2m,dphijm1o2,dphijm1o2
+(1/2 - x/2)*(x/2 + 1/2)**2*(x - 1/2)**2,-1,1,1/24,psijm1o2p,psijp1o2m,psijp1o2m,dphijm1o2,dphijm1o2
+(x/2 + 1/2)**3*(x - 1/2)**2,-1,1,7/120,psijp1o2m,psijp1o2m,psijp1o2m,dphijm1o2,dphijm1o2
+-2*x*(1/2 - x/2)**3*(x - 1/2),-1,1,-23/30,psijm1o2p,psijm1o2p,psijm1o2p,dphij,dphijm1o2
+-2*x*(1/2 - x/2)**2*(x/2 + 1/2)*(x - 1/2),-1,1,-1/10,psijp1o2m,psijm1o2p,psijm1o2p,dphij,dphijm1o2
+-2*x*(1/2 - x/2)**2*(x/2 + 1/2)*(x - 1/2),-1,1,-1/10,psijm1o2p,psijp1o2m,psijm1o2p,dphij,dphijm1o2
+-2*x*(1/2 - x/2)*(x/2 + 1/2)**2*(x - 1/2),-1,1,-1/30,psijp1o2m,psijp1o2m,psijm1o2p,dphij,dphijm1o2
+-2*x*(1/2 - x/2)**2*(x/2 + 1/2)*(x - 1/2),-1,1,-1/10,psijm1o2p,psijm1o2p,psijp1o2m,dphij,dphijm1o2
+-2*x*(1/2 - x/2)*(x/2 + 1/2)**2*(x - 1/2),-1,1,-1/30,psijp1o2m,psijm1o2p,psijp1o2m,dphij,dphijm1o2
+-2*x*(1/2 - x/2)*(x/2 + 1/2)**2*(x - 1/2),-1,1,-1/30,psijm1o2p,psijp1o2m,psijp1o2m,dphij,dphijm1o2
+-2*x*(x/2 + 1/2)**3*(x - 1/2),-1,1,-1/6,psijp1o2m,psijp1o2m,psijp1o2m,dphij,dphijm1o2
+(1/2 - x/2)**3*(x - 1/2)*(x + 1/2),-1,1,13/120,psijm1o2p,psijm1o2p,psijm1o2p,dphijp1o2,dphijm1o2
+(1/2 - x/2)**2*(x/2 + 1/2)*(x - 1/2)*(x + 1/2),-1,1,-1/120,psijp1o2m,psijm1o2p,psijm1o2p,dphijp1o2,dphijm1o2
+(1/2 - x/2)**2*(x/2 + 1/2)*(x - 1/2)*(x + 1/2),-1,1,-1/120,psijm1o2p,psijp1o2m,psijm1o2p,dphijp1o2,dphijm1o2
+(1/2 - x/2)*(x/2 + 1/2)**2*(x - 1/2)*(x + 1/2),-1,1,-1/120,psijp1o2m,psijp1o2m,psijm1o2p,dphijp1o2,dphijm1o2
+(1/2 - x/2)**2*(x/2 + 1/2)*(x - 1/2)*(x + 1/2),-1,1,-1/120,psijm1o2p,psijm1o2p,psijp1o2m,dphijp1o2,dphijm1o2
+(1/2 - x/2)*(x/2 + 1/2)**2*(x - 1/2)*(x + 1/2),-1,1,-1/120,psijp1o2m,psijm1o2p,psijp1o2m,dphijp1o2,dphijm1o2
+(1/2 - x/2)*(x/2 + 1/2)**2*(x - 1/2)*(x + 1/2),-1,1,-1/120,psijm1o2p,psijp1o2m,psijp1o2m,dphijp1o2,dphijm1o2
+(x/2 + 1/2)**3*(x - 1/2)*(x + 1/2),-1,1,13/120,psijp1o2m,psijp1o2m,psijp1o2m,dphijp1o2,dphijm1o2
+-2*x*(1/2 - x/2)**3*(x - 1/2),-1,1,-23/30,psijm1o2p,psijm1o2p,psijm1o2p,dphijm1o2,dphij
+-2*x*(1/2 - x/2)**2*(x/2 + 1/2)*(x - 1/2),-1,1,-1/10,psijp1o2m,psijm1o2p,psijm1o2p,dphijm1o2,dphij
+-2*x*(1/2 - x/2)**2*(x/2 + 1/2)*(x - 1/2),-1,1,-1/10,psijm1o2p,psijp1o2m,psijm1o2p,dphijm1o2,dphij
+-2*x*(1/2 - x/2)*(x/2 + 1/2)**2*(x - 1/2),-1,1,-1/30,psijp1o2m,psijp1o2m,psijm1o2p,dphijm1o2,dphij
+-2*x*(1/2 - x/2)**2*(x/2 + 1/2)*(x - 1/2),-1,1,-1/10,psijm1o2p,psijm1o2p,psijp1o2m,dphijm1o2,dphij
+-2*x*(1/2 - x/2)*(x/2 + 1/2)**2*(x - 1/2),-1,1,-1/30,psijp1o2m,psijm1o2p,psijp1o2m,dphijm1o2,dphij
+-2*x*(1/2 - x/2)*(x/2 + 1/2)**2*(x - 1/2),-1,1,-1/30,psijm1o2p,psijp1o2m,psijp1o2m,dphijm1o2,dphij
+-2*x*(x/2 + 1/2)**3*(x - 1/2),-1,1,-1/6,psijp1o2m,psijp1o2m,psijp1o2m,dphijm1o2,dphij
+4*x**2*(1/2 - x/2)**3,-1,1,14/15,psijm1o2p,psijm1o2p,psijm1o2p,dphij,dphij
+4*x**2*(1/2 - x/2)**2*(x/2 + 1/2),-1,1,2/15,psijp1o2m,psijm1o2p,psijm1o2p,dphij,dphij
+4*x**2*(1/2 - x/2)**2*(x/2 + 1/2),-1,1,2/15,psijm1o2p,psijp1o2m,psijm1o2p,dphij,dphij
+4*x**2*(1/2 - x/2)*(x/2 + 1/2)**2,-1,1,2/15,psijp1o2m,psijp1o2m,psijm1o2p,dphij,dphij
+4*x**2*(1/2 - x/2)**2*(x/2 + 1/2),-1,1,2/15,psijm1o2p,psijm1o2p,psijp1o2m,dphij,dphij
+4*x**2*(1/2 - x/2)*(x/2 + 1/2)**2,-1,1,2/15,psijp1o2m,psijm1o2p,psijp1o2m,dphij,dphij
+4*x**2*(1/2 - x/2)*(x/2 + 1/2)**2,-1,1,2/15,psijm1o2p,psijp1o2m,psijp1o2m,dphij,dphij
+4*x**2*(x/2 + 1/2)**3,-1,1,14/15,psijp1o2m,psijp1o2m,psijp1o2m,dphij,dphij
+-2*x*(1/2 - x/2)**3*(x + 1/2),-1,1,-1/6,psijm1o2p,psijm1o2p,psijm1o2p,dphijp1o2,dphij
+-2*x*(1/2 - x/2)**2*(x/2 + 1/2)*(x + 1/2),-1,1,-1/30,psijp1o2m,psijm1o2p,psijm1o2p,dphijp1o2,dphij
+-2*x*(1/2 - x/2)**2*(x/2 + 1/2)*(x + 1/2),-1,1,-1/30,psijm1o2p,psijp1o2m,psijm1o2p,dphijp1o2,dphij
+-2*x*(1/2 - x/2)*(x/2 + 1/2)**2*(x + 1/2),-1,1,-1/10,psijp1o2m,psijp1o2m,psijm1o2p,dphijp1o2,dphij
+-2*x*(1/2 - x/2)**2*(x/2 + 1/2)*(x + 1/2),-1,1,-1/30,psijm1o2p,psijm1o2p,psijp1o2m,dphijp1o2,dphij
+-2*x*(1/2 - x/2)*(x/2 + 1/2)**2*(x + 1/2),-1,1,-1/10,psijp1o2m,psijm1o2p,psijp1o2m,dphijp1o2,dphij
+-2*x*(1/2 - x/2)*(x/2 + 1/2)**2*(x + 1/2),-1,1,-1/10,psijm1o2p,psijp1o2m,psijp1o2m,dphijp1o2,dphij
+-2*x*(x/2 + 1/2)**3*(x + 1/2),-1,1,-23/30,psijp1o2m,psijp1o2m,psijp1o2m,dphijp1o2,dphij
+(1/2 - x/2)**3*(x - 1/2)*(x + 1/2),-1,1,13/120,psijm1o2p,psijm1o2p,psijm1o2p,dphijm1o2,dphijp1o2
+(1/2 - x/2)**2*(x/2 + 1/2)*(x - 1/2)*(x + 1/2),-1,1,-1/120,psijp1o2m,psijm1o2p,psijm1o2p,dphijm1o2,dphijp1o2
+(1/2 - x/2)**2*(x/2 + 1/2)*(x - 1/2)*(x + 1/2),-1,1,-1/120,psijm1o2p,psijp1o2m,psijm1o2p,dphijm1o2,dphijp1o2
+(1/2 - x/2)*(x/2 + 1/2)**2*(x - 1/2)*(x + 1/2),-1,1,-1/120,psijp1o2m,psijp1o2m,psijm1o2p,dphijm1o2,dphijp1o2
+(1/2 - x/2)**2*(x/2 + 1/2)*(x - 1/2)*(x + 1/2),-1,1,-1/120,psijm1o2p,psijm1o2p,psijp1o2m,dphijm1o2,dphijp1o2
+(1/2 - x/2)*(x/2 + 1/2)**2*(x - 1/2)*(x + 1/2),-1,1,-1/120,psijp1o2m,psijm1o2p,psijp1o2m,dphijm1o2,dphijp1o2
+(1/2 - x/2)*(x/2 + 1/2)**2*(x - 1/2)*(x + 1/2),-1,1,-1/120,psijm1o2p,psijp1o2m,psijp1o2m,dphijm1o2,dphijp1o2
+(x/2 + 1/2)**3*(x - 1/2)*(x + 1/2),-1,1,13/120,psijp1o2m,psijp1o2m,psijp1o2m,dphijm1o2,dphijp1o2
+-2*x*(1/2 - x/2)**3*(x + 1/2),-1,1,-1/6,psijm1o2p,psijm1o2p,psijm1o2p,dphij,dphijp1o2
+-2*x*(1/2 - x/2)**2*(x/2 + 1/2)*(x + 1/2),-1,1,-1/30,psijp1o2m,psijm1o2p,psijm1o2p,dphij,dphijp1o2
+-2*x*(1/2 - x/2)**2*(x/2 + 1/2)*(x + 1/2),-1,1,-1/30,psijm1o2p,psijp1o2m,psijm1o2p,dphij,dphijp1o2
+-2*x*(1/2 - x/2)*(x/2 + 1/2)**2*(x + 1/2),-1,1,-1/10,psijp1o2m,psijp1o2m,psijm1o2p,dphij,dphijp1o2
+-2*x*(1/2 - x/2)**2*(x/2 + 1/2)*(x + 1/2),-1,1,-1/30,psijm1o2p,psijm1o2p,psijp1o2m,dphij,dphijp1o2
+-2*x*(1/2 - x/2)*(x/2 + 1/2)**2*(x + 1/2),-1,1,-1/10,psijp1o2m,psijm1o2p,psijp1o2m,dphij,dphijp1o2
+-2*x*(1/2 - x/2)*(x/2 + 1/2)**2*(x + 1/2),-1,1,-1/10,psijm1o2p,psijp1o2m,psijp1o2m,dphij,dphijp1o2
+-2*x*(x/2 + 1/2)**3*(x + 1/2),-1,1,-23/30,psijp1o2m,psijp1o2m,psijp1o2m,dphij,dphijp1o2
+(1/2 - x/2)**3*(x + 1/2)**2,-1,1,7/120,psijm1o2p,psijm1o2p,psijm1o2p,dphijp1o2,dphijp1o2
+(1/2 - x/2)**2*(x/2 + 1/2)*(x + 1/2)**2,-1,1,1/24,psijp1o2m,psijm1o2p,psijm1o2p,dphijp1o2,dphijp1o2
+(1/2 - x/2)**2*(x/2 + 1/2)*(x + 1/2)**2,-1,1,1/24,psijm1o2p,psijp1o2m,psijm1o2p,dphijp1o2,dphijp1o2
+(1/2 - x/2)*(x/2 + 1/2)**2*(x + 1/2)**2,-1,1,13/120,psijp1o2m,psijp1o2m,psijm1o2p,dphijp1o2,dphijp1o2
+(1/2 - x/2)**2*(x/2 + 1/2)*(x + 1/2)**2,-1,1,1/24,psijm1o2p,psijm1o2p,psijp1o2m,dphijp1o2,dphijp1o2
+(1/2 - x/2)*(x/2 + 1/2)**2*(x + 1/2)**2,-1,1,13/120,psijp1o2m,psijm1o2p,psijp1o2m,dphijp1o2,dphijp1o2
+(1/2 - x/2)*(x/2 + 1/2)**2*(x + 1/2)**2,-1,1,13/120,psijm1o2p,psijp1o2m,psijp1o2m,dphijp1o2,dphijp1o2
+(x/2 + 1/2)**3*(x + 1/2)**2,-1,1,79/120,psijp1o2m,psijp1o2m,psijp1o2m,dphijp1o2,dphijp1o2

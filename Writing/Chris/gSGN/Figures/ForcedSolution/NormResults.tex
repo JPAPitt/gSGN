@@ -1,0 +1,127 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+
+\newcommand{\logLogSlopeTriangle}[5]
+{
+	% #1. Relative offset in x direction.
+	% #2. Width in x direction, so xA-xB.
+	% #3. Relative offset in y direction.
+	% #4. Slope d(y)/d(log10(x)).
+	% #5. Plot options.
+	
+	\pgfplotsextra
+	{
+		\pgfkeysgetvalue{/pgfplots/xmin}{\xmin}
+		\pgfkeysgetvalue{/pgfplots/xmax}{\xmax}
+		\pgfkeysgetvalue{/pgfplots/ymin}{\ymin}
+		\pgfkeysgetvalue{/pgfplots/ymax}{\ymax}
+		
+		% Calculate auxilliary quantities, in relative sense.
+		\pgfmathsetmacro{\xArel}{#1}
+		\pgfmathsetmacro{\yArel}{#3}
+		\pgfmathsetmacro{\xBrel}{#1-#2}
+		\pgfmathsetmacro{\yBrel}{\yArel}
+		\pgfmathsetmacro{\xCrel}{\xArel}
+		%\pgfmathsetmacro{\yCrel}{ln(\yC/exp(\ymin))/ln(exp(\ymax)/exp(\ymin))} % REPLACE THIS EXPRESSION WITH AN EXPRESSION INDEPENDENT OF \yC TO PREVENT THE 'DIMENSION TOO LARGE' ERROR.
+		
+		\pgfmathsetmacro{\lnxB}{\xmin*(1-(#1-#2))+\xmax*(#1-#2)} % in [xmin,xmax].
+		\pgfmathsetmacro{\lnxA}{\xmin*(1-#1)+\xmax*#1} % in [xmin,xmax].
+		\pgfmathsetmacro{\lnyA}{\ymin*(1-#3)+\ymax*#3} % in [ymin,ymax].
+		\pgfmathsetmacro{\lnyC}{\lnyA+#4*(\lnxA-\lnxB)}
+		\pgfmathsetmacro{\yCrel}{\lnyC-\ymin)/(\ymax-\ymin)} % THE IMPROVED EXPRESSION WITHOUT 'DIMENSION TOO LARGE' ERROR.
+		
+		% Define coordinates for \draw. MIND THE 'rel axis cs' as opposed to the 'axis cs'.
+		\coordinate (A) at (rel axis cs:\xArel,\yArel);
+		\coordinate (B) at (rel axis cs:\xBrel,\yBrel);
+		\coordinate (C) at (rel axis cs:\xCrel,\yCrel);
+		
+		% Draw slope triangle.
+		\draw[#5]   (A)-- node[pos=0.5,anchor=north] {1}
+		(B)-- 
+		(C)-- node[pos=0.5,anchor=west] {#4}
+		cycle;
+	}
+}
+
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=4.521in,
+height=3.566in,
+at={(0.758in,0.481in)},
+scale only axis,
+xmode=log,
+xmin=0.0001,
+xmax=10,
+xtick={0.0001,  0.001,   0.01,    0.1,      1,     10},
+xminorticks=true,
+xlabel style={font=\color{white!15!black}},
+xlabel={$\Delta\text{ x}$},
+ymode=log,
+ymin=1e-12,
+ymax=1,
+ytick={1e-12, 1e-09, 1e-06, 0.001,     1},
+yminorticks=true,
+ylabel style={font=\color{white!15!black}},
+ylabel={$\text{L}_\text{2}$},
+axis background/.style={fill=white},
+legend style={at={(0.03,0.97)}, anchor=north west, legend cell align=left, align=left, draw=white!15!black, only marks}
+]
+\addplot [color=blue, draw=none, mark size=2.8pt, mark=square, mark options={solid, blue}]
+  table[row sep=crcr]{%
+1.51515151515152	0.00179814955912212\\
+0.753768844221106	0.000294771587489822\\
+0.37593984962406	5.10548834223749e-05\\
+0.187734668335419	1.1654314226664e-05\\
+0.0938086303939962	2.99669898082514e-06\\
+0.0468896530165677	7.74074084093094e-07\\
+0.023441162681669	1.97466648747588e-07\\
+0.0117196655988749	4.99058835483289e-08\\
+0.00585960389077698	1.25466760503005e-08\\
+0.00292974472157659	3.14593038639753e-09\\
+0.00146485805525445	7.87627364252733e-10\\
+0.000732425451296149	1.96632520263228e-10\\
+};
+\addlegendentry{h}
+
+\addplot [color=red, draw=none, mark size=4.0pt, mark=o, mark options={solid, red}]
+  table[row sep=crcr]{%
+1.51515151515152	0.0906013217148203\\
+0.753768844221106	0.0156352144133535\\
+0.37593984962406	0.00287108891948918\\
+0.187734668335419	0.000669332783525097\\
+0.0938086303939962	0.00017007752974656\\
+0.0468896530165677	4.34214538217144e-05\\
+0.023441162681669	1.1001936076296e-05\\
+0.0117196655988749	2.7705900152448e-06\\
+0.00585960389077698	6.95290996037719e-07\\
+0.00292974472157659	1.74163445722197e-07\\
+0.00146485805525445	4.38208566013559e-08\\
+0.000732425451296149	1.76122208675547e-08\\
+};
+\addlegendentry{G}
+
+\addplot [color=black, draw=none, mark size=2.7pt, mark=triangle, mark options={solid, black}]
+  table[row sep=crcr]{%
+1.51515151515152	0.0784167110166483\\
+0.753768844221106	0.014355508761538\\
+0.37593984962406	0.00294346691591693\\
+0.187734668335419	0.000716048882398718\\
+0.0938086303939962	0.000182616254141428\\
+0.0468896530165677	4.648088621823e-05\\
+0.023441162681669	1.17452914180285e-05\\
+0.0117196655988749	2.95319818548078e-06\\
+0.00585960389077698	7.4047817485766e-07\\
+0.00292974472157659	1.85395327830947e-07\\
+0.00146485805525445	4.63610584377055e-08\\
+0.000732425451296149	1.16495152220648e-08\\
+};
+\addlegendentry{u}
+
+\logLogSlopeTriangle{0.7}{0.25}{0.3}{2}{black};
+\end{axis}
+\end{tikzpicture}%

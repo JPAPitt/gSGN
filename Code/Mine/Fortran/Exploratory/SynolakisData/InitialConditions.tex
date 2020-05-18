@@ -1,0 +1,38 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\begin{document}
+The central idea behind the way I've calculated the initial conditions, is that I wanted to have a soliton solution assuming a flat bed transplanted onto the bed profile of the synolakis experiment.
+
+The way I have achieved this is to make the water surface have the soliton surface profile solution (with $h_0$ = 0, since the bed is negative), I then calculate the velocity using this soliton solution (here $h_0$ is neccessary to give correct speed for depth of water, assuming flat bed).
+
+The depth $h$ is then given as $w - b$.	
+	
+Initial conditions for synolakis data for $h$ (height of water above bed), $w$ (stage - absolute location of free surface), $u$ (velocity) and $b$ bed.
+
+
+\[h(x) = w(x) - b(x),\]
+\[w(x) = \left\{ \begin{array}{c c}
+b(x) &  x \le 0 \\
+amp\times \text{sech}^2\left( k (x - xpeak) - c\times t \right) &  x > 0
+\end{array}
+\right. \]
+\[u(x) = \left\{ \begin{array}{c c}
+0 &  x \le 0 \\
+-c \times \left(  1 -\frac{h_0}{w(x) + h_0}\right) &  x > 0
+\end{array}
+\right. \]
+
+\[b(x) = \left\{ \begin{array}{c c}
+-x \tan\left(\beta\right) &  x \le \text{cot}\left(\beta\right) \\
+-1 &  x > \text{cot}\left(\beta\right)
+\end{array}
+\right. \]
+
+where $c$ and $k$ depend on the inputs like so
+\[c = \sqrt{g*(h_0 + amp)}\]
+\[k = \frac{\sqrt{3 \times amp}}{2 h_0 \sqrt{h_0 + amp}} \]
+
+the input parameters are $t$ - time (initially 0), $h_0$ - background height of water ($1$ for these experiments), $amp$ - height of wave above background water depth,
+$\beta$ - slope of linear beach, $xpeak$ - location of wave peak at $t = 0$, $g$ acceleration due to gravity - in the non-dimensionalised experiments this is should be $1$. 
+
+\end{document}

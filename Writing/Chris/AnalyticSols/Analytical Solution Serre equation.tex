@@ -1,0 +1,155 @@
+ \documentclass[subeqn]{article}
+\usepackage[dvips]{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{topcapt}
+%\usepackage{citeref}
+\usepackage{color}
+%\usepackage{sgr-colors}
+\usepackage{lscape}
+
+\newcommand{\UV}{\mbox{\boldmath$U$}}
+\newcommand{\VV}{\mbox{\boldmath$V$}}
+\newcommand{\FV}{\mbox{\boldmath$F$}}
+\newcommand{\SV}{\mbox{\boldmath$S$}}
+\newcommand{\WV}{\mbox{\boldmath$W$}}
+\newcommand{\CV}{\mbox{\boldmath$C$}}
+\newcommand{\SVhat}{\hat{\SV}}
+\newcommand{\R}{{\mathbb{R}}}
+\newcommand{\comment}[1]
+{\par\colorbox{LGray}{\parbox{\linewidth}{\bf Comment: #1}}}
+\definecolor{lightblue}{rgb}{.80,.9,1}
+\definecolor{lightred}{rgb}{0.95, 0.41, 0.34}
+\newcommand{\hl}[1]
+    {\par\colorbox{lightblue}{\parbox{\linewidth}{#1}}}
+
+\newcommand{\hr}[1]
+{\par\colorbox{lightred}{\parbox{\linewidth}{#1}}}
+
+\begin{document}
+
+The Serre equations are
+\begin{subequations}
+
+%changed to d/dx
+	\hr{
+\begin{equation}
+h_t + [uh]_x = 0
+\label{eq:S1}
+\end{equation}
+}
+\begin{equation}
+u_t + h_x + uu_x - \dfrac{1}{3h} \dfrac{\partial}{\partial x} \left [ h^3 ( u_{xt} + uu_{xx} - (u_x)^2) \right ] =  0.
+\label{eq:S2}
+\end{equation}
+\label{Serre}
+\end{subequations}
+A horizontal bottom is located at $z = -d_0$ below the still water surface, at $z = 0$ and the free surface is located $\eta(x,t)$ above the still water level. Therefore, the water depth is $h(x,t) = \eta(x,t) + d_0$. The depth average fluid velocity is $u(x,t)$.  
+
+Assuming that the solution has the form of a travelling wave solution, where $h(x,t) = h(\xi)$, $u(x,t) = u(\xi)$ and $\xi = x - ct$, where $c$ is a constant.
+
+Substituting into the \eqref{Serre} to obtain a relationship between, $\eta(\xi)$ and $u(\xi)$, then
+\begin{subequations}
+\begin{equation}
+h'(\xi)\xi_t + u(\xi)h(\xi)'\xi_x + h(\xi)u(\xi)'\xi_x = 0
+\label{eq:S11}
+\end{equation}
+\begin{gather}
+u'(\xi) \xi_t + h(\xi)'\xi_x + u(\xi)u(\xi)'\xi_x \\
+- \dfrac{1}{3h(\xi)}  \left [ h(\xi)^3 ( u(\xi)''\xi_x\xi_t + u(\xi)u(\xi)''\xi_x\xi_x - (u(\xi)'\xi_x)^2) \right ]' =  0.
+\label{eq:S22}
+\end{gather}
+\label{Serre2}
+\end{subequations}
+Now $\partial \xi//\partial x = 1$ and $\partial \xi/\partial t  = -c$, then \eqref{Serre2} become
+\begin{subequations}
+\begin{equation}
+-c h' + uh' + hu' = 0
+\label{eq:S13}
+\end{equation}
+\begin{equation}
+-cu(\xi)' + h(\xi)' + u(\xi)u(\xi)' - \dfrac{1}{3h(\xi)}  \left [ h^3 ( -cu(\xi)'' + u(\xi)u(\xi)'' - (u(\xi)')^2) \right ]' =  0.
+\label{eq:S23}
+\end{equation}
+\label{Serre3}
+\end{subequations}
+which are functions of $\xi$ only.
+
+Integrating \eqref{eq:S13}
+\begin{equation*}
+\int -c h(\xi)' + u(\xi)h(\xi)' + h(\xi)u(\xi)' \, d\xi = 0
+\end{equation*}
+and substituting $h = \eta + 1$, where we have chosen $d_0 = 1$ then
+\begin{equation*}
+-c h(\xi) + \int u(\xi)\eta(\xi)' + (\eta(\xi) + 1)u(\xi)' \, d\xi = 0
+\end{equation*}
+or
+\begin{equation}
+-c h(\xi) + u(\xi) + \int u(\xi)\eta(\xi)' + \eta(\xi) u(\xi)' \, d\xi = 0.
+\label{eq:S14}
+\end{equation}
+Now using the integration by parts on the first term in the integrand
+\begin{gather*}
+\int u(\xi)\eta(\xi)' \, d\xi = u(\xi)\eta(\xi) - \int u(\xi)' \eta(\xi)' \, d\xi.
+\end{gather*}
+Substituting into \eqref{eq:S14}, then
+\begin{equation*}
+-c h(\xi) + u(\xi) + u(\xi)\eta(\xi) = 0.
+\end{equation*}
+Rearranging, then
+\begin{equation*}
+u(\xi) = \dfrac{c\eta(\xi)}{1 + \eta}
+\end{equation*}
+or
+\begin{equation}
+u(\xi) = \dfrac{c(h(\xi) - 1)}{h(\xi)}
+\label{eq:u-h}
+\end{equation}
+which is a relationship between $u(\xi)$ and $h(\xi)$.
+
+Returning to the momentum equation, \eqref{Serre2}, which will provide travelling wave solution. The relationships, $u(\xi)'$ and $u(\xi)''$ are required, which are
+\begin{gather*}
+u(\xi)' = \dfrac{ch(\xi)'}{h(\xi)^2}
+\end{gather*}
+and
+\begin{gather*}
+u(\xi)'' = \dfrac{c(h(\xi)''h(\xi) - 2h(\xi)^2)}{h(\xi)^3}.
+\end{gather*}
+Substituting into \eqref{Serre2}, then
+\begin{gather*}
+-\dfrac{c^2 h(\xi)'}{h(\xi)^2} + \dfrac{cu(\xi)h(\xi)'}{h(\xi)^2} + h(\xi)' \\
+= -\dfrac{1}{3h(\xi)} \left ( \dfrac{1}{h(\xi)} \Bigg [ -c^2 h(\xi) \left ( h(\xi)''h(\xi) - 2(h(\xi)')^2 \right ) + u(\xi)ch(\xi) \left ( h(\xi)''h(\xi) - 2(h(\xi)')^2 \right ) - c^2(h(\xi)')^2 \Bigg ] \right )'
+\end{gather*}
+\hl{Making use of \eqref{eq:u-h}, then
+\begin{gather*}
+-\dfrac{c^2 h(\xi)'}{h(\xi)^2} + \dfrac{c^2(h(\xi) - 1)h(\xi)'}{h(\xi)^3} + h(\xi)' = -\dfrac{c^2}{3h(\xi)} \left ( \dfrac{ h(\xi)''h(\xi) - (h(\xi)')^2}{h(\xi)} \right )'.
+\end{gather*}
+Simplifying
+\begin{gather*}
+-\dfrac{c^2 h(\xi)'}{h(\xi)^3} + h(\xi)' = -\dfrac{c^2}{3h(\xi)} \left ( \dfrac{ h(\xi)''h(\xi) - (h(\xi)')^2}{h(\xi)} \right )'.
+\end{gather*}
+Integrating
+\begin{gather*}
+\dfrac{c^2}{2h(\xi)^2} + h(\xi) = ??????????
+\end{gather*}
+}
+The above is what I get. I am not sure how to integrate the last term in the above equation, hence ?????? above.
+
+This is what Demitri has:
+
+Making use of \eqref{eq:u-h}, then
+\begin{gather*}
+-c \dfrac{h(\xi)'}{h(\xi)^2} + c^2 \dfrac{(h(\xi) - 1)h(\xi)'}{h(\xi)^2} + h(\xi)' = -c^2 \dfrac{1}{3h(\xi)} \left ( \dfrac{ h(\xi)''h(\xi) - (h(\xi)')^2}{h(\xi)} \right )'.
+\end{gather*}
+After simplificationn of same terms this gives
+\begin{gather*}
+-c^2 \dfrac{h(\xi)'}{h(\xi)^2} + h{\xi}h(\xi)' = -c^2 \dfrac{1}{3h(\xi)} \left ( \dfrac{ h(\xi)''h(\xi) - (h(\xi)')^2}{h(\xi)} \right )'.
+\end{gather*}
+which after Integrating and division by $h$ becomes
+\begin{gather*}
+c^2 \dfrac{1}{h(\xi)^2} + \dfrac{h(\xi)}{2} = -\dfrac{c^2}{3}\left ( \dfrac{h(\xi)'}{h(\xi)} \right ) + \left ( c^2 + \dfrac{1}{2} \right ) \dfrac{1}{h(\xi)}
+\end{gather*}
+I am not sure how he got this, and I am not sure that it is correct.
+
+\end{document}

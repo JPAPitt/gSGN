@@ -1,0 +1,113 @@
+\documentclass[subeqn]{article}
+\usepackage[dvips]{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{topcapt}
+%\usepackage{citeref}
+\usepackage{color}
+%\usepackage{sgr-colors}
+\usepackage{lscape}
+
+\begin{document}
+The  regularised Serre equations are
+\begin{subequations}
+	\begin{equation}
+	\label{eqh}
+	h_t + (uh)_x = 0
+	\end{equation}
+	\begin{equation}
+	\label{equh}
+	(uh)_t + \left(u^2h + \frac{gh^2}{2} + \epsilon h^2 \left[h\left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]  - g \left ( h \dfrac{\partial^2 h}{\partial x^2}  + \dfrac{1}{2} \dfrac{\partial h}{\partial x} \dfrac{\partial h}{\partial x} \right )\right] \right)_x = 0
+	\end{equation}
+\end{subequations}
+
+Assuming that
+\begin{align*}
+h(x,t) &= h_0 + \delta \eta(x,t) + O(\delta^2)\\
+u(x,t) &= u_0 + \delta v(x,t) + O(\delta^2)
+\end{align*}
+
+By substituting these forms into the linearised Serre equations and neglecting $O(\delta^2)$ terms, we get the linearised regularised Serre equations. We also substitute $\eta_t$ using the mass equation into the momentum equation. 
+
+
+\begin{subequations}
+	\begin{equation}
+	\label{eqlinhd}
+	(\delta\eta)_t + u_0 (\delta \eta)_x + h_0 (\delta v)_x = 0
+	\end{equation}
+	\begin{equation}
+	\label{eqlinuhd}
+	h_0(\delta v)_t + gh_0(\delta \eta)_x + h_0u_0 (\delta v)_x - \epsilon h_0^3(\delta v)_{xxt} -g \epsilon h_0^3 (\delta \eta)_{xxx} - \epsilon h_0^3 u_0 (\delta v)_{xxx} = 0
+	\end{equation}
+\end{subequations}
+
+We can remove the $\delta$ term, either by removing the common factor, or absorbing it into $\eta$ and $v$ to get
+
+\begin{subequations}
+	\begin{equation}
+	\label{eqlinh}
+	\eta_t + u_0 \eta_x + h_0 v_x = 0
+	\end{equation}
+	\begin{equation}
+	\label{eqlinuh}
+	h_0v_t + gh_0\eta_x + h_0u_0 v_x - \epsilon h_0^3v_{xxt} -g \epsilon h_0^3 \eta_{xxx} - \epsilon h_0^3 u_0 v_{xxx} = 0
+	\end{equation}
+\end{subequations}
+
+We now assume that $\eta(x,t) = H \exp\left(i (\kappa x - \omega t)\right)$,  $v(x,t) = U \exp\left(i (\kappa x - \omega t)\right)$
+\begin{align*}
+\eta(x,t) &= H \exp\left(i (\kappa x - \omega t)\right) \\
+v(x,t) &= U \exp\left(i (\kappa x - \omega t)\right)
+\end{align*}
+
+substituting these into the linearised Serre equation we get
+
+\begin{subequations}
+	\begin{equation}
+	\label{eqlinhexp}
+	\left[H u_0 \kappa - H \omega + U h_0\kappa\right]i \exp\left[i \left(\kappa x - \omega t\right)\right] = 0
+	\end{equation}
+	\begin{equation}
+	\label{eqlinuhexp}
+	\left[g \epsilon H h_0^2 \kappa^3  + g \kappa H + U h_0^2 u_0 \epsilon \kappa^3 - U h_0^2 \epsilon \kappa^2 \omega + U u_0 \kappa - U \omega\right] i h_0 \exp\left[i \left(\kappa x - \omega t\right)\right] = 0
+	\end{equation}
+\end{subequations}
+
+This can be written as
+\begin{equation}
+\begin{bmatrix}
+u_0\kappa - \omega & h_0 \kappa \\
+g \epsilon h_0^2 \kappa^3 + \kappa g & h_0^2 u_0 \epsilon \kappa^3 - h_0^2 \epsilon \kappa^2 \omega + u_0 \kappa - \omega
+\end{bmatrix}
+\begin{bmatrix}
+H \\ U
+\end{bmatrix} = 0
+\end{equation}
+
+Which has non-trivial solutons when the determinant is zero. 
+
+The determinant of this matrix is
+\begin{equation}
+\left(\epsilon h_0^2 \kappa ^2 + 1\right)\left[\omega^2 - 2u_0\kappa \omega +  u_0^2 \kappa^2 - gh_0\kappa^2 \right] 
+\end{equation} 
+
+
+To solve for $0$ we get
+\begin{equation}
+\omega^2 - 2u_0\kappa \omega +  u_0 \kappa^2 - gh_0\kappa^2 = 0 
+\end{equation} 
+
+by quadratic equation we have
+
+\begin{equation}
+\omega = \dfrac{2u_0 \kappa \pm \sqrt{4u_0^2\kappa^2 - 4(u_0^2\kappa^2 - gh_0\kappa^2)}}{2}
+\end{equation}
+
+\begin{equation}
+\omega = (u_0 \pm \sqrt{gh_0})\kappa
+\end{equation}
+
+so wave speed and phase speed are equal,and also independent of $\epsilon$
+
+\end{document}

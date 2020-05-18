@@ -1,0 +1,350 @@
+\documentclass[subeqn]{article}
+\usepackage[dvips]{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{topcapt}
+%\usepackage{citeref}
+\usepackage{color}
+%\usepackage{sgr-colors}
+\usepackage{lscape}
+
+\newcommand{\UV}{\mbox{\boldmath$U$}}
+\newcommand{\VV}{\mbox{\boldmath$V$}}
+\newcommand{\FV}{\mbox{\boldmath$F$}}
+\newcommand{\SV}{\mbox{\boldmath$S$}}
+\newcommand{\WV}{\mbox{\boldmath$W$}}
+\newcommand{\CV}{\mbox{\boldmath$C$}}
+\newcommand{\SVhat}{\hat{\SV}}
+\newcommand{\R}{{\mathbb{R}}}
+\newcommand{\comment}[1]
+{\par\colorbox{LGray}{\parbox{\linewidth}{\bf Comment: #1}}}
+\definecolor{lightblue}{rgb}{.80,.9,1}
+\definecolor{lightred}{rgb}{0.95, 0.41, 0.34}
+\newcommand{\hl}[1]
+    {\par\colorbox{lightblue}{\parbox{\linewidth}{#1}}}
+
+\newcommand{\hr}[1]
+{\par\colorbox{lightred}{\parbox{\linewidth}{#1}}}
+
+\begin{document}
+
+The Serre equations are
+\begin{subequations}
+	\begin{equation}
+	\label{eqh}
+	h_t + (uh)_x = 0
+	\end{equation}
+	\begin{equation}
+	\label{equh}
+	(uh)_t + \left(u^2h + \frac{gh^2}{2} + \frac{h^3}{3} \left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]\right)_x = 0
+	\end{equation}
+\end{subequations}
+
+rewriting \eqref{equh} gives
+\[hu_t + uh_t + 2u u_x h + u^2h_x + ghh_x + \left(\frac{h^3}{3} \left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]\right)_x  = 0\]
+
+substituting  \eqref{eqh}
+\[hu_t - u\left(uh_x + hu_x\right) + 2u u_x h + u^2h_x + ghh_x + \left(\frac{h^3}{3} \left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]\right)_x = 0\]
+
+\[hu_t +  u u_x h + ghh_x + \left(\frac{h^3}{3} \left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]\right)_x = 0\]
+
+divide by $h$
+\[u_t +  u u_x  + gh_x + \frac{1}{h} \left(\frac{h^3}{3} \left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]\right)_x = 0\]
+
+So we get
+
+\begin{subequations}
+	\label{eqexp}
+	\begin{equation}
+	\label{eqhexp}
+	h_t + u_xh + u h_x = 0
+	\end{equation}
+	\begin{equation}
+	\label{equhexp}
+	u_t +  u u_x  + gh_x + \frac{1}{3h} \left({h^3}\left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]\right)_x = 0	
+	\end{equation}
+\end{subequations}
+
+Want solutions of travelling wave form $h(\xi)$ and $u(\xi)$ where $\xi = x - ct$. For this to be a solution must satisfy \eqref{eqexp}. First we want to write these equations in terms of $\xi$
+
+For \eqref{eqhexp} using $[q(\xi)]_x = q'(\xi)\xi_x$ and $[q(\xi)]_t = q'(\xi)\xi_t$ we have
+\[h' \xi_t + u'h\xi_x + u h'\xi_x = 0\]
+
+since $\xi_x = 1$ and $\xi_t = -c$ then
+\[-c h' + u'h + u h' = 0\]
+
+Integrating we get
+\[ \int -c h' + u'h + u h' d\xi =  \int 0 d\xi\]
+
+\[ \int -c h' + \left[uh\right]' d\xi =  \int 0 d\xi\]
+
+Combining the contstants of integration of both integrals into $A$ we get that
+\[ -ch + uh + A = 0  \]
+
+so we get
+
+\[ uh = ch - A  \]
+
+\[ u = c - \frac{A}{h}  \]
+
+\begin{equation}
+\label{eqnuhmassrel}
+u(\xi) = c - \frac{A}{h(\xi)} 
+\end{equation}
+
+Now we rewrite \eqref{equhexp} as a function of $\xi$, making use of 
+\begin{align*}
+[q(\xi)]_x &= q'(\xi) \\
+[q(\xi)]_{xx} &= q''(\xi) \\
+[q(\xi)]_{xxx} &= q'''(\xi) \\
+[q(\xi)]_{xt} &= -c q''(\xi) \\
+[q(\xi)]_{xxt} &= -c q'''(\xi) \\
+[q(\xi)]_t &= -c q'(\xi)
+\end{align*}
+using $\xi = x - ct$
+
+we get from \eqref{equhexp}
+
+\[	-cu' +  u u'  + gh' + \frac{1}{3h} \left({h^3}\left[\left(u' \right)^2 - uu'' + c u'' \right]\right)' = 0\]
+
+From \eqref{eqnuhmassrel} we have
+\begin{align*}
+u &= c - \frac{A}{h} \\
+u' &= A \frac{h'}{h^2} \\
+u'' &= A \frac{h h'' - 2\left[h'\right]^2}{h^3} \\
+u''' &= A \frac{h^2 h''' + 6 \left[h'\right]^3 - 6hh'h''}{h^4} \\
+\end{align*}
+
+So we get that
+\begin{multline*}
+-c\left[A \frac{h'}{h^2}\right] + \left[ c - \frac{A}{h}\right] \left[A \frac{h'}{h^2}\right]  + gh' \\ + \frac{1}{3h} \left({h^3}\left[\left(A \frac{h'}{h^2} \right)^2 - \left[ c - \frac{A}{h}\right]\left[A \frac{h h'' - 2\left[h'\right]^2}{h^3}\right] + c \left[A \frac{h h'' - 2\left[h'\right]^2}{h^3}\right] \right]\right)' = 0 \end{multline*}
+
+\begin{multline*}
+-\left[A^2 \frac{h'}{h^3}\right]  + gh'  + \frac{1}{3h} \left({h^3}\left[\left(A \frac{h'}{h^2} \right)^2 + \left[ \frac{A}{h}\right]\left[A \frac{h h'' - 2\left[h'\right]^2}{h^3}\right] \right]\right)' = 0 \end{multline*}
+
+\begin{equation*}
+-\left[A^2 \frac{h'}{h^3}\right]  + gh'  + \frac{1}{3h} \left({h^3}\left[\left(A^2 \frac{\left[h'\right]^2}{h^4} \right) + \left[A^2 \frac{h h'' - 2\left[h'\right]^2}{h^4}\right] \right]\right)' = 0 
+\end{equation*}
+
+\begin{equation*}
+-\left[A^2 \frac{h'}{h^3}\right]  + gh'  + \frac{A^2}{3h} \left({h^3}\left[\frac{h h'' - \left[h'\right]^2}{h^4} \right]\right)' = 0 
+\end{equation*}
+
+\begin{equation*}
+-A^2 \frac{h'}{h^3}  + gh'  + \frac{A^2}{3h} \left(\frac{h h'' - \left[h'\right]^2}{h} \right)' = 0 
+\end{equation*}
+
+multiply by $h$
+
+\begin{equation*}
+-A^2 \frac{h'}{h^2}  + ghh'  + \frac{A^2}{3} \left(\frac{h h'' - \left[h'\right]^2}{h} \right)' = 0 
+\end{equation*}
+
+\begin{equation*}
+\frac{A^2}{3} \left(\frac{h h'' - \left[h'\right]^2}{h} \right)' = A^2 \frac{h'}{h^2} - ghh'
+\end{equation*}
+
+Integrating we get
+
+\begin{equation*}
+\int \frac{A^2}{3} \left(\frac{h h'' - \left[h'\right]^2}{h} \right)' \; d \xi =  \int A^2 \frac{h'}{h^2} - ghh'  d \xi
+\end{equation*}
+$C$ constant of integration
+\begin{equation*}
+ \frac{A^2}{3} \left(\frac{h h'' - \left[h'\right]^2}{h} \right) + C  =  \int A^2 \frac{h'}{h^2} - ghh'  d \xi
+\end{equation*}
+
+Absorbing all contstants of intergration into C we get
+\begin{equation*}
+\frac{A^2}{3} \left(\frac{h h'' - \left[h'\right]^2}{h} \right) + C  =  -\frac{A^2}{h} - \frac{gh^2}{2}
+\end{equation*}
+
+Thus we have
+
+\begin{equation*}
+\frac{A^2}{3} \left({h h'' - \left[h'\right]^2} \right) + Ch  =  -{A^2} - \frac{gh^3}{2}
+\end{equation*}
+
+\begin{equation*}
+\frac{A^2}{3} \left({h h'' - \left[h'\right]^2} \right) + \frac{gh^3}{2}   =  -{A^2} - Ch
+\end{equation*}
+
+divide by $h^2$
+
+\begin{equation*}
+\frac{A^2}{3} \left(\frac{h h'' - \left[h'\right]^2}{h^2} \right) + \frac{gh}{2}   =  \frac{-{A^2}}{h^2} - \frac{C}{h}
+\end{equation*}
+
+\begin{equation*}
+\frac{A^2}{3} \left(\frac{h'}{h} \right)' + \frac{gh}{2}   =  \frac{-{A^2}}{h^2} - \frac{C}{h}
+\end{equation*}
+
+\begin{equation*}
+\frac{A^2}{3} \left(\frac{h'}{h} \right)' + \frac{gh}{2}   =  -\frac{{A^2}}{h^2} - \frac{C}{h}
+\end{equation*}
+
+So we have two constants of integration which we can set as we like. 
+
+In summary we have the following equations that travelling wave solutions must satisfy, for a particular choice of $A$ and $C$.
+\begin{subequations}
+\label{eqnSerreSat}
+\begin{equation}
+\label{eqnSerreSath}
+\frac{A^2}{3} \left(\frac{h'(\xi)}{h(\xi)} \right)' + \frac{gh(\xi)}{2}   =  -\frac{{A^2}}{h^2(\xi)} - \frac{C}{h(\xi)}
+\end{equation}
+\begin{equation}
+\label{eqnSerreSatu}
+u(\xi) = c - \frac{A}{h(\xi)}
+\end{equation}
+\end{subequations}
+
+In Dimitri's case we have $A = 1$ and $C = -\left(c^2 + \frac{1}{2}\right) $
+Resulting in:
+\[\frac{c^2}{3} \left(\frac{h'(\xi)}{h(\xi)} \right)' + \frac{gh(\xi)}{2}   =  -\frac{{c^2}}{h^2(\xi)} + \frac{1}{h(\xi)}\left(c^2 + \frac{1}{2} \right)\]
+
+\subsection{Validation with soliton}
+
+The equations for a soliton are:
+\begin{subequations}
+	\label{eqnsol}
+	\begin{equation}
+	\label{eqnSolitonh}
+	h(\xi) = a_0 + a_1\text{sech}^2\left( \kappa \xi\right)
+	\end{equation}
+	\begin{equation}
+	\label{eqnSolitonu}
+	u(\xi) = c\left(1 - \frac{a_0}{h(x,t)}\right)
+	\end{equation}
+	where
+	\begin{align}
+	\label{paramsc}
+	c &= \sqrt{g\left(a_0 + a_1\right)}\\
+	\label{paramsk}
+	\kappa &= \frac{\sqrt{3a_1}}{2 a_0 \sqrt{a_0 + a_1}}
+	\end{align}
+\end{subequations}
+
+
+
+\eqref{eqnSolitonu} satisfies \eqref{eqnSerreSatu} for constant of integration $A = a_0 c$. Using this value we have 
+\[\frac{a_0^2 c^2}{3} \left(\frac{h'(\xi)}{h(\xi)} \right)' + \frac{gh(\xi)}{2}   =  -\frac{a_0^2 c^2}{h^2(\xi)} - \frac{C}{h(\xi)}\]
+
+\begin{align*}
+h(\xi) &= a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \\
+h'(\xi) &= -2 a_1 \kappa\tanh\left(\kappa \xi \right) \text{sech}^2\left( \kappa \xi\right) \\ \\
+\frac{h'(\xi)}{h(\xi)} &= \frac{-2 a_1 \kappa\tanh\left(\kappa \xi \right) \text{sech}^2\left( \kappa \xi\right)}{a_0 + a_1\text{sech}^2\left( \kappa \xi\right)} \\
+\left(\frac{h'(\xi)}{h(\xi)}\right)' &= -\frac{2 a_1 \kappa^2 sech^2(\kappa x) \left(a_0 sech^2(\kappa x) + a_1 sech^4(\kappa x) - 2 a_0 tanh^2(\kappa x) \right)}{(a_0 + a_1 sech^2(\kappa x))^2}
+\end{align*}
+
+substituting into  \eqref{eqnSerreSath} we get
+\begin{multline*}
+- \frac{a_0^2 c^2}{3}\frac{2 a_1 \kappa^2 sech^2(\kappa \xi) \left(a_0 sech^2(\kappa \xi) + a_1 sech^4(\kappa \xi) - 2 a_0 tanh^2(\kappa \xi) \right)}{(a_0 + a_1 sech^2(\kappa \xi))^2} \\
+ = -\frac{g}{2}\left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right) - \frac{a_0^2c^2}{\left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)^2} \\
+- \frac{C}{\left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)}
+\end{multline*}
+
+\begin{multline*}
+- \frac{a_0^2 c^2}{3}\frac{2 a_1 \kappa^2 sech^2(\kappa \xi) \left(a_0 sech^2(\kappa \xi) + a_1 sech^4(\kappa \xi) - 2 a_0 tanh^2(\kappa \xi) \right)}{(a_0 + a_1 sech^2(\kappa \xi))^2} \\
+= -\frac{g}{2}\frac{\left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)^3 }{\left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right) ^2} - \frac{a_0^2c^2}{\left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)^2} \\
+- \frac{C\left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right) }{\left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)^2}
+\end{multline*}
+
+
+\begin{multline*}
+- \frac{a_0^2 c^2}{3}\frac{2 a_1 \kappa^2 sech^2(\kappa \xi) \left(a_0 sech^2(\kappa \xi) + a_1 sech^4(\kappa \xi) - 2 a_0 tanh^2(\kappa \xi) \right)}{(a_0 + a_1 sech^2(\kappa \xi))^2} \\
+= \frac{-\frac{g}{2} \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)^3 - a_0^2 c^2 - C \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)}{\left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right) ^2}
+\end{multline*}
+
+multiply both sides by $\left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right) ^2$
+ \begin{multline*}
+- \frac{a_0^2 c^2}{3}{2 a_1 \kappa^2 sech^2(\kappa \xi) \left(a_0 sech^2(\kappa \xi) + a_1 sech^4(\kappa \xi) - 2 a_0 tanh^2(\kappa \xi) \right)} \\
+ = {-\frac{g}{2} \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)^3 - a_0^2 c^2 - C \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)}
+ \end{multline*}
+ 
+ using $\tanh^2(x) = 1 - \text{sech}^2(x)$
+ 
+  \begin{multline*}
+- \frac{a_0^2 c^2}{3}{2 a_1 \kappa^2 sech^2(\kappa \xi) \left(a_0 sech^2(\kappa \xi) + a_1 sech^4(\kappa \xi) - 2 a_0 \left(1 - sech^2(\kappa \xi) \right) \right)} \\
+ = {-\frac{g}{2} \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)^3 - a_0^2 c^2 - C \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)}
+ \end{multline*}
+ 
+   \begin{multline*}
+ - \frac{a_0^2 c^2}{3}{2 a_1 \kappa^2 sech^2(\kappa \xi) \left(3a_0 sech^2(\kappa \xi) + a_1 sech^4(\kappa \xi)- 2a_0 \right)} \\
+ = {-\frac{g}{2} \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)^3 - a_0^2 c^2 - C \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)}
+ \end{multline*}
+ 
+    \begin{multline*}
+ - \frac{a_0^2 c^2}{3}{2 a_1 \kappa^2 sech^2(\kappa \xi) \left(3a_0 sech^2(\kappa \xi) + a_1 sech^4(\kappa \xi)- 2a_0 \right)} \\
+ = {-\frac{g}{2} \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)^3 - a_0^2 c^2 - C \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)}
+ \end{multline*}
+ 
+ Just expanding the RHS now
+
+\begin{multline*}
+- \frac{a_0^2 c^2}{3}{2 a_1 \kappa^2 sech^2(\kappa \xi) \left(3a_0 sech^2(\kappa \xi) + a_1 sech^4(\kappa \xi)- 2a_0 \right)} \\
+= {-\frac{g}{2} \left[a_0^3 + 3a_0a_1^2\text{sech}^4\left( \kappa \xi\right) + 3a_0^2a_1\text{sech}^2\left( \kappa \xi\right) + a_1^3\text{sech}^6\left( \kappa \xi\right)   \right] - a_0^2 c^2 - C \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)}
+\end{multline*}
+
+making use of \eqref{paramsc} and \eqref{paramsk} we have $c^2 = g(a_0 + a_1)$ and $\kappa^2  = \frac{3a_1}{4 a_0^2(a_0 + a_1)}$, first we try the RHS
+
+\begin{multline*}
+- \frac{a_0^2 g \left(a_0 + a_1\right)}{3}{2 a_1 \frac{3a_1}{4 a_0^2(a_0 + a_1)} sech^2(\kappa \xi) \left(3a_0 sech^2(\kappa \xi) + a_1 sech^4(\kappa \xi)- 2a_0 \right)} \\
+= {-\frac{g}{2} \left[a_0^3 + 3a_0a_1^2\text{sech}^4\left( \kappa \xi\right) + 3a_0^2a_1\text{sech}^2\left( \kappa \xi\right) + a_1^3\text{sech}^6\left( \kappa \xi\right)   \right] - a_0^2 g \left(a_0 + a_1\right) - C \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)}
+\end{multline*}
+
+\begin{multline*}
+- {\frac{ga_1^2 }{2} sech^2(\kappa \xi) \left(3a_0 sech^2(\kappa \xi) + a_1 sech^4(\kappa \xi)- 2a_0 \right)} \\
+= {-\frac{g}{2} \left[a_0^3 + 3a_0a_1^2\text{sech}^4\left( \kappa \xi\right) + 3a_0^2a_1\text{sech}^2\left( \kappa \xi\right) + a_1^3\text{sech}^6\left( \kappa \xi\right)   \right] - a_0^2 g \left(a_0 + a_1\right) - C \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)}
+\end{multline*}
+
+\begin{multline*}
+- {\frac{ga_1^2 }{2} sech^2(\kappa \xi) \left(3a_0 sech^2(\kappa \xi)\right)} \\
+- {\frac{ga_1^2 }{2} sech^2(\kappa \xi) \left( a_1 sech^4(\kappa \xi) \right)}\\
+- {\frac{ga_1^2 }{2} sech^2(\kappa \xi) \left(- 2a_0 \right)}\\
+= {-\frac{g}{2} \left[a_0^3 + 3a_0a_1^2\text{sech}^4\left( \kappa \xi\right) + 3a_0^2a_1\text{sech}^2\left( \kappa \xi\right) + a_1^3\text{sech}^6\left( \kappa \xi\right)   \right] - a_0^2 g \left(a_0 + a_1\right) - C \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)}
+\end{multline*}
+
+\begin{multline*}
+- \frac{3ga_0a_1^2 }{2} sech^4(\kappa \xi)
+- \frac{ga_1^3 }{2} sech^6(\kappa \xi) 
++ ga_0a_1^2  sech^2(\kappa \xi) \left(a_0 \right)\\
+= {-\frac{g}{2} \left[a_0^3 + 3a_0a_1^2\text{sech}^4\left( \kappa \xi\right) + 3a_0^2a_1\text{sech}^2\left( \kappa \xi\right) + a_1^3\text{sech}^6\left( \kappa \xi\right)   \right] - a_0^2 g \left(a_0 + a_1\right) - C \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)}
+\end{multline*}
+
+\begin{multline*}
+- \frac{3ga_0a_1^2 }{2} sech^4(\kappa \xi)
+- \frac{ga_1^3 }{2} sech^6(\kappa \xi) 
++ ga_0a_1^2  sech^2(\kappa \xi) \\
+= -\frac{g}{2} \left[a_0^3   \right] \\
+-\frac{g}{2} \left[ 3a_0a_1^2\text{sech}^4\left( \kappa \xi\right) \right] \\
+-\frac{g}{2} \left[3a_0^2a_1\text{sech}^2\left( \kappa \xi\right) \right] \\
+-\frac{g}{2} \left[ a_1^3\text{sech}^6\left( \kappa \xi\right)   \right] \\
+ - a_0^2 g \left(a_0 + a_1\right) - C \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)
+\end{multline*}
+
+cancelling like terms we get
+
+\begin{multline*}
+ga_0a_1^2  sech^2(\kappa \xi) = -\frac{3g}{2} \left[a_0^3   \right] \\
+-\frac{g}{2} \left[3a_0^2a_1\text{sech}^2\left( \kappa \xi\right) \right] \\
+- a_0^2 g a_1 - C \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)
+\end{multline*}
+
+\begin{multline*}
+ga_0a_1^2  sech^2(\kappa \xi)  +\frac{3g}{2} \left[a_0^3   \right] \\
++\frac{g}{2} \left[3a_0^2a_1\text{sech}^2\left( \kappa \xi\right) \right] \\
++ a_0^2 g a_1  =  C \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)
+\end{multline*}
+
+\begin{multline*}
+ga_0a_1^2  sech^2(\kappa \xi) +\frac{g}{2} \left[3a_0^2a_1\text{sech}^2\left( \kappa \xi\right) \right]   +\frac{3g}{2} \left[a_0^3   \right]+ a_0^2 g a_1  \\=  C \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)
+\end{multline*}
+
+\begin{multline*}
+\left[ga_0a_1  +\frac{3g}{2} a_0^2 \right]  a_1\text{sech}^2\left( \kappa \xi\right)  + \left[\frac{3g}{2}a_0^2  + a_0 g a_1\right] a_0  \\=  C \left(a_0 + a_1\text{sech}^2\left( \kappa \xi\right) \right)
+\end{multline*}
+
+So when $C =ga_0a_1  +\dfrac{3ga_0^2}{2}   $ then \eqref{eqnsol} satisfies \eqref{eqnSerreSat}. Thus as we would expect, the soliton analytic solution equations satisfies the travelling wave solution equations \eqref{eqnSerreSat}. 
+
+\end{document}

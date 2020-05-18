@@ -1,0 +1,227 @@
+\documentclass[subeqn]{article}
+\usepackage[dvips]{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{topcapt}
+%\usepackage{citeref}
+\usepackage{color}
+%\usepackage{sgr-colors}
+\usepackage{lscape}
+
+\newcommand{\UV}{\mbox{\boldmath$U$}}
+\newcommand{\VV}{\mbox{\boldmath$V$}}
+\newcommand{\FV}{\mbox{\boldmath$F$}}
+\newcommand{\SV}{\mbox{\boldmath$S$}}
+\newcommand{\WV}{\mbox{\boldmath$W$}}
+\newcommand{\CV}{\mbox{\boldmath$C$}}
+\newcommand{\SVhat}{\hat{\SV}}
+\newcommand{\R}{{\mathbb{R}}}
+\newcommand{\comment}[1]
+{\par\colorbox{LGray}{\parbox{\linewidth}{\bf Comment: #1}}}
+\definecolor{lightblue}{rgb}{.80,.9,1}
+\definecolor{lightred}{rgb}{0.95, 0.41, 0.34}
+\newcommand{\hl}[1]
+    {\par\colorbox{lightblue}{\parbox{\linewidth}{#1}}}
+
+\newcommand{\hr}[1]
+{\par\colorbox{lightred}{\parbox{\linewidth}{#1}}}
+
+\begin{document}
+
+The  regularised Serre equations are
+\begin{subequations}
+	\begin{equation}
+	\label{eqh}
+	h_t + (uh)_x = 0
+	\end{equation}
+	\begin{equation}
+	\label{equh}
+	(uh)_t + \left(u^2h + \frac{gh^2}{2} + \epsilon h^2 \left[h\left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]  - g \left ( h \dfrac{\partial^2 h}{\partial x^2}  + \dfrac{1}{2} \dfrac{\partial h}{\partial x} \dfrac{\partial h}{\partial x} \right )\right] \right)_x = 0
+	\end{equation}
+\end{subequations}
+
+rewriting \eqref{equh} gives
+\[hu_t + uh_t + 2u u_x h + u^2h_x + ghh_x + \left( \epsilon h^2 \left[h\left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]  - g \left ( h \dfrac{\partial^2 h}{\partial x^2}  + \dfrac{1}{2} \dfrac{\partial h}{\partial x} \dfrac{\partial h}{\partial x} \right )\right]\right)_x  = 0\]
+
+substituting  \eqref{eqh}
+\[hu_t - u\left(uh_x + hu_x\right) + 2u u_x h + u^2h_x + ghh_x + \left( \epsilon h^2 \left[h\left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]  - g \left ( h \dfrac{\partial^2 h}{\partial x^2}  + \dfrac{1}{2} \dfrac{\partial h}{\partial x} \dfrac{\partial h}{\partial x} \right )\right]\right)_x = 0\]
+
+\[hu_t +  u u_x h + ghh_x +  \left( \epsilon h^2 \left[h\left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]  - g \left ( h \dfrac{\partial^2 h}{\partial x^2}  + \dfrac{1}{2} \dfrac{\partial h}{\partial x} \dfrac{\partial h}{\partial x} \right )\right]\right)_x = 0\]
+
+divide by $h$
+\[u_t +  u u_x  + gh_x + \frac{\epsilon}{h}\left( h^2 \left[h\left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]  - g \left ( h \dfrac{\partial^2 h}{\partial x^2}  + \dfrac{1}{2} \dfrac{\partial h}{\partial x} \dfrac{\partial h}{\partial x} \right )\right]\right)_x = 0\]
+
+So we get
+
+\begin{subequations}
+	\label{eqexp}
+	\begin{equation}
+	\label{eqhexp}
+	h_t + u_xh + u h_x = 0
+	\end{equation}
+	\begin{equation}
+	\label{equhexp}
+	u_t +  u u_x  + gh_x + \frac{\epsilon}{h}\left( h^2 \left[h\left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]  - g \left ( h \dfrac{\partial^2 h}{\partial x^2}  + \dfrac{1}{2} \dfrac{\partial h}{\partial x} \dfrac{\partial h}{\partial x} \right )\right]\right)_x= 0	
+	\end{equation}
+\end{subequations}
+
+Want solutions of travelling wave form $h(\xi)$ and $u(\xi)$ where $\xi = x - ct$. For this to be a solution must satisfy \eqref{eqexp}. First we want to write these equations in terms of $\xi$
+
+For \eqref{eqhexp} using $[q(\xi)]_x = q'(\xi)\xi_x$ and $[q(\xi)]_t = q'(\xi)\xi_t$ we have
+\[h' \xi_t + u'h\xi_x + u h'\xi_x = 0\]
+
+since $\xi_x = 1$ and $\xi_t = -c$ then
+\[-c h' + u'h + u h' = 0\]
+
+Integrating we get
+\[ \int -c h' + u'h + u h' d\xi =  \int 0 d\xi\]
+
+\[ \int -c h' + \left[uh\right]' d\xi =  \int 0 d\xi\]
+
+Combining the contstants of integration of both integrals into $A$ we get that
+\[ -ch + uh + A = 0  \]
+
+so we get
+
+\[ uh = ch - A  \]
+
+\[ u = c - \frac{A}{h}  \]
+
+\begin{equation}
+\label{eqnuhmassrel}
+u(\xi) = c - \frac{A}{h(\xi)} 
+\end{equation}
+
+Now we rewrite \eqref{equhexp} as a function of $\xi$, making use of 
+\begin{align*}
+[q(\xi)]_x &= q'(\xi) \\
+[q(\xi)]_{xx} &= q''(\xi) \\
+[q(\xi)]_{xxx} &= q'''(\xi) \\
+[q(\xi)]_{xt} &= -c q''(\xi) \\
+[q(\xi)]_{xxt} &= -c q'''(\xi) \\
+[q(\xi)]_t &= -c q'(\xi)
+\end{align*}
+using $\xi = x - ct$
+
+we get from \eqref{equhexp}
+
+\[	-cu' +  u u'  + gh' + \frac{\epsilon}{h}\left( h^2 \left[h\left[\left(u' \right)^2 - uu'' + cu'' \right]  - g \left ( h h''  + \dfrac{1}{2} h'h' \right )\right]\right)' = 0\]
+
+\[	-cu' +  u u'  + gh' + \frac{\epsilon}{h}\left( h^3 \left[\left(u' \right)^2 - uu'' + cu'' \right]  - g \left ( h^3 h''  + \dfrac{1}{2}  h^2h'h' \right )\right)' = 0\]
+
+From \eqref{eqnuhmassrel} we have
+\begin{align*}
+u &= c - \frac{A}{h} \\
+u' &= A \frac{h'}{h^2} \\
+u'' &= A \frac{h h'' - 2\left[h'\right]^2}{h^3} \\
+u''' &= A \frac{h^2 h''' + 6 \left[h'\right]^3 - 6hh'h''}{h^4} \\
+\end{align*}
+
+So we get that
+\begin{multline*}
+-c\left[A \frac{h'}{h^2}\right] + \left[ c - \frac{A}{h}\right] \left[A \frac{h'}{h^2}\right]  + gh' \\ + \frac{\epsilon}{h} \left({h^3}\left[\left(A \frac{h'}{h^2} \right)^2 - \left[ c - \frac{A}{h}\right]\left[A \frac{h h'' - 2\left[h'\right]^2}{h^3}\right] + c \left[A \frac{h h'' - 2\left[h'\right]^2}{h^3}\right] \right]  - g \left ( h^3 h''  + \dfrac{1}{2}  h^2h'h' \right )\right)' = 0 \end{multline*}
+
+\begin{multline*}
+-\left[A^2 \frac{h'}{h^3}\right]  + gh'  + \frac{\epsilon}{h} \left({h^3}\left[\left(A \frac{h'}{h^2} \right)^2 + \left[ \frac{A}{h}\right]\left[A \frac{h h'' - 2\left[h'\right]^2}{h^3}\right] \right]  - g \left ( h^3 h''  + \dfrac{1}{2}  h^2h'h' \right )\right)' = 0 \end{multline*}
+
+\begin{equation*}
+-\left[A^2 \frac{h'}{h^3}\right]  + gh'  + \frac{\epsilon}{h} \left({h^3}\left[\left(A^2 \frac{\left[h'\right]^2}{h^4} \right) + \left[A^2 \frac{h h'' - 2\left[h'\right]^2}{h^4}\right] \right]  - g \left ( h^3 h''  + \dfrac{1}{2}  h^2h'h' \right )\right)' = 0 
+\end{equation*}
+
+\begin{equation*}
+-\left[A^2 \frac{h'}{h^3}\right]  + gh'  + \frac{\epsilon}{h} \left( A^2{h^3}\left[\frac{h h'' - \left[h'\right]^2}{h^4} \right]  - g \left ( h^3 h''  + \dfrac{1}{2}  h^2h'h' \right )\right)' = 0 
+\end{equation*}
+
+\begin{equation*}
+-A^2 \frac{h'}{h^3}  + gh'  + \frac{\epsilon}{h} \left( A^2\frac{h h'' - \left[h'\right]^2}{h}  - gh^2 \left ( h h''  + \dfrac{1}{2}  h'h' \right ) \right)' = 0 
+\end{equation*}
+
+multiply by $h$
+
+\begin{equation*}
+-A^2 \frac{h'}{h^2}  + ghh'  + \epsilon \left( A^2\frac{h h'' - \left[h'\right]^2}{h}  - gh^2 \left ( h h''  + \dfrac{1}{2}  h'h' \right ) \right)' = 0 
+\end{equation*}
+
+\begin{equation*}
+ \epsilon \left( A^2\frac{h h'' - \left[h'\right]^2}{h}  - gh^2 \left ( h h''  + \dfrac{1}{2}  h'h' \right ) \right)' = A^2 \frac{h'}{h^2} - ghh'
+\end{equation*}
+
+Integrating we get
+
+\begin{equation*}
+\int \epsilon \left( A^2\frac{h h'' - \left[h'\right]^2}{h}  - gh^2 \left ( h h''  + \dfrac{1}{2}  h'h' \right ) \right)' \; d \xi =  \int A^2 \frac{h'}{h^2} - ghh'  d \xi
+\end{equation*}
+
+$C$ constant of integration
+\begin{equation*}
+ \epsilon \left( A^2\frac{h h'' - \left[h'\right]^2}{h}  - gh^2 \left ( h h''  + \dfrac{1}{2}  h'h' \right ) \right) + C  =  \int A^2 \frac{h'}{h^2} - ghh'  d \xi
+\end{equation*}
+
+Absorbing all contstants of intergration into C we get
+\begin{equation*}
+ \epsilon \left( A^2\frac{h h'' - \left[h'\right]^2}{h}  - gh^2 \left ( h h''  + \dfrac{1}{2}  h'h' \right ) \right) + C  =  -\frac{A^2}{h} - \frac{gh^2}{2}
+\end{equation*}
+
+Thus we have
+
+\begin{equation*}
+\epsilon \left( A^2 \left(h h'' - \left[h'\right]^2\right)  - gh^3 \left ( h h''  + \dfrac{1}{2}  h'h' \right ) \right) + Ch  =  -{A^2} - \frac{gh^3}{2}
+\end{equation*}
+
+\begin{equation*}
+\epsilon \left( A^2 \left(h h'' - \left[h'\right]^2\right)  - gh^3 \left ( h h''  + \dfrac{1}{2}  h'h' \right ) \right) + \frac{gh^3}{2}  =  -{A^2} - Ch
+\end{equation*}
+
+divide by $h^2$
+\begin{equation*}
+\epsilon \left( A^2 \left(\frac{h h'' - \left[h'\right]^2}{h^2}\right)  - gh \left ( h h''  + \dfrac{1}{2}  h'h' \right ) \right)    + \frac{gh}{2}  =  \frac{-{A^2}}{h^2} - \frac{C}{h}
+\end{equation*}
+
+
+
+So we have two constants of integration which we can set as we like. 
+
+In summary we have the following equations that travelling wave solutions must satisfy, for a particular choice of $A$ and $C$.
+\begin{subequations}
+\label{eqnSerreSat}
+\begin{equation}
+\label{eqnSerreSath}
+\epsilon \left( A^2 \left(\frac{h(\xi) h(\xi)'' - \left[h(\xi)'\right]^2}{h(\xi)^2}\right)  - gh(\xi) \left ( h(\xi) h(\xi)''  + \dfrac{1}{2}  h(\xi)'h(\xi)' \right ) \right)    + \frac{gh(\xi)}{2}  =  \frac{-{A^2}}{h(\xi)^2} - \frac{C}{h(\xi)}
+\end{equation}
+\begin{equation}
+\label{eqnSerreSatu}
+u = c - \frac{A}{h}
+\end{equation}
+\end{subequations}
+
+\section{SWWE $\epsilon = 0$}
+When $\epsilon = 0$ we get that
+
+\begin{subequations}
+	\begin{equation*}
+	\frac{gh}{2}  =  \frac{-{A^2}}{h^2} - \frac{C}{h}
+	\end{equation*}
+	\begin{equation*}
+	u(\xi) = c - \frac{A}{h(\xi)}
+	\end{equation*}
+\end{subequations}
+
+Which is equivalent to
+
+\begin{subequations}
+	\begin{equation*}
+	h \left[\frac{gh^2}{2} + C \right]  =  -A^2
+	\end{equation*}
+	\begin{equation*}
+	u(\xi) = c - \frac{A}{h(\xi)}
+	\end{equation*}
+\end{subequations}
+
+So we must have that $h \left[\frac{gh^2}{2} + C \right]$ is constant over $\xi$. 
+
+Assuming smooth functions, the only function that satisfied this condition are those where $h(\xi)$ is constant. 
+
+
+
+\end{document}

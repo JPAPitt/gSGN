@@ -1,0 +1,92 @@
+\documentclass[subeqn]{article}
+\usepackage[dvips]{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{topcapt}
+%\usepackage{citeref}
+\usepackage{color}
+%\usepackage{sgr-colors}
+\usepackage{lscape}
+
+\begin{document}
+The  regularised Serre equations are
+\begin{subequations}
+	\begin{equation}
+	\label{eqh}
+	h_t + (uh)_x = 0
+	\end{equation}
+	\begin{equation}
+	\label{equh}
+	(uh)_t + \left(u^2h + \frac{gh^2}{2} + \epsilon h^2 \left[h\left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]  - g \left ( h \dfrac{\partial^2 h}{\partial x^2}  + \dfrac{1}{2} \dfrac{\partial h}{\partial x} \dfrac{\partial h}{\partial x} \right )\right] \right)_x = 0
+	\end{equation}
+\end{subequations}
+
+Lets group time derivatives
+
+\begin{subequations}
+	\begin{equation}
+	h_t + u_xh + u h_x = 0
+	\end{equation}
+	\begin{equation}
+(uh)_t + 3\epsilon h^2 h_x u_{xt} + \epsilon h^3 u_{xtx} + \left(u^2h + \frac{gh^2}{2} + \epsilon h^2 \left[h\left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]  - g \left ( h \dfrac{\partial^2 h}{\partial x^2}  + \dfrac{1}{2} \dfrac{\partial h}{\partial x} \dfrac{\partial h}{\partial x} \right )\right] \right)_x = 0
+	\end{equation}
+\end{subequations}
+
+
+
+
+
+equivalently
+
+\begin{subequations}
+	\label{eqexp}
+	\begin{equation}
+	\label{eqhexp}
+	h_t + u_xh + u h_x = 0
+	\end{equation}
+	\begin{equation}
+	\label{equhexp}
+	u_t +  u u_x  + gh_x + \frac{\epsilon}{h}\left(h^3\left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]  - gh^2 \left ( h \dfrac{\partial^2 h}{\partial x^2}  + \dfrac{1}{2} \dfrac{\partial h}{\partial x} \dfrac{\partial h}{\partial x} \right )\right)_x= 0	
+	\end{equation}
+\end{subequations}
+
+
+
+Obvious way:
+
+\begin{subequations}
+	\begin{gather}
+	\dfrac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0
+	\label{eq:gSV_Ga}
+	\end{gather}
+	\begin{gather}
+	\dfrac{\partial G}{\partial t} + \dfrac{\partial }{\partial x} \left[ uG + \dfrac{gh^2}{2} - \epsilon h^2\left ( 2 h \dfrac{\partial u}{\partial x} \dfrac{\partial u}{\partial x} + gh \dfrac{\partial^2h}{\partial x^2} +\dfrac{g}{2} \dfrac{\partial h}{\partial x}\dfrac{\partial h}{\partial x} \right ) \right]= 0
+	\label{eq:gSV_Gb}
+	\end{gather}
+	\label{eq:gSV_G}
+\end{subequations}
+where
+\begin{equation}
+G = uh - \epsilon \dfrac{\partial }{\partial x} \left (h^3 \dfrac{\partial u}{\partial x} \right )
+\end{equation}
+
+Lets see
+\begin{equation}
+\frac{ \partial G}{\partial x} = \frac{ \partial (uh)}{\partial x} - \epsilon \dfrac{\partial^2 }{\partial x^2} \left (h^3 \dfrac{\partial u}{\partial x} \right )
+\end{equation}
+
+Then
+\begin{gather}
+\dfrac{\partial h}{\partial t} + \dfrac{\partial}{\partial x} \left[G + \epsilon \dfrac{\partial }{\partial x} \left (h^3 \dfrac{\partial u}{\partial x} \right )\right] = 0
+\end{gather}
+\begin{gather}
+\dfrac{\partial h}{\partial t} + \dfrac{\partial}{\partial x} \left[G + \epsilon\left[3h^2h_xu_x + h^3u_{xx}\right] \right] = 0
+\end{gather}
+
+\begin{gather}
+\dfrac{\partial h}{\partial t} + G_x + \epsilon\left[\right] \dfrac{\partial}{\partial x} \left[G + \epsilon\left[3h^2h_xu_x + h^3u_{xx}\right] \right] = 0
+\end{gather}
+
+
+\end{document}
