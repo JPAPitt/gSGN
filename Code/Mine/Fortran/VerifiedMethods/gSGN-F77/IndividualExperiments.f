@@ -21,7 +21,7 @@
       
       wdir = "/home/jp/Documents/" // 
      . "Work/PostDoc/Projects/Steve/1DWaves/" //
-     . "RegularisedSerre/CodeAndData/Data/RAW" //
+     . "RegularisedSerre/Data/RAW" //
      . "/Models/gSGN/ConstantBetas/SWWE/Dambreak/"
      
       call LenTrim(wdir,wdirlen,effeclenwdir)
@@ -59,7 +59,7 @@
       dx = (xend - xstart) / (x_len -1) 
       
       tstart = 0d0
-      tend = 5d0
+      tend = 7d0
       
       !alpha is a factor on g*h, that determines wavespeed
       !when beta1 ~ -2/3, then this ratio would go to infinity unless beta1 = 0

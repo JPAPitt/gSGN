@@ -1,21 +1,17 @@
-c =========================
-c DB single experiment
-c
-c ====================   
-      subroutine SingleSWWESmoothDB(hl,hr,dbalpha,ga,beta1,beta2,
-     . xstart,xbc_len,n_GhstCells,dx,tstart,tend,
-     . dt,theta,NormFile,EnergFile,ExpWdir,ExpWdir_len,dtsep)
-     
-      DOUBLE PRECISION hl,hr,dbalpha,ga,beta1,beta2,xstart,dx,
-     . tstart,tend,dt,theta
-     
-      integer xbc_len,n_GhstCells,NormFile,EnergFile,ExpWdir_len,dtsep
       
+      subroutine SingleSerreSoliton(a0,a1,ga,beta1,beta2
+     . ,xstart,xbc_len,n_GhstCells,dx,tstart,tend,
+     . dt,theta,NormFile,EnergFile,ExpWdir,ExpWdir_len)
+     
+      implicit none
+      DOUBLE PRECISION a0,a1,ga,beta1,beta2,xstart,dx,
+     . tstart,tend,dt,theta
+      integer xbc_len,n_GhstCells,ExpWdir_len,NormFile,EnergFile
       CHARACTER(len=ExpWdir_len) ExpWdir
       
       DOUBLE PRECISION xbc(xbc_len),hbc_init(xbc_len),
-     . Gbc_init(xbc_len), ubc_init(xbc_len),  hbc_fin(xbc_len),
-     . Gbc_fin(xbc_len), ubc_fin(xbc_len), hbc_fin_a(xbc_len),
+     . Gbc_init(xbc_len),ubc_init(xbc_len),hbc_fin(xbc_len),
+     . Gbc_fin(xbc_len),ubc_fin(xbc_len),hbc_fin_a(xbc_len),
      . Gbc_fin_a(xbc_len),ubc_fin_a(xbc_len)
      
       
@@ -28,19 +24,20 @@ c ====================
       call Generatexbc(xstart,dx,xbc_len,n_GhstCells,xbc)
       
       !get initial conditions at all cell nodes
-      call SmoothDB(xbc,xbc_len,
-     . hl,hr,dbalpha,hbc_init,ubc_init,Gbc_init) 
+      call SerreSoliton(xbc,xbc_len,tstart,
+     . ga,a0,a1,hbc_init,ubc_init,Gbc_init)
+     
+      print *,1,1,1,1
       
-      !solve gSGN with beta values until currenttime > tend    
-      call NumericalSolveTSPrint(tstart,tend,
-     . ga,beta1,beta2,theta,dx,dt,n_GhstCells,xbc,xbc_len,
+      !solve gSGN with beta values until currenttime > tend
+      call NumericalSolve(tstart,tend,
+     . ga,beta1,beta2,theta,dx,dt,n_GhstCells,xbc_len,
      . hbc_init,Gbc_init,ubc_init,
-     . Energs_init,currenttime,hbc_fin,Gbc_fin,ubc_fin,Energs_fin,
-     . dtsep,ExpWdir,ExpWdir_len)
+     . Energs_init,currenttime,hbc_fin,Gbc_fin,ubc_fin,Energs_fin)
      
       ! get analytic values of h,u,G
-      call Dambreak(xbc,xbc_len,currenttime,ga,hl,hr,
-     . hbc_fin_a,ubc_fin_a,Gbc_fin_a) 
+      call SerreSoliton(xbc,xbc_len,currenttime,ga,a0,a1,
+     . hbc_fin_a,ubc_fin_a,Gbc_fin_a)
      
      
 c Convergence Norm Tests     
@@ -66,9 +63,9 @@ c Convergence Norm Tests
       do i = 1,3
          !if sum is very small, just return absolute error
          if (suma(i) .lt. 10d0**(-10)) then
-            Norms(i) = sqrt(sumerr(i))
+            Norms(i) = dsqrt(sumerr(i))
          else
-            Norms(i) = sqrt(sumerr(i)) / sqrt(suma(i))
+            Norms(i) = dsqrt(sumerr(i)) / dsqrt(suma(i))
          end if
       end do
 
@@ -110,19 +107,19 @@ c Conservation Norm Tests
       write(4,*) 'actual end time :', currenttime
       write(4,*) 'dt:' , dt
       write(4,*) 'gravity :' , ga
-      write(4,*) 'hl :' , hl
-      write(4,*) 'hr :' , hr
+      write(4,*) 'a0 :' , a0
+      write(4,*) 'a1 :' , a1
       write(4,*) 'beta1 :' , beta1
       write(4,*) 'beta2 :' , beta2
       
       !write out information for group of experiments (Norms, Energy)
-      write(NormFile,*) dx,dt,beta1,beta2,Norms(1),Norms(2),Norms(3)
+      write(NormFile,*) dx,Norms(1),Norms(2),Norms(3)
       
-      write(EnergFile,*) dx,dt,beta1,beta2,Energ_Err(1),Energ_Err(2),
+      write(EnergFile,*) dx,Energ_Err(1),Energ_Err(2),
      .   Energ_Err(3),Energ_Err(4)
       
-      end 
-
+      end
+      
 
  
       program main
@@ -137,17 +134,16 @@ c Conservation Norm Tests
       CHARACTER(len=2) strdiri
      
   
-      integer expi,x_len,xbc_len,n_GhstCells,dtsep
-      DOUBLE PRECISION hl,hr,ga,xstart,xend,tstart,tend,
-     . dx,dt,theta,Cr,maxwavespeed,beta1,beta2,alpha,
-     . dbalpha
+      integer expi,x_len,xbc_len,n_GhstCells, lowestresx
+      DOUBLE PRECISION a0,a1,ga,xstart,xend,tstart,tend,
+     . dx,dt,theta,Cr,maxwavespeed,beta1,beta2,alpha
      
       INTEGER effeclenwdir
       
       wdir = "/home/jp/Documents/" // 
      . "Work/PostDoc/Projects/Steve/1DWaves/" //
      . "RegularisedSerre/Data/RAW" //
-     . "/Models/gSGN/VaryBeta/SmoothDB/alpha2/timeseries/"
+     . "/Models/gSGN/ConstantBetas/Serre/SolLoop/"
      
       call LenTrim(wdir,wdirlen,effeclenwdir)
       
@@ -165,60 +161,54 @@ c Conservation Norm Tests
       !SWWE equations
       ga = 9.81d0
       
+      beta1 = 0d0
+      beta2 = 0d0
       
-      hl = 2.0d0
-      hr = 1.0d0
-      dbalpha = 2
+      a0 = 1.0
+      a1 = 0.7
       
-      xstart = -100d0
-      xend = 100d0
+      xstart = -50d0
+      xend = 50d0
       
       theta = 1.2d0
       
       tstart = 0d0
-      tend = 15d0
+      tend = 5d0
       
-      dtsep = 50
+      !alpha is a factor on g*h, that determines wavespeed
+      !when beta1 ~ -2/3, then this ratio would go to infinity unless beta1 = 0
+      ! thus we limit ourselves to beta1 ~ -2/3 only when beta1 = 0
+      if  (dabs(2d0/3d0 + beta1) < 10d0**(-10))  then
+         alpha = 1d0
+      else
+         alpha = max(1d0,beta2 / (2d0/3d0 + beta1))
+      end if
       
-      x_len = 10000
-      xbc_len = x_len + 2 *n_GhstCells
-
-      dx = (xend - xstart) / (x_len -1)
-           
+      lowestresx = 100
       
       !perform the soliton experiment a number of times, decreasing \Delta x each time
-      do expi = 0,30
+      do expi = 0,10
       
          write (strdiri,'(I2.2)') expi
          
          CALL SYSTEM('mkdir -p '// wdir(1:effeclenwdir) //strdiri)
-      
-         !beta1 = -2d0/3d0 + expi*0.1
-         !beta2 = beta1 + 2d0/3d0
-         beta1 = expi/30d0*0.3d0
-         beta2 = expi/30d0*0.3d0
          
-         !alpha is a factor on g*h, that determines wavespeed
-         !when beta1 ~ -2/3, then this ratio would go to infinity unless beta1 = 0
-         ! thus we limit ourselves to beta1 ~ -2/3 only when beta1 = 0
-         if  (dabs(2d0/3d0 + beta1) < 10d0**(-10))  then
-            alpha = 1d0
-         else
-            alpha = max(1d0,beta2 / (2d0/3d0 + beta1))
-         end if
-         
+         x_len = lowestresx *2**(expi)
+         xbc_len = x_len + 2 *n_GhstCells
+
+         dx = (xend - xstart) / (x_len -1)
          Cr = 0.5
-         maxwavespeed = dsqrt(alpha*ga*(hl))
+         maxwavespeed = dsqrt(alpha*ga*(a0 + a1))
          dt  = (Cr / maxwavespeed) *dx
          
          print *,'++++++++++++ Experiment : ',expi ,' || ', '# Cells :',
      .    x_len , '++++++++++++'
-           
-         !have to trim charachter string
-         call SingleSWWESmoothDB(hl,hr,dbalpha,ga,beta1,beta2,xstart,
-     .      xbc_len,n_GhstCells,dx,tstart,tend,dt,theta,
-     .      NormFile,EnergFile,
-     .      wdir(1:effeclenwdir)//strdiri//'/',effeclenwdir+3,dtsep)
+         
+         call SingleSerreSoliton(a0,a1,ga,beta1,beta2,
+     . xstart,xbc_len,n_GhstCells,dx,tstart,tend,
+     . dt,theta,NormFile,EnergFile,
+     .      wdir(1:effeclenwdir)//strdiri//'/',effeclenwdir+3)
+
       
       end do
       

@@ -76,6 +76,86 @@ c=====================================
                  
     
       end
+      
+c **********************************************
+c Numerical solve that prints time series
+c
+c
+c *******************************************
+      subroutine NumericalSolveTSPrint(tstart,tend,
+     . ga,beta1,beta2,theta,dx,dt,n_GhstCells,xbc,xbc_len,
+     . hbc_init,Gbc_init,ubc_init,
+     . Energs_init,currenttime,hbc_fin,Gbc_fin,ubc_fin,Energs_fin,
+     . dtsep,ExpWdir,expwdirlen)
+     
+      implicit none
+      
+      integer n_GhstCells,xbc_len,expwdirlen,dtsep
+      CHARACTER(len=expwdirlen) ExpWdir
+      DOUBLE PRECISION tstart,tend,ga,beta1,beta2,theta,dx,dt,
+     . currenttime
+      DOUBLE PRECISION xbc(xbc_len),hbc_init(xbc_len),Gbc_init(xbc_len),
+     . ubc_init(xbc_len),Energs_init(xbc_len),hbc_fin(xbc_len),
+     . Gbc_fin(xbc_len), ubc_fin(xbc_len),Energs_fin(xbc_len)
+     
+      
+      integer i,ileft,iright,dtcount
+      CHARACTER(len=5) strct
+      
+      !initial time
+      currenttime  = tstart
+      dtcount = 0
+      
+      !loop over and set hbc_fin,Gbc_fin to initial conditions
+      ileft = 1
+      iright = xbc_len
+      do i = ileft,iright
+         hbc_fin(i) = hbc_init(i) 
+         Gbc_fin(i) = Gbc_init(i) 
+         ubc_fin(i) = ubc_init(i)
+      end do
+      
+      !calculate initial Energies
+      call GetufromhG(xbc_len,hbc_fin,Gbc_fin,ubc_fin,
+     . beta1,dx,n_GhstCells)
+      
+      call TotalEnergy(xbc_len,hbc_fin,ubc_fin,Gbc_fin,ga,beta1,beta2,
+     . n_GhstCells,dx,Energs_init)
+     
+      
+      !evolve the system through time
+      do while (currenttime  .LT. tend ) 
+     
+         if ((MOD(dtcount,dtsep) .EQ. 0)
+     .      .OR. (currenttime + dt  .GE. tend ))  then
+            write (strct,'(F5.2)') currenttime
+            open(5, file = ExpWdir//'t='//strct //'.dat') 
+            do i = 1,xbc_len
+               write(5,*) currenttime,xbc(i),hbc_fin(i),
+     .            Gbc_fin(i),ubc_fin(i)
+            end do
+            close(5)
+         
+         end if
+     
+         call EvolveStepWrap(xbc_len,hbc_fin,Gbc_fin,ubc_fin,ga,
+     .   beta1,beta2,theta,n_GhstCells,dx,dt)
+     
+         currenttime  = currenttime  + dt
+         dtcount = dtcount + 1
+         print *, 'Current Time : ', currenttime 
+      end do
+      
+      !calculate end energies  
+      call GetufromhG(xbc_len,hbc_fin,Gbc_fin,ubc_fin,
+     . beta1,dx,n_GhstCells)
+      
+      call TotalEnergy(xbc_len,hbc_fin,ubc_fin,Gbc_fin,ga,beta1,beta2,
+     . n_GhstCells,dx,Energs_fin)
+      
+                 
+    
+      end
 
 
 c  ********************************************************************************

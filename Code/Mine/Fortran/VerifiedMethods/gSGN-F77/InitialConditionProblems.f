@@ -124,5 +124,25 @@ c =====
       end do 
       
       end
+      
+c ====
+c Subroutine that generates the hyperbolic tanh
+c =====      
+      subroutine SmoothDB(x,x_len,hl,hr,alpha,h,u,G)
+      implicit none
+      
+      integer x_len
+      real*8 x(x_len),h(x_len),G(x_len),u(x_len)
+      real*8 hl,hr,alpha
+      
+      integer i
+      
+      do i=1,x_len 
+         h(i) = hl + (hr - hl)/2d0*(1d0 + dtanh(x(i)/alpha))
+         u(i) = 0d0
+         G(i) = 0d0
+      end do 
+      
+      end
 
 

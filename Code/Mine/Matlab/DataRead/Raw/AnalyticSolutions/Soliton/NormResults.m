@@ -6,7 +6,7 @@ close all;
 
 % Get list of directories to loop over when reading data
 
-wdir = '/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/CodeAndData/Data/RAW/Models/gSGN/ConstantBetas/Serre/LoopSoliton/';
+wdir = '/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/Data/RAW/Models/gSGN/ConstantBetas/Serre/SolLoop/';
 
 
 Norms = importdata(strcat(wdir, 'Norms.dat'));

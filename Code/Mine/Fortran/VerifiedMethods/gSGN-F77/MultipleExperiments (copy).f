@@ -2,14 +2,14 @@ c =========================
 c DB single experiment
 c
 c ====================   
-      subroutine SingleSWWESmoothDB(hl,hr,dbalpha,ga,beta1,beta2,
-     . xstart,xbc_len,n_GhstCells,dx,tstart,tend,
-     . dt,theta,NormFile,EnergFile,ExpWdir,ExpWdir_len,dtsep)
+      subroutine SingleSWWEDB(hl,hr,ga,beta1,beta2
+     . ,xstart,xbc_len,n_GhstCells,dx,tstart,tend,
+     . dt,theta,NormFile,EnergFile,ExpWdir,ExpWdir_len)
      
-      DOUBLE PRECISION hl,hr,dbalpha,ga,beta1,beta2,xstart,dx,
+      DOUBLE PRECISION hl,hr,ga,beta1,beta2,xstart,dx,
      . tstart,tend,dt,theta
      
-      integer xbc_len,n_GhstCells,NormFile,EnergFile,ExpWdir_len,dtsep
+      integer xbc_len,n_GhstCells,NormFile,EnergFile,ExpWdir_len
       
       CHARACTER(len=ExpWdir_len) ExpWdir
       
@@ -28,15 +28,14 @@ c ====================
       call Generatexbc(xstart,dx,xbc_len,n_GhstCells,xbc)
       
       !get initial conditions at all cell nodes
-      call SmoothDB(xbc,xbc_len,
-     . hl,hr,dbalpha,hbc_init,ubc_init,Gbc_init) 
+      call Dambreak(xbc,xbc_len,tstart,
+     . ga,hl,hr,hbc_init,ubc_init,Gbc_init) 
       
-      !solve gSGN with beta values until currenttime > tend    
-      call NumericalSolveTSPrint(tstart,tend,
-     . ga,beta1,beta2,theta,dx,dt,n_GhstCells,xbc,xbc_len,
+      !solve gSGN with beta values until currenttime > tend
+      call NumericalSolve(tstart,tend,
+     . ga,beta1,beta2,theta,dx,dt,n_GhstCells,xbc_len,
      . hbc_init,Gbc_init,ubc_init,
-     . Energs_init,currenttime,hbc_fin,Gbc_fin,ubc_fin,Energs_fin,
-     . dtsep,ExpWdir,ExpWdir_len)
+     . Energs_init,currenttime,hbc_fin,Gbc_fin,ubc_fin,Energs_fin)
      
       ! get analytic values of h,u,G
       call Dambreak(xbc,xbc_len,currenttime,ga,hl,hr,
@@ -137,17 +136,16 @@ c Conservation Norm Tests
       CHARACTER(len=2) strdiri
      
   
-      integer expi,x_len,xbc_len,n_GhstCells,dtsep
+      integer expi,x_len,xbc_len,n_GhstCells
       DOUBLE PRECISION hl,hr,ga,xstart,xend,tstart,tend,
-     . dx,dt,theta,Cr,maxwavespeed,beta1,beta2,alpha,
-     . dbalpha
+     . dx,dt,theta,Cr,maxwavespeed,beta1,beta2,alpha
      
       INTEGER effeclenwdir
       
       wdir = "/home/jp/Documents/" // 
      . "Work/PostDoc/Projects/Steve/1DWaves/" //
      . "RegularisedSerre/Data/RAW" //
-     . "/Models/gSGN/VaryBeta/SmoothDB/alpha2/timeseries/"
+     . "/Models/gSGN/VaryBeta/ImpDisp/"
      
       call LenTrim(wdir,wdirlen,effeclenwdir)
       
@@ -168,17 +166,14 @@ c Conservation Norm Tests
       
       hl = 2.0d0
       hr = 1.0d0
-      dbalpha = 2
       
-      xstart = -100d0
-      xend = 100d0
+      xstart = -50d0
+      xend = 50d0
       
       theta = 1.2d0
       
       tstart = 0d0
-      tend = 15d0
-      
-      dtsep = 50
+      tend = 7d0
       
       x_len = 10000
       xbc_len = x_len + 2 *n_GhstCells
@@ -195,8 +190,8 @@ c Conservation Norm Tests
       
          !beta1 = -2d0/3d0 + expi*0.1
          !beta2 = beta1 + 2d0/3d0
-         beta1 = expi/30d0*0.3d0
-         beta2 = expi/30d0*0.3d0
+         beta1 = expi*1d0/90d0
+         beta2 = expi*1d0/90d0
          
          !alpha is a factor on g*h, that determines wavespeed
          !when beta1 ~ -2/3, then this ratio would go to infinity unless beta1 = 0
@@ -215,10 +210,10 @@ c Conservation Norm Tests
      .    x_len , '++++++++++++'
            
          !have to trim charachter string
-         call SingleSWWESmoothDB(hl,hr,dbalpha,ga,beta1,beta2,xstart,
+         call SingleSWWEDB(hl,hr,ga,beta1,beta2,xstart,
      .      xbc_len,n_GhstCells,dx,tstart,tend,dt,theta,
      .      NormFile,EnergFile,
-     .      wdir(1:effeclenwdir)//strdiri//'/',effeclenwdir+3,dtsep)
+     .      wdir(1:effeclenwdir)//strdiri//'/',effeclenwdir+3)
       
       end do
       
