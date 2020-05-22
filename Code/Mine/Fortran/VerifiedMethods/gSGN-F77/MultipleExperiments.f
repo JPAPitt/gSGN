@@ -2,25 +2,23 @@ c =========================
 c DB single experiment
 c
 c ====================   
-      subroutine SingleSWWESmoothDB(hl,hr,dbalpha,ga,beta1,beta2,
+      subroutine SingleGaussian(a0,a1,a2,ga,beta1,beta2,
      . xstart,xbc_len,n_GhstCells,dx,tstart,tend,
-     . dt,theta,NormFile,EnergFile,ExpWdir,ExpWdir_len,dtsep)
+     . dt,theta,EnergFile,ExpWdir,ExpWdir_len,dtsep)
      
-      DOUBLE PRECISION hl,hr,dbalpha,ga,beta1,beta2,xstart,dx,
+      DOUBLE PRECISION a0,a1,a2,ga,beta1,beta2,xstart,dx,
      . tstart,tend,dt,theta
      
-      integer xbc_len,n_GhstCells,NormFile,EnergFile,ExpWdir_len,dtsep
+      integer xbc_len,n_GhstCells,EnergFile,ExpWdir_len,dtsep
       
       CHARACTER(len=ExpWdir_len) ExpWdir
       
       DOUBLE PRECISION xbc(xbc_len),hbc_init(xbc_len),
      . Gbc_init(xbc_len), ubc_init(xbc_len),  hbc_fin(xbc_len),
-     . Gbc_fin(xbc_len), ubc_fin(xbc_len), hbc_fin_a(xbc_len),
-     . Gbc_fin_a(xbc_len),ubc_fin_a(xbc_len)
+     . Gbc_fin(xbc_len), ubc_fin(xbc_len)
      
       
       DOUBLE PRECISION Energs_init(4), Energs_fin(4),Energ_Err(4)
-      DOUBLE PRECISION Norms(3),sumerr(3),suma(3)
       integer i
       DOUBLE PRECISION currenttime
       
@@ -28,8 +26,8 @@ c ====================
       call Generatexbc(xstart,dx,xbc_len,n_GhstCells,xbc)
       
       !get initial conditions at all cell nodes
-      call SmoothDB(xbc,xbc_len,
-     . hl,hr,dbalpha,hbc_init,ubc_init,Gbc_init) 
+      call Gaussian(xbc,xbc_len,
+     . a0,a1,a2,hbc_init,ubc_init,Gbc_init) 
       
       !solve gSGN with beta values until currenttime > tend    
       call NumericalSolveTSPrint(tstart,tend,
@@ -38,40 +36,6 @@ c ====================
      . Energs_init,currenttime,hbc_fin,Gbc_fin,ubc_fin,Energs_fin,
      . dtsep,ExpWdir,ExpWdir_len)
      
-      ! get analytic values of h,u,G
-      call Dambreak(xbc,xbc_len,currenttime,ga,hl,hr,
-     . hbc_fin_a,ubc_fin_a,Gbc_fin_a) 
-     
-     
-c Convergence Norm Tests     
-      !calculate norm values for h,u,G
-      !Convergence Norms
-      do i = 1,3
-         sumerr(i) = 0
-         suma(i) = 0
-      end do
-      
-      !sum L2 norm of q - q*, and q*
-      do i = 1, xbc_len
-         sumerr(1) = sumerr(1) + (hbc_fin_a(i) - hbc_fin(i))**2
-         suma(1) = suma(1) + (hbc_fin_a(i))**2
-         
-         sumerr(2) = sumerr(2) + (ubc_fin_a(i) - ubc_fin(i))**2
-         suma(2) = suma(2) + (ubc_fin_a(i))**2
-         
-         sumerr(3) = sumerr(3) + (Gbc_fin_a(i) - Gbc_fin(i))**2
-         suma(3) = suma(3) + (Gbc_fin_a(i))**2 
-      end do
-      
-      do i = 1,3
-         !if sum is very small, just return absolute error
-         if (suma(i) .lt. 10d0**(-10)) then
-            Norms(i) = sqrt(sumerr(i))
-         else
-            Norms(i) = sqrt(sumerr(i)) / sqrt(suma(i))
-         end if
-      end do
-
 c Conservation Norm Tests  
 
       do i = 1,4
@@ -88,14 +52,12 @@ c Conservation Norm Tests
       ! write out individual experiment details
       open(1, file = ExpWdir//'InitVal.dat') 
       open(2, file = ExpWdir//'EndVals.dat') 
-      open(3, file = ExpWdir//'EndAnaVals.dat') 
       open(4, file = ExpWdir//'Params.dat') 
       
       !write out initial,end and analytic values 
       do i = 1,xbc_len
          write(1,*) xbc(i),hbc_init(i),Gbc_init(i),ubc_init(i)
          write(2,*) xbc(i),hbc_fin(i),Gbc_fin(i),ubc_fin(i)
-         write(3,*) xbc(i),hbc_fin_a(i),Gbc_fin_a(i),ubc_fin_a(i)
       end do
       
       !write out parameters      write(5,*) 'Experiment - Forced Solution, Gaussian Bump'
@@ -115,8 +77,6 @@ c Conservation Norm Tests
       write(4,*) 'beta1 :' , beta1
       write(4,*) 'beta2 :' , beta2
       
-      !write out information for group of experiments (Norms, Energy)
-      write(NormFile,*) dx,dt,beta1,beta2,Norms(1),Norms(2),Norms(3)
       
       write(EnergFile,*) dx,dt,beta1,beta2,Energ_Err(1),Energ_Err(2),
      .   Energ_Err(3),Energ_Err(4)
@@ -129,8 +89,8 @@ c Conservation Norm Tests
          
       implicit none
    
-      Integer wdirlen,NormFile,EnergFile
-      PARAMETER(wdirlen= 300,NormFile = 98, EnergFile = 99)
+      Integer wdirlen,EnergFile
+      PARAMETER(wdirlen= 300,EnergFile = 99)
       
       CHARACTER(len =wdirlen) wdir
      
@@ -138,16 +98,15 @@ c Conservation Norm Tests
      
   
       integer expi,x_len,xbc_len,n_GhstCells,dtsep
-      DOUBLE PRECISION hl,hr,ga,xstart,xend,tstart,tend,
-     . dx,dt,theta,Cr,maxwavespeed,beta1,beta2,alpha,
-     . dbalpha
+      DOUBLE PRECISION a0,a1,a2,ga,xstart,xend,tstart,tend,
+     . dx,dt,theta,Cr,maxwavespeed,beta1,beta2,alpha
      
       INTEGER effeclenwdir
       
       wdir = "/home/jp/Documents/" // 
      . "Work/PostDoc/Projects/Steve/1DWaves/" //
      . "RegularisedSerre/Data/RAW" //
-     . "/Models/gSGN/VaryBeta/SmoothDB/alpha2/timeseries/"
+     . "/Models/gSGN/VaryBeta/ImpDisp/Gaussian/timeseries/"
      
       call LenTrim(wdir,wdirlen,effeclenwdir)
       
@@ -157,7 +116,6 @@ c Conservation Norm Tests
       
       !open output files
       open(EnergFile, file = wdir(1:effeclenwdir)//'Energy.dat') 
-      open(NormFile, file = wdir(1:effeclenwdir)//'Norms.dat') 
 
       
       n_GhstCells = 6
@@ -166,37 +124,38 @@ c Conservation Norm Tests
       ga = 9.81d0
       
       
-      hl = 2.0d0
-      hr = 1.0d0
-      dbalpha = 2
+      a0 = 1.0d0
+      a1 = 0.5
+      a2 = 10.0d0
       
-      xstart = -100d0
-      xend = 100d0
+      xstart = -250d0
+      xend = 250d0
       
       theta = 1.2d0
       
       tstart = 0d0
-      tend = 15d0
+      tend = 50d0
       
       dtsep = 50
       
-      x_len = 10000
+      x_len = 20000
       xbc_len = x_len + 2 *n_GhstCells
 
       dx = (xend - xstart) / (x_len -1)
            
       
       !perform the soliton experiment a number of times, decreasing \Delta x each time
-      do expi = 0,30
+      do expi = 0,40
       
          write (strdiri,'(I2.2)') expi
          
          CALL SYSTEM('mkdir -p '// wdir(1:effeclenwdir) //strdiri)
       
-         !beta1 = -2d0/3d0 + expi*0.1
+         !beta1 = -2d0/3d0 + (expi - 15)*0.1
          !beta2 = beta1 + 2d0/3d0
-         beta1 = expi/30d0*0.3d0
-         beta2 = expi/30d0*0.3d0
+         
+         beta1 = expi/100d0 - 0.1d0
+         beta2 = expi/100d0 - 0.1d0
          
          !alpha is a factor on g*h, that determines wavespeed
          !when beta1 ~ -2/3, then this ratio would go to infinity unless beta1 = 0
@@ -208,21 +167,20 @@ c Conservation Norm Tests
          end if
          
          Cr = 0.5
-         maxwavespeed = dsqrt(alpha*ga*(hl))
+         maxwavespeed = dsqrt(alpha*ga*(a0 + a1))
          dt  = (Cr / maxwavespeed) *dx
          
          print *,'++++++++++++ Experiment : ',expi ,' || ', '# Cells :',
      .    x_len , '++++++++++++'
            
          !have to trim charachter string
-         call SingleSWWESmoothDB(hl,hr,dbalpha,ga,beta1,beta2,xstart,
+         call SingleGaussian(a0,a1,a2,ga,beta1,beta2,xstart,
      .      xbc_len,n_GhstCells,dx,tstart,tend,dt,theta,
-     .      NormFile,EnergFile,
-     .      wdir(1:effeclenwdir)//strdiri//'/',effeclenwdir+3,dtsep)
+     .      EnergFile,wdir(1:effeclenwdir)//strdiri//'/',
+     .      effeclenwdir+3,dtsep)
       
       end do
       
       close(EnergFile)
-      close(NormFile)
       
       end

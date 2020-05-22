@@ -1,0 +1,28 @@
+\documentclass[10pt]{article}
+\usepackage{amsmath}
+\begin{document}
+Lemma : For $a \ge 0$, $b \ge 0$ and $x \ge 0 $ we have that (all quantities are reals)
+
+\begin{equation}
+f(x) = \dfrac{a x^2 + 2}{ b x^2 + 2}
+\end{equation}
+
+\begin{equation}
+f(x) = 1 + \dfrac{\left(b - a \right) x^2}{ b x^2 + 2}
+\end{equation}
+
+\begin{equation}
+f(x) = 1 + \dfrac{\left(b - a \right)}{ b +  \dfrac{2}{x^2}}
+\end{equation}
+
+is a montone function. We know that $\frac{2}{x^2}$ is monotone decreasing when $x \ge 0$.
+
+Proof:
+\[x_0 \le x_1 \implies x_0^2 \le x_1^2 \implies \dfrac{2}{x_1^2} \le \dfrac{2}{x_0^2}   \]
+
+It then follows that $b +  \frac{2}{x^2}$ is monotone decreasing when $x \ge 0$. Then $\dfrac{1}{b +  \frac{2}{x^2}}$ is monotone increasing. Since $x_0 \le x_1 \implies  \dfrac{1}{b +  \frac{2}{x_0^2}} \ge \dfrac{1}{b +  \frac{2}{x_1^2}}$, due to inequality flipping for division. 
+
+Then if $a \le b$ it follows that $f(x)$ is monotone increasing whilst if $a \ge b$ then $f(x)$ is monotone decreasing. With the special case of $a = b$ giving the constant function $f(x) = 1$.
+
+
+\end{document}

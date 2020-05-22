@@ -8,7 +8,7 @@ close all;
 %wdir = '/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/CodeAndData/Data/RAW/Models/gSGN/ConstantBetas/Serre/Soliton/';
 
 
-wdir = '/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/Data/RAW/Models/gSGN/VaryBeta/SmoothDB/alpha2/timeseries/01/';
+wdir = '/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/Data/RAW/Models/gSGNForcedLimhG/VaryBeta/Reg2/SmoothDB/alpha2/timeseries/01/';
 
 initfile = strcat(wdir, 'InitVal.dat' );
 endfile = strcat(wdir, 'EndVals.dat' );

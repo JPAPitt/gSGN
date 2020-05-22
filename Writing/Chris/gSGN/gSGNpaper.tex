@@ -317,7 +317,41 @@ This is equivalent to showing that $\exists \alpha$ s.t  $\forall \mu$
 
 One such bound is simple enough to get and that is when $\alpha = \max\left\lbrace 1,\frac{a}{b} \right\rbrace$ when $b \neq 0$ and $\alpha = \max\left\lbrace1, a \mu^2 + 1\right\rbrace$ when $b = 0$. So if $b = 0$ and $a \neq 0$ then the wavespeeds are no longer bounded. Thus we must restrict our numerical method to only allow $\beta_1 = -\frac{2}{3}$ only when $\beta_2 = 0$. Note that the regularised SWWE and the Serre equations fall under this condition (all our problems of interest) so its ok that our method is not appropriate for the condition.
 
+Additionally for $\beta_1 \ge -\frac{2}{3}$ and $\beta_2 \ge 0$ we have that 
 
+\begin{equation}
+\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)}
+\end{equation}
+
+is a montone function in terms of $h_0k$, it is monotone decreasing if $\beta_2 \le \frac{2}{3} + \beta_1$ and monotone increasing if $\beta_2 \ge \frac{2}{3} + \beta_1$.
+ 
+We have the following limits
+
+as $k \rightarrow 0$
+\begin{equation}
+ v^\pm_p = u_0 \pm \sqrt{gh_0}
+\end{equation} 
+
+as $k \rightarrow \infty$
+\begin{equation}
+v^\pm_p = u_0 \pm \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}}
+\end{equation}
+
+When $\dfrac{\beta_2}{\frac{2}{3} + \beta_1} \le 1$ we have
+
+\begin{equation}
+u_0 -  \sqrt{gh_0} \le  v^-_p \le u_0 - \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} \le u_0 \le u_0 + \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} \le   v^+_p  \le u_0 +   \sqrt{gh_0}
+\end{equation}
+
+(includes Serre and regularised SWWE). For Serre the $k \rightarrow \infty $ bounds are $u_0$, so inequality simplifies for regularised SWWE, phase speed is fixed as $k$ changes. 
+
+when $\dfrac{\beta_2}{\frac{2}{3} + \beta_1} > 1$ we have
+
+\begin{equation}
+u_0 - \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} \le v^-_p \le u_0 -  \sqrt{gh_0} \le  u_0 \le u_0 + \sqrt{gh_0} \le   v^+_p  \le u_0 +  \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}}
+\end{equation}
+
+Region $1$ is what we expect, dispersive waves travel behind the shock front, Region $2$ is inverted and we begin to see dispersive waves travel in front of the shock. 
 
 
 
@@ -483,6 +517,229 @@ When $\beta_1 = \beta_2 = 0$ the gSGN are equivalent to the SGN equations which 
 	\caption{$C$ comparing total amount of conserved quantities in initial conditions and numerical solution for travelling wave solution with $\beta_1 = \beta_2 = 0$. }
 \end{figure}
 
+
+\subsubsection{Dam-break - SWWE ( $\beta_1= -\frac{2}{3}$ and $ \beta_2 =0$ ) }
+\begin{align}
+h(x,0) & = \left\lbrace \begin{array}{c c}
+h_0 & x < 0\\
+h_1 & x \ge 0
+\end{array} \right.  \\
+u(x,0) &= 0 \\
+G(x,0) &= 0
+\end{align}
+$\Delta x \approx 0.02$
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.6}}%
+	\centering
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{./Figures/Dambreak/DBInith.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{./Figures/Dambreak/DBInitu.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\input{./Figures/Dambreak/DBInitG.tex}
+		\caption{$G$}
+	\end{subfigure}
+	\caption{Initial Conditions}
+\end{figure}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Dambreak/DBEndh.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Dambreak/DBEndu.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Dambreak/DBEndG.tex}
+		\caption{$G$}
+	\end{subfigure}
+	\caption{Numerical Solution}
+\end{figure}
+\begin{table}
+\begin{tabular}{c c c c c}
+Context	 & $h$ & $G$ & $uh$ & $\mathcal{H}$ \\
+\hline
+Initial	& $300.032154872864$ & $0$ & $0$ & $2452.77542969807$ \\
+End	& $300.03215487288$ & $220.741414068836$ & $220.741410229554$ & $2442.82816385916$ \\
+Analytic Flux & $0$ & $220.741414068868$& $220.741414068868$ & $0$ \\
+Conservation Error &  $5.342708725849857 \times 10^{-14}$ & $3.200284481863491\times 10^{-11}$ 
+ & $3.839314018705409\times 10^{-6}$ & $0.004055514303702256$
+\end{tabular}
+\caption{Conservation error for gSGN solver dam-break solution}
+\end{table}
+
+
+\subsection{Numerical Experiments}
+
+\subsubsection{Smooth Dambreak}
+
+\begin{align}
+h(x,0) & = h_0 + \dfrac{h_1 - h_0}{2} \left(1 + \tanh\left(\dfrac{x}{\alpha}\right)\right)  \\
+u(x,0) &= 0 \\
+G(x,0) &= 0
+\end{align}
+
+$\alpha = 2$
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2Inith.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2Inithz.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2Initu.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2InitG.tex}
+		\caption{$G$}
+	\end{subfigure}
+	\caption{Initial Conditions $\alpha = 2$}
+\end{figure}
+
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2ImpDisph.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2ImpDisphz.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2ImpDispu.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Improve Dispersion Serre Family $\beta_1 = \beta_2$ for smooth dam-break $\alpha = 2$ at $t=15s$. $\beta_1 =\beta_2 = 0.1$ to $\beta_1 =\beta_2 = 1$. }
+\end{figure}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2RegSWWEh.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2RegSWWEu.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Regularised SWWE Family $\beta_1 = \beta_2 - \frac{2}{3}$ for smooth dam-break $\alpha = 2$ at $t=15s$. $\beta_1 = \beta_2 - \frac{2}{3}$ with  $\beta_2 = 0$ to $\beta_2 = 5$. }
+\end{figure}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2Reg2h.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2Reg2u.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Region 2 Family $\beta_1 = \beta_2 - \frac{2}{3} - k$ and $\beta_2 = 2k$ (should find something better so we get expanding wave train), so $\alpha = 2$ for smooth dam-break $\alpha = 2$ at $t=15s$.  }
+\end{figure}
+
+
+$\alpha = 0.1$
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1Inith.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1Inithz.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1Initu.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1InitG.tex}
+		\caption{$G$}
+	\end{subfigure}
+	\caption{Initial Conditions $\alpha = 0.1$}
+\end{figure}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1ImpDisph.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1ImpDisphz.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1ImpDispu.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Improve Dispersion Serre Family $\beta_1 = \beta_2$ for smooth dam-break $\alpha = 0.1$ at $t=15s$. $\beta_1 =\beta_2 = 0.1$ to $\beta_1 =\beta_2 = 1$. }
+\end{figure}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1RegSWWEh.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1RegSWWEu.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Improve Dispersion Serre Family $\beta_1 = \beta_2$ for smooth dam-break $\alpha = 2$ at $t=15s$. $\beta_1 = \beta_2 - \frac{2}{3}$ with  $\beta_2 = 0$ to $\beta_2 = 5$. }
+\end{figure}
 
 %-----------------------------------------------------
 \begin{thebibliography}{99}

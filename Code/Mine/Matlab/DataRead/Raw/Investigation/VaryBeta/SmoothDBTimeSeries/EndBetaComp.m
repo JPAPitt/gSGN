@@ -5,13 +5,12 @@ clear all;
 close all;
 
 % Get list of directories to loop over when reading data
-%wdir = '/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/CodeAndData/Data/RAW/Models/gSGN/ConstantBetas/Serre/Soliton/';
 
-wdir = '/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/Data/RAW/Models/gSGN/VaryBeta/SmoothDB/alpha2/timeseries/';
+wdir = '/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/Data/RAW/Models/gSGNForcedLimhG/VaryBeta/RegSWWE/SmoothDB/alpha2/timeseries/';
 
 figure;
 begi = 0;
-bege = 7;
+bege = 4;
 for k = begi:bege
     if k < 10
         expwdir = strcat(wdir,'0',int2str(k), '/');
@@ -40,7 +39,7 @@ for k = begi:bege
        hold on
     end
     
-    plot(x1,h1,'-','DisplayName',strcat("\beta's = ",num2str(k/30.0*0.3) ));
+    plot(x1,h1,'-','DisplayName',strcat("\beta_2 = ",num2str(k*0.5) ));
 end
 legend('show');
 hold off
