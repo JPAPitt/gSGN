@@ -7,7 +7,7 @@ close all;
 % Get list of directories to loop over when reading data
 %wdir = '/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/CodeAndData/Data/RAW/Models/gSGN/ConstantBetas/Serre/Soliton/';
 
-wdir = '/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/CodeAndData/Data/RAW/Models/gSGN/ConstantBetas/SWWE/Dambreak/'
+wdir = '/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/Data/RAW/Models/gSGNForcedLimhG/BetaFunc/Serre2SWWE/SmoothDB/alpha0p1/timeseries/exp1/'
 initfile = strcat(wdir, 'InitVal.dat' );
 endfile = strcat(wdir, 'EndVals.dat' );
 endanafile = strcat(wdir, 'EndAnaVals.dat' );

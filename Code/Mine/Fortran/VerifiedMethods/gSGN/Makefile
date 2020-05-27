@@ -1,17 +1,17 @@
-FF = gfortran
-FFLAGS = -c -Wall -fdefault-real-8 -fdefault-integer-8 -fdefault-double-8
+FF = f77
+FFLAGS = -c -Wall -freal-4-real-8 -std=legacy
 
 objects = IndividualExperiments.out MultipleExperiments.out
 
 all : $(objects)
  
-%.out : FDVM2.o InitialConditionProblems.o %.intout 
+%.out : FDVM2.o InitialConditionProblems.o MiscFuncs.o %.a
 	$(FF) $^ -o $@
 
-%.intout : %.for FDVM2.o InitialConditionProblems.o
+%.a : %.f FDVM2.o InitialConditionProblems.o MiscFuncs.o
 	$(FF) $(FFLAGS) $< -o $@
 	
-%.o : %.for
+%.o : %.f
 	$(FF) $(FFLAGS) $< -o $@
 
 clean:

@@ -1,0 +1,329 @@
+\documentclass[10pt]{article}
+
+  \usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+%% the following commands are needed for some matlab2tikz features
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{arrows.meta}
+\usepgfplotslibrary{patchplots}
+\usepackage{grffile}
+\usepackage{amsmath}
+
+
+%\usepackage{fullpage}
+\usepackage[top=1in, bottom=1in, left=0.8in, right=1in]{geometry}
+\usepackage{multicol}
+%\usepackage{wrapfig}
+%\usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{xcolor}
+%\usepackage{soul}
+\usepackage{graphicx}
+\usepackage[pdf]{pstricks}
+
+\definecolor{lightblue}{rgb}{.80,.9,1}
+\newcommand{\hl}[1]
+    {\par\colorbox{lightblue}{\parbox{\linewidth}{#1}}}
+
+\newcommand{\defn}{\stackrel{\textrm{\scriptsize def}}{=}}
+
+\setlength{\columnsep}{0.1pc}
+
+\title{Generalised Serre-Green-Naghdi Model}
+%\author{Christopher Zoppou -- \texttt{christopher.zoppou@anu.edu.au}, Dimitrios Mitsotakis -- \texttt{dmitsot@gmail.com}, Stephen Roberts -- \texttt{stephen.roberts@anu.edu.au}, Jordan Pitt}
+
+% TIME ON EVERY PAGE AS WELL AS THE FILE NAME
+\usepackage{fancyhdr}
+\usepackage{currfile}
+\usepackage[us,12hr]{datetime} % `us' makes \today behave as usual in TeX/LaTeX
+\fancypagestyle{plain}{
+\fancyhf{}
+\rfoot{\emph{\footnotesize \textcopyright  Serre Notes by C. Zoppou, D. Mitsatakis and S. Roberts.}
+ \\ File Name: {\currfilename} \\ Date: {\ddmmyyyydate\today} at \currenttime}
+\lfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0pt}}
+\pagestyle{plain}
+
+\begin{document}
+
+\maketitle
+
+\vspace{-0.3in}
+\noindent
+\rule{\linewidth}{0.4pt}
+
+%-------------------------------------------------
+%\section{Introduction}
+%-------------------------------------------------
+
+\section{Time Series of $\beta_1$ }
+
+
+\subsection{Smooth Dambreak}
+
+\begin{align}
+h(x,0) & = h_0 + \dfrac{h_1 - h_0}{2} \left(1 + \tanh\left(\dfrac{x}{\alpha}\right)\right)  \\
+u(x,0) &= 0 \\
+G(x,0) &= 0
+\end{align}
+$\alpha = 0.1$ and $\beta_2 = 0$
+
+\subsubsection{Fixed Beta}
+Even small changes from $\beta_1 = -2/3$ can leade to significant dispersive wave trains. I was getting significant wave trains even for values $\beta_1 = -2/3 + 0.01 $, also even with $\beta$ values close to $\beta_1 =-2/3$, I couldn't get dambreaks from 10 to 1 to be stable, very large spike at front and back
+
+
+\subsubsection{Global Beta Transitionining}
+\begin{equation}
+\beta_1(t) = \dfrac{b_1 - b_0}{t_1 - t_0} t + b_0
+\end{equation}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.7}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+	\centering
+	\input{./Figures/Timeseries/SWWE2Serre/SWWE2Serre10to20B.tex}
+	\caption{$t=10s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+	\centering
+	\input{./Figures/Timeseries/SWWE2Serre/SWWE2Serre10to20C.tex}
+	\caption{$t=20s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+	\centering
+	\input{./Figures/Timeseries/SWWE2Serre/SWWE2Serre10to20D.tex}
+	\caption{$t=30s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+	\centering
+	\input{./Figures/Timeseries/SWWE2Serre/SWWE2Serre10to20E.tex}
+	\caption{$t=40s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+	\centering
+	\input{./Figures/Timeseries/SWWE2Serre/SWWE2Serre10to20F.tex}
+	\caption{$t=50s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+	\centering
+	\input{./Figures/Timeseries/SWWE2Serre/SWWE2Serre10to20G.tex}
+	\caption{$t=60s$}
+	\end{subfigure}
+	\caption{ SWWE to Serre, linear transition from $10s$ to $20s$}
+\end{figure}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.7}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/SWWE2Serre/SWWE2Serre10to11B.tex}
+		\caption{$t=10s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/SWWE2Serre/SWWE2Serre10to11C.tex}
+		\caption{$t=20s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/SWWE2Serre/SWWE2Serre10to11D.tex}
+		\caption{$t=30s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/SWWE2Serre/SWWE2Serre10to11E.tex}
+		\caption{$t=40s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/SWWE2Serre/SWWE2Serre10to11F.tex}
+		\caption{$t=50s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/SWWE2Serre/SWWE2Serre10to11G.tex}
+		\caption{$t=60s$}
+	\end{subfigure}
+\caption{ SWWE to Serre, linear transition from $10s$ to $11s$}
+\end{figure}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.7}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre/SerreB.tex}
+		\caption{$t=10s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre/SerreC.tex}
+		\caption{$t=20s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre/SerreD.tex}
+		\caption{$t=30s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre/SerreE.tex}
+		\caption{$t=40s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre/SerreF.tex}
+		\caption{$t=50s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre/SerreG.tex}
+		\caption{$t=60s$}
+	\end{subfigure}
+	\caption{Serre equations throughout,Solutions are smooth, only resolution issues stop it from appearing so}
+\end{figure}
+
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.7}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE10to20B.tex}
+		\caption{$t=10s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE10to20C.tex}
+		\caption{$t=20s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE10to20D.tex}
+		\caption{$t=30s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE10to20E.tex}
+		\caption{$t=40s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE10to20F.tex}
+		\caption{$t=50s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE10to20G.tex}
+		\caption{$t=60s$}
+	\end{subfigure}
+\caption{ Serre to SWWE, linear transition from $10s$ to $20s$}
+\end{figure}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.7}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE10to20FocusB.tex}
+		\caption{$t=15s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE10to20FocusC.tex}
+		\caption{$t=17.5s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE10to20FocusD.tex}
+		\caption{$t=22.5s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE10to20FocusE.tex}
+		\caption{$t=25s$}
+	\end{subfigure}
+\caption{ Serre to SWWE, linear transition from $10s$ to $20s$, more times - does go above $h_l$ and below $h_r$}
+\end{figure}
+
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.7}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE10to11B.tex}
+		\caption{$t=10s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE10to11C.tex}
+		\caption{$t=20s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE10to11D.tex}
+		\caption{$t=30s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE10to11E.tex}
+		\caption{$t=40s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE10to11F.tex}
+		\caption{$t=50s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE10to11G.tex}
+		\caption{$t=60s$}
+	\end{subfigure}
+	\caption{ Serre to SWWE, linear transition from $10s$ to $11s$}
+\end{figure}
+
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.7}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE20B.tex}
+		\caption{$t=10s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE20C.tex}
+		\caption{$t=20s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE20D.tex}
+		\caption{$t=30s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE20E.tex}
+		\caption{$t=40s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE20F.tex}
+		\caption{$t=50s$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/Timeseries/Serre2SWWE/Serre2SWWE20G.tex}
+		\caption{$t=60s$}
+	\end{subfigure}
+	\caption{ Serre to SWWE, instant transition at $20s$}
+\end{figure}
+
+
+
+\end{document} 

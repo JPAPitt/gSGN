@@ -12,9 +12,9 @@ wdir = '/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/
 figure;
 
 linesep = 20;
-begi = 00;
-sep = 2;
-bege = 10;
+begi = 6;
+sep = 1;
+bege = 8;
 for k = begi:sep:bege
     if k < 10
         expwdir = strcat(wdir,'0',int2str(k), '/');
@@ -52,19 +52,19 @@ hold off
 legend('hide');
 xlabel('x (m)');
 ylabel('h (m)');
-axis([-150 150 0.8 2.4]);
-xticks([-150,-100,-50,0,50,100,150]);
+axis([-250 250 0.8 2.4]);
+xticks([-250,-200,-50,0,50,100,150]);
 yticks([0.8,1,1.2,1.4,1.6,1.8,2,2.2,2.4]);
 
-matlab2tikz('SDBa2Reg2h.tex');
-
-clc;
-close all;
+% matlab2tikz('SDBa2Reg2h.tex');
+% 
+% clc;
+% close all;
 
 figure;
 linesep = 20;
 begi = 00;
-sep = 2;
+sep = 1;
 bege = 10;
 for k = begi:sep:bege
     if k < 10
@@ -100,11 +100,11 @@ hold off
 legend('hide');
 xlabel('x (m)');
 ylabel('u (m/s)');
-axis([-150 150 -1 3]);
+axis([-250 250 -1 3]);
 xticks([-150,-100,-50,0,50,100,150]);
 yticks([-1,0,1,2,3]);
 
-matlab2tikz('SDBa2Reg2u.tex');
+% matlab2tikz('SDBa2Reg2u.tex');
 
 
 

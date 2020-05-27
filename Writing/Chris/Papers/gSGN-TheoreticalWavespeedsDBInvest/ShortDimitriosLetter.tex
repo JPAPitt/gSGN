@@ -1,0 +1,367 @@
+\documentclass[10pt]{article}
+
+\usepackage[pdftex]{graphicx} 
+  \usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+%% the following commands are needed for some matlab2tikz features
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{arrows.meta}
+\usepgfplotslibrary{patchplots}
+\usepackage{grffile}
+\usepackage{amsmath}
+
+
+%\usepackage{fullpage}
+\usepackage[top=1in, bottom=1in, left=0.8in, right=1in]{geometry}
+\usepackage{multicol}
+%\usepackage{wrapfig}
+%\usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{xcolor}
+%\usepackage{soul}
+\usepackage{tikz}
+
+\definecolor{lightblue}{rgb}{.80,.9,1}
+\newcommand{\hl}[1]
+    {\par\colorbox{lightblue}{\parbox{\linewidth}{#1}}}
+
+\newcommand{\defn}{\stackrel{\textrm{\scriptsize def}}{=}}
+
+\setlength{\columnsep}{0.1pc}
+
+\title{gSGN Wave Speeds and The Dam-break Problem.}
+%\author{Christopher Zoppou -- \texttt{christopher.zoppou@anu.edu.au}, Dimitrios Mitsotakis -- \texttt{dmitsot@gmail.com}, Stephen Roberts -- \texttt{stephen.roberts@anu.edu.au}, Jordan Pitt}
+
+% TIME ON EVERY PAGE AS WELL AS THE FILE NAME
+\usepackage{fancyhdr}
+\usepackage{currfile}
+\usepackage[us,12hr]{datetime} % `us' makes \today behave as usual in TeX/LaTeX
+\fancypagestyle{plain}{
+\fancyhf{}
+\rfoot{\emph{\footnotesize \textcopyright  gSGN Letter to Dimitrios Mitsotakis by Jordan Pitt, Chris Zoppou and Stephen Roberts.}
+ \\ File Name: {\currfilename} \\ Date: {\ddmmyyyydate\today} at \currenttime}
+\lfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0pt}}
+\pagestyle{plain}
+
+\begin{document}
+
+\maketitle
+
+\vspace{-0.3in}
+\noindent
+\rule{\linewidth}{0.4pt}
+
+%-------------------------------------------------
+%\section{Introduction}
+%-------------------------------------------------
+Hello Dimitrios, I have adapted the $\text{FDVM}_2$ method in \cite{Zoppou-etal-2017} to solve the gSGN (generalised Serre-Green-Naghsi) equations from \cite{Clamond-Dutykh-2018-237}. 
+
+The $\text{FDVM}_2$ method uses a second-order finite difference approximation to solve the elliptic equation that related the new conserved quantity $G$ to the primitive variable $u$, and a finite volume method with second-order Runge-Kutta time stepping to obtain a fully second order method. I have been able to demonstrate convergence to forced solutions and the ability of the method to reproduce the analytic solutions for well known members of this family of equations captureed by the gSGN; the dambreak problem for the SWWE and the soliton solution for the Serre equations.
+
+To remind you, the gSGN equations and its reformulation into a conservative form are here.
+
+%-------------------------------------------------
+\section{gSGN - generalised Serre-Green-Naghdi equations}
+%-------------------------------------------------
+\cite{Clamond-Dutykh-2018-237} derived the following generalised version of the Serre-Green-Naghdi equations:
+
+\begin{subequations}
+	\begin{gather}
+	\dfrac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0
+	\label{eq:gSGNh}
+	\end{gather}
+	\begin{gather}
+	\dfrac{\partial (uh)}{\partial t} + \dfrac{\partial }{\partial x} \left( u^2h + \dfrac{gh^2}{2} + \frac{1}{3} h^2 \Gamma \right)= 0
+	\label{eq:gSGNuh}
+	\end{gather}
+	\begin{multline}
+	\dfrac{\partial}{\partial t}\left[\frac{1}{2}hu^2 + \dfrac{1}{2}\left(1 + \frac{3}{2}\beta_1\right) h^3 \dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x} + \frac{1}{2}gh^2\left(1 + \frac{1}{2}\beta_2 \dfrac{\partial h}{\partial x} \dfrac{\partial h}{\partial x}\right) \right] \\
+	\dfrac{\partial}{\partial x}\left[uh\left(\frac{1}{2}u^2 + \dfrac{1}{2}\left(1 + \frac{3}{2}\beta_1\right)h^2\dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x} + gh\left(1 + \frac{1}{4}\beta_2\dfrac{\partial h}{\partial x}\dfrac{\partial h}{\partial x} \right)   + \frac{1}{3} h\Gamma  \right) + \frac{1}{2}\beta_2 g h^3\dfrac{\partial h}{\partial x}\dfrac{\partial u}{\partial x} \right]
+	=0
+	\label{eq:gSGNE}
+	\end{multline}
+	where
+	\begin{equation}
+	\Gamma = \left(1 + \frac{3}{2}\beta_1\right)h \left[\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} - \frac{\partial^2 u}{\partial x \partial t} - u\frac{\partial^2 u}{\partial x^2}\right] - \frac{3}{2} \beta_2 g\left[h \frac{\partial^2 h}{\partial x^2} + \frac{1}{2} \frac{\partial h}{\partial x}\frac{\partial h}{\partial x} \right]
+	\end{equation}
+	\label{eq:gSGN}
+\end{subequations}
+
+Thus we have conservation of mass, momentum and energy for all values of $\beta_j$. 
+
+From these equations the SWWE, the Serre equations and the regularised SWWE \cite{Clamond-Dutykh-2018-237} can be recovered for certain values of $\beta_1$ and $\beta_2$. Summaried in Table \ref{tab:betavalues}. 
+
+\begin{table}
+	\centering
+	\begin{tabular}{c | c | c}
+		Resulting Equations &$\beta_1$ & $\beta_2$  \\
+		\hline 
+		Serre Equations & $0$ & $0$ \\
+		SWWE Equations & $-\dfrac{2}{3}$ & $0$ \\
+		Regularised SWWE Equations & free variable & $\beta_1 + \dfrac{2}{3}$  \\
+		Improved Dispersion Serre Equations & free variable & $\beta_1$
+	\end{tabular}
+	\caption{Showing various combinations of $\beta$ values and equivalent equations \label{tab:betavalues}}
+\end{table}
+
+%-------------------------------------------------
+\subsection{Alternative Conservative Form of the gSGN}
+%-------------------------------------------------
+
+A major difficulty with solving the SGN is that the dispersive terms contain a mixed spatial-temporal derivative term which is difficult to handle numerically. This mixed derivative term can be rewritten  so that the Serre equations can be expressed in conservation law form, with the water depth and a new quantity as conservative variables. This reformulation allows standard techniques for solving conservation laws to be applied to the Serre equations, even though the Serre equations are neither hyperbolic nor parabolic.
+
+Consider the Serre equations written for a horizontal bed. The flux term in the momentum equation, \eqref{eq:gSGNuh} contains a mixed spatial and temporal derivative term which is difficult to treat numerically. It is possible to replace this term  by a combination of spatial and temporal derivative terms by making the following observation
+\begin{multline}
+\dfrac{\partial^2}{\partial x \partial t} \left ( \frac{1}{3}\left(1 + \frac{3}{2} \beta_1\right) h^3 \dfrac{\partial u}{\partial x} \right ) =   \frac{1}{3}\left(1 + \frac{3}{2} \beta_1\right) \dfrac{\partial }{\partial t} \left ( 3h^2 \dfrac{\partial h}{\partial x} \dfrac{\partial u}{\partial x} + h^3 \dfrac{\partial^2 u}{\partial x^2} \right ) \\=  \frac{1}{3}\left(1 + \frac{3}{2} \beta_1\right)
+\dfrac{\partial }{\partial x} \left ( 3 h^2 \dfrac{\partial h}{\partial t} \dfrac{\partial u}{\partial x} + h^3 \dfrac{\partial^2 u}{\partial x \partial t} \right ).
+\end{multline}
+Rearranging and making use of the continuity equation, \eqref{eq:gSGNh} the momentum equation, \eqref{eq:gSGNuh} becomes
+\begin{multline}
+\dfrac{\partial }{\partial t} \left ( u h -  \frac{1}{3}\left(1 + \frac{3}{2} \beta_1\right) \dfrac{\partial}{\partial x} \left [h^3 \dfrac{\partial u}{\partial x}  \right ] \right ) \\ + \dfrac{\partial}{\partial x} \left ( u\left[uh - \frac{1}{3}\left(1 + \frac{3}{2} \beta_1\right) \dfrac{\partial }{\partial x} \left [ h^3 \dfrac{\partial u}{\partial x} \right ]\right] + \dfrac{gh^2}{2} - \frac{2}{3}\left(1 + \frac{3}{2} \beta_1\right) h^3\dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x}  - \frac{1}{2} \beta_2 g h^2 \left[h\frac{\partial^2 h}{\partial x^2} + \frac{1}{2}\frac{\partial h}{\partial x}\frac{\partial h}{\partial x}\right]\right ) = 0.
+\end{multline}
+The momentum equation can be written in conservation law form as
+\begin{gather}\label{eq:G_momentum}
+\dfrac{\partial G }{\partial t}  + \dfrac{\partial}{\partial x} \left ( uG + \dfrac{gh^2}{2} - \frac{2}{3}\left(1 + \frac{3}{2} \beta_1\right) h^3\dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x}  - \frac{1}{2} \beta_2 g h^2  \left[h\frac{\partial^2 h}{\partial x^2} + \frac{1}{2}\frac{\partial h}{\partial x}\frac{\partial h}{\partial x}\right]\right ) = 0.
+\end{gather}
+where a new conserved quantity, $G$ is given by
+\begin{gather*}
+G = uh - \frac{1}{3}\left(1 + \frac{3}{2} \beta_1\right) \dfrac{\partial }{\partial x} \left ( h^3 \dfrac{\partial u}{\partial x} \right ).
+\end{gather*}
+This expands the conserved variable introduced by \cite{Clamond-Dutykh-2018-237}, as well as in the Serre equations \cite{Zoppou-etal-2017}. 
+
+Thus we have the following conservation equations
+
+\begin{subequations}
+\begin{gather}
+\dfrac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0
+\label{eq:gSGN_Gh}
+\end{gather}
+\begin{gather}
+\dfrac{\partial G }{\partial t}  + \dfrac{\partial}{\partial x} \left ( uG + \dfrac{gh^2}{2} - \frac{2}{3}\left(1 + \frac{3}{2} \beta_1\right) h^3\dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x}  - \frac{1}{2} \beta_2 g h^2  \left[h\frac{\partial^2 h}{\partial x^2} + \frac{1}{2}\frac{\partial h}{\partial x}\frac{\partial h}{\partial x}\right]\right ) = 0.
+\label{eq:gSGN_GG}
+\end{gather}
+with
+\begin{gather}\label{eq:G_divergent}
+G = uh - \frac{1}{3}\left(1 + \frac{3}{2} \beta_1\right) \dfrac{\partial }{\partial x} \left ( h^3 \dfrac{\partial u}{\partial x} \right ).
+\end{gather}
+\end{subequations}
+
+\section{Dispserion Properties}
+I have linearised the equations and obtained the dispersion properties of the linearised Serre equations which are below
+
+\begin{equation}
+\omega^\pm = u_0 k \pm k \sqrt{gh_0} \sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2} }
+\end{equation}
+
+Thus we have the phase speed $v^\pm_p$
+\begin{equation}
+v^\pm_p = \frac{\omega^\pm}{k}=u_0 \pm  \sqrt{gh_0} \sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} }
+\end{equation} 
+
+While the group speed $v^\pm_g$
+
+\begin{equation}
+v^\pm_g = u_0  \pm  \sqrt{gh_0} \sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} } \left[1 +  \dfrac{\beta_2 - \beta_1 - \frac{2}{3}}{\left(\frac{1}{2}\beta_2 h_0^2 k^2 +1\right)\left( \left(\frac{1}{3} + \beta_1\right) h_0^2 k^2 + 1\right)}\right] 
+\end{equation} 
+
+
+\subsection{Wave Speed Bounds}
+The phase speed bounds can be found by observing that for our $\beta$ values of interest, that is  when $\beta_1 \ge -\frac{2}{3}$ and $\beta_2 \ge 0$ we have that 
+\begin{equation}
+\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)}
+\end{equation}
+is a montone function in terms of $h_0k$, it is monotone decreasing if $\beta_2 \le \frac{2}{3} + \beta_1$ and monotone increasing if $\beta_2 \ge \frac{2}{3} + \beta_1$.
+ 
+In addition we have the following limits on the extremes for these monotononic functions
+
+as $k \rightarrow 0$
+\begin{equation}
+ v^\pm_p = u_0 \pm \sqrt{gh_0}
+\end{equation} 
+
+as $k \rightarrow \infty$
+\begin{equation}
+v^\pm_p = u_0 \pm \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}}
+\end{equation}
+
+Thus when $\beta_2 \le \frac{2}{3} + \beta_1$ we have the following inequality chain
+
+\begin{equation}
+\label{eqn:phasespeedserre}
+u_0 -  \sqrt{gh_0} \le  v^-_p \le u_0 - \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} \le u_0 \le u_0 + \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} \le   v^+_p  \le u_0 +   \sqrt{gh_0}
+\end{equation}
+
+
+Whereas when $\beta_2 \ge \frac{2}{3} + \beta_1$ we have the following inequality chain
+
+\begin{equation}
+u_0 - \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} \le v^-_p \le u_0 -  \sqrt{gh_0} \le  u_0 \le u_0 + \sqrt{gh_0} \le   v^+_p  \le u_0 +  \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}}
+\end{equation}
+
+Thus we have 3 regions when investigating the effect of $\beta$ values on wavespeeds, $\beta_2 < \frac{2}{3} + \beta_1$, $\beta_2 = \frac{2}{3} + \beta_1$ and $\beta_2 > \frac{2}{3} + \beta_1$. I will demonstrate the effect of the $\beta$ values on the dispersion property for the smoothed dambreak problem, since we can increase the steepness and thus obtain higher frequency waves. 
+
+
+
+
+\section{Smoothed Dambreak Investigation}
+
+The smoothed dam-break is defined below:
+\begin{align}
+h(x,0) & = h_0 + \dfrac{h_1 - h_0}{2} \left(1 + \tanh\left(\dfrac{x}{\alpha}\right)\right)  \\
+u(x,0) &= 0 \\
+G(x,0) &= 0
+\end{align}
+We will focus on the following values $h_0 = 1$, $h_1 = 2$ and $\alpha = 0.1$
+
+I have produced numerical solutions of the $\text{FDVM}_2$ solving the gSGN equations, and plotted both $h$ and $u$ as well as the regions representing the inequality chains to show the effect of different combination of $\beta$ values. I used the domain $x \in [-100, 100]$, and solved until $t = 15s$, I used the reconstruction parameter $\theta = 1.2$. With $\Delta x \approx 0.0166m$ and $\Delta t =  1/ \left[{2\sqrt{gh_1 \frac{\beta_2}{\frac{2}{3} + \beta_1}}} \right]$ to satisfy the CFL condition, and thus will change for various $\beta$ values used here. These are sufficiently fine grids to get good convergence in \cite{Pitt-2019}, and given other validation of the method, I am comfortable that these are close representations of the true solution. 
+
+In addition to the plots of $h$ and $u$ for the numerical solutions of $\text{FDVM}_2$, I have also plotted the regions of the inequalities. I have used the solutions for $h$ and $u$ in the constant state given by the analytic solution to the equivalent discontinuous dam-break problem for the SWWE equations
+\begin{equation}
+h_s = \dfrac{h_0}{2}  \sqrt{1 + 8 \left( \dfrac{2 h_s}{h_s - h_0} \left(\dfrac{\sqrt{gh_1} - \sqrt{gh_s}}{\sqrt{gh_0}}\right)\right)^2 - 1}
+\end{equation}
+\begin{equation}
+u_s = 2\left(\sqrt{gh_1} - \sqrt{gh_s} \right)
+\end{equation}
+where you solve $h_s$ for given values of $h_0$ and $h_1$. For $h_0 = 1$ and $h_1 = 2$, I get that $h_2 \approx 1.45384$ and $u_2\approx  1.30584$.
+
+
+I have listed the regions for $\beta_2 \le \frac{2}{3} + \beta_1$ in Table \ref{tab:regions1} and for $\beta_2 > \frac{2}{3} + \beta_1$  in Table \ref{tab:regions2}.
+
+The plots  in Figures \ref{fig:SerreSDB},\ref{fig:SerreSDBImpDisp}, \ref{fig:SWWESDB} \ref{fig:RegSWWESDB} and \ref{fig:Reg2SDB} demonstrate the effect of the chain of inequalities of the phase speed on the behaviour of the dispersive wave train. 
+
+When $\beta_2 < \frac{2}{3} + \beta_1$ the dispersive wave trains are contained between the rarefaction fan and the shock due to hard limit that the phase speed is bounded by $u_0 \pm \sqrt{gh_0}$. We can see this in Figures  \ref{fig:SerreSDB} and \ref{fig:SerreSDBImpDisp}. Additionally we have two cases for the constrained dispersive wavetrains; when $\beta_2 = 0$ we have one wave train and when $\beta_2 \neq 0$ we have two wavetrains. This is due to the behaviour of the phase speed \eqref{eqn:phasespeedserre} as $k \rightarrow \infty$, which when $\beta_2 = 0$ results in $v^-_p = u_0 = v^+_p$ wheras when $\beta_2 \neq 0$ we get that $v^-_p < v^+_p$ for all values of $k$, even in the limit to $\infty$. 
+
+When $\beta_2 = \frac{2}{3} + \beta_1$ we get the regularised SWWE where there are no dispersive wave trains, since the phase speed is constant as $k$ varies. This can be seen in Figures \ref{fig:SWWESDB} and \ref{fig:RegSWWESDB} for both the SWWE and the regularised SWWE. 
+
+When $\beta_2 > \frac{2}{3} + \beta_1$ the dispersive wave trains are no longer contained between the rarefaction fan and the shock, and instead occur outside this region. We can see this in Figure \ref{fig:Reg2SDB}. This is because we now have that $v_p^+ \ge  u_0 + \sqrt{gh_0}$ and  $v_p^- \le  u_0 - \sqrt{gh_0}$ for all values of $k$. 
+
+\begin{table}
+	\centering
+	\begin{tabular}{c | c}
+		Colour region & Condition \\
+		\hline
+		first blue & $\dfrac{x}{t} \le u_{s} - \sqrt{g h_{s}} $ \\
+		first red & $  u_{s} - \sqrt{g h_{s}} \le \dfrac{x}{t} \le u_s - \sqrt{gh_s} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}}$ \\
+		first green & $u_s - \sqrt{gh_s} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} \le \dfrac{x}{t} \le u_{s}$ \\
+		second green & $u_{s} \le \dfrac{x}{t}\le u_s + \sqrt{gh_s} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}}$ \\
+		second red & $  u_s + \sqrt{gh_s} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} \le \dfrac{x}{t} \le  u_{s} + \sqrt{g h_{s}} $ \\
+		second blue & $u_{s} +  \sqrt{g h_{s}} \le \dfrac{x}{t} $ 	
+	\end{tabular}
+	\caption{Regions in the plots in Figures \ref{fig:SerreSDB},\ref{fig:SerreSDBImpDisp}, \ref{fig:SWWESDB} \ref{fig:RegSWWESDB}. Note that in Figure \ref{fig:SerreSDB}, that green regions dissapear since $\beta_2 = 0$ and in Figures \ref{fig:SWWESDB} and \ref{fig:RegSWWESDB} the red regions dissappear since $\beta_2 = \frac{2}{3} + \beta_1$. 	\label{tab:regions1}  }
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{c | c}
+	Colour region & Condition \\
+	\hline
+	first blue & $\dfrac{x}{t} \le u_s - \sqrt{gh_s} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} $ \\
+	first red & $ u_s - \sqrt{gh_s} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} \le u_s - \sqrt{gh_s}$ \\
+	first green & $u_s - \sqrt{gh_s} \le \dfrac{x}{t} \le u_{s}$ \\
+	second green & $u_{s} \le \dfrac{x}{t}\le u_s + \sqrt{gh_s}$ \\
+	second red & $  u_s + \sqrt{gh_s} \le \dfrac{x}{t} \le  u_{s} + \sqrt{g h_{s}}\sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} $ \\
+	second blue & $u_{s} +  \sqrt{g h_{s}}\sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} \le \dfrac{x}{t} $
+\end{tabular}
+	\caption{Regions in the plots in Figure \ref{fig:Reg2SDB} 	\label{tab:regions2}}
+\end{table}
+
+
+ 
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/RegionhPlotBetaZero.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/RegionuPlotBetaZero.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Solution of gSGN with $\beta_1 = \beta_2 = 0$ (Serre equations) for smooth dam-break problem at $t=15s$ with inequality regions shown.}
+	\label{fig:SerreSDB}
+\end{figure}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/RegionhPlotBetaImpDisp.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/RegionuPlotBetaImpDisp.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Solution of gSGN with $\beta_1 = \beta_2 = \dfrac{1}{15}$ (Serre equations with improved dispersion charachteristics) for smooth dam-break problem at $t=15s$ with inequality regions shown.}
+	\label{fig:SerreSDBImpDisp}
+\end{figure}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/RegionhPlotBetaSWWE.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/RegionuPlotBetaSWWE.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Solution of gSGN with $\beta_1 = -\dfrac{2}{3} $ and $\beta_2 = 0$ (Shallow Water Wave Equations) for smooth dam-break problem at $t=15s$ with inequality regions shown.}
+	\label{fig:SWWESDB}
+\end{figure}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/RegionhPlotBetaRegSWWEThree.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/RegionuPlotBetaRegSWWEThree.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Solution of gSGN with $\beta_1 = 3 -\dfrac{2}{3} $ and $\beta_2 = 3$ (Regularised Shallow Water Wave Equations) for smooth dam-break problem at $t=15s$ with inequality regions shown.}
+	\label{fig:RegSWWESDB}
+\end{figure}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/RegionhPlotBetaReg2.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/RegionuPlotBetaReg2.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Solution of gSGN with $\beta_1 = 6 $ and $\beta_2 = \left(\beta_1 + \dfrac{2}{3}\right)^2$ for smooth dam-break problem at $t=15s$ with inequality regions shown.}
+	\label{fig:Reg2SDB}
+\end{figure}
+
+
+
+
+
+
+
+\bibliographystyle{unsrtnat}
+\bibliography{Bibliography}
+
+\end{document} 
