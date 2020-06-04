@@ -5,16 +5,7 @@ clear all;
 close all;
 
 % Get list of directories to loop over when reading data
-%wdir = '/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/CodeAndData/Data/RAW/Models/gSGN/ConstantBetas/Serre/Soliton/';
-
-%wdir = "/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/Data/RAW/Models/gSGNForcedLimhG/BetaFunc/SWWE2Serre/SmoothDB/alpha0p1/timeseries/exp3/";
-%wdir = "/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/Data/RAW/Models/gSGNForcedLimhG/BetaFunc/Serre2SWWE/SmoothDB/alpha0p1/timeseries/exp3/";
-%wdir = "/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/Data/RAW/Models/gSGNForcedLimhG/BetaFunc/Switch/Serre2SWWE/SmoothDB/alpha0p1/timeseries/exp1/";
-
-%wdir = "/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/Data/RAW/Models/gSGNForcedLimhG/BetaFunc/Switch/SWWE2Serre/SmoothDB/1to0p001/alpha0p1/timeseries/exp1/"
-
-
-wdir = "/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/Data/RAW/Models/gSGNForcedLimhG/BetaConstant/SWWE/SmoothDB/1to0p1/alpha0p1/timeseries/exp1/"
+wdir = "/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/Data/RAW/Models/gSGNForcedLimAll/BetaFunc/Beta1Beta2Switch/Serre2ImpSerre/SmoothDB/1to0p01/alpha0p1/timeseries/exp1/"
 
 linesep = 1;
 
@@ -51,7 +42,7 @@ file1dat = importdata(file1);
 nextt = file1dat(1,1);
 
 filedt = nextt - startt;
-times = [1,5,10];
+times = [5,10,20,30];
 
 for k = 1:size(times,2)
     currenttime = times(k);
@@ -71,13 +62,11 @@ for k = 1:size(times,2)
         filedat = fileidat;
     end 
     
-    
     beta1 = filedat(1,2);
-    %beta2 = filedat(1,3);
-    x = filedat(:,2);
-    h = filedat(:,3);
-    G = filedat(:,4);
-    u = filedat(:,5);
+    x = filedat(:,3);
+    h = filedat(:,4);
+    G = filedat(:,5);
+    u = filedat(:,6);
     
     figure;
     subplot(1,2,1)
@@ -86,7 +75,7 @@ for k = 1:size(times,2)
     subplot(1,2,2)
     plot(x(1:linesep:end),u(1:linesep:end),'-r');
     title('u')
-    sgtitle(strcat('t=',num2str(currenttime),'s' , '   \beta_1 = ',num2str(beta1)) );
+    sgtitle(strcat('t=',num2str(currenttime),'s' , '   \beta_1 = ',num2str(beta1)));
     legend('hide');
     
 %     matlab2tikz( strcat('Serre2SWWE20',65+ k,'.tex'));

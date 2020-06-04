@@ -3,7 +3,7 @@
       implicit none
    
       Integer wdirlen, xbc_len
-      PARAMETER(wdirlen= 300,xbc_len=30012)
+      PARAMETER(wdirlen= 300,xbc_len=20012)
       
       CHARACTER(len =wdirlen) wdir
   
@@ -13,19 +13,18 @@
      . ubc_fin(xbc_len),hbc_fin_a(xbc_len),Gbc_fin_a(xbc_len),
      . ubc_fin_a(xbc_len)
      
-      DOUBLE PRECISION Energs_init(4),Energs_fin(4)
-     
       DOUBLE PRECISION hl,hr,ga,xstart,xend,tstart,tend,
-     . dx,dt,theta,Cr,maxwavespeed,beta1,beta2,currenttime,dbalpha,
-     . alpha
+     . dx,dt,theta,Cr,maxwavespeed,currenttime,
+     . b10,b11,b20,b21,t0,dbalpha
      
       INTEGER effeclenwdir,dtsep
       
       wdir = "/home/jp/Documents/" // 
      . "Work/PostDoc/Projects/Steve/1DWaves/" //
      . "RegularisedSerre/Data/RAW" //
-     . "/Models/gSGNForcedLimhG/BetaConstant/Serre/"//
-     . "SmoothDB/1to0p1/alpha0p1/timeseries/exp1/"
+     . "/Models/gSGNForcedLimAll/BetaFunc/" //
+     . "BetaConstant/SWWE/"//
+     . "SmoothDB/1to0p1/alpha0p5/timeseries/exp1/"
      
       call LenTrim(wdir,wdirlen,effeclenwdir)
       
@@ -46,32 +45,29 @@
       !SWWE equations
       
       ga = 9.81
+            
+      b20 = 0d0
+      b21 = 0d0
       
-      beta1 = 0d0
-      beta2 = 0d0
+      b10 = -2d0/3d0
+      b11 = -2d0/3d0
+      
+      t0 = 10d0
+     
          
       hl = 1.0d0
       hr = 0.1d0
-      dbalpha = 0.1d0
+      dbalpha = 0.5d0
       
-      xstart = -100d0
-      xend = 100d0
+      xstart = -300d0
+      xend = 300d0
       
       theta = 1.2d0
       
       tstart = 0d0
-      tend = 10d0
+      tend = 40d0
       
       dtsep = 50
-      
-      !alpha is a factor on g*h, that determines wavespeed
-      !when beta1 ~ -2/3, then this ratio would go to infinity unless beta1 = 0
-      ! thus we limit ourselves to beta1 ~ -2/3 only when beta1 = 0
-      if  (dabs(2d0/3d0 + beta1) < 10d0**(-10))  then
-         alpha = 1d0
-      else
-         alpha = max(1d0,beta2 / (2d0/3d0 + beta1))
-      end if
       
       
       
@@ -79,7 +75,7 @@
       dx = (xend - xstart) / (x_len -1) 
       
       Cr = 0.5
-      maxwavespeed = dsqrt(alpha*ga*(hl))
+      maxwavespeed = dsqrt(ga*(hl))
       dt  = (Cr / maxwavespeed) *dx
       
       !generate cell nodes
@@ -88,14 +84,15 @@
       !get initial conditions at all cell nodes
       call SmoothDB(xbc,xbc_len,
      . hl,hr,dbalpha,hbc_init,ubc_init,Gbc_init) 
+     
       
       !solve gSGN with beta values until currenttime > tend
       call NumericalSolveTSPrint(tstart,tend,
-     . ga,beta1,beta2,theta,dx,dt,n_GhstCells,xbc,xbc_len,
+     . ga,b10,b11,b20,b21,t0,theta,dx,dt,n_GhstCells,xbc,xbc_len,
      . hbc_init,Gbc_init,ubc_init,
-     . Energs_init,currenttime,hbc_fin,Gbc_fin,ubc_fin,Energs_fin,
+     . currenttime,hbc_fin,Gbc_fin,ubc_fin,
      . dtsep,wdir(1:effeclenwdir),effeclenwdir)
-     
+
      
       ! get analytic values of h,u,G
       call Dambreak(xbc,xbc_len,currenttime,ga,hl,hr,
@@ -123,8 +120,11 @@
       write(4,*) 'gravity :' , ga
       write(4,*) 'hl :' , hl
       write(4,*) 'hr :' , hr
-      write(4,*) 'beta1 :' , beta1
-      write(4,*) 'beta2 :' , beta2
+      write(4,*) 'b10 :' , b10
+      write(4,*) 'b11 :' , b11
+      write(4,*) 'b20 :' , b20
+      write(4,*) 'b21 :' , b21
+      write(4,*) 't0 :' , t0
   
       
       

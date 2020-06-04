@@ -1,10 +1,10 @@
       
-      subroutine SingleSWWEDB(hl,hr,ga,
-     . xstart,xbc_len,n_GhstCells,dx,tstart,tend,
+      subroutine SingleSerreSoliton(a0,a1,ga,beta1,beta2
+     . ,xstart,xbc_len,n_GhstCells,dx,tstart,tend,
      . dt,theta,NormFile,EnergFile,ExpWdir,ExpWdir_len)
      
       implicit none
-      DOUBLE PRECISION hl,hr,ga,xstart,dx,
+      DOUBLE PRECISION a0,a1,ga,beta1,beta2,xstart,dx,
      . tstart,tend,dt,theta
       integer xbc_len,n_GhstCells,ExpWdir_len,NormFile,EnergFile
       CHARACTER(len=ExpWdir_len) ExpWdir
@@ -15,7 +15,7 @@
      . Gbc_fin_a(xbc_len),ubc_fin_a(xbc_len)
      
       
-      DOUBLE PRECISION Energs_init(3), Energs_fin(3),Energ_Err(3)
+      DOUBLE PRECISION Energs_init(4), Energs_fin(4),Energ_Err(4)
       DOUBLE PRECISION Norms(3),sumerr(3),suma(3)
       DOUBLE PRECISION tlist(1)
       integer i
@@ -27,20 +27,20 @@
       call Generatexbc(xstart,dx,xbc_len,n_GhstCells,xbc)
       
       !get initial conditions at all cell nodes
-      call Dambreak(xbc,xbc_len,tstart,ga,hl,hr,
-     . hbc_init,ubc_init,Gbc_init)
+      call SerreSoliton(xbc,xbc_len,tstart,
+     . ga,a0,a1,hbc_init,ubc_init,Gbc_init)
      
       
       !solve gSGN with beta values until currenttime > tend     
       call NumericalSolveTSPrint(tstart,tend,
-     . ga,theta,dx,dt,n_GhstCells,xbc_len,xbc,
+     . ga,beta1,beta2,theta,dx,dt,n_GhstCells,xbc_len,xbc,
      . hbc_init,Gbc_init,ubc_init,
      . currenttime,hbc_fin,Gbc_fin,ubc_fin,
      . Energs_init, Energs_fin,
      . tlist,1,ExpWdir,ExpWdir_len)
      
       ! get analytic values of h,u,G
-      call Dambreak(xbc,xbc_len,currenttime,ga,hl,hr,
+      call SerreSoliton(xbc,xbc_len,currenttime,ga,a0,a1,
      . hbc_fin_a,ubc_fin_a,Gbc_fin_a)
      
      
@@ -75,7 +75,7 @@ c Convergence Norm Tests
 
 c Conservation Norm Tests  
 
-      do i = 1,3
+      do i = 1,4
          !if denominator small just return absolute error
          if (dabs(Energs_init(i)) .lt. 10d0**(-10)) then
             Energ_Err(i) = dabs(Energs_fin(i) - Energs_init(i))
@@ -113,21 +113,23 @@ c Conservation Norm Tests
       write(4,*) 'actual end time :', currenttime
       write(4,*) 'dt:' , dt
       write(4,*) 'gravity :' , ga
-      write(4,*) 'hl :' , hl
-      write(4,*) 'hr :' , hr
+      write(4,*) 'a0 :' , a0
+      write(4,*) 'a1 :' , a1
+      write(4,*) 'beta1 :' , beta1
+      write(4,*) 'beta2 :' , beta2
       
       !write out enery
-      write (5,*) 'When , h , uh , Energy'
+      write (5,*) 'When , h , G ,  uh , Energy'
       write(5,*) 'Initial ',Energs_init(1),Energs_init(2),
-     .   Energs_init(3)
+     .   Energs_init(3),Energs_init(4)
       write(5,*) 'End ',Energs_fin(1),Energs_fin(2),
-     .   Energs_fin(3)
+     .   Energs_fin(3),Energs_fin(4)
       
       !write out information for group of experiments (Norms, Energy)
       write(NormFile,*) dx,Norms(1),Norms(2),Norms(3)
       
       write(EnergFile,*) dx,Energ_Err(1),Energ_Err(2),
-     .   Energ_Err(3)
+     .   Energ_Err(3),Energ_Err(4)
       
       
       close(1)
@@ -152,14 +154,14 @@ c Conservation Norm Tests
      
   
       integer expi,x_len,xbc_len,n_GhstCells, lowestresx
-      DOUBLE PRECISION hl,hr,ga,xstart,xend,tstart,tend,
-     . dx,dt,theta,Cr,maxwavespeed
+      DOUBLE PRECISION a0,a1,ga,xstart,xend,tstart,tend,
+     . dx,dt,theta,Cr,maxwavespeed,beta1,beta2,alpha
      
       INTEGER effeclenwdir
       
       wdir = "/home/jp/Documents/Work/PostDoc/Projects/Steve/" //
-     . "1DWaves/RegularisedSerre/Data/RAW/Models/SWWE" //
-     . "/AnaSolDBLoop/theta1/";
+     . "1DWaves/RegularisedSerre/Data/RAW/Models/gSGNForcedLimAll" //
+     . "/ConstantBeta/AnaSolSolitonLoop/";
      
       call LenTrim(wdir,wdirlen,effeclenwdir)
       
@@ -177,23 +179,33 @@ c Conservation Norm Tests
       !SWWE equations
       ga = 9.81d0
       
+      beta1 = 0d0
+      beta2 = 0d0
       
-      hl = 2.0
-      hr = 1.0
+      a0 = 1.0
+      a1 = 0.7
       
       xstart = -50d0
       xend = 50d0
       
-      theta = 1.0d0
+      theta = 1.2d0
       
       tstart = 0d0
       tend = 1d0
       
+      !alpha is a factor on g*h, that determines wavespeed
+      !when beta1 ~ -2/3, then this ratio would go to infinity unless beta1 = 0
+      ! thus we limit ourselves to beta1 ~ -2/3 only when beta1 = 0
+      if  (dabs(2d0/3d0 + beta1) < 10d0**(-10))  then
+         alpha = 1d0
+      else
+         alpha = max(1d0,beta2 / (2d0/3d0 + beta1))
+      end if
       
       lowestresx = 100
       
       !perform the soliton experiment a number of times, decreasing \Delta x each time
-      do expi = 7,7
+      do expi = 0,12
       
          write (strdiri,'(I2.2)') expi
          
@@ -204,13 +216,13 @@ c Conservation Norm Tests
 
          dx = (xend - xstart) / (x_len -1)
          Cr = 0.5
-         maxwavespeed = dsqrt(ga*(hl + hr))
+         maxwavespeed = dsqrt(alpha*ga*(a0 + a1))
          dt  = (Cr / maxwavespeed) *dx
          
          print *,'++++++++++++ Experiment : ',expi ,' || ', '# Cells :',
      .    x_len , '++++++++++++'
          
-         call SingleSWWEDB(hl,hr,ga,
+         call SingleSerreSoliton(a0,a1,ga,beta1,beta2,
      . xstart,xbc_len,n_GhstCells,dx,tstart,tend,
      . dt,theta,NormFile,EnergFile,
      .      wdir(1:effeclenwdir)//strdiri//'/',effeclenwdir+3)

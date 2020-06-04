@@ -93,6 +93,49 @@ h = symbols("dx")
 func = f(x)
 
 
+"""
+#Backward
+print('Backward')
+expandloc = symbols('x_{j}')
+evallocs = [-2*h,-h,0]
+desiredorder = 2
+desiredderiv =1
+DerivApproximation = TSFDCoeff(func,expandloc,evallocs,desiredorder,desiredderiv)
+
+print('Second order approximation to dq/dx_{j}')
+display(DerivApproximation[0])
+display(DerivApproximation[1])
+print('\n\n\n')
+
+#Middle
+print('Middle')
+expandloc = symbols('x_{j}')
+evallocs = [-h,h,0]
+desiredorder = 2
+desiredderiv =1
+DerivApproximation = TSFDCoeff(func,expandloc,evallocs,desiredorder,desiredderiv)
+
+print('Second order approximation to dq/dx_{j}')
+display(DerivApproximation[0])
+display(DerivApproximation[1])
+print('\n\n\n')
+
+
+#Forward
+print('Forward')
+expandloc = symbols('x_{j}')
+evallocs = [2*h,h,0]
+desiredorder = 2
+desiredderiv =1
+DerivApproximation = TSFDCoeff(func,expandloc,evallocs,desiredorder,desiredderiv)
+
+print('Second order approximation to dq/dx_{j}')
+display(DerivApproximation[0])
+display(DerivApproximation[1])
+print('\n\n\n')
+"""
+
+"""
 #Backward
 print('Backward Full')
 expandloc = symbols('x_{j+1/2}')
@@ -107,6 +150,16 @@ display(DerivApproximation[1])
 print('\n\n\n')
 
 #Middle Approximations are all the same as partial since, if both h_j, h_j+1, then it drops to centered
+print('Middle')
+expandloc = symbols('x_{j+1/2}')
+evallocs = [-h/2,h/2,3*h/2]
+desiredorder = 2
+desiredderiv =1
+DerivApproximation = TSFDCoeff(func,expandloc,evallocs,desiredorder,desiredderiv)
+print('Second order approximation to dq/dx^+_{j+1/2}')
+display(DerivApproximation[0])
+display(DerivApproximation[1])
+print('\n\n\n')
 
 #Second order approximation to (dq/dx)^+_{j+1/2}
 print('Forward Full')
@@ -119,9 +172,11 @@ print('Second order approximation to dq/dx^+_{j+1/2}')
 display(DerivApproximation[0])
 display(DerivApproximation[1])
 print('\n\n\n')
+"""
 
 
 #Second order approximation to (d^2 q/d x^2 )^-_{j+1/2}
+print('Backward Full')
 expandloc = symbols('x_{j+1/2}')
 evallocs = [-h/2,-3*h/2, -5*h/2, -7*h/2]
 desiredorder = 2
@@ -133,8 +188,48 @@ display(DerivApproximation[0])
 display(DerivApproximation[1])
 print('\n\n\n')
 
+#Second order approximation to (d^2 q/d x^2 )^+_{j+1/2}
+print('Backward Partial')
+expandloc = symbols('x_{j+1/2}')
+evallocs = [h/2,-h/2,-3*h/2, -5*h/2]
+desiredorder = 2
+desiredderiv = 2
+DerivApproximation = TSFDCoeff(func,expandloc,evallocs,desiredorder,desiredderiv)
+
+print('Second order approximation to (d^2 q/d x^2 )^+_{j+1/2}')
+display(DerivApproximation[0])
+display(DerivApproximation[1])
+print('\n\n\n')
+
 
 #Second order approximation to (d^2 q/d x^2 )^+_{j+1/2}
+print('Middle')
+expandloc = symbols('x_{j+1/2}')
+evallocs = [-3*h/2,-h/2,h/2,3*h/2]
+desiredorder = 2
+desiredderiv = 2
+DerivApproximation = TSFDCoeff(func,expandloc,evallocs,desiredorder,desiredderiv)
+
+print('Second order approximation to (d^2 q/d x^2 )^+_{j+1/2}')
+display(DerivApproximation[0])
+display(DerivApproximation[1])
+print('\n\n\n')
+
+print('Forward Partial')
+expandloc = symbols('x_{j+1/2}')
+evallocs = [-h/2,h/2,3*h/2, 5*h/2]
+desiredorder = 2
+desiredderiv = 2
+DerivApproximation = TSFDCoeff(func,expandloc,evallocs,desiredorder,desiredderiv)
+
+print('Second order approximation to (d^2 q/d x^2 )^+_{j+1/2}')
+display(DerivApproximation[0])
+display(DerivApproximation[1])
+print('\n\n\n')
+
+
+#Second order approximation to (d^2 q/d x^2 )^+_{j+1/2}
+print('Forward Full')
 expandloc = symbols('x_{j+1/2}')
 evallocs = [h/2,3*h/2, 5*h/2, 7*h/2]
 desiredorder = 2
@@ -145,16 +240,4 @@ print('Second order approximation to (d^2 q/d x^2 )^+_{j+1/2}')
 display(DerivApproximation[0])
 display(DerivApproximation[1])
 print('\n\n\n')
-
-# #Second order approximation to (d^2 q/d x^2 )^_{j}
-# expandloc = symbols('x_{j}')
-# evallocs = [-h,0,h,2*h]
-# desiredorder = 2
-# desiredderiv = 2
-# DerivApproximation = TSFDCoeff(func,expandloc,evallocs,desiredorder,desiredderiv)
-
-# # print('Second order approximation to (d^2 q/d x^2 )^-_{j+1/2}')
-# # display(DerivApproximation[0])
-# # display(DerivApproximation[1])
-# # print('\n\n\n')
 

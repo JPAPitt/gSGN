@@ -1,0 +1,247 @@
+\documentclass[10pt]{article}
+
+  \usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+%% the following commands are needed for some matlab2tikz features
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{arrows.meta}
+\usepgfplotslibrary{patchplots}
+\usepackage{grffile}
+\usepackage{amsmath}
+
+
+%\usepackage{fullpage}
+\usepackage[top=1in, bottom=1in, left=0.8in, right=1in]{geometry}
+\usepackage{multicol}
+%\usepackage{wrapfig}
+%\usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{xcolor}
+%\usepackage{soul}
+\usepackage{graphicx}
+\usepackage[pdf]{pstricks}
+
+\definecolor{lightblue}{rgb}{.80,.9,1}
+\newcommand{\hl}[1]
+    {\par\colorbox{lightblue}{\parbox{\linewidth}{#1}}}
+
+\newcommand{\defn}{\stackrel{\textrm{\scriptsize def}}{=}}
+
+\setlength{\columnsep}{0.1pc}
+
+\title{Generalised Serre-Green-Naghdi Model}
+%\author{Christopher Zoppou -- \texttt{christopher.zoppou@anu.edu.au}, Dimitrios Mitsotakis -- \texttt{dmitsot@gmail.com}, Stephen Roberts -- \texttt{stephen.roberts@anu.edu.au}, Jordan Pitt}
+
+% TIME ON EVERY PAGE AS WELL AS THE FILE NAME
+\usepackage{fancyhdr}
+\usepackage{currfile}
+\usepackage[us,12hr]{datetime} % `us' makes \today behave as usual in TeX/LaTeX
+\fancypagestyle{plain}{
+\fancyhf{}
+\rfoot{\emph{\footnotesize \textcopyright  Serre Notes by C. Zoppou, D. Mitsatakis and S. Roberts.}
+ \\ File Name: {\currfilename} \\ Date: {\ddmmyyyydate\today} at \currenttime}
+\lfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0pt}}
+\pagestyle{plain}
+
+\begin{document}
+
+\maketitle
+
+\vspace{-0.3in}
+\noindent
+\rule{\linewidth}{0.4pt}
+
+%-------------------------------------------------
+%\section{Introduction}
+%-------------------------------------------------
+
+
+
+\subsection{Numerical Experiments}
+
+\subsubsection{Smooth Dambreak}
+
+\begin{align}
+h(x,0) & = h_0 + \dfrac{h_1 - h_0}{2} \left(1 + \tanh\left(\dfrac{x}{\alpha}\right)\right)  \\
+u(x,0) &= 0 \\
+G(x,0) &= 0
+\end{align}
+
+$\alpha = 2$
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2Inith.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2Inithz.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2Initu.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2InitG.tex}
+		\caption{$G$}
+	\end{subfigure}
+	\caption{Initial Conditions $\alpha = 2$}
+\end{figure}
+
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2ImpDisph.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2ImpDisphz.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2ImpDispu.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Improve Dispersion Serre Family $\beta_1 = \beta_2$ for smooth dam-break $\alpha = 2$ at $t=15s$. $\beta_1 =\beta_2 = 0.1$ to $\beta_1 =\beta_2 = 1$. }
+\end{figure}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2RegSWWEh.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2RegSWWEu.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Regularised SWWE Family $\beta_1 = \beta_2 - \frac{2}{3}$ for smooth dam-break $\alpha = 2$ at $t=15s$. $\beta_1 = \beta_2 - \frac{2}{3}$ with  $\beta_2 = 0$ to $\beta_2 = 5$. }
+\end{figure}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2Reg2h.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a2/SDBa2Reg2u.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Region 2 Family $\beta_1 = \beta_2 - \frac{2}{3} - k$ and $\beta_2 = 2k$ (should find something better so we get expanding wave train), so $\alpha = 2$ for smooth dam-break $\alpha = 2$ at $t=15s$.  }
+\end{figure}
+
+
+$\alpha = 0.1$
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1Inith.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1Inithz.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1Initu.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1InitG.tex}
+		\caption{$G$}
+	\end{subfigure}
+	\caption{Initial Conditions $\alpha = 0.1$}
+\end{figure}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1ImpDisph.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1ImpDisphz.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1ImpDispu.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Improve Dispersion Serre Family $\beta_1 = \beta_2$ for smooth dam-break $\alpha = 0.1$ at $t=15s$. $\beta_1 =\beta_2 = 0.1$ to $\beta_1 =\beta_2 = 1$. }
+\end{figure}
+
+\begin{figure}
+	\tikzset{every picture/.style={scale=0.75}}%
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1RegSWWEh.tex}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\input{./Figures/SmoothDB-a0p1/SDBa0p1RegSWWEu.tex}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Improve Dispersion Serre Family $\beta_1 = \beta_2$ for smooth dam-break $\alpha = 2$ at $t=15s$. $\beta_1 = \beta_2 - \frac{2}{3}$ with  $\beta_2 = 0$ to $\beta_2 = 5$. }
+\end{figure}
+
+%-----------------------------------------------------
+\begin{thebibliography}{99}
+%-----------------------------------------------------
+
+\bibitem{Clamond-Dutykh-2018-237}Clamond,~D. and D.~Dutykh, Non-dispersive conservative regularisation of nonlinear shallow water (and isentropic Euler equations), Communications in Nonlinear Science and Numerical Simulation, 55(42), 237-247.
+
+\bibitem{Dutykh-etal-2018-371}Dutykh,~D., M.~Hoefer and D.~Mitsotakis, Soliary wave solutions and their interactions for fully nonlinear water waves with surface tension in the generalized Serre equations, Theoretical and Computational Fluid Dynamics, 32(3), 371-397.
+
+\bibitem{Evans-L-1997} L.C.~Evans, \emph{Partial Differential Equations}, Graduate Studies in Mathematics, Volume 19, American Mathematical Society, New York, (1997).
+
+\bibitem{Harten-A-83-357}  A.~Harten, High resolution schemes for hyperbolic conservation laws, Journal of Computational Physics,  49 (3) (1983) 357-393.
+
+\bibitem{Kurganov-etal-2001-707} A.~Kurganov, S.~Noelle, G.~Petrova, Semidiscrete central-upwind schemes for hyperbolic conservation laws and Hamilton-Jacobi equations, Journal of Scientific Computing, Society for Industrial and Applied Mathematics, 23 (3) (2002) 707-740.
+
+\bibitem{vanLeer-B-1979-101} B.~van~Leer, Towards the ultimate conservative difference scheme, V. A second-order sequel to Godunov's method, Journal of Computational Physics, 32 (1) (1979) 101-136.
+
+\bibitem{Shu-Osher-1988-439} C.W.~Shu, S.~Osher, Efficient implementation of essentially non-oscillatory shock-capturing schemes, Journal of Computational Physics,  77 (2) (1988) 439-471.
+
+\bibitem{Serre-F-1953-857} F.~Serre, Contribution \`{a} l'\'{e}tude des \'{e}coulements permanents et variables dans les canaux, La Houille Blanche, 6 (1953) 830-872.
+
+\bibitem{Zoppou-C-2014} C.~Zoppou, Numerical solution of the one-dimensional and cylindrical Serre equations for rapidly varying free surface flows, Ph.D., Mathematical Sciences Institute, College of Physical and Mathematical Sciences, The Australian National University, (2014).
+
+\bibitem{Zoppou-etal-2017-70}C.~Zoppou, J.~Pitt and S.G.~Roberts, Numerical solution of the fully non-linear weakly dispersive Serre equations for steep gradient flows, Applied Mathematical Modelling, 48, 70-95.
+
+\end{thebibliography}
+
+\end{document} 

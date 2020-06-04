@@ -3,7 +3,7 @@
       implicit none
    
       Integer wdirlen, xbc_len
-      PARAMETER(wdirlen= 300,xbc_len=20012)
+      PARAMETER(wdirlen= 300,xbc_len=10012)
       
       CHARACTER(len =wdirlen) wdir
   
@@ -13,18 +13,17 @@
      . ubc_fin(xbc_len),hbc_fin_a(xbc_len),Gbc_fin_a(xbc_len),
      . ubc_fin_a(xbc_len)
      
+      DOUBLE PRECISION Energs_init(4), Energs_fin(4)
       DOUBLE PRECISION hl,hr,ga,xstart,xend,tstart,tend,
-     . dx,dt,theta,Cr,maxwavespeed,currenttime,
-     . b10,b11,b20,b21,t0,dbalpha
+     . dx,dt,theta,Cr,maxwavespeed,beta1,beta2,alpha,currenttime
      
-      INTEGER effeclenwdir,dtsep
+      INTEGER effeclenwdir
       
       wdir = "/home/jp/Documents/" // 
      . "Work/PostDoc/Projects/Steve/1DWaves/" //
      . "RegularisedSerre/Data/RAW" //
-     . "/Models/gSGNForcedLimAll/BetaFunc/" //
-     . "BetaConstant/SWWE/"//
-     . "SmoothDB/1to0p1/alpha0p5/timeseries/exp1/"
+     . "/Models/gSGNForcedLimhG/ConstantBeta/SWWE/"//
+     . "DB/timeseries/"
      
       call LenTrim(wdir,wdirlen,effeclenwdir)
       
@@ -37,7 +36,7 @@
       open(2, file = wdir(1:effeclenwdir)//'EndVals.dat') 
       open(3, file = wdir(1:effeclenwdir)//'EndAnaVals.dat') 
       open(4, file = wdir(1:effeclenwdir)//'Params.dat') 
-
+      open(5, file = wdir(1:effeclenwdir)//'Energy.dat')
       
       n_GhstCells = 6
       x_len = xbc_len - 2 *n_GhstCells
@@ -45,54 +44,50 @@
       !SWWE equations
       
       ga = 9.81
-            
-      b20 = 0d0
-      b21 = 0d0
       
-      b10 = -2d0/3d0
-      b11 = -2d0/3d0
-      
-      t0 = 10d0
-     
+      beta1 = -2d0/3d0
+      beta2 = 0d0
          
-      hl = 1.0d0
-      hr = 0.1d0
-      dbalpha = 0.5d0
+      hl = 2.0d0
+      hr = 1.0d0
       
-      xstart = -300d0
-      xend = 300d0
+      xstart = -100d0
+      xend = 100d0
       
       theta = 1.2d0
       
       tstart = 0d0
-      tend = 40d0
-      
-      dtsep = 50
-      
+      tend = 15d0
       
       
       !ensures that x(0) = xstart and x(x_len) = x_end
       dx = (xend - xstart) / (x_len -1) 
       
+      !alpha is a factor on g*h, that determines wavespeed
+      !when beta1 ~ -2/3, then this ratio would go to infinity unless beta1 = 0
+      ! thus we limit ourselves to beta1 ~ -2/3 only when beta1 = 0
+      if  (dabs(2d0/3d0 + beta1) < 10d0**(-10))  then
+         alpha = 1
+      else
+         alpha = max(1d0,beta2 / (2d0/3d0 + beta1))
+      end if
+      
       Cr = 0.5
-      maxwavespeed = dsqrt(ga*(hl))
+      maxwavespeed = dsqrt(alpha*ga*(hl))
       dt  = (Cr / maxwavespeed) *dx
       
       !generate cell nodes
       call Generatexbc(xstart,dx,xbc_len,n_GhstCells,xbc)
       
       !get initial conditions at all cell nodes
-      call SmoothDB(xbc,xbc_len,
-     . hl,hr,dbalpha,hbc_init,ubc_init,Gbc_init) 
-     
+      call Dambreak(xbc,xbc_len,tstart,ga,hl,hr,
+     . hbc_init,ubc_init,Gbc_init) 
       
-      !solve gSGN with beta values until currenttime > tend
-      call NumericalSolveTSPrint(tstart,tend,
-     . ga,b10,b11,b20,b21,t0,theta,dx,dt,n_GhstCells,xbc,xbc_len,
+            !solve gSGN with beta values until currenttime > tend
+      call NumericalSolve(tstart,tend,
+     . ga,beta1,beta2,theta,dx,dt,n_GhstCells,xbc_len,
      . hbc_init,Gbc_init,ubc_init,
-     . currenttime,hbc_fin,Gbc_fin,ubc_fin,
-     . dtsep,wdir(1:effeclenwdir),effeclenwdir)
-
+     . Energs_init,currenttime,hbc_fin,Gbc_fin,ubc_fin,Energs_fin)
      
       ! get analytic values of h,u,G
       call Dambreak(xbc,xbc_len,currenttime,ga,hl,hr,
@@ -120,18 +115,31 @@
       write(4,*) 'gravity :' , ga
       write(4,*) 'hl :' , hl
       write(4,*) 'hr :' , hr
-      write(4,*) 'b10 :' , b10
-      write(4,*) 'b11 :' , b11
-      write(4,*) 'b20 :' , b20
-      write(4,*) 'b21 :' , b21
-      write(4,*) 't0 :' , t0
+      write(4,*) 'beta1 :' , beta1
+      write(4,*) 'beta2 :' , beta2
   
       
+      !write out energies
+      write(5,*) 'initial h  G  uh  H'
+      write(5,*) Energs_init(1), Energs_init(2), 
+     . Energs_init(3), Energs_init(4)
+      write(5,*) ''
+      write(5,*) 'End h  G  uh  H'
+      write(5,*) Energs_fin(1), Energs_fin(2), 
+     . Energs_fin(3), Energs_fin(4)   
+      write(5,*) ''  
+      write(5,*) 'Relative h  G  uh  H'
+      write(5,*) 
+     . dabs(Energs_fin(1) - Energs_init(1))/ dabs(Energs_init(1)), 
+     . dabs(Energs_fin(2) - Energs_init(2))/ dabs(Energs_init(2)),
+     . dabs(Energs_fin(3) - Energs_init(3))/ dabs(Energs_init(3)),
+     . dabs(Energs_fin(4) - Energs_init(4))/ dabs(Energs_init(4))
       
       close(1)
       close(2)
       close(3)
       close(4)
+      close(5)
 
       
       end 
