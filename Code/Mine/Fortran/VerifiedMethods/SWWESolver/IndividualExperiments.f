@@ -1,137 +1,222 @@
-      program main
-   
+      
+      subroutine SingleSWWESDB(hl,hr,dbalpha,ga,
+     . xstart,xbc_len,n_GhstCells,dx,tstart,tend,
+     . dt,theta,NormFile,EnergFile,tlist,tlist_len,ExpWdir,ExpWdir_len)       
       implicit none
-   
-      Integer wdirlen, xbc_len
-      PARAMETER(wdirlen= 300,xbc_len=20012)
+      DOUBLE PRECISION hl,hr,ga,xstart,dx,
+     . tstart,tend,dt,theta,dbalpha
+      integer xbc_len,n_GhstCells,ExpWdir_len,NormFile,EnergFile,
+     . tlist_len
+      CHARACTER(len=ExpWdir_len) ExpWdir
       
-      CHARACTER(len =wdirlen) wdir
-  
-      integer i,x_len,n_GhstCells
-      DOUBLE PRECISION xbc(xbc_len),hbc_init(xbc_len),Gbc_init(xbc_len),
-     . ubc_init(xbc_len),hbc_fin(xbc_len),Gbc_fin(xbc_len),
-     . ubc_fin(xbc_len),hbc_fin_a(xbc_len),Gbc_fin_a(xbc_len),
-     . ubc_fin_a(xbc_len)
+      DOUBLE PRECISION xbc(xbc_len),hbc_init(xbc_len),
+     . Gbc_init(xbc_len),ubc_init(xbc_len),hbc_fin(xbc_len),
+     . Gbc_fin(xbc_len),ubc_fin(xbc_len),hbc_fin_a(xbc_len),
+     . Gbc_fin_a(xbc_len),ubc_fin_a(xbc_len)
      
-      DOUBLE PRECISION hl,hr,ga,xstart,xend,tstart,tend,
-     . dx,dt,theta,Cr,maxwavespeed,currenttime,
-     . b10,b11,b20,b21,t0,dbalpha
-     
-      INTEGER effeclenwdir,dtsep
       
-      wdir = "/home/jp/Documents/" // 
-     . "Work/PostDoc/Projects/Steve/1DWaves/" //
-     . "RegularisedSerre/Data/RAW" //
-     . "/Models/gSGNForcedLimAll/BetaFunc/" //
-     . "BetaConstant/SWWE/"//
-     . "SmoothDB/1to0p1/alpha0p5/timeseries/exp1/"
-     
-      call LenTrim(wdir,wdirlen,effeclenwdir)
+      DOUBLE PRECISION Energs_init(4), Energs_fin(4),Energ_Err(4)
+      DOUBLE PRECISION Norms(3),sumerr(3),suma(3)
+      DOUBLE PRECISION tlist(tlist_len)
+      integer i
+      DOUBLE PRECISION currenttime
       
-      !Remove previous runs, and make directory to dump data
-      CALL SYSTEM('rm -rf '//wdir)
-      CALL SYSTEM('mkdir -p '// wdir)
-      
-      !open output files
-      open(1, file = wdir(1:effeclenwdir)//'InitVal.dat') 
-      open(2, file = wdir(1:effeclenwdir)//'EndVals.dat') 
-      open(3, file = wdir(1:effeclenwdir)//'EndAnaVals.dat') 
-      open(4, file = wdir(1:effeclenwdir)//'Params.dat') 
 
-      
-      n_GhstCells = 6
-      x_len = xbc_len - 2 *n_GhstCells
-      
-      !SWWE equations
-      
-      ga = 9.81
-            
-      b20 = 0d0
-      b21 = 0d0
-      
-      b10 = -2d0/3d0
-      b11 = -2d0/3d0
-      
-      t0 = 10d0
-     
-         
-      hl = 1.0d0
-      hr = 0.1d0
-      dbalpha = 0.5d0
-      
-      xstart = -300d0
-      xend = 300d0
-      
-      theta = 1.2d0
-      
-      tstart = 0d0
-      tend = 40d0
-      
-      dtsep = 50
-      
-      
-      
-      !ensures that x(0) = xstart and x(x_len) = x_end
-      dx = (xend - xstart) / (x_len -1) 
-      
-      Cr = 0.5
-      maxwavespeed = dsqrt(ga*(hl))
-      dt  = (Cr / maxwavespeed) *dx
-      
       !generate cell nodes
       call Generatexbc(xstart,dx,xbc_len,n_GhstCells,xbc)
       
-      !get initial conditions at all cell nodes
-      call SmoothDB(xbc,xbc_len,
-     . hl,hr,dbalpha,hbc_init,ubc_init,Gbc_init) 
+      call SmoothDB(xbc,xbc_len,hl,hr,dbalpha,
+     . hbc_init,ubc_init,Gbc_init)
+
      
       
-      !solve gSGN with beta values until currenttime > tend
+      !solve gSGN with beta values until currenttime > tend     
       call NumericalSolveTSPrint(tstart,tend,
-     . ga,b10,b11,b20,b21,t0,theta,dx,dt,n_GhstCells,xbc,xbc_len,
+     . ga,theta,dx,dt,n_GhstCells,xbc_len,xbc,
      . hbc_init,Gbc_init,ubc_init,
      . currenttime,hbc_fin,Gbc_fin,ubc_fin,
-     . dtsep,wdir(1:effeclenwdir),effeclenwdir)
-
+     . Energs_init, Energs_fin,
+     . tlist,tlist_len,ExpWdir,ExpWdir_len)
+     
+     
+     
      
       ! get analytic values of h,u,G
       call Dambreak(xbc,xbc_len,currenttime,ga,hl,hr,
-     . hbc_fin_a,ubc_fin_a,Gbc_fin_a) 
+     . hbc_fin_a,ubc_fin_a,Gbc_fin_a)
+     
+     
+c Convergence Norm Tests     
+      !calculate norm values for h,u,G
+      !Convergence Norms
+      do i = 1,3
+         sumerr(i) = 0
+         suma(i) = 0
+      end do
+      
+      !sum L2 norm of q - q*, and q*
+      do i = 1, xbc_len
+         sumerr(1) = sumerr(1) + (hbc_fin_a(i) - hbc_fin(i))**2
+         suma(1) = suma(1) + (hbc_fin_a(i))**2
+         
+         sumerr(2) = sumerr(2) + (ubc_fin_a(i) - ubc_fin(i))**2
+         suma(2) = suma(2) + (ubc_fin_a(i))**2
+         
+         sumerr(3) = sumerr(3) + (Gbc_fin_a(i) - Gbc_fin(i))**2
+         suma(3) = suma(3) + (Gbc_fin_a(i))**2 
+      end do
+      
+      do i = 1,3
+         !if sum is very small, just return absolute error
+         if (suma(i) .lt. 10d0**(-10)) then
+            Norms(i) = dsqrt(sumerr(i))
+         else
+            Norms(i) = dsqrt(sumerr(i)) / dsqrt(suma(i))
+         end if
+      end do
 
+c Conservation Norm Tests  
 
-      !write out initial values and end values
+      do i = 1,4
+         !if denominator small just return absolute error
+         if (dabs(Energs_init(i)) .lt. 10d0**(-10)) then
+            Energ_Err(i) = dabs(Energs_fin(i) - Energs_init(i))
+         else
+            Energ_Err(i) = dabs(Energs_fin(i) - Energs_init(i))/
+     .       dabs(Energs_init(i))
+         end if
+      end do   
+
+           
+      ! write out individual experiment details
+      open(1, file = ExpWdir//'Init.dat') 
+      open(2, file = ExpWdir//'End.dat') 
+      open(3, file = ExpWdir//'EndAna.dat') 
+      open(4, file = ExpWdir//'Params.dat') 
+      open(5, file = ExpWdir//'Energy.dat') 
+      
+      !write out initial,end and analytic values 
       do i = 1,xbc_len
-         write(1,*) xbc(i),hbc_init(i),Gbc_init(i),ubc_init(i)
-         write(2,*) xbc(i),hbc_fin(i),Gbc_fin(i),ubc_fin(i)
-         write(3,*) xbc(i),hbc_fin_a(i),Gbc_fin_a(i),ubc_fin_a(i)
+         write(1,*) tstart,xbc(i),hbc_init(i),Gbc_init(i),ubc_init(i)
+         write(2,*) currenttime,xbc(i),hbc_fin(i),Gbc_fin(i),ubc_fin(i)
+         write(3,*) currenttime,xbc(i),hbc_fin_a(i),Gbc_fin_a(i),
+     .               ubc_fin_a(i)
       end do
       
       !write out parameters      write(5,*) 'Experiment - Forced Solution, Gaussian Bump'
-      write(4,*) 'xstart :',xstart
-      write(4,*) 'xend :',xend
-      write(4,*) 'x_len :',x_len
-      write(4,*) 'dx = (x_end - x_start) / (x_len -1)  :' , dx
-      write(4,*) 'n_GhstCells :',n_GhstCells
-      write(4,*) 'tstart :', tstart
-      write(4,*) 'tend :',tend 
-      write(4,*) 'actual end time :', currenttime
-      write(4,*) 'dt/dx :' , (Cr / maxwavespeed)
-      write(4,*) 'dt = dx*(dt/dx)  :' , dt
-      write(4,*) 'gravity :' , ga
-      write(4,*) 'hl :' , hl
-      write(4,*) 'hr :' , hr
-      write(4,*) 'b10 :' , b10
-      write(4,*) 'b11 :' , b11
-      write(4,*) 'b20 :' , b20
-      write(4,*) 'b21 :' , b21
-      write(4,*) 't0 :' , t0
-  
+      write(4,*) 'xstart',xstart
+      write(4,*) 'xend',xbc(xbc_len)
+      write(4,*) 'x_len',xbc_len - 2*n_GhstCells
+      write(4,*) 'n_GhstCells',n_GhstCells
+      write(4,*) 'xbc_len',xbc_len
+      write(4,*) 'dx' , dx
+      write(4,*) 'tstart', tstart
+      write(4,*) 'tend',tend 
+      write(4,*) 'actual_end_time', currenttime
+      write(4,*) 'dt' , dt
+      write(4,*) 'theta' , theta
+      write(4,*) 'gravity' , ga
+      write(4,*) 'hl' , hl
+      write(4,*) 'hr' , hr
+      write(4,*) 'dbalpha' , dbalpha
+      
+      !write out enery
+      write (5,*) 'When , h , G ,  uh , Energy'
+      write(5,*) 'Initial ',Energs_init(1),Energs_init(2),
+     .   Energs_init(3),Energs_init(4)
+      write(5,*) 'End ',Energs_fin(1),Energs_fin(2),
+     .   Energs_fin(3),Energs_fin(4)
+      
+      !write out information for group of experiments (Norms, Energy)
+      write(NormFile,*) dx,Norms(1),Norms(2),Norms(3)
+      
+      write(EnergFile,*) dx,Energ_Err(1),Energ_Err(2),
+     .   Energ_Err(3),Energ_Err(4)
       
       
       close(1)
       close(2)
       close(3)
       close(4)
-
+      close(5)
       
-      end 
+      end
+      
+
+ 
+      program main
+         
+      implicit none
+   
+      Integer wdirlen,NormFile,EnergFile,tlist_len
+      PARAMETER(wdirlen= 300,NormFile = 98, 
+     .   EnergFile = 99,tlist_len=35)
+      
+      CHARACTER(len =wdirlen) wdir
+     
+  
+      integer x_len,xbc_len,n_GhstCells, lowestresx 
+      DOUBLE PRECISION hl,hr,ga,xstart,xend,tstart,tend,
+     . dx,dt,theta,Cr,maxwavespeed,dbalpha
+     
+      INTEGER effeclenwdir
+     
+      DOUBLE PRECISION tlist(tlist_len)
+      
+      wdir = "/home/jp/Documents/Work/PostDoc/" //
+     . "Projects/Steve/1DWaves/RegularisedSerre/" // 
+     . "Data/RAW/Models/gSGNForcedLimAll/ConstantBeta/" //
+     . "SmoothDBInvestigation/SWWESolver/AspRat2to1/DBalpha0p1/"
+
+     
+      call LenTrim(wdir,wdirlen,effeclenwdir)
+      
+      !Remove previous runs, and make directory to dump data
+      CALL SYSTEM('rm -rf '//wdir(1:effeclenwdir))
+      CALL SYSTEM('mkdir -p '// wdir(1:effeclenwdir))
+      
+      open(EnergFile, file = wdir(1:effeclenwdir)//'EnergyErrAll.dat') 
+      open(NormFile, file = wdir(1:effeclenwdir)//'NormsErrAll.dat') 
+     
+
+      n_GhstCells = 6
+      
+      !SWWE equations
+      ga = 9.81d0
+      hl = 2.0
+      hr = 1.0
+      dbalpha = 0.1
+      
+      xstart = -250d0
+      xend = 250d0
+      
+      theta = 1.2d0
+      
+      tstart = 0d0
+      tend = 35d0
+      
+      call EqualSpaced(tstart,tend,tlist_len, tlist)
+      
+      
+      lowestresx = 1000
+      x_len = lowestresx * (2**6)
+      xbc_len = x_len + 2 *n_GhstCells
+
+      dx = (xend - xstart) / (x_len -1)
+      Cr = 0.5
+      maxwavespeed = dsqrt(ga*(hl + hr))
+      dt  = (Cr / maxwavespeed) *dx
+
+      call SingleSWWESDB(hl,hr,dbalpha,ga,
+     .         xstart,xbc_len,n_GhstCells,dx,tstart,tend,
+     .         dt,theta,NormFile,EnergFile,tlist,tlist_len,
+     .         wdir(1:effeclenwdir),effeclenwdir)  
+
+         
+         
+      close(EnergFile)
+      close(NormFile)
+      
+      
+      
+      end

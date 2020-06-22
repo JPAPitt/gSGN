@@ -101,22 +101,23 @@ c Conservation Norm Tests
       end do
       
       !write out parameters      write(5,*) 'Experiment - Forced Solution, Gaussian Bump'
-      write(4,*) 'xstart :',xstart
-      write(4,*) 'xend :',xbc(xbc_len)
-      write(4,*) 'x_len :',xbc_len - 2*n_GhstCells
-      write(4,*) 'n_GhstCells :',n_GhstCells
-      write(4,*) 'xbc_len :',xbc_len
-      write(4,*) 'dx = (x_end - x_start) / (x_len -1)  :' , dx
-      write(4,*) 'tstart :', tstart
-      write(4,*) 'tend :',tend 
-      write(4,*) 'actual end time :', currenttime
-      write(4,*) 'dt:' , dt
-      write(4,*) 'gravity :' , ga
-      write(4,*) 'hl :' , hl
-      write(4,*) 'hr :' , hr
-      write(4,*) 'dbalpha :' , dbalpha
-      write(4,*) 'beta1 :' , beta1
-      write(4,*) 'beta2 :' , beta2
+      write(4,*) 'xstart',xstart
+      write(4,*) 'xend',xbc(xbc_len)
+      write(4,*) 'x_len',xbc_len - 2*n_GhstCells
+      write(4,*) 'n_GhstCells',n_GhstCells
+      write(4,*) 'xbc_len',xbc_len
+      write(4,*) 'dx' , dx
+      write(4,*) 'tstart', tstart
+      write(4,*) 'tend',tend 
+      write(4,*) 'actual end time', currenttime
+      write(4,*) 'dt' , dt
+      write(4,*) 'gravity' , ga
+      write(4,*) 'hl' , hl
+      write(4,*) 'hr' , hr
+      write(4,*) 'dbalpha' , dbalpha
+      write(4,*) 'theta' , beta1
+      write(4,*) 'beta1' , beta1
+      write(4,*) 'beta2' , beta2
       
       !write out enery
       write (5,*) 'When , h , G ,  uh , Energy'

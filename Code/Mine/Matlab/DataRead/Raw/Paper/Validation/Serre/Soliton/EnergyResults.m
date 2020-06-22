@@ -7,7 +7,8 @@ close all;
 % Get list of directories to loop over when reading data
 
 
-wdir = "/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/Data/RAW/Models/gSGNForcedLimAll/ConstantBeta/AnaSolSolitonLoop/";
+%wdir = "/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/Data/RAW/Models/gSGNForcedLimAll/ConstantBeta/AnaSolSolitonLoop/";
+wdir = "/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/gSGN/Code/Mine/Fortran/ExperimentCollections/OtherComputers/Validation/AnalyticSolutions/Results/Validation/AnalyticSolutions/SerreSoliton/";
 
 
 OutEps = importdata(strcat(wdir, 'Energy.dat'));

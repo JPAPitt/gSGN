@@ -48,7 +48,7 @@ c=====================================
       !initial time
       currenttime  = tstart
       dtcount = 0
-      filecount = 0
+      filecount = 1
       
       !loop over and set hbc_fin,Gbc_fin to initial conditions
       ileft = 1
@@ -58,7 +58,6 @@ c=====================================
          uhbc_fin(i) = uhbc_init(i) 
          ubc_fin(i) = ubc_init(i)
       end do
-      
       
       !calculate initial Energies
       call Getufromhuh(xbc_len,hbc_fin,uhbc_fin,ubc_fin,
@@ -70,15 +69,15 @@ c=====================================
       !evolve the system through time
       do while (currenttime  .LT. tend )   
       
-         if ( dabs(currenttime - tlist(filecount)) .LT. 0.51*dt  )  then
+         if ( dabs(currenttime - tlist(filecount)) .LT. 0.9*dt  )  then
               
             write (strct,'(I2)') filecount
-            open(5, file = ExpWdir// strct //'.dat') 
+            open(9, file = ExpWdir// strct //'.dat') 
             do i = 1,xbc_len
-               write(5,*) currenttime,xbc(i),hbc_fin(i),
+               write(9,*) currenttime,xbc(i),hbc_fin(i),
      .            uhbc_fin(i),ubc_fin(i)
             end do
-            close(5)
+            close(9)
             
             filecount = filecount + 1
          end if

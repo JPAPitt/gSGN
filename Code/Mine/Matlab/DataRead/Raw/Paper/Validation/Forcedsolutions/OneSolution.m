@@ -5,7 +5,7 @@ clear all;
 close all;
 
 % Get list of directories to loop over when reading data
-wdir = "/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/Data/RAW/Models/gSGNForcedLimAll/ForcedSolution/multexpshort/06/";
+wdir = "/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/gSGN/Code/Mine/Fortran/ExperimentCollections/OtherComputers/Validation/ForcedSolution/Experiment/Results/Validation/ForcedSolutions/test/06/";
 
 
 End = importdata(strcat(wdir,'End.dat' ));
