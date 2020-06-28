@@ -1,4 +1,4 @@
-\documentclass[10pt]{article}
+\documentclass[10pt]{elsarticle}
 
   \usepackage{pgfplots}
 \pgfplotsset{compat=newest}
@@ -8,19 +8,17 @@
 \usepgfplotslibrary{patchplots}
 \usepackage{grffile}
 \usepackage{amsmath}
+\usepackage{lineno}
 
 
 %\usepackage{fullpage}
 \usepackage[top=1in, bottom=1in, left=0.8in, right=1in]{geometry}
 \usepackage{multicol}
-%\usepackage{wrapfig}
-%\usepackage{listings}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{hyperref}
 \usepackage{xcolor}
-%\usepackage{soul}
-\usepackage{graphicx}
+\usepackage{graphicx,psfrag}
 \usepackage[pdf]{pstricks}
 
 \definecolor{lightblue}{rgb}{.80,.9,1}
@@ -53,15 +51,28 @@
 \definecolor{mycolor5}{rgb}{0.46600,0.67400,0.18800}%
 \definecolor{mycolor6}{rgb}{0.30100,0.74500,0.93300}%
 
-\newcommand\T{\rule{0pt}{5ex }}       % Top table strut
+\newcommand\T{\rule{0pt}{3ex }}       % Top table strut
 \newcommand\B{\rule[-4ex]{0pt}{4ex }} % Bottom table strut
 
 \newcommand\TM{\rule{0pt}{2.8ex }}       % Top matrix strut
 \newcommand\BM{\rule[-2ex]{0pt}{2ex }} % Bottom matrix strut
 
-\newcommand\solidrule[1][0.25cm]{\rule[0.5ex]{#1}{1.5pt}}
-\newcommand\dashedrule{\mbox{%
+\DeclareRobustCommand{\solidrule}[1][0.25cm]{\rule[0.5ex]{#1}{1.5pt}}
+
+\DeclareRobustCommand{\dashedrule}{\mbox{%
 		\solidrule[2mm]\hspace{2mm}\solidrule[2mm]}}
+
+\DeclareRobustCommand{\tikzcircle}[1]{\tikz{\filldraw[#1] (0,0) circle (0.5ex);}}	
+	
+	
+\DeclareRobustCommand{\squaret}[1]{\tikz{\draw[#1,thick] (0,0) rectangle (0.2cm,0.2cm);}}
+\DeclareRobustCommand{\circlet}[1]{\tikz{\draw[#1,thick] (0,0) circle [radius=0.1cm];}}
+\DeclareRobustCommand{\trianglet}[1]{\tikz{\draw[#1,thick] (0,0) --
+		(0.25cm,0) -- (0.125cm,0.25cm) -- (0,0);}}
+\DeclareRobustCommand{\crosst}[1]{\tikz{\draw[#1,thick] (0cm,0cm) --
+		(0.1cm,0.1cm) -- (0cm,0.2cm) -- (0.1cm,0.1cm) -- (0.2cm,0.2cm) -- (0.1cm,0.1cm)-- (0.2cm,0cm);}}
+\DeclareRobustCommand{\diamondt}[1]{\tikz{\draw[#1,thick] (0,0) --(0.1cm,0.15cm) -- (0.2cm,0cm) -- (0.1cm,-0.15cm) -- (0,0)  ;}}
+\DeclareRobustCommand{\squareF}[1]{\tikz{\filldraw[#1,fill opacity= 0.3] (0,0) rectangle (0.2cm,0.2cm);}}
 
 \begin{document}
 
@@ -76,85 +87,164 @@
 %-------------------------------------------------
 \section{Introduction}
 %-------------------------------------------------
+The simulation of gravity waves of fluids plays a pivotal role in the modelling of important and interesting physical phenomena such as tsunamis [], storm surges [] and riverine flooding[]. Such phenomena are routinely shallow water phenomena, where the typical water depth $H$ is much smaller than the typical wave length $\lambda$, such that shallowness parameter $\sigma = H/  \lambda \ll 1$. 
+
+A variety of equations have been developed for waves in this shallow water regime []. These equations are usually characterised by the powers of $\sigma$ retained in their approximation to the full Euler equations, as well as the allowable size of the non-linearity parameter $\eta = A/H$ where $A$ is the typical wave amplitude. Important members of this family of shallow water wave models are; the shallow water wave equations (SWWE) which retains only the first power of $\sigma$ \cite{Bonneton-Lannes-2009-16601} and are fully non-linear so that $\eta  = O\left(1\right)$ and the Serre-Green-Naghdi (SGN) equations which retain up to the third powers of $\sigma$ and are also fully non-linear \cite{Bonneton-Lannes-2009-16601}. 
+
+There are equations corresponding to any power of $\sigma$ retained, with each power of $\sigma$ allowing for more accurate modelling of waves as the shallowness restriction is relaxed and $\sigma$ increases. However, as more powers of $\sigma$ are retained higher order derivative terms appear in the equations, which can be difficult to treat analytically and numerically. Hence, the focus on lower order $\sigma$ approximations. Particular attention has been on the dispersion relationship of these equations, which relates the angular frequency $\omega$ to the wave number $k$ for solutions of the linearised equations. This focus is due to the utility of the dispersion relationship in determining the behaviour of the corresponding non-linear equations []. 
+
+Recently, \cite{Clamond-et.al-2017-245} demonstrated a family of equations that improve the dispersion relationship of the SGN equations with only a minor increase in complexity, the so called improved SGN (iSGN). The iSGN family of equations was then expanded to the generalised SGN equations (gSGN), a family of equations that includes the SWWE, the SGN equations, the iSGN family and the regularised shallow water wave equations (rSWWE) \cite{Clamond-Dutykh-2018-237}. The rSWWE are regularised in the sense that the shocks observed in solutions of the SWWE become regularised (smoothed) shocks that are no longer discontinuous.
+
+This family of equations contains many members that are of current interest to the numerical wave modelling community []. Thus a numerical method that can solve these equations allows for a single point of comparison between the numerical solutions of many different equations of interest. We propose a method to solve the gSGN that relies on generalising the methods for the SGN equations presented in [].
+
+This numerical method is then validated using analytic solutions of the SGN and the SWWE, demonstrating its convergence rate and conservation properties. Additionally, we also make use of Forced solutions to validate that all terms in the gSGN are being accurately approximated to the correct order of accuracy. Forced solutions are necessary to validate the numerical method for the more general members of this family of equations, outside the well tested members.
+
+Finally, using the well validated numerical method we perform a numerical investigation into the behaviour of this family of equations for a smoothed dambreak problem. This problem is of particular interest firstly, because this problem requires that the numerical method is robust in the presence of steep gradients. Secondly, the solution of steep smoothed dam-break problems requires the resolution of very high wave-number waves allowing us to see the full effect of the changes in the numerical solutions between different members of the family. Thirdly, for the rSWWE we will be able to demonstrate the transition along the rSWWE family, as it approaches the standard SWWE. 
+
+
+Background
+\begin{itemize}
+	\item Why 
+	\begin{itemize}
+		\item Dispersive wave equations to model phenomena
+		\item New regularisation techniques to improve dispersive properties without requiring additional higher derivative terms (Denys - improved dispersion paper)
+		\item Regularisation techniques to produce regularised shock waves - (other denys paper)
+		\item The equations capture this new areas whilst possessing conservation law forms
+		\item Such generalised equations will allow us to gain insight into heuristic processes such as switching off dispersion/ regularisation
+	\end{itemize}
+\end{itemize}
+
+Contributions
+\begin{itemize}
+	\item Numerical illustrations, but no concrete methods with validation in literature
+	\item Robust numerical method
+	\item Numerical study of effect of beta values, in particular for various interesting classes
+\end{itemize}
 
 
 
 %-------------------------------------------------
 \section{Generalised Serre-Green-Naghdi Equations}
 %-------------------------------------------------
-Clamond and Dutykh\cite{Clamond-Dutykh-2018-237} derived the generalised Serre-Green-Naghdi (gSGN) equations:
-
+The gSGN equations derived by \citet{Clamond-Dutykh-2018-237} generalise the SGN equations that describe a depth averaged approximation to the Euler equations [] where $h$ is the height of the free-surface of the water, $u$ is the depth averaged velocity and $g$ is the acceleration due to gravity. The gSGN equations accomplish this by introducing two free parameters $\beta_1$ and $\beta_2$, that when fixed result in a particular member of this family of equations. The gSGN equations are particularly desirable due to their generalisation of the SGN equations for conservation of mass, momentum and energy like so:
 \begin{subequations}
-	\begin{gather}
-	\dfrac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0
-	\label{eq:gSGNh}
-	\end{gather}
-	\begin{gather}
-	\dfrac{\partial (uh)}{\partial t} + \dfrac{\partial }{\partial x} \left( u^2h + \dfrac{gh^2}{2} + \frac{1}{3} h^2 \Gamma \right)= 0
-	\label{eq:gSGNuh}
-	\end{gather}
-	\begin{multline}
-	\dfrac{\partial}{\partial t}\left[\frac{1}{2}hu^2 + \dfrac{1}{4}\left(\frac{2}{3} + \beta_1\right) h^3 \dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x} + \frac{1}{2}gh^2\left(1 + \frac{1}{2}\beta_2 \dfrac{\partial h}{\partial x} \dfrac{\partial h}{\partial x}\right) \right] \\
-	\dfrac{\partial}{\partial x}\left[uh\left(\frac{1}{2}u^2 + \dfrac{1}{4}\left(\frac{2}{3} + \beta_1\right)h^2\dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x} + gh\left(1 + \frac{1}{4}\beta_2\dfrac{\partial h}{\partial x}\dfrac{\partial h}{\partial x} \right)   + \frac{1}{3} h\Gamma  \right) + \frac{1}{2}\beta_2 g h^3\dfrac{\partial h}{\partial x}\dfrac{\partial u}{\partial x} \right]
-	=0
-	\label{eq:gSGNE}
-	\end{multline}
-	where
-	\begin{equation}
-	\Gamma = \frac{3}{2}\left(\frac{2}{3} + \beta_1\right)h \left[\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} - \frac{\partial^2 u}{\partial x \partial t} - u\frac{\partial^2 u}{\partial x^2}\right] - \frac{3}{2} \beta_2 g\left[h \frac{\partial^2 h}{\partial x^2} + \frac{1}{2} \frac{\partial h}{\partial x}\frac{\partial h}{\partial x} \right]
-	\end{equation}
-	\label{eq:gSGN}
+\begin{align}
+\begin{split}
+	&\dfrac{\partial h}{\partial t} + \dfrac{\partial (hu)}{\partial x} = 0
+\label{eq:gSGNh}
+\end{split}\\
+\begin{split}
+	&\dfrac{\partial (hu)}{\partial t} + \dfrac{\partial }{\partial x} \left( hu^2 + \frac{1}{2}gh^2 + \frac{1}{3} h^2 \Gamma \right)= 0
+\label{eq:gSGNuh}
+\end{split}\\
+\begin{split}
+	&\dfrac{\partial}{\partial t}\left[\frac{1}{2}hu^2 + \dfrac{1}{4}\left(\frac{2}{3} + \beta_1\right) h^3 \dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x} + \frac{1}{2}gh^2\left(1 + \frac{1}{2}\beta_2 \dfrac{\partial h}{\partial x} \dfrac{\partial h}{\partial x}\right) \right] \\
+&\phantom{+++}+\dfrac{\partial}{\partial x}\left[hu\left(\frac{1}{2}u^2 + \dfrac{1}{4}\left(\frac{2}{3} + \beta_1\right)h^2\dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x} + gh\left(1 + \frac{1}{4}\beta_2\dfrac{\partial h}{\partial x}\dfrac{\partial h}{\partial x} \right)   + \frac{1}{3} h\Gamma  \right) + \frac{1}{2}\beta_2 g h^3\dfrac{\partial h}{\partial x}\dfrac{\partial u}{\partial x} \right] = 0
+\label{eq:gSGNE}
+\end{split}
+\end{align}
+where
+\begin{equation}
+\Gamma = \frac{3}{2}\left(\frac{2}{3} + \beta_1\right)h \left[\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} - \frac{\partial^2 u}{\partial x \partial t} - u\frac{\partial^2 u}{\partial x^2}\right] - \frac{3}{2} \beta_2 g\left[h \frac{\partial^2 h}{\partial x^2} + \frac{1}{2} \frac{\partial h}{\partial x}\frac{\partial h}{\partial x} \right]
+\end{equation}
+\label{eq:gSGN}
 \end{subequations}
 
-These equations have the same order of approximation in the lagrangian density (dispersion properties?) when $\beta_1 = \beta_2$. The interesting thing about the equations though, is that we will conserve mass, momentum and energy for all values of $\beta_j$. 
-
-From these equations the SWWE, the Serre equations and the regularised SWWE \cite{Clamond-Dutykh-2018-237} can be recovered for certain values of $\beta_1$ and $\beta_2$. 
-
-%\begin{itemize}
-%	\item When $\beta_1 = 2\epsilon -\frac{2}{3}$ and $\beta_2 = 2 \epsilon$ we get the regularised Saint Venant equations of \cite{Clamond-Dutykh-2018-237}. Which admit the SWWE when $\epsilon = 0$. 
-%	\item When $\beta_1 = \beta_2$ we get the improved Serre-Green-Naghdi equations, which when $\beta_1 =\beta_2 = 0$ are the Serre-Green-Naghdi equations. 
-%\end{itemize}
+I have summarised the important members (pairs of $\beta$ values) and families (groups of pairs of $\beta$ values) in Table \ref{Tab:gSGNFamilyMembers}. Equations \eqref{eq:gSGNh} - \eqref{eq:gSGNE} hold for all $\beta$ values provided the solutions are sufficiently smooth. However, for particular $\beta$ values, for example those corresponding to the SWWE, it is possible to obtain non-smooth solutions for any pair of these equations that no longer satisfy all three equations simultaneously []. This particular issue with the SWWE, is one of impetuses for regularising them in the rSWWE family. 
 
 \begin{table}
 	\centering
-	\begin{tabular}{c | c | c}
+	\begin{tabular}{l | c | c}
 		Resulting Equations &$\beta_1$ & $\beta_2$  \\
 		\hline 
-		Serre Equations & $0$ & $0$ \\
-		SWWE Equations & $-\dfrac{2}{3}$ & $0$ \\
-		Regularised SWWE Equation Family & free variable & $\beta_1 + \dfrac{2}{3}$  \\
-		Modified Dispersion Serre Equation Family & free variable & $\beta_1$
+		\T SGN Equations & $0$ & $0$ \\
+		\T SWWE & $-\dfrac{2}{3}$ & $0$ \\
+		\T rSWWE Family & free variable & $\beta_1 + \dfrac{2}{3}$  \\
+		\T iSGN Family & free variable & $\beta_1$ \\
+		\T SGN to SWWE Family & $ -\frac{2}{3}\le\beta_1 \le 0$ & $0$
 	\end{tabular}
-	\caption{Showing various combinations of $\beta$ values and equivalent equations}
+	\caption{Important members and families of equations of the gSGN in terms of the associated $\beta$ values. Here free variable, indicates that any chosen value of $\beta_1$ is a member of the family, provided that $\beta_2$ is defined in terms of $\beta_1$ in the corresponding way.}
+	\label{Tab:gSGNFamilyMembers}
 \end{table}
+%
+%\begin{itemize}
+%	\item Equations
+%	\item Mass,Momentum and Energy Conservation (for fixed beta)
+%	\item Linear Theory
+%	\item Alternative Formulation
+%\end{itemize}
+
+\subsection{Dispersion Relation of Linearised gSGN}
+Linearising the gSGN \eqref{eq:gSGN} for small waves on a mean flow depth $h_0$ and mean flow velocity $u_0$ and seeking travelling wave solutions of the form $\exp\left(i (k x - \omega t)\right)$ as was done by [] we obtain the dispersion relation
+
+\begin{equation}
+\omega^\pm = u_0 k \pm k \sqrt{gh_0} \sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2} }.
+\label{eq:DispRelgSGN}
+\end{equation}
+This dispersion relation provides the angular freqeuncy $\omega$ of travelling wave solutions of the linearised gSGN equations for wave with wavenumber $k$. This dispersion relation \eqref{eq:DispRelgSGN} is equivalent to the dispersion relation derived by \cite{Clamond-Dutykh-2018-237} when $u_0 = 0$. 
+
+From the dispersion relation \eqref{eq:DispRelgSGN}, the phase speed $v_p$ and the group speed $v_g$ can be derived as follows
+\begin{subequations}
+\begin{align}
+v^\pm_p &= \frac{\omega^\pm}{k} = u_0 \pm  \sqrt{gh_0} \sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} },\\
+v^\pm_g &= \frac{\partial \omega^\pm }{\partial k}= u_0  \pm  \sqrt{gh_0} \sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} } \left[1 +  \dfrac{\beta_2 - \left(\beta_1 + \frac{2}{3}\right)}{\left(\frac{1}{2}\beta_2 h_0^2 k^2 +1\right)\left( \left(\frac{1}{3} + \beta_1\right) h_0^2 k^2 + 1\right)}\right].
+\end{align}
+\label{eq:wavespeeds}
+\end{subequations}
+For the appropriate choices of $\beta$ values we recover the dispersion relationship and thus the phase and group speeds of the SGN [] and the SWWE [].
+
+\subsubsection{Wave Speed Bounds}
+[] made use of bounds on the phase speeds for the SGN, to apply approximate Riemann solvers such as those of [] to solve the SGN. Thus, if the gSGN can also be shown to have bounds on the phase speeds then such techniques can be applied to the gSGN. Thus we want to demonstrate which $\beta$ values force the phase speeds of the gSGN to be bounded. 
+
+The proof of this can be seen by observing that when $\beta_1 \ge -\frac{2}{3}$, $\beta_2 \ge 0$ and $h_0 k \ge 0$ we have that 
+\begin{equation*}
+f_1(h_0k) = \dfrac{\beta_2 \left(h_0 k\right)^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) \left(h_0 k\right)^2 + 2\right)},
+\end{equation*}
+is a monotone function over $h_0 k$. This can be seen by reformulating and taking the derivative with respect to $h_0 k$, to obtain that 
+\begin{equation*}
+ \frac{\partial \left(f_1(h_0k)\right)}{\partial \left(h_0 k\right)} = \left[\frac{\beta_2}{\beta_1 + \frac{2}{3}} - 1\right] \dfrac{ \frac{4}{\beta_1 + \frac{2}{3}} \left(h_0 k\right)}{\left( \frac{4}{\beta_1 + \frac{2}{3}} + \left(h_0 k\right)^2\right)^2}.
+\end{equation*}
+The derivative is greater than $0$ and thus monotone non-increasing if $\beta_2 \le \frac{2}{3} + \beta_1$ and less than $0$ and thus monotone non-decreasing if $\beta_2 \le \frac{2}{3} + \beta_1$  given the initial assumptions. It can therefore be seen that under the initial assumptions that $v^+_p$ is monotone non-decreasing and $v^-_p$ is monotone non-increasing when $\beta_2 \le \frac{2}{3} + \beta_1$ and $v^-_p$ is monotone non-increasing and $v^-_p$ is monotone non-decreasing when $\beta_2 \ge \frac{2}{3} + \beta_1$. 
+
+In addition to the monotonicity of $v^\pm_p$ we have that as $k \rightarrow 0$ then $v^\pm_p \rightarrow u_0 \pm \sqrt{gh_0}$ whilst as $k \rightarrow \infty$ then $v^\pm_p \rightarrow u_0 \pm \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}}$. Together these results demonstrate that the phase speeds are bounded for all $\beta$ values provided that $\beta_1 = -\frac{2}{3}$ only when $\beta_2 = 0$, otherwise the $k \rightarrow \infty$ limit, is no longer bounded. 
+
+The extra care taken to identify when checking the monotonicty of $v^\pm_p$, can be used to demonstrate that when ${\beta_2} \le \frac{2}{3} + \beta_1$ then the following chain of inequalities holds 
+\begin{equation}
+u_0 -  \sqrt{gh_0} \le  v^-_p \le u_0 - \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} \le u_0 \le u_0 + \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} \le   v^+_p  \le u_0 +   \sqrt{gh_0}.
+\end{equation}
+We designate this region of $\beta$ values, as Region 1, it is characterised by either lack of dispersion when $\beta_2 = \frac{2}{3} + \beta_1$ or trailing discursive waves when $\beta_2 < \frac{2}{3} + \beta_1$. Region 1 includes the SWWE, the SGN, the rSWWE family, and the iSGN family, it is also the behaviour of the dispersion of actual water waves []. 
+
+When ${\beta_2} > \frac{2}{3} + \beta_1 $ the inequality chain becomes
+\begin{equation}
+u_0 - \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} \le v^-_p \le u_0 -  \sqrt{gh_0} \le  u_0 \le u_0 + \sqrt{gh_0} \le   v^+_p  \le u_0 +  \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}}
+\end{equation}
+We call this Region 2, and it is characterised by advancing dispersive waves. Advancing dispersive waves are not observed for water waves, and thus none of our equations or family of equations of interest lie in this region. We will therefore, be restricting our study to the Region 1 in this paper.  
+
+The location of important members and families of equations in terms of $\beta$ values is summarised in Figure \ref{Fig:WaveSpeedReg}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.4\textwidth]{./Figures/Explanation/BetaPlotAll.pdf}
+	\caption{Plot phase speed regions of $\beta_1$ and $\beta_2$ showing important families of equations and particular members of these families.}
+	\label{Fig:WaveSpeedReg}
+\end{figure}
+
+
 
 %-------------------------------------------------
 \subsection{Alternative Conservative Form of the gSGN}
 %-------------------------------------------------
-
-A major difficulty with solving the SGN is that the dispersive terms contain a mixed spatial-temporal derivative term which is difficult to handle numerically. This mixed derivative term can be rewritten  so that the Serre equations can be expressed in conservation law form, with the water depth and a new quantity as conservative variables. This reformulation allows standard techniques for solving conservation laws to be applied to the Serre equations, even though the Serre equations are neither hyperbolic nor parabolic.
-
-Consider the Serre equations written for a horizontal bed. The flux term in the momentum equation, \eqref{eq:gSGNuh} contains a mixed spatial and temporal derivative term which is difficult to treat numerically. It is possible to replace this term  by a combination of spatial and temporal derivative terms by making the following observation
-\begin{multline}
-\dfrac{\partial^2}{\partial x \partial t} \left ( \frac{1}{3}\left(1 + \frac{3}{2} \beta_1\right) h^3 \dfrac{\partial u}{\partial x} \right ) =   \frac{1}{3}\left(1 + \frac{3}{2} \beta_1\right) \dfrac{\partial }{\partial t} \left ( 3h^2 \dfrac{\partial h}{\partial x} \dfrac{\partial u}{\partial x} + h^3 \dfrac{\partial^2 u}{\partial x^2} \right ) \\=  \frac{1}{3}\left(1 + \frac{3}{2} \beta_1\right)
-\dfrac{\partial }{\partial x} \left ( 3 h^2 \dfrac{\partial h}{\partial t} \dfrac{\partial u}{\partial x} + h^3 \dfrac{\partial^2 u}{\partial x \partial t} \right ).
-\end{multline}
-Rearranging and making use of the continuity equation, \eqref{eq:gSGNh} the momentum equation, \eqref{eq:gSGNuh} becomes
-\begin{multline}
-\dfrac{\partial }{\partial t} \left ( u h -  \frac{1}{3}\left(1 + \frac{3}{2} \beta_1\right) \dfrac{\partial}{\partial x} \left [h^3 \dfrac{\partial u}{\partial x}  \right ] \right ) \\ + \dfrac{\partial}{\partial x} \left ( u\left[uh - \frac{1}{3}\left(1 + \frac{3}{2} \beta_1\right) \dfrac{\partial }{\partial x} \left [ h^3 \dfrac{\partial u}{\partial x} \right ]\right] + \dfrac{gh^2}{2} - \frac{2}{3}\left(1 + \frac{3}{2} \beta_1\right) h^3\dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x}  - \frac{1}{2} \beta_2 g h^2 \left[h\frac{\partial^2 h}{\partial x^2} + \frac{1}{2}\frac{\partial h}{\partial x}\frac{\partial h}{\partial x}\right]\right ) = 0.
-\end{multline}
-The momentum equation can be written in conservation law form as
-\begin{gather}\label{eq:G_momentum}
-\dfrac{\partial G }{\partial t}  + \dfrac{\partial}{\partial x} \left ( uG + \dfrac{gh^2}{2} - \frac{2}{3}\left(1 + \frac{3}{2} \beta_1\right) h^3\dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x}  - \frac{1}{2} \beta_2 g h^2  \left[h\frac{\partial^2 h}{\partial x^2} + \frac{1}{2}\frac{\partial h}{\partial x}\frac{\partial h}{\partial x}\right]\right ) = 0.
-\end{gather}
-where a new conserved quantity, $G$ is given by
-\begin{gather*}
-G = uh - \frac{1}{3}\left(1 + \frac{3}{2} \beta_1\right) \dfrac{\partial }{\partial x} \left ( h^3 \dfrac{\partial u}{\partial x} \right ).
+\citet{Clamond-Dutykh-2018-237} demonstrate how to rearrange \eqref{eq:gSGNuh} for the rSWWE, in an analagous way to the reformulations of SGN demonstrated by []. The purpose of doing this is to remove the mixed spatial-temporal derivative, which is difficult to treat numerically. The reformulation works analogously for the gSGN equations as well, and so we can obtain an equivalent formulation of \eqref{eq:gSGNuh} which becomes
+\begin{gather*}\label{eq:G_momentum}
+\dfrac{\partial G }{\partial t}  + \dfrac{\partial}{\partial x} \left ( uG + \dfrac{gh^2}{2} - \left(\frac{2}{3} +  \beta_1\right) h^3\dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x}  - \frac{1}{2} \beta_2 g h^2  \left[h\frac{\partial^2 h}{\partial x^2} + \frac{1}{2}\frac{\partial h}{\partial x}\frac{\partial h}{\partial x}\right]\right ) = 0.
 \end{gather*}
-This expands the conserved variable introduced by \cite{Clamond-Dutykh-2018-237}, as well as in the Serre equations []. 
+where the new conserved quantity, $G$ is given by
+\begin{gather*}
+G = hu - \frac{1}{2}\left(\frac{2}{3} + \beta_1\right) \dfrac{\partial }{\partial x} \left ( h^3 \dfrac{\partial u}{\partial x} \right ).
+\end{gather*}
+Using the appropriate substitution, we can recover the the conserved variable introduced by \citet{Clamond-Dutykh-2018-237} for the rSWWE as well as for the Serre equations []. 
 
-Thus we have the following conservation equations
-
+Making this reformulation, we now have the equation of mass for the gSGN and an equation in conservation law form for $G$ which is equivalent to the conservation of momentum equations as follows
 \begin{subequations}
 \begin{gather}
 \dfrac{\partial h}{\partial t} + \dfrac{\partial (uh)}{\partial x} = 0
@@ -168,217 +258,65 @@ with
 \begin{gather}\label{eq:G_divergent}
 G = uh - \frac{1}{3}\left(1 + \frac{3}{2} \beta_1\right) \dfrac{\partial }{\partial x} \left ( h^3 \dfrac{\partial u}{\partial x} \right ).
 \end{gather}
+\label{eq:gSGN_G}
 \end{subequations}
 
-\subsection{Dispersion Relation of Linearised gSGN}
-
-Assuming that
-\begin{align*}
-h(x,t) &= h_0 + \delta \eta(x,t) + O(\delta^2)\\
-u(x,t) &= u_0 + \delta v(x,t) + O(\delta^2)
-\end{align*}
-
-By substituting these forms into the linearised Serre equations and neglecting $O(\delta^2)$ terms, we get the linearised regularised Serre equations. We also substitute $\eta_t$ using the mass equation into the momentum equation. 
-
-
-\begin{subequations}
-	\begin{equation}
-	\label{eqlinhd}
-	(\delta\eta)_t + u_0 (\delta \eta)_x + h_0 (\delta v)_x = 0
-	\end{equation}
-	\begin{equation}
-	\label{eqlinuhd}
-	h_0(\delta v)_t + gh_0(\delta \eta)_x + h_0u_0 (\delta v)_x - \frac{1}{3}\left(1 + \frac{3}{2}\beta_1\right) h_0^3(\delta v)_{xxt} - \frac{1}{3}\left(1 + \frac{3}{2}\beta_1\right) h_0^3 u_0 (\delta v)_{xxx} -\frac{g\beta_2}{2}h_0^3 (\delta \eta)_{xxx}  = 0
-	\end{equation}
-\end{subequations}
-
-We can remove the $\delta$ term, either by removing the common factor, or absorbing it into $\eta$ and $v$ to get
-
-\begin{subequations}
-	\begin{equation}
-	\label{eqlinh}
-	\eta_t + u_0 \eta_x + h_0 v_x = 0
-	\end{equation}
-	\begin{equation}
-	\label{eqlinuh}
-	h_0(v)_t + gh_0(\eta)_x + h_0u_0 (v)_x - \frac{1}{3}\left(1 + \frac{3}{2}\beta_1\right) h_0^3(v)_{xxt} - \frac{1}{3}\left(1 + \frac{3}{2}\beta_1\right) h_0^3 u_0 ( v)_{xxx} -\frac{g\beta_2}{2}h_0^3 (\eta)_{xxx}  = 0
-	\end{equation}
-\end{subequations}
-
-We now assume that $\eta(x,t) = H \exp\left(i (k x - \omega t)\right)$,  $v(x,t) = U \exp\left(i (k x - \omega t)\right)$
-\begin{align*}
-\eta(x,t) &= H \exp\left(i (k x - \omega t)\right) \\
-v(x,t) &= U \exp\left(i (k x - \omega t)\right)
-\end{align*}
-
-substituting these into the linearised Serre equation we get
-
-\begin{subequations}
-	\begin{equation}
-	\label{eqlinhexp}
-	\left[H u_0 k - H \omega + U h_0k\right]i \exp\left[i \left(k x - \omega t\right)\right] = 0
-	\end{equation}
-	\begin{multline}
-	\label{eqlinuhexp}
-	\bigg[3H \beta_2 g h_0^2 k^3 + 6Hgk - 3U \beta_1 \omega h_0^2 k^2 + 3U\beta_1 h_0^2 k^3 u_0\\ - 2U \omega h_0^2 k^2 - 6U \omega + 2U h_0^2 k^3 u_0 + 6U k u_0\bigg] i \frac{h_0}{6} \exp\left[i \left(k x - \omega t\right)\right] = 0
-	\end{multline}
-\end{subequations}
-
-
-This can be written as
-\begin{equation}
-\begin{bmatrix}
-u_0k - \omega & h_0 k \\
-3 \beta_2 h_0^2 k^3 + 6k g & -3 \beta_1 \omega h_0^2 k^2 + 3 \beta_1 h_0^2 k^3 u_0 - 2\omega h_0^2 k^2 - 6\omega + 2h_0^2 k^3 u_0 + 6ku_0
-\end{bmatrix}
-\begin{bmatrix}
-H \\ U
-\end{bmatrix} = 0
-\end{equation}
-
-Which has non-trivial solutons when the determinant is zero. 
-
-The determinant of this matrix is
-\begin{equation}
-\left(3\beta_1 h_0^2 k^2 + 2h_0^2 k^2 + 6\right)\omega^2 - 2 u_0k \left(3\beta_1 h_0^2 k^2 + 2h_0^2 k^2 + 6\right)\omega  + u_0^2 k^2 \left(3\beta_1 h_0^2 k^2 + 2h_0^2 k^2 + 6\right) - g h_0 k^2 \left(3 \beta_2 h_0^2 k^2 + 6\right)
-\end{equation} 
-
-To get non-trivial solution we have
-
-\begin{equation}
-\left(3\beta_1 h_0^2 k^2 + 2h_0^2 k^2 + 6\right)\omega^2 - 2 u_0k \left(3\beta_1 h_0^2 k^2 + 2h_0^2 k^2 + 6\right)\omega  + u_0^2 k^2 \left(3\beta_1 h_0^2 k^2 + 2h_0^2 k^2 + 6\right) - g h_0 k^2 \left(3 \beta_2 h_0^2 k^2 + 6\right) = 0
-\end{equation} 
-
-\begin{equation}
-\omega^2 - 2 u_0k \omega  + u_0^2 k^2 - g h_0 k^2 \dfrac{3 \beta_2 h_0^2 k^2 + 6}{\left(3\beta_1 h_0^2 k^2 + 2h_0^2 k^2 + 6\right)} 
-\end{equation} 
-
-Using quadratic equation, or another quadratic polynomial solver we get that
-
-\begin{equation}
-\omega^\pm = u_0 k \pm k \sqrt{gh_0} \sqrt{\dfrac{3 \beta_2 h_0^2 k^2 + 6}{\left(3\beta_1 h_0^2 k^2 + 2h_0^2 k^2 + 6\right)} }
-\end{equation}
-
-\begin{equation}
-\omega^\pm = u_0 k \pm k \sqrt{gh_0} \sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2} }
-\end{equation}
-
-
-Thus we have the following regimes
-\begin{itemize}
-	\item SWWE wavespeeds (non-dispersive): occurs when $\beta_2 = \frac{2}{3} + \beta_1$ then $\omega^\pm = k\left(u_0\pm \sqrt{gh_0}\right)$ (\cite{Clamond-Dutykh-2018-237}).
-	\item Serre wavespeeds - when $\beta_1 = \beta_2 = 0$ - we get $\omega^\pm = k\left(u_0\pm \sqrt{gh_0} \sqrt{\dfrac{3}{3 + h_0^2 k^2}}\right)$
-	\item For other values of $\beta_1$ and $\beta_2$ we can vary the wavespeeds, in certain situations this will lead to a better approximation of the linear wavespeed of waves than the Serre equations ( \cite{Clamond-Dutykh-2018-237}), in others it will be worse. We show an example below.
-\end{itemize}
-
-Now for the group speed
-\begin{equation}
-v^\pm_g = \frac{\partial \omega^\pm }{\partial k}= u_0  \pm  \sqrt{gh_0} \sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} } \pm \dfrac{k\sqrt{gh_0}}{\beta_2 h_0^2 k^2 +2} \left[\sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} } \left( \beta_2 h_0^2 k - \dfrac{h_0^2 k \left(\beta_1 + \frac{2}{3}\right)\left(\beta_2h_0^2k^2 + 2\right)}{h_0^2 k^2 \left(\beta_1 + \frac{2}{3}\right) + 2} \right)\right]
-\end{equation} 
-
-\begin{multline*}
-= u_0  \pm  \sqrt{gh_0} \sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} } \pm \\ \dfrac{k\sqrt{gh_0}}{\beta_2 h_0^2 k^2 +2} \left[\sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} } \left(  \dfrac{\beta_2 h_0^2 k^2 \left[h_0^2 k^2 \left(\beta_1 + \frac{2}{3}\right) + 2\right] -h_0^2 k \left(\beta_1 + \frac{2}{3}\right)\left(\beta_2h_0^2k^2 + 2\right)}{h_0^2 k^2 \left(\beta_1 + \frac{2}{3}\right) + 2} \right)\right]
-\end{multline*} 
-
-\begin{multline*}
-= u_0  \pm  \sqrt{gh_0} \sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} } \pm \\ \dfrac{k\sqrt{gh_0}}{\beta_2 h_0^2 k^2 +2} \left[\sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} } \left(  \dfrac{  \beta_2 h_0^4 k^3 \left(\beta_1 + \frac{2}{3}\right)  + 2\beta_2 h_0^2 k -h_0^2 k \left(\beta_1 + \frac{2}{3}\right)\left(\beta_2h_0^2k^2 + 2\right)}{h_0^2 k^2 \left(\beta_1 + \frac{2}{3}\right) + 2} \right)\right]
-\end{multline*} 
-
-\begin{multline*}
-= u_0  \pm  \sqrt{gh_0} \sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} } \pm \\ \dfrac{k\sqrt{gh_0}}{\beta_2 h_0^2 k^2 +2} \left[\sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} } \left(  \dfrac{  \beta_2 h_0^4 k^3 \left(\beta_1 + \frac{2}{3}\right)  + 2\beta_2 h_0^2 k -  \beta_2\left(\beta_1 + \frac{2}{3}\right)h_0^4k^3 -    2 h_0^2 k \left(\beta_1 + \frac{2}{3}\right)}{h_0^2 k^2 \left(\beta_1 + \frac{2}{3}\right) + 2} \right)\right]
-\end{multline*} 
-
-
-\begin{multline*}
-= u_0  \pm  \sqrt{gh_0} \sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} } \pm \\ \dfrac{k\sqrt{gh_0}}{\beta_2 h_0^2 k^2 +2} \left[\sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} } \left(  \dfrac{  2\beta_2 h_0^2 k  -    2 h_0^2 k \left(\beta_1 + \frac{2}{3}\right)}{h_0^2 k^2 \left(\beta_1 + \frac{2}{3}\right) + 2} \right)\right]
-\end{multline*} 
-
-\begin{multline*}
-= u_0  \pm  \sqrt{gh_0} \sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} } \pm  2\dfrac{k^2h_0^2\sqrt{gh_0}}{\beta_2 h_0^2 k^2 +2} \left[\sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} } \left(  \dfrac{\beta_2  -    \beta_1 - \frac{2}{3}}{h_0^2 k^2 \left(\beta_1 + \frac{2}{3}\right) + 2} \right)\right]
-\end{multline*} 
-
-\begin{equation*}
-= u_0  \pm  \sqrt{gh_0} \sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} } \left[1 +  \dfrac{\beta_2 - \beta_1 - \frac{2}{3}}{\left(\frac{1}{2}\beta_2 h_0^2 k^2 +1\right)\left( \left(\frac{1}{3} + \beta_1\right) h_0^2 k^2 + 1\right)}\right] 
-\end{equation*} 
-
-
-When $\beta_2 = \frac{2}{3} + \beta_1$ then the group speed is equal to the phase speed of the Shallow Water Wave equations. When $\beta_2 = \beta_1 = 0$ then we get
-
-\begin{equation*}
-= u_0  \pm  \sqrt{gh_0} \sqrt{\dfrac{2}{\left( \frac{2}{3} h_0^2 k^2 + 2\right)} } \left[1 + \dfrac{- \frac{1}{3}}{\left( \frac{1}{3} h_0^2 k^2 + 1\right)}\right] 
-\end{equation*} 
-
-\begin{equation*}
-= u_0  \pm  \sqrt{gh_0} \sqrt{\dfrac{3}{  h_0^2 k^2 + 3} } \left[1 -  \dfrac{1}{ h_0^2 k^2 + 3}\right] 
-\end{equation*} 
-
-which matches [Zoppo,pitt,paper on FDVM methods for Serre equations / Chris thesis]
-
-
-\subsubsection{Wave Speed Bounds}
-
-First we want to show that phase and group speed are bounded, when treated as functions of $k$.
-The phase speed is:
-\begin{equation}
-v^\pm_p = \frac{\omega^\pm}{k}=u_0 \pm  \sqrt{gh_0} \sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)} }
-\end{equation} 
-
-For $\beta_1 \ge -\frac{2}{3}$ and $\beta_2 \ge 0$ we have that 
-
-\begin{equation}
-\dfrac{\beta_2 h_0^2 k^2 + 2}{\left( \left(\frac{2}{3} + \beta_1\right) h_0^2 k^2 + 2\right)}
-\end{equation}
-
-is a montone function in terms of $h_0k$, it is monotone decreasing if $\beta_2 \le \frac{2}{3} + \beta_1$ and monotone increasing if $\beta_2 \ge \frac{2}{3} + \beta_1$.
- 
-We have the following limits
-
-as $k \rightarrow 0$
-\begin{equation}
- v^\pm_p = u_0 \pm \sqrt{gh_0}
-\end{equation} 
-
-as $k \rightarrow \infty$
-\begin{equation}
-v^\pm_p = u_0 \pm \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}}
-\end{equation}
-
-When $\dfrac{\beta_2}{\frac{2}{3} + \beta_1} \le 1$ we have
-
-\begin{equation}
-u_0 -  \sqrt{gh_0} \le  v^-_p \le u_0 - \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} \le u_0 \le u_0 + \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} \le   v^+_p  \le u_0 +   \sqrt{gh_0}
-\end{equation}
-
-(includes Serre and regularised SWWE). For Serre the $k \rightarrow \infty $ bounds are $u_0$, so inequality simplifies for regularised SWWE, phase speed is fixed as $k$ changes. 
-
-when $\dfrac{\beta_2}{\frac{2}{3} + \beta_1} > 1$ we have
-
-\begin{equation}
-u_0 - \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}} \le v^-_p \le u_0 -  \sqrt{gh_0} \le  u_0 \le u_0 + \sqrt{gh_0} \le   v^+_p  \le u_0 +  \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\frac{2}{3} + \beta_1}}
-\end{equation}
-
-Region $1$ is what we expect, dispersive waves travel behind the shock front, Region $2$ is inverted and we begin to see dispersive waves travel in front of the shock. 
-
-%Region Plot
-%\beta_2 = -2/3 + beta_1
-
-We thus have the following plots
-
-\begin{figure}
-		\centering
-		\includegraphics[width=0.4\textwidth]{./Figures/Explanation/BetaPlotAll.pdf}
-	\caption{Wave speed region plots showing important families of equations and particular members of these families.}
-\end{figure}
+This form of the equations and a bound on the wave speeds, allows us to solve \eqref{eq:gSGN_G} numerically using a combination of finite difference and finite volume methods as performed in [] for the SGN.
 
 
 \section{Numerical Method}
+The numerical method proposed for the gSGN, is very similar to methods published for the SGN []. For brevity, we will only provide a general overview of the method, whilst highlighting the important differences that need to be made to solve the gSGN over the SGN.
 
+\subsection{Overview}
+The numerical method for the gSGN equations proceeds very similarly to the SGN equations, we discretise space into cells of fixed width $\Delta x$, and used fixed time steps $\Delta t$. We then solved 
+
+
+in particular we have an elliptic equation which relates $h$, $G$ and $u$ and a set of conservation equations for $h$ and $G$. To develop a numerical method for these equations we discretise space into cells of fixed width $\Delta x$, and used fixed time steps $\Delta t$. Using subscripts to denote spatial location, and superscripts to denote time
+
+
+
+Following, [] we can therefore solve the gSGN equations using the following method
+\begin{enumerate}
+	\item We begin with the cell averages $\bar{h}^n_j$ and $\bar{G}^n_j$ for all cells $j$
+	\item We solve \eqref{eq:G_divergent} using $\bar{h}^n_j$ and $\bar{G}^n_j$ to obtain an approximation to $u^n_j$ for all cells $j$
+	\item We then solve \eqref{eq:gSGN_Gh} and \eqref{eq:gSGN_GG} using a finite volume method with an approximate Riemann solver to obtain $\bar{h}^{n+1}_j$ and $\bar{G}^{n+1}_j$ at the next time step.
+\end{enumerate}
+Since the finite volume solver is first-order accurate in time, we repeat these steps and do a convex combination to obtain a second-order accurate approximation to \eqref{eq:gSGN_G} in time. 
+
+\subsection{Differences}
+
+\begin{itemize}
+	\item Just general form
+	\item Highlight changes - limiters on gradients
+\end{itemize}
 
 \section{Validation}
+\begin{itemize}
+	\item Analytic solutions - we recover them (conservation and norm)
+	\item Forced solutions - our numerical method can handle any combination of beta values, all terms are approximated with correct order of accuracy. Limiters on gradients off. 
+\end{itemize}
 
 \subsection{Analytic Solutions}
 \subsubsection{Serre Equations ($\beta_1=\beta_2 =0$) - Solitary Travelling Wave Solution}
 When $\beta_1 = \beta_2 = 0$ the gSGN are equivalent to the SGN equations which admit the following travelling wave solution
+
+% xstart  -200.00000000000000     
+%xend   200.37505860290673     
+%x_len        6400
+%n_GhstCells           6
+%xbc_len        6412
+%dx   6.2509767151117362E-002
+%tstart   0.0000000000000000     
+%tend   30.000000000000000     
+%actual_end_time   30.001639491135400     
+%dt   7.6534794620238432E-003
+%theta   1.2000000000000000     
+%gravity   9.8100000000000005     
+%a0   1.0000000000000000     
+%a1  0.69999999999999996     
+%beta1   0.0000000000000000     
+%beta2   0.0000000000000000      
+
 
 \begin{subequations}
 	\begin{equation}
@@ -397,6 +335,41 @@ When $\beta_1 = \beta_2 = 0$ the gSGN are equivalent to the SGN equations which 
 \end{subequations}
 
 
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/Serre/h.pdf}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/Serre/G.pdf}
+		\caption{$G$}
+	\end{subfigure}
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/Serre/u.pdf}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Example plot comparing numerical for $t = 30s$. Initial (\solidrule), analytic solution ({\color{blue}\solidrule}), and numerical solution with $\Delta x \approx 0.06m$ (\tikzcircle{red})  .}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/Serre/NormResults.pdf}
+		\caption{$L_2$}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/Serre/EnergyResults.pdf}
+		\caption{$C_1$, $uh$ (\trianglet{black})}
+	\end{subfigure}
+	\caption{Convergence and Conservation Plots  $h$ (\squaret{blue}) , $G$ (\circlet{red}), $u$ (\trianglet{black}), $\mathcal{H}$ \crosst{green!60!black}.}
+\end{figure}
+
 %% RESULTS %%
 
 Results - Example,Convergence and Conservation Plot
@@ -411,21 +384,91 @@ u(x,0) &= 0 \\
 G(x,0) &= 0
 \end{align}
 
+%xstart  -250.00000000000000     
+%xend   250.18751171948242     
+%x_len       16000
+%n_GhstCells           6
+%xbc_len       16012
+%dx   3.1251953247077940E-002
+%tstart   0.0000000000000000     
+%tend   35.000000000000000     
+%actual end time   35.002559302559774     
+%dt   2.8803949393156393E-003
+%theta   1.2000000000000000     
+%gravity   9.8100000000000005     
+%hl   2.0000000000000000     
+%hr   1.0000000000000000     
+%beta1 -0.66666666666666663     
+%beta2   0.0000000000000000     
+
 We have an analytic solution for the SWWE for the discontinuous limit of these equations as $\alpha \rightarrow 0$. It is 3 constant states $(h_0,0)$, $(h_s,u_s)$ and $(h_1,0)$ where
 \begin{equation}
-h_s = \dfrac{h_0}{2}  \sqrt{1 + 8 \left( \dfrac{2 h_s}{h_s - h_0} \left(\dfrac{\sqrt{gh_1} - \sqrt{gh_s}}{\sqrt{gh_0}}\right)\right)^2 - 1}
+h_s = \dfrac{h_0}{2} \left[  \sqrt{1 + 8 \left( \dfrac{2 h_s}{h_s - h_0} \left(\dfrac{\sqrt{gh_1} - \sqrt{gh_s}}{\sqrt{gh_0}}\right)\right)^2 } - 1 \right]
 \end{equation}
 \begin{equation}
 u_s = 2\left(\sqrt{gh_1} - \sqrt{gh_s} \right).
 \end{equation}
 Where $(h_0,0)$ and $(h_s,u_s)$ are joined by a 
 
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/DBSWWE/h.pdf}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/DBSWWE/G.pdf}
+		\caption{$G$}
+	\end{subfigure}
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/DBSWWE/u.pdf}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Example plots for $t=35s$. Initial (\solidrule), analytic solution ({\color{blue}\solidrule}), and numerical solution with $\Delta x \approx 0.03m$ (\tikzcircle{red})  .}
+\end{figure}
+
+
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/DBSWWE/hFront.pdf}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/DBSWWE/hRFTop.pdf}
+		\caption{$h$}
+	\end{subfigure}
+	\caption{Example plots for $t=35s$. Initial (\solidrule), analytic solution ({\color{blue}\solidrule}), and numerical solution with $\Delta x \approx 0.03m$ (\tikzcircle{red})  .}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/DBSWWE/EnergyResults.pdf}
+		\caption{}
+	\end{subfigure}
+	\caption{Conservation Plots  $h$ (\squaret{blue}) , $G$ (\circlet{red}), $uh$ (\trianglet{black}), $\mathcal{H}$ \crosst{green!60!black}.}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.49\textwidth]{./Figures/Simulations/Validation/DBSWWE/EnergyOverTime.pdf}
+	\caption{Plot of $\mathcal{H}$ over time.}
+\end{figure}
+
 
 Results - Example and Conservation Table
 
 
 \subsection{Forced Solutions}
-To demonstate the validity and versatility of our method to solve the gSGN whilst allowing varying $\beta_i$ values, we make use of forced solutions. To generate a forced solution we consider the modified gSGN equations 
+To demonstrate the validity and versatility of our method to solve the gSGN whilst allowing varying $\beta_i$ values, we make use of forced solutions. To generate a forced solution we consider the modified gSGN equations 
 
 \begin{subequations}
 	\begin{gather}
@@ -458,7 +501,59 @@ I have used this technique to investigate the method for the following forced so
 \end{subequations}
 where $G^*$ is determined by \eqref{eq:G_divergent} with the above values. 
 
-%% RESULTS %%
+
+% xstart :  -100.00000000000000     
+%xend :   100.00000000000000     
+%xbc_len :        6412
+%dx = (x_end - x_start) / (x_len -1)  :   3.1254883575558681E-002
+%n_GhstCells :           6
+%tstart :   0.0000000000000000     
+%tend :   10.000000000000000     
+%actual end time :   10.000952459292289     
+%dt/dx :   5.2619712865493169E-002
+%dt = dx*(dt/dx)  :   1.6446229993903163E-003
+%gravity :   9.8100000000000005     
+%theta :   1.2000000000000000     
+%a0 :   1.0000000000000000     
+%a1 :  0.50000000000000000     
+%a2 :   5.0000000000000000     
+%a3 :   20.000000000000000     
+%a4 :  0.29999999999999999     
+%a5 :   0.0000000000000000     
+%b1a6 :   0.0000000000000000     
+%b1a7 :   1.0000000000000000     
+%b2a6 :   0.0000000000000000     
+%b2a7 :   2.0000000000000000     
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/Forced/h.pdf}
+		\caption{$h$}
+	\end{subfigure}
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/Forced/G.pdf}
+		\caption{$G$}
+	\end{subfigure}
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/Forced/u.pdf}
+		\caption{$u$}
+	\end{subfigure}
+	\caption{Example plots Initial (\solidrule), analytic solution ({\color{blue}\solidrule}), and numerical solution with $\Delta x \approx 0.03m$ (\tikzcircle{red})  .}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/Serre/NormResults.pdf}
+		\caption{$L_2$}
+	\end{subfigure}
+	\caption{Convergence and Conservation Plots  $h$ (\squaret{blue}) , $G$ (\circlet{red}), $u$ (\trianglet{black}).}
+\end{figure}
 
 Results - Example plot and L1 convergence, comment that this worked for all beta values, and we only show one for conciseness
 
@@ -473,6 +568,23 @@ G(x,0) &= 0
 
 \subsection{Regularised SWWE Family $\beta_2 = \frac{2}{3} + \beta_1$}
 Justify interest, cite denys paper on regularised SWWE
+
+% xstart :  -250.00000000000000     
+%xend :   250.04687573243325     
+%x_len :       64000
+%n_GhstCells :           6
+%xbc_len :       64012
+%dx = (x_end - x_start) / (x_len -1)  :   7.8126220722198776E-003
+%tstart :   0.0000000000000000     
+%tend :   35.000000000000000     
+%actual end time :   35.000198467001518     
+%dt:   7.2006497967329038E-004
+%gravity :   9.8100000000000005     
+%hl :   2.0000000000000000     
+%hr :   1.0000000000000000     
+%dbalpha :  0.10000000000000001     
+%beta1 : -0.66666666666666663     
+%beta2 :   0.0000000000000000   
 
 \begin{itemize}
 	\item we do get nice well behaved transitions between behaviours when varying $\beta$ values
@@ -807,6 +919,8 @@ Points:
 \end{table}
 
 
+\bibliographystyle{unsrtnat}
+\bibliography{Bibliography}
 
 
 \end{document} 

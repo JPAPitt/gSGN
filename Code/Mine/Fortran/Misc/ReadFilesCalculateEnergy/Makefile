@@ -1,7 +1,7 @@
 FF = f77
 FFLAGS = -c -Wall -freal-4-real-8 -std=legacy
 
-objects = ReadAndCalc.out
+objects = ReadAndCalc.out ReadAndCalcNew.out ReadAndCalc-DB.out ReadAndCalc-DBBeta.out
 
 all : $(objects)
  

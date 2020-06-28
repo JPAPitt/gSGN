@@ -1,0 +1,29 @@
+\begin{thebibliography}{3}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Lannes and Bonneton(2009)]{Bonneton-Lannes-2009-16601}
+D.~Lannes and P.~Bonneton.
+\newblock Derivation of asymptotic two-dimensional time-dependent equations for
+  surface water wave propagation.
+\newblock \emph{Physics of Fluids}, 21\penalty0 (1):\penalty0 16601, 2009.
+
+\bibitem[Clamond et~al.(2017)Clamond, Dutykh, and
+  Mitsotakis]{Clamond-et.al-2017-245}
+D.~Clamond, D.~Dutykh, and D.~Mitsotakis.
+\newblock Conservative modified {S}erre-{G}reen-{N}aghdi equations with
+  improved dispersion characteristics.
+\newblock \emph{Communications in Nonlinear Science and Numerical Simulation},
+  45, 2017.
+
+\bibitem[Clamond and Dutykh(2018)]{Clamond-Dutykh-2018-237}
+D.~Clamond and D.~Dutykh.
+\newblock Non-dispersive conservative regularisation of nonlinear shallow water
+  (and isentropic euler equations).
+\newblock \emph{Communications in Nonlinear Science and Numerical Simulation},
+  55, 2018.
+
+\end{thebibliography}
