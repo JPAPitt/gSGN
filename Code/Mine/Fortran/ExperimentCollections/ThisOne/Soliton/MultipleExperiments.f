@@ -1,12 +1,14 @@
       
       subroutine SingleSerreSoliton(a0,a1,ga,beta1,beta2
      . ,xstart,xbc_len,n_GhstCells,dx,tstart,tend,
-     . dt,theta,NormFile,EnergFile,ExpWdir,ExpWdir_len)
+     . dt,theta,NormFile,EnergFile,ExpWdir,ExpWdir_len,
+     . tlist, tlist_len)
      
       implicit none
       DOUBLE PRECISION a0,a1,ga,beta1,beta2,xstart,dx,
      . tstart,tend,dt,theta
-      integer xbc_len,n_GhstCells,ExpWdir_len,NormFile,EnergFile
+      integer xbc_len,n_GhstCells,ExpWdir_len,NormFile,EnergFile, 
+     . tlist_len 
       CHARACTER(len=ExpWdir_len) ExpWdir
       
       DOUBLE PRECISION xbc(xbc_len),hbc_init(xbc_len),
@@ -17,11 +19,9 @@
       
       DOUBLE PRECISION Energs_init(4), Energs_fin(4),Energ_Err(4)
       DOUBLE PRECISION Norms(3),sumerr(3),suma(3)
-      DOUBLE PRECISION tlist(1)
+      DOUBLE PRECISION tlist(tlist_len)
       integer i
       DOUBLE PRECISION currenttime
-      
-      tlist(1) = (tend - tstart) / 2d0
       
       !generate cell nodes
       call Generatexbc(xstart,dx,xbc_len,n_GhstCells,xbc)
@@ -37,7 +37,7 @@
      . hbc_init,Gbc_init,ubc_init,
      . currenttime,hbc_fin,Gbc_fin,ubc_fin,
      . Energs_init, Energs_fin,
-     . tlist,1,ExpWdir,ExpWdir_len)
+     . tlist,tlist_len,ExpWdir,ExpWdir_len)
      
       ! get analytic values of h,u,G
       call SerreSoliton(xbc,xbc_len,currenttime,ga,a0,a1,
@@ -146,8 +146,9 @@ c Conservation Norm Tests
          
       implicit none
    
-      Integer wdirlen,NormFile,EnergFile
-      PARAMETER(wdirlen= 300,NormFile = 98, EnergFile = 99)
+      Integer wdirlen,NormFile,EnergFile, tlist_len
+      PARAMETER(wdirlen= 300,NormFile = 98, EnergFile = 99,
+     . tlist_len = 90)
       
       CHARACTER(len =wdirlen) wdir
      
@@ -158,10 +159,13 @@ c Conservation Norm Tests
       DOUBLE PRECISION a0,a1,ga,xstart,xend,tstart,tend,
      . dx,dt,theta,Cr,maxwavespeed,beta1,beta2,alpha
      
+      DOUBLE PRECISION tlist(tlist_len)
+     
       INTEGER effeclenwdir
       
-      wdir = "../Results/Validation/" // 
-     . "AnalyticSolutions/SerreSoliton/" 
+      wdir = "/home/jp/Documents/Work/PostDoc/Projects/" //
+     . "Steve/1DWaves/RegularisedSerre/Data/RAW/Models/" //
+     . "gSGNForcedLimAll/Energy/Soliton/"
      
       call LenTrim(wdir,wdirlen,effeclenwdir)
       
@@ -185,37 +189,54 @@ c Conservation Norm Tests
       a0 = 1.0
       a1 = 0.7
       
-      xstart = -50d0
-      xend = 150d0
+      xstart = -200d0
+      xend = 200d0
       
       theta = 1.2d0
       
       tstart = 0d0
       tend = 30d0
       
-      !alpha is a factor on g*h, that determines wavespeed
-      !when beta1 ~ -2/3, then this ratio would go to infinity unless beta1 = 0
-      ! thus we limit ourselves to beta1 ~ -2/3 only when beta1 = 0
-      if  (dabs(2d0/3d0 + beta1) < 10d0**(-10))  then
-         alpha = 1d0
-      else
-         alpha = max(1d0,beta2 / (2d0/3d0 + beta1))
-      end if
+      call EqualSpaced(tstart,tend,tlist_len, tlist)
       
       lowestresx = 100
       
+      x_len = lowestresx *2**(9)
+      xbc_len = x_len + 2 *n_GhstCells
+
+      dx = (xend - xstart) / (x_len -1)
+      Cr = 0.5
+      
       !perform the soliton experiment a number of times, decreasing \Delta x each time
-      do expi = 0,14
+      do expi = 0,3
+      
+         if (expi .EQ. 0) then
+            beta1 = 0d0
+            beta2 = 0d0
+         else if (expi .EQ. 1) then
+            beta1 = 1.0d0/15.0d0
+            beta2 = 1.0d0/15.0d0
+         else if (expi .EQ. 2) then
+            beta1 = -2d0/3d0
+            beta2 = 0.0
+         else
+            beta1 = 0.5-2d0/3d0
+            beta2 = 0.5
+         end if
       
          write (strdiri,'(I2.2)') expi
          
          CALL SYSTEM('mkdir -p '// wdir(1:effeclenwdir) //strdiri)
          
-         x_len = lowestresx *2**(expi)
-         xbc_len = x_len + 2 *n_GhstCells
-
-         dx = (xend - xstart) / (x_len -1)
-         Cr = 0.5
+         
+         !alpha is a factor on g*h, that determines wavespeed
+         !when beta1 ~ -2/3, then this ratio would go to infinity unless beta1 = 0
+         ! thus we limit ourselves to beta1 ~ -2/3 only when beta1 = 0
+         if  (dabs(2d0/3d0 + beta1) < 10d0**(-10))  then
+            alpha = 1d0
+         else
+            alpha = max(1d0,beta2 / (2d0/3d0 + beta1))
+         end if
          maxwavespeed = dsqrt(alpha*ga*(a0 + a1))
          dt  = (Cr / maxwavespeed) *dx
          
@@ -225,7 +246,8 @@ c Conservation Norm Tests
          call SingleSerreSoliton(a0,a1,ga,beta1,beta2,
      . xstart,xbc_len,n_GhstCells,dx,tstart,tend,
      . dt,theta,NormFile,EnergFile,
-     .      wdir(1:effeclenwdir)//strdiri//'/',effeclenwdir+3)
+     . wdir(1:effeclenwdir)//strdiri//'/',effeclenwdir+3,
+     . tlist, tlist_len)
 
       
       end do
