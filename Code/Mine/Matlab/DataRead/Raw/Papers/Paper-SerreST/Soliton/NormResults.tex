@@ -1,0 +1,77 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=4.521in,
+height=3.566in,
+at={(0.758in,0.481in)},
+scale only axis,
+xmode=log,
+xmin=0.0001,
+xmax=10,
+xtick={0.0001,  0.001,   0.01,    0.1,      1,     10},
+xminorticks=true,
+xlabel style={font=\color{white!15!black}},
+xlabel={$\Delta\text{ x}$},
+ymode=log,
+ymin=1e-08,
+ymax=100,
+ytick={ 1e-08,  1e-06, 0.0001,   0.01,      1,    100},
+yminorticks=true,
+ylabel style={font=\color{white!15!black}},
+ylabel={$\text{L}_\text{2}$},
+axis background/.style={fill=white},
+legend style={at={(0.03,0.97)}, anchor=north west, legend cell align=left, align=left, draw=white!15!black}
+]
+\addplot [color=blue, draw=none, mark=square, mark options={solid, blue}]
+  table[row sep=crcr]{%
+1.01010101010101	0.0268496317348801\\
+0.50251256281407	0.0113456363619716\\
+0.25062656641604	0.00331264121398838\\
+0.125156445556946	0.000674575668429846\\
+0.0625390869293308	0.000134559074054626\\
+0.0312597686777118	3.09535894686198e-05\\
+0.0156274417877793	7.50214784149653e-06\\
+0.00781311039924994	1.85174594027548e-06\\
+0.00390640259385132	4.59965965876494e-07\\
+0.00195316314771773	1.14651955378243e-07\\
+};
+\addlegendentry{h}
+
+\addplot [color=red, draw=none, mark=o, mark options={solid, red}]
+  table[row sep=crcr]{%
+1.01010101010101	0.205329674257521\\
+0.50251256281407	0.0667428373702316\\
+0.25062656641604	0.0160939446108179\\
+0.125156445556946	0.00338769060936826\\
+0.0625390869293308	0.00075115847699179\\
+0.0312597686777118	0.000184024226874057\\
+0.0156274417877793	4.57657639457578e-05\\
+0.00781311039924994	1.14235197663514e-05\\
+0.00390640259385132	2.85177904712408e-06\\
+0.00195316314771773	7.12569767417913e-07\\
+};
+\addlegendentry{G}
+
+\addplot [color=black, draw=none, mark=triangle, mark options={solid, black}]
+  table[row sep=crcr]{%
+1.01010101010101	0.399129857301604\\
+0.50251256281407	0.201662756914903\\
+0.25062656641604	0.0731650826043177\\
+0.125156445556946	0.015280098396497\\
+0.0625390869293308	0.00280572516184817\\
+0.0312597686777118	0.000588706938846585\\
+0.0156274417877793	0.00013435392479395\\
+0.00781311039924994	3.20589474341936e-05\\
+0.00390640259385132	7.81723900263772e-06\\
+0.00195316314771773	1.92906673228094e-06\\
+};
+\addlegendentry{u}
+
+\end{axis}
+\end{tikzpicture}%

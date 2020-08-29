@@ -1,0 +1,165 @@
+\documentclass[10pt]{elsarticle}
+
+  \usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+%% the following commands are needed for some matlab2tikz features
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{arrows.meta}
+\usepgfplotslibrary{patchplots}
+\usepackage{grffile}
+\usepackage{amsmath}
+\usepackage{lineno}
+
+
+%\usepackage{fullpage}
+\usepackage[top=1in, bottom=1in, left=0.8in, right=1in]{geometry}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{graphicx,psfrag}
+\usepackage[pdf]{pstricks}
+
+\definecolor{lightblue}{rgb}{.80,.9,1}
+\newcommand{\hl}[1]
+    {\par\colorbox{lightblue}{\parbox{\linewidth}{#1}}}
+
+\newcommand{\defn}{\stackrel{\textrm{\scriptsize def}}{=}}
+
+\setlength{\columnsep}{0.1pc}
+
+\title{Numerical Study of The Generalised Serre-Green-Naghdi Model}
+%\author{Christopher Zoppou -- \texttt{christopher.zoppou@anu.edu.au}, Dimitrios Mitsotakis -- \texttt{dmitsot@gmail.com}, Stephen Roberts -- \texttt{stephen.roberts@anu.edu.au}, Jordan Pitt}
+
+% TIME ON EVERY PAGE AS WELL AS THE FILE NAME
+\usepackage{fancyhdr}
+\usepackage{currfile}
+\usepackage[us,12hr]{datetime} % `us' makes \today behave as usual in TeX/LaTeX
+\fancypagestyle{plain}{
+\fancyhf{}
+\rfoot{\emph{\footnotesize \textcopyright  Serre Notes by C. Zoppou, D. Mitsatakis and S. Roberts.}
+ \\ File Name: {\currfilename} \\ Date: {\ddmmyyyydate\today} at \currenttime}
+\lfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0pt}}
+\pagestyle{plain}
+
+\definecolor{mycolor1}{rgb}{0.00000,0.44700,0.74100}%
+\definecolor{mycolor2}{rgb}{0.85000,0.32500,0.09800}%
+\definecolor{mycolor3}{rgb}{0.92900,0.69400,0.12500}%
+\definecolor{mycolor4}{rgb}{0.49400,0.18400,0.55600}%
+\definecolor{mycolor5}{rgb}{0.46600,0.67400,0.18800}% 
+\definecolor{mycolor6}{rgb}{0.30100,0.74500,0.93300}%
+\definecolor{mycolor7}{rgb}{0.63500,0.07800,0.18400}%
+
+\newcommand\T{\rule{0pt}{3ex }}       % Top table strut
+\newcommand\B{\rule[-4ex]{0pt}{4ex }} % Bottom table strut
+
+\newcommand\TM{\rule{0pt}{2.8ex }}       % Top matrix strut
+\newcommand\BM{\rule[-2ex]{0pt}{2ex }} % Bottom matrix strut
+
+\newcommand{\vecn}[1]{\boldsymbol{#1}}
+\DeclareRobustCommand{\solidrule}[1][0.25cm]{\rule[0.5ex]{#1}{1.5pt}}
+
+\DeclareRobustCommand{\dashedrule}{\mbox{%
+		\solidrule[2mm]\hspace{2mm}\solidrule[2mm]}}
+
+\DeclareRobustCommand{\tikzcircle}[1]{\tikz{\filldraw[#1] (0,0) circle (0.5ex);}}	
+	
+	
+\DeclareRobustCommand{\squaret}[1]{\tikz{\draw[#1,thick] (0,0) rectangle (0.2cm,0.2cm);}}
+\DeclareRobustCommand{\circlet}[1]{\tikz{\draw[#1,thick] (0,0) circle [radius=0.1cm];}}
+\DeclareRobustCommand{\trianglet}[1]{\tikz{\draw[#1,thick] (0,0) --
+		(0.25cm,0) -- (0.125cm,0.25cm) -- (0,0);}}
+\DeclareRobustCommand{\crosst}[1]{\tikz{\draw[#1,thick] (0cm,0cm) --
+		(0.1cm,0.1cm) -- (0cm,0.2cm) -- (0.1cm,0.1cm) -- (0.2cm,0.2cm) -- (0.1cm,0.1cm)-- (0.2cm,0cm);}}
+\DeclareRobustCommand{\diamondt}[1]{\tikz{\draw[#1,thick] (0,0) --(0.1cm,0.15cm) -- (0.2cm,0cm) -- (0.1cm,-0.15cm) -- (0,0)  ;}}
+\DeclareRobustCommand{\squareF}[1]{\tikz{\filldraw[#1,fill opacity= 0.3] (0,0) rectangle (0.2cm,0.2cm);}}
+
+\begin{document}
+
+\maketitle
+
+\vspace{-0.3in}
+\noindent
+\rule{\linewidth}{0.4pt}
+
+\section{Lagrangian}
+These were derived to reduce to SWWE when bed varies, and allow the dispersion regularisation. For this purpose the lagrangian works, but it may not reduce to previous definition of SGN equations with a varying bed. In fact, it seems like it doesnt. 
+
+
+The lagrangian for the gSGN was derived  as
+
+\[\mathcal{L}_{gSGN} = \frac{1}{2}hu^2 - \frac{1}{2} g h^2 + \left(\frac{1}{6} + \frac{1}{4}\beta_1\right)h^3 u_x^2 - \frac{1}{4} \beta_2 g h^2  h_x^2 + \left[h_t + \left(uh\right)_x\right]\phi \]
+
+The lagrangian derived by [] for the rSV with a varying bottom was
+\[\mathcal{L}_{rSVB} = \frac{1}{2}hu^2 - \frac{1}{2} g \eta^2 + \epsilon \frac{1}{2} h^3 u_x^2  - \frac{1}{2} \epsilon g h^2  \eta_x^2 + \left[h_t + \left(uh\right)_x\right]\phi \]
+
+Clearly, to ensure that the rSV with a bed remains consistent with the lagrangian for the gSGN with a flat bed (where $h = \eta$), we can seperate these two $\epsilon$ terms into $\epsilon_1$ which maps to $\beta_1$ and $\epsilon_2$ which maps to $\beta_2$ to recover the information lost when performing the transformation from gSGN to rSV in the first paper, defined by $\beta_1 = 2 \epsilon - \frac{2}{3}$ and $\beta_2 = 2 \epsilon$. Thus for the dispersive terms we can transfer $\epsilon \mapsto \frac{1}{2} \left(\beta_1 + \frac{2}{3} \right)$ and for the surface tension regularisation we have  $\epsilon \mapsto \frac{1}{2} \beta_2$. However, we can only recover the gSGN if we are careful about which epsilon maps to which $\beta$, since we have lost information in the gSGN to rSWWE transition.
+
+This leads to 
+\[\mathcal{L}_{gSGNB} = \frac{1}{2}hu^2 - \frac{1}{2} g \eta^2 + \epsilon_1 \frac{1}{2} h^3 u_x^2  - \frac{1}{2} \epsilon_2 g h^2  \eta_x^2 + \left[h_t + \left(uh\right)_x\right]\phi \]
+
+which reduces to $\mathcal{L}_{gSGN}$ when $\epsilon_1 \mapsto \frac{1}{2} \left(\beta_1 + \frac{2}{3} \right)$ and $\epsilon_2 \mapsto \frac{1}{2} \beta_2$ and the bed is flat and thus $h = \eta$.
+
+
+
+Following [] we thus obtain
+
+\begin{align}
+\dfrac{\partial \mathcal{L}}{\partial \phi} & : h_t + \left[uh\right]_x = 0 \\
+\dfrac{\partial \mathcal{L}}{\partial u}  & : hu - h \phi_x - \epsilon_1\left[h^3 u_x\right] = 0 \\
+\dfrac{\partial \mathcal{L}}{\partial \eta}  & : \frac{1}{2}u^2 - g\eta - \phi_t - u\phi_x + \frac{3}{2}\epsilon_1 h^2 u_x^2 + \epsilon_2 g \left[h^2 \eta_x\right]_x - \epsilon_2 g h \eta_x^2 = 0
+\end{align}
+
+
+
+
+\section{Equations}
+
+With a flat bed
+\begin{subequations}
+\begin{align}
+\begin{split}
+\dfrac{\partial h}{\partial t} + \dfrac{\partial (hu)}{\partial x} = 0
+\label{eq:gSGNh}
+\end{split}\\
+\begin{split}
+\dfrac{\partial (hu)}{\partial t} + \dfrac{\partial }{\partial x} \left( hu^2 + \frac{1}{2}gh^2 + \frac{1}{3} h^2 \Gamma \right)= 0
+\label{eq:gSGNuh}
+\end{split}\\
+\begin{split}
+\dfrac{\partial\left(\mathcal{E}\right)}{\partial t} +\dfrac{\partial}{\partial x}\left[hu\left(\frac{1}{2}u^2 + \dfrac{1}{4}\left(\frac{2}{3} + \beta_1\right)h^2\dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x} + gh\left(1 + \frac{1}{4}\beta_2\dfrac{\partial h}{\partial x}\dfrac{\partial h}{\partial x} \right)   + \frac{1}{3} h\Gamma  \right) + \frac{1}{2}\beta_2 g h^3\dfrac{\partial h}{\partial x}\dfrac{\partial u}{\partial x} \right] = 0
+\label{eq:gSGNE}
+\end{split}
+\end{align}
+where
+\begin{align}
+\Gamma &= \frac{3}{2}\left(\frac{2}{3} + \beta_1\right)h \left[\frac{\partial u}{\partial x}\frac{\partial u}{\partial x} - \frac{\partial^2 u}{\partial x \partial t} - u\frac{\partial^2 u}{\partial x^2}\right] - \frac{3}{2} \beta_2 g\left[h \frac{\partial^2 h}{\partial x^2} + \frac{1}{2} \frac{\partial h}{\partial x}\frac{\partial h}{\partial x} \right]\\
+\mathcal{E} &=\frac{1}{2}hu^2 + \dfrac{1}{4}\left(\frac{2}{3} + \beta_1\right) h^3 \dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x} + \frac{1}{2}gh^2\left(1 + \frac{1}{2}\beta_2 \dfrac{\partial h}{\partial x} \dfrac{\partial h}{\partial x}\right) 
+\end{align}
+\label{eq:gSGN}
+\end{subequations}
+
+To get rSWWe with a flat bed we set $\beta_1 = 2 \epsilon - \frac{2}{3}$ and $\beta_2 = 2 \epsilon$. Thus for the dispersive terms we can transfer $\epsilon \mapsto \frac{1}{2} \left(\beta_1 + \frac{2}{3} \right)$ and for the surface tension regularisation we have  $\epsilon \mapsto \frac{1}{2} \beta_2$. However, we can only recover the gSGN if we are careful about which epsilon maps to which $\beta$, since we have lost information in the gSGN to rSWWE transition.
+
+
+
+The Clamond rSWWE with an uneven bathymetry, where $\epsilon$ subscripts are used to denote either dispersive (1) or surface tension (2) term are
+\begin{align*}
+h_t + \left[hu\right]_x = 0,\\
+G_t + \left[uG + \frac{1}{2} gh^2  - 2 \epsilon_1 h^3 u_x^2 - \epsilon_2 \left(gh^3\eta_{xx} + \frac{1}{2} g h^2 \eta_x^2 + g h^2 \eta_x d _ x\right)  \right]_x  = ghd_x + \epsilon_2 g h^2 \eta_x d_{xx}
+\end{align*}
+
+\[G = uh - \epsilon_1\left[h^3 u_x\right]_x\]
+
+The SGN equations with a bottom by
+\begin{align*}
+h_t + \left[hu\right]_x = 0,\\
+G_t + \left[uG + \frac{1}{2} gh^2  - 2 \epsilon_1 h^3 u_x^2 - \epsilon_2 \left(gh^3\eta_{xx} + \frac{1}{2} g h^2 \eta_x^2 + g h^2 \eta_x d _ x\right)  \right]_x  = ghd_x + \epsilon_2 g h^2 \eta_x d_{xx}
+\end{align*}
+
+
+
+
+\end{document} 

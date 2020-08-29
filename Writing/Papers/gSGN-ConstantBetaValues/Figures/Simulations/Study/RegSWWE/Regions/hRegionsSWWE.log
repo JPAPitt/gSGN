@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  18 JUN 2020 14:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  18 AUG 2020 07:03
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -795,18 +795,18 @@ Non-PDF special ignored!
 Non-PDF special ignored!{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 (./hRegionsSWWE.aux) ) 
 Here is how much of TeX's memory you used:
- 25977 strings out of 492982
- 676679 string characters out of 6134896
- 3164087 words of memory out of 5000000
- 29101 multiletter control sequences out of 15000+600000
- 4094 words of font info for 16 fonts, out of 8000000 for 9000
+ 25982 strings out of 492982
+ 676743 string characters out of 6134896
+ 3166096 words of memory out of 5000000
+ 29104 multiletter control sequences out of 15000+600000
+ 5004 words of font info for 19 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,10n,128p,735b,1853s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 74i,10n,128p,735b,1865s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
+s/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
 fb>
-Output written on hRegionsSWWE.pdf (1 page, 101478 bytes).
+Output written on hRegionsSWWE.pdf (1 page, 99312 bytes).
 PDF statistics:
  23 PDF objects out of 1000 (max. 8388607)
  16 compressed objects within 1 object stream

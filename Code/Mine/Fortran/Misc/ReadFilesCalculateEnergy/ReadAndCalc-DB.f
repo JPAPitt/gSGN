@@ -280,7 +280,7 @@ c get length of string without trailing whitespace
       
       call LenTrim(wdir,wdirlen,effeclenwdir)
       
-      do i = 0,7
+      do i = 0,12
          write (stri,'(I2.2)') i
          call EnergyTimeSeries(wdir(1:effeclenwdir) // stri // '/',
      .      effeclenwdir +3, "Params.dat", 10,ts_len,ts,Energys,dx)

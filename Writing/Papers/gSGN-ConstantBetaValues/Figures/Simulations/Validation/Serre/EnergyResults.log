@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  27 JUN 2020 13:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  19 AUG 2020 11:02
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -783,9 +783,9 @@ ABD: EveryShipout initializing macros
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.15}).
 
-Package pgfplots info on input line 89: Using 'lua backend=false' for axis: xmo
+Package pgfplots info on input line 90: Using 'lua backend=false' for axis: xmo
 de=log unsupported (yet).
-Package pgfplots info on input line 89: Using 'lua backend=false' for axis: ymo
+Package pgfplots info on input line 90: Using 'lua backend=false' for axis: ymo
 de=log unsupported (yet).
 Missing character: There is no ; in font nullfont!
 NOTE: coordinate (4.04040404040404,0) has been dropped because it is unbounded 
@@ -804,21 +804,21 @@ Non-PDF special ignored!
 Non-PDF special ignored!{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 (./EnergyResults.aux) ) 
 Here is how much of TeX's memory you used:
- 26080 strings out of 492982
- 678258 string characters out of 6134896
- 865327 words of memory out of 5000000
- 29204 multiletter control sequences out of 15000+600000
- 4094 words of font info for 16 fonts, out of 8000000 for 9000
+ 26064 strings out of 492982
+ 677947 string characters out of 6134896
+ 856961 words of memory out of 5000000
+ 29186 multiletter control sequences out of 15000+600000
+ 5004 words of font info for 19 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,18n,128p,736b,2182s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 74i,10n,128p,736b,1865s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
->
-Output written on EnergyResults.pdf (1 page, 31860 bytes).
+ts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on EnergyResults.pdf (1 page, 35631 bytes).
 PDF statistics:
- 23 PDF objects out of 1000 (max. 8388607)
- 16 compressed objects within 1 object stream
+ 27 PDF objects out of 1000 (max. 8388607)
+ 19 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

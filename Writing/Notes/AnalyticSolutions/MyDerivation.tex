@@ -1,0 +1,269 @@
+\documentclass[subeqn]{article}
+\usepackage[dvips]{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{topcapt}
+%\usepackage{citeref}
+\usepackage{color}
+%\usepackage{sgr-colors}
+\usepackage{lscape}
+
+\newcommand{\UV}{\mbox{\boldmath$U$}}
+\newcommand{\VV}{\mbox{\boldmath$V$}}
+\newcommand{\FV}{\mbox{\boldmath$F$}}
+\newcommand{\SV}{\mbox{\boldmath$S$}}
+\newcommand{\WV}{\mbox{\boldmath$W$}}
+\newcommand{\CV}{\mbox{\boldmath$C$}}
+\newcommand{\SVhat}{\hat{\SV}}
+\newcommand{\R}{{\mathbb{R}}}
+\newcommand{\comment}[1]
+{\par\colorbox{LGray}{\parbox{\linewidth}{\bf Comment: #1}}}
+\definecolor{lightblue}{rgb}{.80,.9,1}
+\definecolor{lightred}{rgb}{0.95, 0.41, 0.34}
+\newcommand{\hl}[1]
+    {\par\colorbox{lightblue}{\parbox{\linewidth}{#1}}}
+
+\newcommand{\hr}[1]
+{\par\colorbox{lightred}{\parbox{\linewidth}{#1}}}
+
+\begin{document}
+
+The Serre equations with surface tension are
+\begin{subequations}
+	\begin{equation}
+	\label{eqh}
+	h_t + (uh)_x = 0
+	\end{equation}
+	\begin{equation}
+	\label{equh}
+	(uh)_t + \left(u^2h + \frac{gh^2}{2} + \frac{h^3}{3} \left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right] - \tau\left( h \frac{\partial^2 h}{\partial x^2} - \frac{1}{2}\frac{\partial h}{\partial x}\frac{\partial h}{\partial x} \right) \right)_x = 0
+	\end{equation}
+\end{subequations}
+
+rewriting \eqref{equh} gives
+\[hu_t + uh_t + 2u u_x h + u^2h_x + ghh_x + \left(\frac{h^3}{3} \left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]  - \tau\left( h \frac{\partial^2 h}{\partial x^2} - \frac{1}{2}\frac{\partial h}{\partial x}\frac{\partial h}{\partial x} \right) \right)_x  = 0\]
+
+substituting  \eqref{eqh}
+\[hu_t - u\left(uh_x + hu_x\right) + 2u u_x h + u^2h_x + ghh_x + \left(\frac{h^3}{3} \left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right]  - \tau\left( h \frac{\partial^2 h}{\partial x^2} - \frac{1}{2}\frac{\partial h}{\partial x}\frac{\partial h}{\partial x} \right) \right)_x = 0\]
+
+\[hu_t +  u u_x h + ghh_x + \left(\frac{h^3}{3} \left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right] - \tau\left( h \frac{\partial^2 h}{\partial x^2} - \frac{1}{2}\frac{\partial h}{\partial x}\frac{\partial h}{\partial x} \right) \right)_x = 0\]
+
+divide by $h$
+\[u_t +  u u_x  + gh_x + \frac{1}{h} \left(\frac{h^3}{3} \left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right] - \tau\left( h \frac{\partial^2 h}{\partial x^2} - \frac{1}{2}\frac{\partial h}{\partial x}\frac{\partial h}{\partial x} \right)\right)_x = 0\]
+
+Integrating the surface tension term we get 
+\[\left[ \frac{1}{h} \left(- \tau\left( h \frac{\partial^2 h}{\partial x^2} - \frac{1}{2}\frac{\partial h}{\partial x}\frac{\partial h}{\partial x} \right)\right)_x \right] = -\tau h_{xxx}\]
+
+So we get
+
+\begin{subequations}
+	\label{eqexp}
+	\begin{equation}
+	\label{eqhexp}
+	h_t + u_xh + u h_x = 0
+	\end{equation}
+	\begin{equation}
+	\label{equhexp}
+	u_t +  u u_x  + gh_x + \frac{1}{3h} \left({h^3}\left[\left(u_x \right)^2 - uu_{xx} - u_{xt} \right] \right)_x -\tau h_{xxx} = 0	
+	\end{equation}
+\end{subequations}
+
+
+
+Want solutions of travelling wave form $h(\xi)$ and $u(\xi)$ where $\xi = x - ct$. For this to be a solution must satisfy \eqref{eqexp}. First we want to write these equations in terms of $\xi$
+
+\subsection{Mass}
+
+For \eqref{eqhexp} using $[q(\xi)]_x = q'(\xi)\xi_x$ and $[q(\xi)]_t = q'(\xi)\xi_t$ we have
+\[h' \xi_t + u'h\xi_x + u h'\xi_x = 0\]
+
+since $\xi_x = 1$ and $\xi_t = -c$ then
+\[-c h' + u'h + u h' = 0\]
+
+Integrating we get
+\[ \int -c h' + u'h + u h' d\xi =  \int 0 d\xi\]
+
+\[ \int -c h' + \left[uh\right]' d\xi =  \int 0 d\xi\]
+
+Combining the contstants of integration of both integrals into $A$ we get that
+\[ -ch + uh + A = 0  \]
+
+so we get
+
+\[ uh = ch - A  \]
+
+\[ u = c - \frac{A}{h}  \]
+
+\begin{equation}
+\label{eqnuhmassrel}
+u(\xi) = c - \frac{A}{h(\xi)} 
+\end{equation}
+
+\subsection{Momentum}
+Now we rewrite \eqref{equhexp} as a function of $\xi$, making use of 
+\begin{align*}
+[q(\xi)]_x &= q'(\xi) \\
+[q(\xi)]_{xx} &= q''(\xi) \\
+[q(\xi)]_{xxx} &= q'''(\xi) \\
+[q(\xi)]_{xt} &= -c q''(\xi) \\
+[q(\xi)]_{xxt} &= -c q'''(\xi) \\
+[q(\xi)]_t &= -c q'(\xi)
+\end{align*}
+using $\xi = x - ct$
+
+we get from \eqref{equhexp}
+
+\[	-cu' +  u u'  + gh' + \frac{1}{3h} \left({h^3}\left[\left(u' \right)^2 - uu'' + c u'' \right] \right)' - \tau h''' = 0\]
+
+From \eqref{eqnuhmassrel} we have
+\begin{align*}
+u &= c - \frac{A}{h} \\
+u' &= A \frac{h'}{h^2} \\
+u'' &= A \frac{h h'' - 2\left[h'\right]^2}{h^3} \\
+u''' &= A \frac{h^2 h''' + 6 \left[h'\right]^3 - 6hh'h''}{h^4} \\
+\end{align*}
+
+So we get that
+\begin{multline*}
+-c\left[A \frac{h'}{h^2}\right] + \left[ c - \frac{A}{h}\right] \left[A \frac{h'}{h^2}\right]  + gh' \\ + \frac{1}{3h} \left({h^3}\left[\left(A \frac{h'}{h^2} \right)^2 - \left[ c - \frac{A}{h}\right]\left[A \frac{h h'' - 2\left[h'\right]^2}{h^3}\right] + c \left[A \frac{h h'' - 2\left[h'\right]^2}{h^3}\right] \right]\right)'  - \tau h'''  = 0 \end{multline*}
+
+\begin{multline*}
+-\left[A^2 \frac{h'}{h^3}\right]  + gh'  + \frac{1}{3h} \left({h^3}\left[\left(A \frac{h'}{h^2} \right)^2 + \left[ \frac{A}{h}\right]\left[A \frac{h h'' - 2\left[h'\right]^2}{h^3}\right] \right] \right)'  - \tau h'''  = 0 \end{multline*}
+
+\begin{equation*}
+-\left[A^2 \frac{h'}{h^3}\right]  + gh'  + \frac{1}{3h} \left({h^3}\left[\left(A^2 \frac{\left[h'\right]^2}{h^4} \right) + \left[A^2 \frac{h h'' - 2\left[h'\right]^2}{h^4}\right] \right]\right)'  - \tau h'''  = 0 
+\end{equation*}
+
+\begin{equation*}
+-\left[A^2 \frac{h'}{h^3}\right]  + gh'  + \frac{A^2}{3h} \left({h^3}\left[\frac{h h'' - \left[h'\right]^2}{h^4} \right] \right)'  - \tau h'''  = 0 
+\end{equation*}
+
+\begin{equation*}
+-A^2 \frac{h'}{h^3}  + gh'  + \frac{A^2}{3h} \left(\frac{h h'' - \left[h'\right]^2}{h}  \right)'  - \tau h'''  = 0 
+\end{equation*}
+
+multiply by $h$
+
+\begin{equation*}
+-A^2 \frac{h'}{h^2}  + ghh'  + \frac{A^2}{3} \left(\frac{h h'' - \left[h'\right]^2}{h} \right)'  - \tau h'''  = 0 
+\end{equation*}
+
+\begin{equation*}
+\frac{A^2}{3} \left(\frac{h h'' - \left[h'\right]^2}{h} \right)'  - \tau h'''  = A^2 \frac{h'}{h^2} - ghh'
+\end{equation*}
+
+Integrating we get
+
+\begin{equation*}
+\int \frac{A^2}{3} \left(\frac{h h'' - \left[h'\right]^2}{h}  \right)' \; d \xi =  \int A^2 \frac{h'}{h^2} - ghh'  + \tau h'''   d \xi
+\end{equation*}
+$C$ constant of integration
+\begin{equation*}
+ \frac{A^2}{3} \left(\frac{h h'' - \left[h'\right]^2}{h}  \right) + C  =  \int A^2 \frac{h'}{h^2} - ghh' + \tau h'''  d \xi
+\end{equation*}
+
+Absorbing all contstants of intergration into C we get
+\begin{equation*}
+\frac{A^2}{3} \left(\frac{h h'' - \left[h'\right]^2}{h}  \right) + C  =  -\frac{A^2}{h} - \frac{gh^2}{2} + \tau h''
+\end{equation*}
+
+Thus we have
+
+\begin{equation*}
+\frac{A^2}{3} \left({h h'' - \left[h'\right]^2}  \right) + Ch  =  -{A^2} - \frac{gh^3}{2} + \tau h h''
+\end{equation*}
+
+\begin{equation*}
+\frac{A^2}{3} \left({h h'' - \left[h'\right]^2} \right) + \frac{gh^3}{2}   =  -{A^2} - Ch + \tau h h''
+\end{equation*}
+
+divide by $h^2$
+
+\begin{equation*}
+\frac{A^2}{3} \left(\frac{h h'' - \left[h'\right]^2}{h^2} \right) + \frac{gh}{2}   =  \frac{-{A^2}}{h^2} - \frac{C}{h} + \frac{\tau h''}{h}
+\end{equation*}
+
+\begin{equation*}
+\frac{A^2}{3} \left(\frac{h h'' - \left[h'\right]^2}{h^2} \right) - \frac{\tau h''}{h} + \frac{gh}{2}   =  \frac{-{A^2}}{h^2} - \frac{C}{h} 
+\end{equation*}
+
+\begin{equation*}
+-\frac{A^2}{3} \left(\frac{ \left[h'\right]^2}{h^2} \right) + \frac{A^2}{3} \left(\frac{h''}{h} \right) - \frac{\tau h''}{h} + \frac{gh}{2}   =  \frac{-{A^2}}{h^2} - \frac{C}{h} 
+\end{equation*}
+
+\begin{equation*}
+\frac{A^2 - 3\tau}{3} \left(\frac{h''}{h} \right)-\frac{A^2}{3} \left(\frac{ \left[h'\right]^2}{h^2} \right)  + \frac{gh}{2}   =  \frac{-{A^2}}{h^2} - \frac{C}{h} 
+\end{equation*}
+
+
+So we have two constants of integration which we can set as we like. 
+
+In summary we have the following equations that travelling wave solutions must satisfy, for a particular choice of $A$ and $C$.
+\begin{subequations}
+\label{eqnSerreSat}
+\begin{equation}
+\label{eqnSerreSath}
+\frac{A^2 - 3\tau}{3} \left(\frac{h''\left(\xi\right)}{h\left(\xi\right)} \right)  - \frac{A^2}{3} \left(\frac{ \left[h'(\xi)\right]^2}{\left[h(\xi)\right]^2} \right)  + \frac{gh(\xi)}{2}   =  -\frac{{A^2}}{h^2(\xi)} - \frac{C}{h(\xi)}
+\end{equation}
+\begin{equation}
+\label{eqnSerreSatu}
+u(\xi) = c - \frac{A}{h(\xi)}
+\end{equation}
+\end{subequations}
+
+
+\subsection{Consistent with soliton}
+To get $u$ in the same form as the soliton for a solution we must set 
+
+$A = c a_0$ where $c = \sqrt{g\left(a_0 + a_1\right)}$
+
+Thus we get
+
+\begin{equation}
+u(\xi) = c\left[1  - \frac{a_0}{h(\xi)} \right]
+\end{equation}
+
+Thus the equation for $h$ becomes
+\begin{equation}
+\frac{\left(c a_0\right)^2 - 3\tau}{3} \left(\frac{h''\left(\xi\right)}{h\left(\xi\right)} \right)  - \frac{\left(c a_0\right)^2}{3} \left(\frac{ \left[h'(\xi)\right]^2}{\left[h(\xi)\right]^2} \right)  + \frac{gh(\xi)}{2}   =  -\frac{{\left(c a_0\right)^2}}{h^2(\xi)} - \frac{C}{h(\xi)}
+\end{equation}
+
+want the peakon solution
+\[h\left(\xi\right) = a_0 + a_1 \exp\left(-\frac{\sqrt{3}}{a_0} \left|\xi\right|\right) \]
+
+The derivatives of this function are
+
+\[h'\left(\xi\right) = -\frac{\sqrt{3} a_1}{a_0} \frac{\xi}{\left|\xi\right|} \exp\left(-\frac{\sqrt{3}}{a_0} \left|\xi\right|\right) \]
+
+Let's assume that $\left(c a_0\right)^2 - 3\tau = 0$ thus $\left(c a_0\right)^2  =  3\tau$ and $ \tau = \dfrac{c^2 a_0 ^2}{3}$. So that the second derivative, is not needed, which is a delta function. 
+
+
+So we get
+\begin{equation}
+- \frac{\left(c a_0\right)^2}{3} \left(\frac{ \left[h'(\xi)\right]^2}{\left[h(\xi)\right]^2} \right)  + \frac{gh(\xi)}{2}   =  -\frac{{\left(c a_0\right)^2}}{h^2(\xi)} - \frac{C}{h(\xi)}
+\end{equation}
+
+Multiplying out the $h\left(\xi\right)$
+\begin{equation}
+- \frac{\left(c a_0\right)^2}{3} \left(\frac{ \left[h'(\xi)\right]^2}{\left[h(\xi)\right]} \right)  + \frac{gh^2(\xi)}{2}   =  -\frac{{\left(c a_0\right)^2}}{h(\xi)} - C
+\end{equation}
+
+\begin{equation}
+ C = \frac{\left(c a_0\right)^2}{3} \left(\frac{ \left[h'(\xi)\right]^2}{\left[h(\xi)\right]} \right) - \frac{gh^2(\xi)}{2} - \frac{{\left(c a_0\right)^2}}{h(\xi)}
+\end{equation}
+
+
+
+\[\left[h\left(\xi\right)\right]^2 = a_0^2 + 2 a_0 a_1 + a_1^2 \exp\left(-2\frac{\sqrt{3}}{a_0} \left|\xi\right|\right) \]
+
+\[\left[ h'\left(\xi\right)\right]^2 =\frac{3 a_1^2}{a_0^2}  \exp\left(-2\frac{\sqrt{3}}{a_0} \left|\xi\right|\right) \]
+
+
+\begin{multline}
+C = \frac{\left(c a_0\right)^2}{3} \left(\frac{\frac{3 a_1^2}{a_0^2}  \exp\left(-2\frac{\sqrt{3}}{a_0} \left|\xi\right|\right) }{a_0 + a_1 \exp\left(-\frac{\sqrt{3}}{a_0} \left|\xi\right|\right)} \right) -  \frac{g}{2} \left[a_0^2 + 2 a_0 a_1 + a_1^2 \exp\left(-2\frac{\sqrt{3}}{a_0} \left|\xi\right|\right)\right] h^2(\xi) \\- \frac{{\left(c a_0\right)^2}}{a_0 + a_1 \exp\left(-\frac{\sqrt{3}}{a_0} \left|\xi\right|\right)}
+\end{multline}
+
+
+
+\end{document}

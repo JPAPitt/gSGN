@@ -2,7 +2,7 @@ c ===
 c Function to make time series of Energies
 c ===
       subroutine EnergyTimeSeries(wdir,wdir_len,paramfilename,
-     . paramfilename_len,ts_len,ts,Energys,dx)
+     . paramfilename_len,ts_len,ts,Energys,dx,beta1,beta2)
       INTEGER ts_len,wdir_len,paramfilename_len
       CHARACTER(len=wdir_len) wdir
       CHARACTER(len=paramfilename_len) paramfilename
@@ -18,6 +18,8 @@ c ===
       call  ReadParamFile(wdir//paramfilename,
      .   wdir_len + paramfilename_len,nGhstcell,
      .   xbc_len,dx,ga,beta1,beta2)
+     
+      print *,beta1,beta2
       do j = 1,ts_len -1
          write (strct,'(I2)') j
          
@@ -63,10 +65,7 @@ c ===
      
       end do
       close(1)
-      
-      beta1 = -2d0/3d0
-      beta2 = 0d0
-            
+
       end
  
 
@@ -273,7 +272,8 @@ c get length of string without trailing whitespace
       PARAMETER(wdirlen= 200,ts_len=35)
       
       INTEGER j,i,lenwdir,lenexpdir 
-      DOUBLE PRECISION ts(ts_len),Energys(ts_len,4),dx
+      DOUBLE PRECISION ts(ts_len),Energys(ts_len,4),dx,beta1,beta2
+      INTEGER betas(5)
       
       CHARACTER(len =wdirlen) wdir,expdir
       CHARACTER(len =2) stri
@@ -281,25 +281,34 @@ c get length of string without trailing whitespace
       wdir = "/home/jp/Documents/Work/PostDoc/Projects/Steve/" //
      .    "1DWaves/RegularisedSerre/Data/RAW/Models/" //
      .    "gSGNForcedLimAll/ConstantBeta/SmoothDBInvestigation/" //
-     .    "REGSWWE/AspRat2to1/DBalpha0p1/Beta"
+     .    "Serre2SWWECloser/AspRat2to1/DBalpha0p1/Beta"
 
       
       call LenTrim(wdir,wdirlen,lenwdir)
       
-      do i = 0,5
-         write (stri,'(I2.2)') i
+      betas(1) = 0
+      betas(2) = 1
+      betas(3) = 2
+      betas(4) = 3
+      betas(5) = 51
+      
+      do i = 1,5
+         write (stri,'(I2.2)') betas(i)
          expdir = wdir(1:lenwdir) // stri //"/dx06/"
+         
+         print *, expdir
          
          
          call LenTrim(expdir,wdirlen,lenexpdir)
          
          call EnergyTimeSeries(expdir(1:lenwdir),
-     .      lenexpdir, "Params.dat", 10,ts_len,ts,Energys,dx)
+     .      lenexpdir, "Params.dat", 10,ts_len,ts,Energys,dx,
+     .      beta1,beta2)
      
-     
+         write (stri,'(I2.2)') i
          open(2, file = 'DB_Beta'//stri //'.dat') 
          do j = 1,ts_len
-            write(2,*) ts(j),dx,Energys(j,1),Energys(j,2),
+            write(2,*) ts(j),dx,beta1,beta2,Energys(j,1),Energys(j,2),
      .       Energys(j,3), Energys(j,4) 
          end do
       

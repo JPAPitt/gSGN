@@ -1,0 +1,55 @@
+\documentclass{article}
+
+\usepackage{enumerate}
+\usepackage{pdfpages}
+\usepackage{mathtools}
+\usepackage{listings,multicol}
+\usepackage{listings}
+\usepackage{amsmath}
+
+\newcommand{\vecn}[1]{\boldsymbol{#1}}
+\begin{document}
+
+\section{Basis polynomials}
+
+For zeroth order we have
+
+\begin{equation}
+P_i(x) = a_i = \bar{q}_i
+\end{equation}
+
+For first order we have
+
+\begin{equation}
+P_{i,j}(x) = a_{i,j}\left(x - x_j\right) + b_{i,j} 
+\end{equation}
+
+Similarly for cubics (4th) order we have
+
+\begin{equation}
+P_{i,j,k,l}(x) = a_{i,j,k,l}\left(x - x_j\right)^3 + b_{i,j,k,l}\left(x - x_j\right)^2 + c_{i,j,k,l}\left(x - x_j\right) + d_{i,j,k,l}
+\end{equation}
+
+The coefficients of these are all linear combinations of cell averages $\bar{q}_i$,$\bar{q}_j$,$\bar{q}_k$, $\bar{q}_l$. Where we have that
+
+\begin{equation}
+\int_{C_i}  P_{i,j,k,l}(x) dx  =\bar{q}_i 
+\end{equation}
+
+where $C_i$ is the volume corresponding to the average value over it $\bar{q}_i $. When solutions are smooth over the minimum region covering $C_i$, $C_j$,$C_k$ and $C_l$ (when cells are apart, then this minimum region also includes in between cells). 
+
+Goal is to construct $Q_m$, as some weighted average of some $P_{i,j,k,l}$'s to maintain accuracy. In general we will want to keep close to the original reconstruction cell, as the further we are extrapolating, the less we are capturing local behaviour of the function.
+
+For the fourth order we have $P_{i-3,i-2,i-1,i}$, $P_{i-2,i-1,i,i+1}$, $P_{i-1,i,i+1,i+2}$, $P_{i, i+1,i +2, i+3}$ as the obvious candidates. In terms of equal spacing we also have 
+$P_{i-3, i-1,i +1, i+3}$, using all the cells we have anyway. So we have biasing in either direction for the obvious ones, and than an unbiased, central one as well. 
+
+Thus we want 
+\begin{equation}
+Q_i = w_{1} P_{i-3,i-2,i-1,i}+  w_{2} P_{i-2,i-1,i,i+1} + w_3P_{i-1,i,i+1,i+2} + w_4 P_{i, i+1,i +2, i+3} + w_5  P_{i-3, i-1,i +1, i+3}
+\end{equation}
+
+where $\sum_i w_i = 1$. When solutions are smooth then the difference between these polynomials will be $O(\Delta x ^4$ and one can pick any indicator weights one chooses. When solutions are not smooth, then this is no longer the case. 
+
+
+
+\end{document}
