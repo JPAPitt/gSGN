@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  26 AUG 2020 11:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  7 SEP 2020 10:17
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -797,10 +797,10 @@ Non-PDF special ignored!
 Non-PDF special ignored!{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 (./PeakSpeedEstimates.aux) ) 
 Here is how much of TeX's memory you used:
- 25965 strings out of 492982
- 676335 string characters out of 6134896
- 846507 words of memory out of 5000000
- 29087 multiletter control sequences out of 15000+600000
+ 25966 strings out of 492982
+ 676343 string characters out of 6134896
+ 846722 words of memory out of 5000000
+ 29088 multiletter control sequences out of 15000+600000
  5004 words of font info for 19 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,10n,128p,741b,1867s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -809,7 +809,7 @@ msfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 r12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
 b>
-Output written on PeakSpeedEstimates.pdf (1 page, 35450 bytes).
+Output written on PeakSpeedEstimates.pdf (1 page, 34350 bytes).
 PDF statistics:
  27 PDF objects out of 1000 (max. 8388607)
  19 compressed objects within 1 object stream

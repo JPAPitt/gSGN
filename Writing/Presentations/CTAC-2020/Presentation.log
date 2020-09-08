@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  30 AUG 2020 11:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  1 SEP 2020 06:34
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1015,18 +1015,18 @@ Package caption Info: End \AtBeginDocument code.
 }
 
 ]
-LaTeX Font Info:    Try loading font information for U+msa on input line 55.
+LaTeX Font Info:    Try loading font information for U+msa on input line 57.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 55.
+LaTeX Font Info:    Try loading font information for U+msb on input line 57.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Try loading font information for OT1+mathkerncmss on input 
-line 55.
+line 57.
 
 (/usr/share/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
 File: ot1mathkerncmss.fd 2013/03/27 Fontinst v1.933 font definitions for OT1/ma
@@ -1040,17 +1040,17 @@ thkerncmss.
 <./Pics/Web/SualwesiTsunami.jpg, id=210, 361.35pt x 240.9pt>
 File: ./Pics/Web/SualwesiTsunami.jpg Graphic file (type jpg)
 <use ./Pics/Web/SualwesiTsunami.jpg>
-Package pdftex.def Info: ./Pics/Web/SualwesiTsunami.jpg  used on input line 78.
+Package pdftex.def Info: ./Pics/Web/SualwesiTsunami.jpg  used on input line 80.
 
 (pdftex.def)             Requested size: 135.51541pt x 90.34462pt.
 <./Pics/Web/HurricaneFlorence.jpg, id=211, 1003.75pt x 543.02875pt>
 File: ./Pics/Web/HurricaneFlorence.jpg Graphic file (type jpg)
 <use ./Pics/Web/HurricaneFlorence.jpg>
-Package pdftex.def Info: ./Pics/Web/HurricaneFlorence.jpg  used on input line 7
-8.
+Package pdftex.def Info: ./Pics/Web/HurricaneFlorence.jpg  used on input line 8
+0.
 (pdftex.def)             Requested size: 165.632pt x 89.60416pt.
 
-Overfull \hbox (15.05829pt too wide) in paragraph at lines 78--78
+Overfull \hbox (15.05829pt too wide) in paragraph at lines 80--80
 [][] 
  []
 
@@ -1060,11 +1060,11 @@ Overfull \hbox (15.05829pt too wide) in paragraph at lines 78--78
 <./Pics/Web/StormSurgeLaura.jpeg, id=246, 466.1924pt x 355.75162pt>
 File: ./Pics/Web/StormSurgeLaura.jpeg Graphic file (type jpg)
 <use ./Pics/Web/StormSurgeLaura.jpeg>
-Package pdftex.def Info: ./Pics/Web/StormSurgeLaura.jpeg  used on input line 86
+Package pdftex.def Info: ./Pics/Web/StormSurgeLaura.jpeg  used on input line 88
 .
 (pdftex.def)             Requested size: 215.10196pt x 164.1417pt.
 
-Overfull \vbox (3.12808pt too high) detected at line 86
+Overfull \vbox (3.12808pt too high) detected at line 88
  []
 
 [6
@@ -1080,7 +1080,7 @@ File: ./Pics/Tex/Explanatory/DispersionPlot/Dispersion.pdf Graphic file (type p
 df)
 <use ./Pics/Tex/Explanatory/DispersionPlot/Dispersion.pdf>
 Package pdftex.def Info: ./Pics/Tex/Explanatory/DispersionPlot/Dispersion.pdf  
-used on input line 108.
+used on input line 110.
 (pdftex.def)             Requested size: 276.559pt x 122.5106pt.
  [9
 
@@ -1091,7 +1091,7 @@ File: ./Pics/Tex/Explanatory/DispersionPlot/Dispersion_Analagous.pdf Graphic fi
 le (type pdf)
 <use ./Pics/Tex/Explanatory/DispersionPlot/Dispersion_Analagous.pdf>
 Package pdftex.def Info: ./Pics/Tex/Explanatory/DispersionPlot/Dispersion_Anala
-gous.pdf  used on input line 115.
+gous.pdf  used on input line 117.
 (pdftex.def)             Requested size: 276.559pt x 127.8373pt.
  [10
 
@@ -1107,10 +1107,10 @@ gous.pdf  used on input line 115.
 File: ./Pics/Tex/Explanatory/Setupplot/Waves.pdf Graphic file (type pdf)
 <use ./Pics/Tex/Explanatory/Setupplot/Waves.pdf>
 Package pdftex.def Info: ./Pics/Tex/Explanatory/Setupplot/Waves.pdf  used on in
-put line 150.
+put line 153.
 (pdftex.def)             Requested size: 276.559pt x 123.72063pt.
 
-Overfull \vbox (6.24452pt too high) detected at line 150
+Overfull \vbox (6.24452pt too high) detected at line 153
  []
 
 [14
@@ -1119,31 +1119,31 @@ Overfull \vbox (6.24452pt too high) detected at line 150
 
 ] [16
 
+] [17
+
 ]
-<./Pics/Tex/Explanatory/RegionsPlot/BetaPlotAll.pdf, id=697, 349.98856pt x 291.
+<./Pics/Tex/Explanatory/RegionsPlot/BetaPlotAll.pdf, id=733, 349.98856pt x 291.
 95374pt>
 File: ./Pics/Tex/Explanatory/RegionsPlot/BetaPlotAll.pdf Graphic file (type pdf
 )
 <use ./Pics/Tex/Explanatory/RegionsPlot/BetaPlotAll.pdf>
 Package pdftex.def Info: ./Pics/Tex/Explanatory/RegionsPlot/BetaPlotAll.pdf  us
-ed on input line 180.
+ed on input line 190.
 (pdftex.def)             Requested size: 215.10196pt x 179.43242pt.
- [17
+ [18
 
  <./Pics/Tex/Explanatory/RegionsPlot/BetaPlotAll.pdf>]
-<./Pics/Tex/Explanatory/RegionsPlot/BetaPlotAllArrows.pdf, id=756, 349.98856pt 
+<./Pics/Tex/Explanatory/RegionsPlot/BetaPlotAllArrows.pdf, id=791, 349.98856pt 
 x 291.95374pt>
 File: ./Pics/Tex/Explanatory/RegionsPlot/BetaPlotAllArrows.pdf Graphic file (ty
 pe pdf)
 <use ./Pics/Tex/Explanatory/RegionsPlot/BetaPlotAllArrows.pdf>
 Package pdftex.def Info: ./Pics/Tex/Explanatory/RegionsPlot/BetaPlotAllArrows.p
-df  used on input line 187.
+df  used on input line 197.
 (pdftex.def)             Requested size: 215.10196pt x 179.43242pt.
- [18
+ [19
 
- <./Pics/Tex/Explanatory/RegionsPlot/BetaPlotAllArrows.pdf>] [19
-
-] [20
+ <./Pics/Tex/Explanatory/RegionsPlot/BetaPlotAllArrows.pdf>] [20
 
 ] [21
 
@@ -1159,44 +1159,48 @@ df  used on input line 187.
 
 ] [27
 
+] [28
+
 ]
-<./Pics/Tex/Explanatory/MiniRegions/Serre.pdf, id=1118, 349.98856pt x 291.76604
+<./Pics/Tex/Explanatory/MiniRegions/Serre.pdf, id=1154, 349.98856pt x 291.76604
 pt>
 File: ./Pics/Tex/Explanatory/MiniRegions/Serre.pdf Graphic file (type pdf)
 <use ./Pics/Tex/Explanatory/MiniRegions/Serre.pdf>
 Package pdftex.def Info: ./Pics/Tex/Explanatory/MiniRegions/Serre.pdf  used on 
-input line 298.
+input line 308.
 (pdftex.def)             Requested size: 56.9055pt x 47.4359pt.
- [28
+
+[29
 
 <<./Videos/Soliton.avi>> <./Pics/Tex/Explanatory/MiniRegions/Serre.pdf>]
-<./Pics/Tex/Results/Validation/Soliton/Convergence.pdf, id=1171, 393.61856pt x 
+<./Pics/Tex/Results/Validation/Soliton/Convergence.pdf, id=1206, 393.61856pt x 
 302.45296pt>
 File: ./Pics/Tex/Results/Validation/Soliton/Convergence.pdf Graphic file (type 
 pdf)
 <use ./Pics/Tex/Results/Validation/Soliton/Convergence.pdf>
 Package pdftex.def Info: ./Pics/Tex/Results/Validation/Soliton/Convergence.pdf 
- used on input line 312.
+ used on input line 322.
 (pdftex.def)             Requested size: 135.51541pt x 104.12947pt.
-<./Pics/Tex/Results/Validation/Soliton/Conservation.pdf, id=1172, 395.81877pt x
+<./Pics/Tex/Results/Validation/Soliton/Conservation.pdf, id=1207, 395.81877pt x
  302.44894pt>
 File: ./Pics/Tex/Results/Validation/Soliton/Conservation.pdf Graphic file (type
  pdf)
 <use ./Pics/Tex/Results/Validation/Soliton/Conservation.pdf>
 Package pdftex.def Info: ./Pics/Tex/Results/Validation/Soliton/Conservation.pdf
-  used on input line 312.
+  used on input line 322.
 (pdftex.def)             Requested size: 135.51541pt x 103.5466pt.
 File: ./Pics/Tex/Explanatory/MiniRegions/Serre.pdf Graphic file (type pdf)
 <use ./Pics/Tex/Explanatory/MiniRegions/Serre.pdf>
 Package pdftex.def Info: ./Pics/Tex/Explanatory/MiniRegions/Serre.pdf  used on 
-input line 312.
+input line 322.
 (pdftex.def)             Requested size: 56.9055pt x 47.4359pt.
- [29
+
+[30
 
  <./Pics/Tex/Results/Validation/Soliton/Convergence.pdf> <./Pics/Tex/Results/Va
-lidation/Soliton/Conservation.pdf>] [30
+lidation/Soliton/Conservation.pdf>] [31
 
-] [31
+] [32
 
 ]
 \tf@nav=\write6
@@ -1215,18 +1219,18 @@ Package movie15 Warning: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 (movie15)                @@ superseded by `media9'.           @@
 (movie15)                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 329.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 329.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 339.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 339.
 (./Presentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 329.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 329.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 339.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 339.
 Package rerunfilecheck Info: File `Presentation.out' has not changed.
 (rerunfilecheck)             Checksum: 898BD077C091407FEA26D88A32352113;171.
  ) 
 Here is how much of TeX's memory you used:
- 22267 strings out of 492982
- 435445 string characters out of 6134896
- 652616 words of memory out of 5000000
+ 22269 strings out of 492982
+ 435470 string characters out of 6134896
+ 652619 words of memory out of 5000000
  25261 multiletter control sequences out of 15000+600000
  15834 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1244,10 +1248,10 @@ s/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmssi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10
 .pfb>
-Output written on Presentation.pdf (31 pages, 22364793 bytes).
+Output written on Presentation.pdf (32 pages, 22366034 bytes).
 PDF statistics:
- 1354 PDF objects out of 1440 (max. 8388607)
- 1246 compressed objects within 13 object streams
- 70 named destinations out of 1000 (max. 500000)
+ 1389 PDF objects out of 1440 (max. 8388607)
+ 1280 compressed objects within 13 object streams
+ 72 named destinations out of 1000 (max. 500000)
  222 words of extra memory for PDF output out of 10000 (max. 10000000)
 

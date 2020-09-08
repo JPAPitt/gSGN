@@ -90,7 +90,7 @@
 %\begin{itemize}
 %	\item Extension of numerical scheme (elliptic + conservation solvers) of previous papers for SGN to gSGN
 %	\item Straightforward 2nd order implementation - demonstrating the use of this method
-%	\item Validation of the example implementation using analytic solutions for SWWE and SGN (dam-break and soliton) and forced solutions for more general members (only showing a select few)
+%	\item Validation of the example implementation using analytic solutions for SWWE and SGN (dam-break and solitary travelling wave) and forced solutions for more general members (only showing a select few)
 %	\item Method is promising : can handle discontinuities, maintain order of accuracy. However, there are additional challenges (weak disconinuities) and limiting of derivative which will be investigated in another paper. 
 %\end{itemize}
 
@@ -104,23 +104,23 @@
 %-------------------------------------------------
 \section{Introduction}
 %-------------------------------------------------
-The generalised Serre-Green-Naghdi (gSGN) equations were recently derived by \citet{Clamond-Dutykh-2018-237}, they are a set of equations that generalise the classical Serre-Green-Naghdi (SGN) first derived by \citet{Serre-F-1953-857} with the addition of two parameters $\beta_1$ and $\beta_2$. The equations describe the behaviour of water waves in shallow water where the typical water depth $h_0$ is much smaller than the wavelength $\lambda$ so that the shallowness parameter $\sigma = h_0/\lambda \ll 1$. The gSGN equations are of particular interest to the wave modelling community as their dispersion relation well approximates the dispersion relationship of the linear wave theory \cite{Whitham-1967-399}, with the choice of $\beta$ values allowing for the dispersion relationship of the gSGN to be accurate up to $\mathcal{O}\left(\sigma^2\right)$ terms, $\mathcal{O}\left(\sigma^4\right)$ terms and even $\mathcal{O}\left(\sigma^6\right)$ terms \cite{Clamond-Dutykh-2018-237,Clamond-et.al-2017-245}. Therefore, these equations provide a way to study the behaviour of water waves as higher powers of $\sigma$ are retained in the wave model. 
+The generalised Serre-Green-Naghdi (gSGN) equations were recently derived by \citet{Clamond-Dutykh-2018-237}. They are a set of equations that generalise the classical Serre-Green-Naghdi (SGN) first derived by \citet{Serre-F-1953-857} with the addition of two parameters $\beta_1$ and $\beta_2$. The equations describe the behaviour of water waves in shallow water where the typical water depth $h_0$ is much smaller than the wavelength $\lambda$ so that the shallowness parameter $\sigma = h_0/\lambda \ll 1$. The gSGN equations are of particular interest to the wave modelling community as their dispersion relation well approximates the dispersion relationship of the linear wave theory \cite{Whitham-1967-399}. The choice of $\beta$ values allows for the dispersion relationship of the gSGN to be accurate up to $\mathcal{O}\left(\sigma^2\right)$ terms, $\mathcal{O}\left(\sigma^4\right)$ terms and even $\mathcal{O}\left(\sigma^6\right)$ terms \cite{Clamond-Dutykh-2018-237,Clamond-et.al-2017-245}. Therefore, these equations provide a way to study the behaviour of water waves as higher powers of $\sigma$ are retained in the wave model. 
 
-In previous work we have developed and validated numerical methods for a conservative reformulation of the SGN equations \cite{Zoppou-2014,Zoppou-etal-2016,Zoppou-etal-2017,Pitt-2019}. These numerical methods have all been based on the following overall scheme; firstly solve an auxiliary elliptic equation containing only spatial derivatives, to obtain all the primitive variables in the conservation equation, and then secondly evolve the remaining conservation equation using a finite volume method. The central benefit of the approach was the replication of the fundamental conservation properties of the SGN equations \cite{Pitt-2019} and the robustness of the method in the presence of steep gradients \cite{Pitt-2018-61}. The approach has been shown to produce the theoretical accuracy of the underlying methods up to third-order \cite{Zoppou-etal-2017,Pitt-2019} with the desired conservation and linear dispersion properties \cite{Pitt-2019}. The approach has also been successfully extended to include the effects of varying bathymetry and allow for the presence of dry beds \cite{Pitt-2019}.  
+In previous work we have developed and validated numerical methods for a conservative reformulation of the SGN equations \cite{Zoppou-2014,Zoppou-etal-2016,Zoppou-etal-2017,Pitt-2019}. These numerical methods have all been based on the following approach; firstly solve an auxiliary elliptic equation containing only spatial derivatives, to obtain all the primitive variables in the conservation equation. Then evolve the remaining conservation equation using a finite volume method. The benefit of the approach was the replication of the fundamental conservation properties of the SGN equations \cite{Pitt-2019} and the robustness of the method in the presence of steep gradients \cite{Pitt-2018-61}. The approach has been shown to produce the theoretical accuracy of the underlying methods up to third-order \cite{Zoppou-etal-2017,Pitt-2019} with the desired conservation and linear dispersion properties \cite{Pitt-2019}. The approach has also been successfully extended to include the effects of varying bathymetry and allow for the presence of dry beds \cite{Pitt-2019}.  
 
-As demonstrated by \citet{Clamond-Dutykh-2018-237}, the gSGN also possesses a conservation reformulation and thus the technique described above for the SGN equations \cite{Zoppou-2014,Zoppou-etal-2016,Zoppou-etal-2017,Pitt-2019} can be extended to the gSGN equations. The success of this technique for the SGN equations makes this an attractive option and would allow for an explicit, robust and conservative method for the gSGN equations with a straight forward implementation. Hence, the goal of this paper is the description of an extension to the numerical scheme of \citet{Zoppou-etal-2017} for the newly developed gSGN equations \cite{Clamond-Dutykh-2018-237}. 
+It was demonstrated by \citet{Clamond-Dutykh-2018-237} that the gSGN also possesses a conservation reformulation and thus the technique described above for the SGN equations can be extended to the gSGN equations. The success of this technique for the SGN equations makes this an attractive option and would allow for an explicit, robust and conservative method for the gSGN equations. Hence, the purpose of this paper is a description of the extension to the numerical scheme of \citet{Zoppou-etal-2017} for the recently developed gSGN equations \cite{Clamond-Dutykh-2018-237}. 
 
 This paper begins by introducing the gSGN and highlighting their important properties with regards to the developed numerical scheme. The overall numerical scheme of \citet{Zoppou-etal-2017} is then described, with a straightforward second-order implementation of the method used as an example method. 
 
-This example numerical method is then validated against analytic solutions of the SGN and the Shallow Water Wave Equations (SWWE), demonstrating its convergence rate and conservation properties. Additionally, forced solutions are used to validate that all terms in the gSGN are being accurately approximated to the correct order of accuracy. Forced solutions are necessary to validate the numerical method for the more general members of this family of equations, as no analytic solutions are currently known. Together these validations demonstrate the capability of the numerical scheme to produce robust and accurate numerical methods. 
+The numerical method is then validated against analytic solutions of the SGN and the Shallow Water Wave Equations (SWWE), demonstrating its convergence rate and conservation properties. Additionally, forced solutions are used to validate that all terms in the gSGN are being accurately approximated to the correct order of accuracy. Forced solutions are necessary to validate the numerical method for the more general members of this family of equations, because no analytic solutions are currently known. Together these validations demonstrate the capability of the numerical scheme to produce robust and accurate numerical methods. 
 
 
 %-------------------------------------------------
 \section{Generalised Serre-Green-Naghdi Equations}
 %-------------------------------------------------
-The gSGN equations were derived by \citet{Clamond-Dutykh-2018-237} using a Lagrangian field theory approach. These equations generalise the SGN equations that describe a depth averaged approximation to the Euler equations where $h(x,t)$ is the height of the free-surface of the water, $u(x,t)$ is the depth averaged horizontal velocity and $g$ is the acceleration due to gravity. The gSGN equations accomplish this by introducing two free parameters $\beta_1$ and $\beta_2$, that when fixed result in a particular member of this family of equations. 
+The gSGN equations were derived by \citet{Clamond-Dutykh-2018-237} using a Lagrangian field theory approach. These equations generalise the SGN equations that describe a depth averaged approximation to the Euler equations, where $h(x,t)$ is the height of the free-surface of the water, $u(x,t)$ is the depth averaged horizontal velocity and $g$ is the acceleration due to gravity. The gSGN equations generalise the SGN equations by introducing two free parameters $\beta_1$ and $\beta_2$, that when fixed result in a particular member of this family of equations. In particular the family of equations captured by gSGN equation contains the SWWE, the SGN equations, a family of regularised SWWE studied by \citet{Clamond-Dutykh-2018-237} and a family of improved dispersion SGN equations studied by \citet{Clamond-et.al-2017-245}. []
 
-The gSGN equations describe the conservation of mass ($h$), momentum ($uh$) and energy ($\mathcal{E}$) for water waves like so
+The gSGN equations describe the conservation of mass ($h$), momentum ($uh$) and energy ($\mathcal{E}$) for water waves subject to gravitational forces like so
 \begin{subequations}
 \begin{align}
 \begin{split}
@@ -145,29 +145,30 @@ where
 \end{subequations}
 When $\beta_1 = \beta_2 = 0$ these equations reduce to the SWWE, whilst when $\beta_1 = 2/3$ and $\beta_2 = 0$ the SGN equations are recovered. 
 
-Equation \eqref{eq:gSGN} holds for all $\beta$ values provided the solutions are sufficiently smooth. However, for particular $\beta$ values, for example those corresponding to the SWWE, it is possible to obtain non-smooth solutions for any pair of these equations that no longer satisfy all three equations simultaneously \cite{Pu-2018-1361}. Typically, since the mass and momentum equations are solved this results in dissipation of energy around discontinuities in solutions of the SWWE. 
+Equation \eqref{eq:gSGN} holds for all $\beta$ values provided the solutions are sufficiently smooth. However, for particular $\beta$ values, for example those corresponding to the SWWE, it is possible to obtain non-smooth solutions for any pair of these equations that no longer satisfy all three equations simultaneously \cite{Pu-2018-1361}. Typically, since the mass and momentum equations are solved this results in dissipation of energy around discontinuities in solutions of the SWWE. Conversely, when mass and energy equations are solved this results in dissipation of momentum and an incorrect shock speed for jump discontinuities. [] 
 
-Since \eqref{eq:gSGN} describes the conservation of mass, momentum and energy, when all solutions are sufficiently smooth and thus all equations hold simultaneously, the total amounts of all these quantities remain constant in time if the system is closed. This can be seen by integrating \eqref{eq:gSGN} over the domain, and observing that the temporal derivative of the spatial integrals of mass ($h$), momentum ($uh$) and energy ($\mathcal{E}$) is zero when there is no flux across the domain boundaries. The conservation properties of numerical solutions will be used to validate the numerical method and its solutions. 
+Since \eqref{eq:gSGN} describes the conservation of mass, momentum and energy, when solutions are sufficiently smooth all equations hold simultaneously and the total amounts of all these quantities remain constant in time if the system is closed. This can be seen by integrating \eqref{eq:gSGN} over the domain, and observing that the temporal derivative of the spatial integrals of mass ($h$), momentum ($uh$) and energy ($\mathcal{E}$) is zero when there is no flux across the domain boundaries. The conservation properties of numerical solutions will be used to validate the numerical method and its solutions. 
 
 \subsection{Dispersion Relation of the Linearised gSGN}
 The linear dispersion properties of water wave equations have been of particular interest \cite{Clamond-et.al-2017-245,Filippini-etal-2016-381,DoCarmo-2019-125}, as the scope of wave modelling expands to include dispersive effects. Indeed, the gSGN equations are of particular interest due to their dispersion relation well approximating the dispersion relation given by the linear theory for water waves \cite{Whitham-1967-399}. 
 
-To obtain the dispersion relationship of the linearised gSGN equations, \eqref{eq:gSGN} is first linearised by considering small waves on a mean flow depth $h_0$ and mean flow velocity $u_0$. The dispersion relationship of the linearised gSGN equations is then obtained by seeking travelling wave solutions of the form $\exp\left(i (k x - \omega t)\right)$ as was done by \citet{Zoppou-etal-2017} to obtain
+To obtain the dispersion relationship of the linearised gSGN equations, \eqref{eq:gSGN} is first linearised by considering small waves on a mean flow depth $h_0$ and mean velocity of the flow $u_0$. The dispersion relationship of the linearised gSGN equations is then obtained by seeking travelling wave solutions of the form $\exp\left(i (k x - \omega t)\right)$, as was done by \citet{Zoppou-etal-2017} to obtain
 \begin{equation}
 \omega^\pm = u_0 k \pm k \sqrt{gh_0} \sqrt{\dfrac{\beta_2 h_0^2 k^2 + 2}{\beta_1 h_0^2 k^2 + 2} }.
 \label{eq:DispRelgSGN}
 \end{equation}
-This dispersion relation provides the angular frequency $\omega$ of these travelling wave solutions of the linearised gSGN equations for waves with wavenumber $k$. The dispersion relation has a positive and negative branch corresponding to the direction of these waves which is denoted by the superscript on $\omega$. This dispersion relation \eqref{eq:DispRelgSGN} is equivalent to the dispersion relation derived by \citet{Clamond-Dutykh-2018-237} for the gSGN when $u_0 = 0$. 
+which provides the angular frequency $\omega$ of travelling wave solutions of the linearised gSGN equations for waves with wavenumber $k$. The dispersion relation has a positive and negative branch corresponding to the direction of these waves. This dispersion relation \eqref{eq:DispRelgSGN} is equivalent to the dispersion relation derived by \citet{Clamond-Dutykh-2018-237} for the gSGN when $u_0 = 0$. 
 
 The dispersion relation of the gSGN approximates the dispersion relationship of water, as can be seen by comparing their power series approximations provided below
 \begin{subequations}
-\begin{align}
-&\omega^\pm = \left(u_0 \pm \sqrt{gh_0}\right) k \pm  \frac{-1}{4}\sqrt{gh_0} k^3 h_0^2 \left(\beta_1 - \beta_2\right) \pm \dfrac{1}{32} \sqrt{gh_0} k^5 h_0^4\left(3 \beta_1^2 -  2 \beta_2 \beta_1 -\beta_2^2 \right) + \mathcal{O}\left(k^7\right) \\
-&\omega^\pm_{\text{water}} = u_0 k \pm \sqrt{gk \tanh\left(k h_0\right)} = \left(u_0 \pm \sqrt{gh_0}\right) k \pm  \frac{-1}{6} h_0^2 k^3 \sqrt{gh_0} \pm \frac{19}{360} h_0^4 k^5 \sqrt{gh_0} + \mathcal{O}\left(k^7\right).
-\end{align}
+\begin{flalign}
+\omega^\pm_{\text{water}} &= u_0 k \pm \sqrt{gk \tanh\left(k h_0\right)} \notag & \\
+&= \left(u_0 \pm \sqrt{gh_0}\right) k &&\pm  \frac{-1}{6}\sqrt{gh_0} h_0^2 k^3  &&\pm \frac{19}{360} \sqrt{gh_0}  h_0^4  k^5 &&+ \mathcal{O}\left(k^7\right)\\
+\omega^\pm &= \left(u_0 \pm \sqrt{gh_0}\right) k &&\pm  \frac{\left(\beta_2 - \beta_1\right) }{4} \sqrt{gh_0} h_0^2 k^3  &&\pm \dfrac{\left(3 \beta_1^2 -  2 \beta_2 \beta_1 -\beta_2^2 \right) }{32} \sqrt{gh_0} h_0^4 k^5  &&+ \mathcal{O}\left(k^7\right).
+\end{flalign}
 \label{eq:DispWaterPower}
 \end{subequations}
-Which is accurate up to the $k$ term for all $\beta$ values, accurate in the $k^3$ term when $\beta_1 = \beta_2 + 2/3$ and accurate in the $k^5$ term when $\beta_1 = \beta_2 + 2/3$ and $\beta_2 = 2/15$ \cite{Clamond-et.al-2017-245}. Since $k = 2\pi / \lambda$, these power of $k$ terms have a corresponding $\sigma$ term, thus affirming the claims in the introduction. Since the $\beta$ values allow us to alter the accuracy of the dispersion relationship the gSGN equations allows us to consistently compare the effect of the dispersion relationship on numerical solutions and thus physical phenomena. 
+Which is accurate up to the $k$ term for all $\beta$ values, accurate in the $k^3$ term when $\beta_1 = \beta_2 + 2/3$ and accurate in the $k^5$ term when $\beta_1 = \beta_2 + 2/3$ and $\beta_2 = 2/15$ \cite{Clamond-et.al-2017-245}. Since $k = 2\pi / \lambda$, these power of $k$ terms have a corresponding $\sigma$ term, thus the gSGN equations have a dispersion relationship that can be accurate up to $\mathcal{O}\left(\sigma^2\right)$ terms, $\mathcal{O}\left(\sigma^4\right)$ terms and even $\mathcal{O}\left(\sigma^6\right)$ terms. Since the $\beta$ values allow us to alter the accuracy of the dispersion relationship the gSGN equations allows us to consistently compare the effect of the dispersion relationship on numerical solutions and thus the physical phenomena. 
 
 
 From the dispersion relation \eqref{eq:DispRelgSGN}, the phase speed $v_p$ and the group speed $v_g$ can be derived as follows
@@ -191,30 +192,30 @@ is a monotone function over $h_0 k$. This can be seen by reformulating and takin
 \begin{equation*}
  \dfrac{\partial \left(f(h_0k)\right)}{\partial \left(h_0 k\right)} = \left[\dfrac{\beta_2}{\beta_1} - 1\right] \dfrac{4\left(h_0 k\right)}{\beta_1\left( \dfrac{4}{\beta_1} + \left(h_0 k\right)^2\right)^2}.
 \end{equation*}
-The derivative is greater than $0$ and thus monotone non-increasing if $\beta_2 \le \beta_1$ and less than $0$ and thus monotone non-decreasing if $\beta_2 \ge  \beta_1$  given the initial assumptions. Since $v^+_p = u_0 + \sqrt{gh_0 f(h_0 k)} $ and $v^-_p = u_0 - \sqrt{gh_0 f(h_0 k)}$, given the above properties of $f(h_0k)$ under the initial assumptions $v^+_p$ is monotone non-decreasing and $v^-_p$ is monotone non-increasing when $\beta_2 \le  \beta_1$ and $v^+_p$ is monotone non-increasing and $v^-_p$ is monotone non-decreasing when $\beta_2 \ge  \beta_1$. 
+The derivative is greater than $0$ and thus monotone non-increasing if $\beta_2 \le \beta_1$ and less than $0$ and thus monotone non-decreasing if $\beta_2 \ge  \beta_1$. Since $v^+_p = u_0 + \sqrt{gh_0 f(h_0 k)} $ and $v^-_p = u_0 - \sqrt{gh_0 f(h_0 k)}$, given the above properties of $f(h_0k)$ under the initial assumptions $v^+_p$ is monotone non-decreasing and $v^-_p$ is monotone non-increasing when $\beta_2 \le  \beta_1$ and $v^+_p$ is monotone non-increasing and $v^-_p$ is monotone non-decreasing when $\beta_2 \ge  \beta_1$. 
 
-In addition to the monotonicity of $v^\pm_p$ when $k \rightarrow 0$ then $v^\pm_p \rightarrow u_0 \pm \sqrt{gh_0}$ whilst as $k \rightarrow \infty$ then $v^\pm_p \rightarrow u_0 \pm \sqrt{gh_0} \sqrt{{\beta_2}/ \beta_1 }$. Therefore, $v^\pm_p$ is monotonic and bounded at the limits of the domain, and thus bounded for all $\beta$ values provided that $\beta_1 = 0$ only when $\beta_2 = 0$, otherwise the $k \rightarrow \infty$ limit, is no longer bounded. Therefore, the methods of \citet{Hank-etal-2010-2034} and \citet{Zoppou-etal-2017} for the SGN equations can be extended to the gSGN as phase speeds are bounded.
+In addition to the monotonicity of $v^\pm_p$, when $k \rightarrow 0$ then $v^\pm_p \rightarrow u_0 \pm \sqrt{gh_0}$, whilst as $k \rightarrow \infty$ then $v^\pm_p \rightarrow u_0 \pm \sqrt{gh_0} \sqrt{{\beta_2}/ \beta_1 }$. Therefore, $v^\pm_p$ is monotonic and bounded at the limits of the domain, and thus bounded for all $\beta$ values provided that $\beta_1 = 0$ when $\beta_2 = 0$, otherwise in the $k \rightarrow \infty$ limit the phase speed is no longer bounded. Therefore, the methods of \citet{Hank-etal-2010-2034} and \citet{Zoppou-etal-2017} for the SGN equations can be extended to the gSGN as phase speeds are bounded.
 
-In addition to the phase speed bounds we also have the following chain of inequalities when ${\beta_2} \le \beta_1$ 
+In addition, to the phase speed bounds we also have the following chain of inequalities when ${\beta_2} \le \beta_1$ 
 \begin{equation}
 u_0 -  \sqrt{gh_0} \le  v^-_p \le u_0 - \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{ \beta_1}} \le u_0 \le u_0 + \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{\beta_1}} \le   v^+_p  \le u_0 +   \sqrt{gh_0}.
 \label{eq:wavespeedbound1}
 \end{equation}
-We designate this region of $\beta$ values, as `Region 1', it is characterised by either lack of dispersion when $\beta_2 =  \beta_1$ or trailing dispersive waves when $\beta_2 <  \beta_1$. Region 1 includes the SWWE and the SGN and is consistent with the behaviour of the dispersion given by the linear theory for water waves \cite{Whitham-1967-399}. 
+We designate this region of $\beta$ values, as `Region 1', it is characterised by either lack of dispersion when $\beta_2 =  \beta_1$ or trailing dispersive waves when $\beta_2 <  \beta_1$. Region 1 includes the SWWE and the SGN and is consistent with the behaviour of the dispersive waves given by the linear theory for water waves \cite{Whitham-1967-399}. 
 
 When ${\beta_2} >  \beta_1 $ the inequality chain becomes
 \begin{equation}
 u_0 - \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{ \beta_1}} \le v^-_p \le u_0 -  \sqrt{gh_0} \le  u_0 \le u_0 + \sqrt{gh_0} \le   v^+_p  \le u_0 +  \sqrt{gh_0} \sqrt{\dfrac{\beta_2}{ \beta_1}}
 \label{eq:wavespeedbound2}
 \end{equation}
-This will be denoted as `Region 2', it is characterised by advancing dispersive waves. Advancing dispersive waves are not observed for water waves, and thus none of the equations or family of equations of interest lie in this region. Hence, the study in this paper will be restricted to Region 1, although the numerical scheme is valid for both regions.   
+This will be denoted as `Region 2' and it is characterised by advancing dispersive waves. Advancing dispersive waves are not observed for water waves. Since we are only interested in water waves, this paper will be restricted to studying Region 1, although the numerical scheme is valid for both regions.   
 
-The regions and location of important members in terms of $\beta$ values is summarised in Figure \ref{Fig:WaveSpeedReg}. Additionally, this figure also demonstrates the accuracy of the dispersion relationship of the gSGN compared to the dispersion relation given by the linear theory for water waves \eqref{eq:DispWaterPower}.
+The regions and location of important members in terms of $\beta$ values is summarised in Figure \ref{Fig:WaveSpeedReg}.
 %
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{./Figures/Explanation/BetaPlotAll.pdf}
-	\caption{Phase speed regions of gSGN in terms of $\beta_1$ and $\beta_2$ showing important equations and labelling combinations of $\beta$ and their associated dispersion relationship accuracy.}
+	\caption{Phase speed regions of gSGN in terms of $\beta_1$ and $\beta_2$ showing important equations and labelling combinations of $\beta$ and their associated dispersion relationship accuracy \eqref{eq:DispWaterPower}.}
 	\label{Fig:WaveSpeedReg}
 \end{figure}
 
@@ -222,7 +223,7 @@ The regions and location of important members in terms of $\beta$ values is summ
 %-------------------------------------------------
 \subsection{Alternative Conservative Form of the gSGN}
 %-------------------------------------------------
-\citet{Clamond-Dutykh-2018-237} demonstrated a rearrangement of \eqref{eq:gSGNuh} for the gSGN, in an analogous way to the reformulations of SGN \cite{Zoppou-etal-2017,Hank-etal-2010-2034,Li-2014-169}. The purpose of this reformulation is to remove the mixed spatial-temporal derivative in the flux term, which is difficult to treat numerically. This reformulation is obtained by introducing a new conserved quantity $G$
+\citet{Clamond-Dutykh-2018-237} provided a reformulation of \eqref{eq:gSGNuh} for the gSGN, in an analogous to the way the SGN \cite{Zoppou-etal-2017,Hank-etal-2010-2034,Li-2014-169} was reformulated. The purpose of this reformulation is to remove the mixed spatial-temporal derivative in the flux term of the momentum equation, which is difficult to treat numerically. This reformulation is obtained by introducing a new conserved quantity
 \begin{gather*}
 G = hu - \frac{\beta_1}{2} \dfrac{\partial }{\partial x} \left ( h^3 \dfrac{\partial u}{\partial x} \right )
 \end{gather*}
@@ -255,9 +256,9 @@ The proposed numerical scheme for the gSGN extends those previously published fo
 The heart of these hybrid finite volume methods for the gSGN equations is the finite volume method used to solve the equations in conservation law form. The finite volume method solves equations of the form 
 \begin{equation}
 \label{eqn:Conservf}
-\frac{\partial q}{\partial t} + \frac{\partial}{\partial x}\left[f(q)\right] = 0
+\frac{\partial q}{\partial t} + \frac{\partial f(q)}{\partial x} = 0
 \end{equation}
-where $q$ is a generic quantity. This is the form of the gSGN equations after the reformulation \eqref{eq:gSGN_G}. The finite volume method does this by integrating \eqref{eqn:Conservf} across cells of fixed width $\Delta x$ in space and over time steps of fixed length $\Delta t$.  The midpoint of the $j^{th}$ cell is given by $x_j = x_0 + j \Delta x$ while the cell edges of the $j^{th}$ cell are given by $x_{j-1/2} = x_0 + (j - \frac{1}{2}) \Delta x$ and $x_{j+1/2} = x_0 + (j + \frac{1}{2}) \Delta x$. Likewise the $n^{th}$ time step is given by $t^n = t^0 + n \Delta t$. 
+where $q$ is a generic conserved quantity. This is the form of the gSGN equations after the reformulation \eqref{eq:gSGN_G}. In the finite volume method \eqref{eqn:Conservf} is integrated over cells of fixed width $\Delta x$ in space and over time steps of fixed length $\Delta t$.  The midpoint of the $j^{th}$ cell is given by $x_j = x_0 + j \Delta x$ while the cell edges of the $j^{th}$ cell are given by $x_{j-1/2} = x_0 + (j - \frac{1}{2}) \Delta x$ and $x_{j+1/2} = x_0 + (j + \frac{1}{2}) \Delta x$. Likewise the $n^{th}$ time step is given by $t^n = t^0 + n \Delta t$. 
 
 Integrating \eqref{eqn:Conservf} over both space and time one results in
 \begin{equation}
@@ -276,25 +277,26 @@ is the average flux of $q$ across the cell edge from time $t^n$ to $t^{n+1}$. Th
 
 
 \subsection{Overview}
-Since the core of this numerical scheme is the finite volume method, we will continue the discretisation used above. Additionally, when describing this broad overview it is also useful to consider collections of the point-wise or cell averaged values described above over the whole domain at a particular time. Thus for an generic quantity $q$, we define $\vecn{q}^n$ to be the vector of $q^n_j$ values and $\bar{\vecn{q}}^n$ to be the vector of $\bar{q}^n_j$ values for all cells in the domain at time $t^n$. 
+We will now describe the numerical scheme, which uses the above finite volume formulation to solve \eqref{eq:gSGN_Gh} and \eqref{eq:gSGN_GG}. When describing this broad overview it is also useful to consider collections of the point-wise values $q$ or cell averaged values $\bar{q}$ described above over the whole domain at a particular time. Thus for $q$, we define $\vecn{q}^n$ to be the vector of $q^n_j$ values and $\bar{\vecn{q}}^n$ to be the vector of $\bar{q}^n_j$ values for all cells in the domain at time $t^n$. 
 
-The numerical scheme for the gSGN equations based on the finite volume method \eqref{eqn:ConsFVM} then proceeds as follows by beginning at a generic $n^{th}$ time step
+The numerical scheme for the gSGN equations based on the finite volume method \eqref{eqn:ConsFVM} then proceeds as follows. Beginning at a generic $n^{th}$ time step where the vectors of cell averages of the conserved quantities $\bar{\vecn{h}}^n$ and $\bar{\vecn{G}}^n$ are either known or provided as initial conditions. 
 \begin{enumerate}
-	\item Begin with the vectors of cell averages of the conserved quantities $\bar{\vecn{h}}^n$ and $\bar{\vecn{G}}^n$.
 	\item Solve \eqref{eq:G_divergent} using $\bar{\vecn{h}}^n$ and $\bar{\vecn{G}}^n$ to obtain an approximation to $\bar{{\vecn{u}}}^n$, which can be written
-	\[\mathcal{A}\left(\bar{\vecn{h}}^n,\bar{\vecn{G}}^n\right) = \bar{{\vecn{u}}}^n.\]
-	\item Solve \eqref{eq:gSGN_Gh} and \eqref{eq:gSGN_GG} using the finite volume method \eqref{eqn:ConsFVM} with the approximate Riemann solver of \citet{Kurganov-etal-2001-707} to obtain $\bar{h}^{n+1}_j$ and $\bar{G}^{n+1}_j$ at the next time step, like so
-	\[\mathcal{F}\left(\bar{\vecn{h}}^n,\bar{\vecn{G}}^n,\bar{{\vecn{u}}}^n\right) = \bar{\vecn{h}}^{n+1 },\bar{\vecn{G}}^{n+1}.\]
-	\item However, since $\mathcal{F}$ is only first order accurate in time, Steps 1-3 are repeated and then appropriate order approximations to $\bar{\vecn{h}}^{n+1 }$,$\bar{\vecn{G}}^{n+1}$ are obtained using a SSP Runge Kutta method \cite{Gottlieb-etal-2003-89}. 
+	\[\mathcal{A}\left(\bar{\vecn{h}}^n,\bar{\vecn{G}}^n\right) \boldsymbol{\rightarrow} \bar{{\vecn{u}}}^n.\]
+	\item Solve \eqref{eq:gSGN_Gh} and \eqref{eq:gSGN_GG}, using the finite volume method \eqref{eqn:ConsFVM} with an approximate Riemann solver such as the one described by \citet{Kurganov-etal-2001-707}, to obtain $\bar{h}^{n+1}_j$ and $\bar{G}^{n+1}_j$ at the next time step, like so
+	\[\mathcal{F}\left(\bar{\vecn{h}}^n,\bar{\vecn{G}}^n,\bar{{\vecn{u}}}^n\right) \boldsymbol{\rightarrow}\bar{\vecn{h}}^{n+1 },\bar{\vecn{G}}^{n+1}.\]
+	\item Since $\mathcal{F}$ is only first order accurate in time, Steps 1 and 2 are repeated a sufficient amount of times and the appropriate order approximations to $\bar{\vecn{h}}^{n+1 }$,$\bar{\vecn{G}}^{n+1}$ are obtained using a convex combination of these repetitions of Steps 1 and 2 to obtain a Strong Stability Preserving (SSP) Runge Kutta time stepping method \cite{Gottlieb-etal-2003-89}. 
 \end{enumerate}
 
 This numerical scheme produces the numerical methods of \citet{Hank-etal-2010-2034}, \citet{Zoppou-etal-2017} and \citet{Pitt-2019} when $\beta_1 = 2/3$ and $\beta_2 = 0$. Additionally, when $\beta_1 = \beta_2 = 0$ the gSGN reduces to the SWWE, and this numerical scheme reduces to a finite volume method \cite{Roberts-2003-129}.  
 
 \subsection{Example Implementation}
-To demonstrate the utility of this numerical scheme we present a simple second-order implementation, and then validate it in the following section. The description of this numerical method will be broken up into the above steps for simplicity and also to highlight the interchangeability of the different parts of the scheme.
+To demonstrate the utility of this numerical scheme we present a simple second-order implementation, and then validate it in the following section. The description of this numerical method will be broken up into the steps described in Section 4.2 for simplicity and also to highlight the interchangeability of the different parts of the scheme.
 
-\subsubsection{Step 2 - Solution of Elliptic Equation}
-To solve \eqref{eq:G_divergent} with $\bar{\vecn{h}}^n$ and $\bar{\vecn{G}}^n$ to obtain $\bar{\vecn{u}}^n$ we use the observation that the cell average and the cell nodal value are approximately equal with second-order accuracy so that $\bar{\vecn{q}}^n = {\vecn{q}}^n + \mathcal{O}\left(\Delta x^2\right)$ for all the quantities of interest. The second-order central finite difference approximation to \eqref{eq:G_divergent} can then be written as
+\subsubsection{Step 1 - Solution of Elliptic Equation}
+To solve \eqref{eq:G_divergent} with $\bar{\vecn{h}}^n$ and $\bar{\vecn{G}}^n$ to obtain $\bar{\vecn{u}}^n$ we use the observation that the cell average and the cell nodal value are equivalent up to second-order accuracy so that $\bar{\vecn{q}}^n = {\vecn{q}}^n + \mathcal{O}\left(\Delta x^2\right)$ for all the quantities of interest. Assuming that $u$ is sufficiently smooth, then a second-order central finite difference approximation can be used to accurately solve \eqref{eq:G_divergent}. 
+
+The second-order central finite difference approximation to \eqref{eq:G_divergent} can be written as
 \begin{equation}
 {\vecn{u}}^n = \vecn{A}^{-1} {\vecn{G}}^n
 \label{eq:FDGeqn}
@@ -307,22 +309,22 @@ A_{j,j+1} &=  -\frac{\beta_1}{2}  \left[  \dfrac{\left(h_j^n\right)^3}{\Delta x^
 \end{align*}
 with all other elements in $\vecn{A}$ being zero. 
 
-The finite difference approximation \eqref{eq:FDGeqn} can be solved with any matrix solver, for this method we use the explicit Thomas Algorithm \cite{Conte-DeBoor-1980}. This is a good method as long as the diagonals are strictly greater than zero which is the case as long as $h_{j}^n > 0$, which is true for all the problems of interest in this paper. 
+The finite difference approximation \eqref{eq:FDGeqn} can be solved with any matrix solver, for this method we use the explicit Thomas Algorithm \cite{Conte-DeBoor-1980}. This is an efficient method provided $\vecn{A}$ is non-singular which is the case as long as $h_{j}^n > 0$, which is true for all the problems of interest in this paper. 
 
 Thus as desired we have 
 \begin{equation}
-\mathcal{A}\left(\bar{\vecn{h}}^n,\bar{\vecn{G}}^n\right) = \vecn{A}^{-1} {\vecn{G}}^n = \vecn{u}^n = \bar{{\vecn{u}}}^n. 
+\mathcal{A}\left(\bar{\vecn{h}}^n,\bar{\vecn{G}}^n\right) = \vecn{A}^{-1} {\vecn{G}}^n = \vecn{u}^n \boldsymbol{\rightarrow} \bar{{\vecn{u}}}^n. 
 \label{eq:A_secondord}
 \end{equation}
 
 
-\subsubsection{Reconstruction of quantities at cell boundaries}
-The finite volume method of \citet{Kurganov-etal-2001-707} relies on approximations of all the terms in the spatial derivative at the cell edges $x_{j\pm1/2}$. Thus the following quantities require second-order approximations at the cell edges: $u$, $h$, $G$, $\partial u / \partial x$, $\partial h / \partial x$, $\partial^2 h / \partial x^2$. In this paper we are interested in reproducing solutions to either smooth analytic and forced solutions or the discontinuous dam-break solutions of the SWWE where only $h$, $u$ and $G$ need to be approximated. For this reason our approximations to to  $u$, $h$, $G$, will allow for discontinuities and thus use limiting while the approximations to the derivatives $\partial u / \partial x$, $\partial h / \partial x$, $\partial^2 h / \partial x^2$ will assume that these quantities are smooth and thus do not require limiting.
+\subsubsection{Step 2 -  Finite Volume Method  - Reconstruction}
+The finite volume method of \citet{Kurganov-etal-2001-707} relies on approximations of all the terms in the spatial derivative at the cell edges $x_{j\pm1/2}$. Thus the following quantities require second-order approximations at the cell edges: $u$, $h$, $G$, $\partial u / \partial x$, $\partial h / \partial x$, $\partial^2 h / \partial x^2$. In this paper we are interested in reproducing solutions to either smooth analytic and forced solutions or the discontinuous dam-break solutions using the SWWE where only $h$, $u$ and $G = uh$ need to be approximated. For this reason our approximations to  $u$, $h$, $G$, will allow for discontinuities and thus use limiting while the approximations to the derivatives $\partial u / \partial x$, $\partial h / \partial x$, $\partial^2 h / \partial x^2$ will assume that these quantities are smooth and thus do not require limiting.
 
-For $h$, $u$ and $G$ to get a second-order approximation that ensures stability in the presence of discontinuities we employ slope limiting, as done previously for the SGN equations \cite{Zoppou-etal-2017}. The reconstructions for all these quantities can be summarised for a general quantity $q$ like so
+The reconstructions for all these quantities can be summarised for a general quantity $q$ like so
 \begin{align}
 q^+_{j-1/2} = \bar{q}_j - \frac{\Delta x}{2} s_j & & \text{and} & &
-q^-_{j-1/2} = \bar{q}_j + \frac{\Delta x}{2} s_j
+q^-_{j+1/2} = \bar{q}_j + \frac{\Delta x}{2} s_j
 \end{align}
 where
 \begin{equation}
@@ -336,7 +338,7 @@ The minmod function is defined as follows
 0 & & \text{otherwise}
 \end{array} \right. . 
 \end{equation}
-This gives a reconstruction at the cell level for each cell edge, so cell $j$ gives rise to $q^+_{j-1/2}$ and $q^-_{j+1/2} $ while cell $j+1$ gives rise to $q^+_{j+1/2}$ and $q^-_{j+3/2}$ all of which are required by the flux approximation.
+This gives a reconstruction at the cell level for each cell edge, so cell $j$ gives rise to $q^+_{j-1/2}$ and $q^-_{j+1/2} $ while cell $j+1$ gives rise to $q^+_{j+1/2}$ and $q^-_{j+3/2}$, all of which are required in the flux approximation.
 
 For $\partial u / \partial x$, $\partial h / \partial x$ and $\partial^2 h / \partial x^2$ we assume that the quantities are smooth, and so using the appropriate order finite difference approximation at the cell edges is sufficient. We demonstrate this for cell $x_{j+1/2}$ and a general quantity $q$
 
@@ -346,10 +348,10 @@ For $\partial u / \partial x$, $\partial h / \partial x$ and $\partial^2 h / \pa
 \end{align*}
 
 
-\subsubsection{Step 3 - Finite Volume Method}
-To solve \eqref{eq:gSGN_Gh} and \eqref{eq:gSGN_GG} which are both in conservation law form \eqref{eqn:Conservf} we use \eqref{eqn:ConsFVM}. Since we begin with $\bar{\vecn{h}}^n$ and $\bar{\vecn{G}}^n$, we only require an approximation to $F^n_{j\pm1/2}$ to make use of \eqref{eqn:ConsFVM} to obtain $\bar{\vecn{h}}^{n+1}$ and $\bar{\vecn{G}}^{n+1}$.
+\subsubsection{Step 2 -  Finite Volume Method - Flux Approximation}
+To solve \eqref{eq:gSGN_Gh} and \eqref{eq:gSGN_GG} which are both in conservation law form \eqref{eqn:Conservf} we use \eqref{eqn:ConsFVM}. Since we begin with $\bar{\vecn{h}}^n$ and $\bar{\vecn{G}}^n$, we only require an approximation to $F^n_{j\pm1/2}$ to obtain $\bar{\vecn{h}}^{n+1}$ and $\bar{\vecn{G}}^{n+1}$.
 
-In this numerical scheme the flux approximation method described by  \citet{Kurganov-etal-2001-707} for $F^n_{j\pm1/2}$ is used. This central benefit of this scheme is that it only requires bounds on the phase speeds. Only the calculation of the flux term $F^n_{j+1/2}$ is demonstrated as the process to calculate the flux term $F^n_{j-1/2}$ is identical but with different cells. For a general quantity $q$ the flux approximation method \cite{Kurganov-etal-2001-707} is
+In this numerical scheme the approximate Riemann solver described by \citet{Kurganov-etal-2001-707} is used to calculate $F^n_{j\pm1/2}$. The major advantage of this scheme is that it only requires bounds on the phase speeds. Only the calculation of the flux term $F^n_{j+1/2}$ is demonstrated as the process to calculate the flux term $F^n_{j-1/2}$ is identical but with different cells. For $q$ the flux is approximated by
 \begin{equation}\label{eqn:HLL_flux}
 F^n_{j+\frac{1}{2}} = \dfrac{a^+_{j+\frac{1}{2}} f\left(q^-_{j+\frac{1}{2}}\right) - a^-_{j+\frac{1}{2}} f\left(q^+_{j+\frac{1}{2}}\right)}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}}  + \dfrac{a^+_{j+\frac{1}{2}} \, a^-_{j+\frac{1}{2}}}{a^+_{j+\frac{1}{2}} - a^-_{j+\frac{1}{2}}} \left [ q^+_{j+\frac{1}{2}} - q^-_{j+\frac{1}{2}} \right ]
 \end{equation}
@@ -360,7 +362,7 @@ a^-_{j+\frac{1}{2}} &= \min\left\lbrace 0\;,\;  u^-_{j + 1/2} - \max{\left(1 , \
 a^+_{j+\frac{1}{2}} &= \max\left\lbrace 0 \;,\;  u^-_{j + 1/2} + \max{\left(1 , \sqrt{\frac{\beta_2}{\beta_1}}\right)}\sqrt{g h^-_{j + 1/2}}  \;,\;u^+_{j + 1/2} + \max{\left(1 , \sqrt{\frac{\beta_2}{\beta_1}}\right)}\sqrt{g h^+_{j + 1/2}} \right\rbrace
 \label{eqn:WaveSpeedBoundsFluxApprox}
 \end{align}
-where the $\max{\left(1 , \sqrt{\frac{\beta_2}{\beta_1}}\right)}$ accounts for the different phase speed bounds  \eqref{eq:wavespeedbound1} and \eqref{eq:wavespeedbound2} which depend on the choice of $\beta$ values. 
+where the $\max{\left(1 , \sqrt{\frac{\beta_2}{\beta_1}}\right)}$ accounts for the different phase speed bounds  \eqref{eq:wavespeedbound1} and \eqref{eq:wavespeedbound2}, which depend on the choice of $\beta$ values. 
 
 The flux functions $f(q^-_{j+\frac{1}{2}})$ and $f(q^+_{j+\frac{1}{2}})$ are evaluated using the reconstructed values of the $j^{th}$ and $(j+1)^{th}$ cell respectively. From the continuity equation \eqref{eq:gSGN_Gh} we have
 \begin{align*}
@@ -371,30 +373,28 @@ For the evolution of $G$ equation \eqref{eq:gSGN_GG} we have
 \begin{multline}
 f\left(G^\pm_{j+\frac{1}{2}}\right) =  u^\pm_{j + 1/2} G^\pm_{j + 1/2}  + \frac{g}{2}\left(h^\pm_{j + 1/2} \right)^2 - \beta_1\left(h^\pm_{j + 1/2}\right)^3 \left(\left[\frac{\partial {u}}{\partial x} \right]_{j + 1/2} \right)^2 \\ - \frac{1}{2} \beta_2 g \left(h^\pm_{j + 1/2}\right)^2  \left[h^\pm_{j + 1/2}\left[\dfrac{\partial^2 h}{\partial x^2} \right]_{j+1/2} + \frac{1}{2}\left(\left[\dfrac{\partial h}{\partial x} \right]_{j+1/2}\right)^2\right].
 \end{multline}
-where derivatives are assumed to be smooth over the cell edge, and thus do not require different superscripts.
+where the derivatives are assumed to be smooth across the cell edge, and thus do not require different superscripts.
 
 Since the reconstructions were given above for all these quantities, we can approximate $F^n_{j\pm1/2}$ using \eqref{eqn:HLL_flux} and thus employ \eqref{eqn:ConsFVM} to obtain $\bar{\vecn{h}}^{n+1}$ and $\bar{\vecn{G}}^{n+1}$ resulting in
 \begin{equation}
-\mathcal{F}\left(\bar{\vecn{h}}^n,\bar{\vecn{G}}^n,\bar{{\vecn{u}}}^n\right) =   \bar{q}^{n}_j  +  \dfrac{\Delta t}{\Delta x}\left[F^n_{j+1/2} - F^n_{j-1/2}\right] = \bar{\vecn{h}}^{n+1 },\bar{\vecn{G}}^{n+1}
+\mathcal{F}\left(\bar{\vecn{h}}^n,\bar{\vecn{G}}^n,\bar{{\vecn{u}}}^n\right) =   \bar{q}^{n}_j  +  \dfrac{\Delta t}{\Delta x}\left[F^n_{j+1/2} - F^n_{j-1/2}\right] \boldsymbol{\rightarrow} \bar{\vecn{h}}^{n+1 },\bar{\vecn{G}}^{n+1}
 \label{eq:F_secondord}
 \end{equation}
 as desired. 
 
-
-
-\subsubsection{Step 4 - Runge-Kutta Time Stepping}
-Combining both Steps 2 and Steps 3, provides a spatially second-order scheme with first-order time stepping. To arrive at a fully second-order method, we make use of repeating Steps 2 and Steps 3 and applying the second-order SSP Runge Kutta method \cite{Gottlieb-etal-2003-89}. Doing this we obtain the following scheme making use of the above implementation of $\mathcal{A}$ \eqref{eq:A_secondord} and $\mathcal{F}$ \eqref{eq:F_secondord}
+\subsubsection{Step 3 - Runge-Kutta Time Stepping}
+Combining both Steps 1 and Steps 2, provides a spatially second-order scheme with first-order time stepping. To arrive at a fully second-order method, we repeat Steps 1 and Steps 2 in the second-order SSP Runge Kutta method \cite{Gottlieb-etal-2003-89}. Doing this we obtain the following scheme making use of the above implementation of $\mathcal{A}$, \eqref{eq:A_secondord} and $\mathcal{F}$, \eqref{eq:F_secondord}
 \begin{align*}
-\bar{\vecn{h}}^{'},\bar{\vecn{G}}^{'} &= \mathcal{F}\left(\bar{\vecn{h}}^n,\bar{\vecn{G}}^n,\mathcal{A}\left(\bar{\vecn{h}}^n,\bar{\vecn{G}}^n\right) \right) \\
-\bar{\vecn{h}}^{''},\bar{\vecn{G}}^{''} &= \mathcal{F}\left(\bar{\vecn{h}}^{'},\bar{\vecn{G}}^{'},\mathcal{A}\left(\bar{\vecn{h}}^{'},\bar{\vecn{G}}^{'}\right) \right)\\
-\bar{\vecn{h}}^{n+1},\bar{\vecn{G}}^{n+1} &= \frac{1}{2}\left(\bar{\vecn{h}}^n + \bar{\vecn{h}}^{''} \right) ,  \frac{1}{2}\left(\bar{\vecn{G}}^n + \bar{\vecn{G}}^{''} \right). 
+\bar{\vecn{h}}^{(1)},\bar{\vecn{G}}^{(1)} &= \mathcal{F}\left(\bar{\vecn{h}}^n,\bar{\vecn{G}}^n,\mathcal{A}\left(\bar{\vecn{h}}^n,\bar{\vecn{G}}^n\right) \right) \\
+\bar{\vecn{h}}^{(2)},\bar{\vecn{G}}^{(2)} &= \mathcal{F}\left(\bar{\vecn{h}}^{(1)},\bar{\vecn{G}}^{(1)},\mathcal{A}\left(\bar{\vecn{h}}^{(1)},\bar{\vecn{G}}^{(1)}\right) \right)\\
+\bar{\vecn{h}}^{n+1},\bar{\vecn{G}}^{n+1} &= \frac{1}{2}\left(\bar{\vecn{h}}^n + \bar{\vecn{h}}^{(2)} \right) ,  \frac{1}{2}\left(\bar{\vecn{G}}^n + \bar{\vecn{G}}^{(2)} \right). 
 \end{align*}
-Hence we obtain a stable fully second-order method. 
+obtaining a stable fully second-order method for solving \eqref{eq:gSGN_G}. 
 
 \subsection{Boundary Conditions}
-For the purposes of the validation below and for simplicity, we have applied Dirichlet boundary conditions using ghost cells over which the values of $h$, $G$ and $u$ are completely determined. Thus in addition to the $m$ cells inside the boundary we have an additional $l$ cells either side of it so that we have the left ghost cells $-l$, $-l + 1$, $\dots$, $-1$ and the right ghost cells $m$, $m+1$, $\dots$, $m + l -1$. Since the example numerical method has a maximum stencil that extends $2$ cells beyond the target cell, then $l$ must be at least $2$. 
+For the purposes of the validation below and for simplicity, we have applied Dirichlet boundary conditions using ghost cells over which the values of $h$, $G$ and $u$ are known. Thus in addition to the $m$ cells inside the boundary we have an additional $l$ cells either side of it so that we have the left ghost cells $-l$, $-l + 1$, $\dots$, $-1$ and the right ghost cells $m$, $m+1$, $\dots$, $m + l -1$. Since the numerical method has a maximum stencil that extends $2$ cells beyond the target cell, then $l$ must be at least $2$. 
 
-This boundary condition is applied to Step 2 by extending the matrix equation \eqref{eq:FDGeqn} to vectors containing the ghost cells $\vecn{\hat{u}}^n$ and $\vecn{\hat{G}}^n$ like so
+This boundary condition is applied to Step 1 by extending the matrix equation \eqref{eq:FDGeqn} to vectors containing the ghost cells $\vecn{\hat{u}}^n$ and $\vecn{\hat{G}}^n$ like so
 \begin{align}
 \vecn{\hat{u}}^n &= \left[u^n_{-l} \; \dots \; u^n_{-1} \; u^n_{0}\; \dots \; u^n_{m-1}\; u^n_{m} \; \dots \; u^n_{m + l -1}   \right]^T \\
 \vecn{\hat{G}}^n &= \left[G^n_{-l} \; \dots \; G^n_{-1} \; G^n_{0}\; \dots \; G^n_{m-1}\; G^n_{m} \; \dots \; G^n_{m + l -1}   \right]^T.
@@ -408,7 +408,7 @@ Likewise the associated extended matrix $\vecn{\hat{A}}$ in \eqref{eq:FDGeqn} is
 \end{equation}
 when $j < 0$ or $j > m -1$. 
 
-For Step 3, since the ghost cells contain the complete representation of $h$, $G$ and $u$ over them, there is no need to reconstruct the quantities inside the ghost cells. 
+For Step 2 there is no need to reconstruct the quantities inside the ghost cells because $h$, $G$ and $u$ are given. 
 
 
 \subsection{Courant-Frederichs-Lewy Condition}
@@ -420,19 +420,19 @@ To ensure the stability of the finite volume method \eqref{eqn:ConsFVM} the Cour
 where $a^\pm_{j+1/2} $ are the phase speed bounds used in the flux approximation \eqref{eqn:WaveSpeedBoundsFluxApprox} and $0\le Cr \le 1$ is the Courant number. 
 
 \section{Validation}
-The example numerical method described above is validated using analytic solutions for particular $\beta$ values that correspond to the SGN equations and the SWWE and a forced solution. Together these tests demonstrate the ability of the method to reproduce analytic solutions to important members of the gSGN family, as well as solve the gSGN for any pair of $\beta$ values that admit phase speed bounds.
+The example numerical method described above is validated using analytic solutions for particular $\beta$ values that correspond to the SGN equations and the SWWE as well as a forced solution. Together these tests demonstrate the ability of the method to reproduce analytic solutions to important members of the gSGN family, as well as solving the gSGN for any combination of $\beta$ values that admit phase speed bounds.
 
 \subsection{Convergence and Conservation Measures}
-To validate that the produced numerical solutions we make use of measures of convergence and conservation. The measure of convergence will be the distance between the numerical solution and the equivalent analytic or forced solution using the $L_2$ norm. While the conservation properties of the numerical method will be measured by numerically approximating the energy in the initial conditions and the numerical solution and comparing them using a measure called $C_1$.
+To validate that the produced numerical solutions we make use of measures of convergence and conservation. The measure of convergence will be the relative distance between the numerical solution and the equivalent analytic or forced solution using the $L_2$ norm. While the conservation properties of the numerical method will be measured by numerically approximating the energy in the initial conditions and the numerical solution and comparing them using a measure called $C_1$.
 
-For a quantity $q$ with a vector of its analytic or forced solution at the cell midpoints $\vecn{q}$ and the numerical solution at the cell midpoints $\vecn{q}^*$, the discrete $L_2$ norm is
+For a quantity $q$ with a vector of its analytic or forced solution at the cell midpoints $\vecn{q}$ and the numerical solution at the cell midpoints $\vecn{q}^*$, the discrete non-dimensional $L_2$ norm is
 \begin{equation}
 \label{eqn:Conv_Error}
 L_2\left(\vecn{q},\vecn{q}^*\right) = \sqrt{ \dfrac{\sum_{j = 0}  \left[q_j^2 - \left(q^*_j\right)^2 \right]}{\sum_{j = 0}  \left[q_j^2 \right]}}
 \end{equation}
 where the time-step superscripts were suppressed for simplicity.
 
-For a quantity $q$ with a vector of its values at the $n^{th}$ time step $\vecn{q}^n$, the total amount of the quantity is approximated by $C(\vecn{q}^n)$. The method for this is the same as the method described by \citet{Zoppou-etal-2017}, which has a higher order of accuracy than the numerical method it is measuring. Using the numerical approximation to the total amounts, the conservation error is obtained in the following way
+For a quantity $q$ with a vector of its values at the $n^{th}$ time step $\vecn{q}^n$, the total amount of the quantity is approximated by $C(\vecn{q}^n)$. The method for this is the same as the method described by \citet{Zoppou-etal-2017}, which has a higher order of accuracy than the numerical method for the gSGN. Using the numerical approximation to the total amounts, the conservation error is obtained using
 \begin{equation}
 \label{eqn:Cons_Error}
 C_1\left(\vecn{q}^0,\vecn{q}^n\right) = \left \lbrace \begin{array}{l c r}
@@ -441,13 +441,13 @@ C_1\left(\vecn{q}^0,\vecn{q}^n\right) = \left \lbrace \begin{array}{l c r}
 \end{array} \right. .
 \end{equation}
 
-\begin{itemize}
-	\item Analytic solutions - we recover them (conservation and norm)
-	\item Forced solutions - our numerical method can handle any combination of beta values, all terms are approximated with correct order of accuracy. Limiters on gradients off. 
-\end{itemize}
+%\begin{itemize}
+%	\item Analytic solutions - we recover them (conservation and norm)
+%	\item Forced solutions - our numerical method can handle any combination of beta values, all terms are approximated with correct order of accuracy. Limiters on gradients off. 
+%\end{itemize}
 
 \subsection{Analytic Solutions}
-The analytic solutions used to validate the numerical method, are the solitary travelling wave solution of the SGN equations and the dam-break solution of the SWWE. The soliton solution is a smooth travelling wave solution, that assesses the balance of the non-linear and dispersive terms in the gSGN equations. Whereas the dam-break solution of the SWWE demonstrates the robustness of the method in the presence of steep gradients. The soliton solution used in this paper, is the same as the soliton solution used for validation by \citet{Pitt-2019}, allowing for a comparison of this gSGN solver to the more specialised SGN solvers described therein. 
+The analytic solutions used to validate the numerical method, are the solitary travelling wave solution of the SGN equations and the dam-break solution of the SWWE. The solitary travelling wave solution is a smooth travelling wave solution, that assesses the balance of the non-linear and dispersive terms in the gSGN equations. Whereas the dam-break solution of the SWWE demonstrates the robustness of the method in the presence of steep gradients. 
 
 \subsubsection{Serre Equations ($\beta_1 = 2/3$ and $\beta_2 = 0$) - Solitary Travelling Wave Solution}
 When $\beta_1 = 2/3$ and $\beta_2 = 0$ the gSGN equations are equivalent to the SGN equations which admit the following travelling wave solution \cite{El-etal-2006}
@@ -464,15 +464,17 @@ When $\beta_1 = 2/3$ and $\beta_2 = 0$ the gSGN equations are equivalent to the 
 	\end{equation}
 	and
 	\begin{equation}
-	c = \sqrt{g\left(a_0 + a_1\right)}.
+	c = \sqrt{g\left(a_0 + a_1\right)}
+	\label{eq:Sol_speed}
 	\end{equation}
 \end{subequations}
+where $c$ is the speed of the wave.
 
-This travelling wave solution is maintained due to a balance between the dispersive terms and the non-linear terms in the momentum equation \eqref{eq:G_momentum}. Validating the numerical solutions for the gSGN solver using this solution tests the balance between these terms in \eqref{eq:G_momentum}, and allows us to verify the method's conservation of energy as the solution is smooth. To enable a comparison between the numerical method and the SGN solver of \citet{Zoppou-etal-2017} the chosen soliton parameters were $a_0 = 1m$ and $a_1 = 0.7m$ and the acceleration due to gravity at the earth surface, $g = 9.81 m^2/s$ was used.
+This travelling wave solution is maintained due to a balance between the dispersive terms and the non-linear terms in the momentum equation \eqref{eq:G_momentum}. This balance results in a solitary wave that is advected with a constant speed without a change in shape. Validating the numerical solutions for the gSGN solver using this solution tests the balance between these terms in \eqref{eq:G_momentum}, and allows us to verify the method's conservation of energy as the solution is smooth. To enable a comparison between the numerical method and the SGN solver of \citet{Zoppou-etal-2017} the chosen solitary travelling wave parameters were $a_0 = 1m$ and $a_1 = 0.7m$ and the acceleration due to gravity at the earth surface, $g = 9.81 m^2/s$ was used.
 
-The numerical solution was solved over the domain $\left[-200m,200m\right]$ from $t=0s$ until $t=30s$. To ensure that the SGN solution is recovered, $\beta_1 = 2/3$ and $\beta_2 = 0$. The spatial resolution was varied like so $\Delta x = 400 / (100 \times 2^{l})$, where $l$ was increased from $0$ to $12$. To satisfy the CFL condition \eqref{eqn:CFLcond} the time step width $\Delta t = \Delta x  / ( 2 \sqrt{g(a_0 + a_1)})$ \cite{Pitt-2019} was chosen. The limiting parameter $\theta$ was set to $\theta = 1.2$, matching the numerical experiments performed by \citet{Pitt-2019}.
+The numerical solution was solved over the domain $\left[-200m,200m\right]$ from $t=0s$ until $t=30s$. To ensure that the SGN solution is recovered, $\beta_1 = 2/3$ and $\beta_2 = 0$. The spatial resolution was varied like so $\Delta x = 400 / (100 \times 2^{l})$, where $l$ was increased from $0$ to $12$. To satisfy the CFL condition \eqref{eqn:CFLcond} the time step width $\Delta t = \Delta x  / ( 2 \sqrt{g(a_0 + a_1)})$ \cite{Pitt-2019} was chosen. The limiting parameter $\theta = 1.2$, was chosen to match the numerical experiments performed by \citet{Pitt-2019}.
 
-Example numerical solutions for $h$, $u$ and $G$ with $\Delta x = 400 / (100 \times 2^{6}) \approx 0.06m$ are plotted in Figure \ref{Fig:Sol_Ex}. These examples demonstrate that the numerical solutions reproduced the analytic solutions well.
+Example numerical solutions for $h$, $u$ and $G$ with $\Delta x = 400 / (100 \times 2^{6}) \approx 0.06m$ are plotted in Figure \ref{Fig:Sol_Ex}. These examples demonstrate that the numerical solutions can reproduce the analytic solutions well.
 %
 \begin{figure}
 	\centering
@@ -495,27 +497,28 @@ Example numerical solutions for $h$, $u$ and $G$ with $\Delta x = 400 / (100 \ti
 	\label{Fig:Sol_Ex}
 \end{figure}
 
-The convergence properties of the method as $\Delta x$ varies are given in Figure \ref{Fig:Sol_Comp} over the whole domain using the $L_2$ norm \eqref{eqn:Conv_Error} and just the error at the peak. The $L_2$ norm demonstrates that all quantities are approximated with second-order accuracy, and thus the method is fully second-order accurate. The error at the peak was measured by taking the relative difference between the numerical solutions value at the peak of the wave which are given by $\max\left({\vecn{h}^n}\right)$, $\max\left({\vecn{u}^n}\right)$ to the analytic values which are $a_0 + a_1$ and $c a_0 / \left(a_0 + a_1\right)$ respectively. The error at the peak demonstrates that even with the slope limiting and the diffusion of the flux approximation \cite{Pitt-2018-61}, the numerical solutions reproduce the peak well with little diffusion. 
+The convergence properties of the method as $\Delta x$ varies are given in Figure \ref{Fig:Sol_Comp}
+where Figure \ref{Fig:Sol_Comp_Conv} shows the $L_2$ norm calculated over the whole domain and Figure \ref{Fig:Sol_Comp_Peak} shows the $L_2$ norm at the peak only. The $L_2$ norm demonstrates that all quantities are approximated with second-order accuracy, and thus the method is second-order accurate. The $L_2$ norm at the peak was measured by taking the relative difference between the numerical solutions value at the peak of the wave which are given by $\max\left({\vecn{h}^n}\right)$, $\max\left({\vecn{u}^n}\right)$ to the analytic values which are $a_0 + a_1$ and $c a_0 / \left(a_0 + a_1\right)$ respectively. The $L_2$ norm at the peak demonstrates that even with the slope limiting and the diffusion introduced by the flux approximation \cite{Pitt-2018-61}, the numerical method introduces little diffusion. 
 %
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.49\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/Serre/NormResults.pdf}
-		\caption{$L_2$}
+		\caption{Whole Domain}
 		\label{Fig:Sol_Comp_Conv}
 	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/Serre/PeakError.pdf}
-		\caption{Convergence to peak values}
+		\caption{Peak Only}
 		\label{Fig:Sol_Comp_Peak}
 	\end{subfigure}
 	\caption{Convergence plots for $h$ (\squaret{blue}) , $G$ (\circlet{red}) and $u$ (\trianglet{black}) as $\Delta x$ varies.}
 	\label{Fig:Sol_Comp}
 \end{figure}
 
-The conservation error $C_1$ \eqref{eqn:Cons_Error} of the numerical solutions as $\Delta x$ varies is given in Figure \ref{Fig:Sol_Comp_Cons}. This conservation measure demonstrates that due to the use of the finite volume method $h$ and $G$ are conserved up to round-off error, which increases as $\Delta x$ increases. Since $uh$ and $\mathcal{E}$ are not the conserved quantities in our finite volume based method, they are not conserved up to round-off error as can be seen. However, the conservation properties of $uh$ and $\mathcal{E}$ are still good, and actually better than expected with both exhibiting conservation errors that have better than second-order convergence in $\Delta x$. 
+The conservation error $C_1$ \eqref{eqn:Cons_Error} of the numerical solutions as $\Delta x$ varies is given in Figure \ref{Fig:Sol_Comp_Cons}. This conservation measure demonstrates that the finite volume method conserves $h$ and $G$ up to round-off error, which accumulates as $\Delta x$ increases due to the additional number of calculations. Since $uh$ and $\mathcal{E}$ are not the conserved quantities in our finite volume based method, they are not conserved up to round-off error. The conservation properties of $uh$ and $\mathcal{E}$ are better than expected, with both exhibiting conservation errors that have better than second-order convergence in $\Delta x$ and $\Delta t$. 
 %
 \begin{figure}
 	\centering
@@ -524,18 +527,20 @@ The conservation error $C_1$ \eqref{eqn:Cons_Error} of the numerical solutions a
 	\label{Fig:Sol_Comp_Cons}
 \end{figure}
 
-By locating the cell on which $\vecn{h}^n$ achieves its maximum, we can provide an upper and lower bound for the speed of the numerical solution to the travelling wave problem where the lower bound is $S_{\text{lower}} = (x_{\text{peak cell}} - 0.5 \Delta x) / t$ and the upper bound is $S_{\text{upper}} = (x_{\text{peak cell}} + 0.5 \Delta x) / t$. These upper and lower bounds are compared to the analytic value $c$ in Figure \ref{Fig:Sol_Comp_Speed}. This figure demonstrates the diffusion of the numerical scheme, as when $\Delta x$ is large, both the upper and lower bounds on the wave speed are below the analytic value. However, this diffusion becomes negligible when $\Delta x$ is small, and for the lowest $\Delta x$ value we actually have $ S_{\text{lower}}< c  < S_{\text{upper}}$, indicating that the peak of the wave is located in the expected cell at the final time. 
+By locating the cell on which $\vecn{h}^n$ achieves its maximum, we can provide an upper and lower bound for the speed of the numerical solution to the travelling wave problem where the lower bound is $c^*_{-}= (x_{\text{peak cell}} - 0.5 \Delta x) / t$ and the upper bound is $c^*_{+} = (x_{\text{peak cell}} + 0.5 \Delta x) / t$. These upper and lower bounds are compared to the analytic value $c$ given by \eqref{eq:Sol_speed} in Figure \ref{Fig:Sol_Comp_Speed}. This figure demonstrates the diffusion of the numerical scheme, as when $\Delta x$ is large, both the upper and lower bounds on the wave speed are below the analytic value. However, this diffusion becomes negligible when $\Delta x$ is small, and for the lowest $\Delta x$ value we actually have $ c^*_{-}< c  < c^*_{+}$, indicating that the peak is travelling at the correct speed up to cell width accuracy.
+% 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.49\textwidth]{./Figures/Simulations/Validation/Serre/PeakSpeedEstimates.pdf}
-	\caption{Plot of $S_{\text{upper}}$ (\crosst{blue}),  $S_{\text{lower}}$ (\crosst{red}) and the analytic value $c$ (\dashedrule) as $\Delta x$ varies.}
+	\caption{Plot of $c^*_{+} / c $ (\crosst{blue}),  $c^*_{-} / c$ (\crosst{red}) and the analytic value (\dashedrule) as $\Delta x$ varies.}
 	\label{Fig:Sol_Comp_Speed}
 \end{figure}
 
-These results agree well with the numerical solutions of \citet{Pitt-2019}, who compared various numerical methods for the SGN equations. Additionally these added measures further justify the use of finite volume based methods for solving water wave equations with dispersion.  
+These results agree well with the numerical solutions of \citet{Pitt-2019}, who compared various numerical methods for the SGN equations.
 
 \subsubsection{SWWE ( $\beta_1= \beta_2 =0$ ) - Dam-break Solution }
 When $\beta_1=\beta_2 =0$ the gSGN equations reduce to the SWWE which have an analytic solution to the dam-break problem given by the initial conditions
+\begin{subequations}
 \begin{align}
 h(x,0) & = \left\lbrace \begin{array}{c c}
 h_0 & x < 0\\
@@ -544,8 +549,11 @@ h_1 & x \ge 0
 u(x,0) &= 0 \\
 G(x,0) &= 0.
 \end{align}
+\label{eqn:DB_Init}
+\end{subequations}
 
-The solution to the dam-break problem is given by
+The solution to the dam-break problem using the conservation of mass and momentum equations is given by
+\begin{subequations}
 \begin{align}
 h(x,t) &= \left \lbrace \begin{array}{l c r}
 h_0 &,& x \le -t\sqrt{g h_0} \\
@@ -560,18 +568,21 @@ u_2 &,&  t \left(u_2 - \sqrt{g h_2}\right) < x \le t S_2  \\
 0 &,&   t S_2 \le x \\
 \end{array} \right. .
 \end{align}
+\end{subequations}
 %
 The constant state values $h_2$ and $u_2$ and the shock speed $S_2$ can be calculated for any initial conditions by solving
+\begin{subequations}
 \begin{align}
 \label{eq:SWWEMiddleState}
 h_2 &= \dfrac{h_0}{2} \left(  \sqrt{1 + 8 \left( \dfrac{2 h_2}{h_2 - h_0} \left(\dfrac{\sqrt{gh_1} - \sqrt{gh_2}}{\sqrt{gh_0}}\right)\right)^2 } - 1 \right) \\
 u_2 &= 2\left(\sqrt{gh_1} - \sqrt{gh_2} \right),\\
-S_2 &= \dfrac{2 h_2}{h_2 - h_1}\left(\sqrt{gh_0} - \sqrt{gh_2} \right).
+S_2 &= \dfrac{2 h_2}{h_2 - h_1}\left(\sqrt{gh_0} - \sqrt{gh_2} \right). \label{eq:SWWEMiddleState_S2}
 \end{align}
+\end{subequations}
 
-The initial conditions as well as the analytic solution are discontinuous. Due to the discontinuities the solutions to the initial conditions are not unique, as solving any pair of the 3 conservation equations \eqref{eq:gSGN}, gives solutions with similar structures but different constant values. The solution presented above is solution of the mass and momentum equations, as these equations are the basis of the numerical method.
+The initial conditions as well as the analytic solution are discontinuous. Due to the discontinuities the solutions to the initial conditions are not unique, as solving any pair of the 3 conservation equations \eqref{eq:gSGN}, gives solutions with similar structures but different shock speeds. The solution presented above is solution of the mass and momentum equations, as these equations are the basis of the numerical method.
 
-A number of numerical experiments were run for the dam-break problem with $h_0 = 2m$ and $h_1 = 1m$. The domain of the solution was $\left[-250,250\right]$ with a final time of $t=35s$.  The spatial resolution was varied like so $\Delta x = 500 / (100 \times 2^{l})$ where $l$ was increased from $0$ to $12$. To satisfy the CFL condition \eqref{eqn:CFLcond} the time step length $\Delta t = \Delta x  / \left( 2 \sqrt{g h_0}\right)$ was used. The limiting parameter $\theta$ was set to be $\theta = 1.0$ and the acceleration due to gravity $g = 9.81 m^2/s$ was used. 
+A number of numerical experiments were run for the dam-break problem with $h_0 = 2m$ and $h_1 = 1m$. The domain of the solution was $\left[-250,250\right]$ with a final time of $t=35s$.  The spatial resolution was varied like so $\Delta x = 500 / (100 \times 2^{l})$ where $l$ was increased from $0$ to $12$. To satisfy the CFL condition \eqref{eqn:CFLcond} the time step length $\Delta t = \Delta x  / \left( 2 \sqrt{g h_0}\right)$ was used. The limiting parameter $\theta = 1.0$ and the acceleration due to gravity $g = 9.81 m^2/s$ was used. 
 
 Example numerical solutions with the spatial resolution $\Delta x = 500 / (100 \times 2^{5}) \approx  0.15m$ and the analytic solutions for $h$, $G$ and $u$ at the final time are plotted in Figure \ref{Fig:DB_Ex}. These figures demonstrate that the method is robust in the presence of steep gradients and accurately reproduces the analytic solution. 
 %
@@ -597,51 +608,34 @@ Example numerical solutions with the spatial resolution $\Delta x = 500 / (100 \
 \end{figure}
 
 
-Figure \ref{Fig:Conv_Ex} demonstrates the convergence of the solutions for $h$ as $\Delta x$ changes for the top of the rarefaction fan and the shock front. Since the bottom of the rarefaction fan is very similar to the top  and the behaviour of the other quantities are produce similar plots these have been omitted. This figure demonstrates the convergence of the numerical solutions to the analytic solution as $\Delta x$ decreases.
-\begin{figure}
-	\centering
-	\begin{subfigure}{0.45\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/DBSWWE/hFront.pdf}
-		\caption{Shock front}
-	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/DBSWWE/hRFTop.pdf}
-		\caption{Top of rarefaction fan}
-	\end{subfigure}
-	\caption{Plots of $h$ at $t=35s$ for the smooth dam-break problem around important locations with $\Delta x = 5 / 2^{2}$ ({\color{mycolor2}\solidrule}), $ 5 / 2^{4}$ ({\color{mycolor3}\solidrule}), $ 5 / 2^{6}$ ({\color{mycolor4}\solidrule}), $ 5 / 2^{8}$ ({\color{mycolor5}\solidrule}), $ 5 / 2^{10}$ ({\color{mycolor6}\solidrule}), $ 5 / 2^{12}$ ({\color{mycolor7}\solidrule}) and the analytic solution ({\dashedrule}) of the SWWE to the corresponding dam-break problem.}
-	\label{Fig:Conv_Ex}
-\end{figure}
-
 The presence of discontinuities in the analytic solution, make accurately assessing convergence of the numerical solutions difficult. To circumvent these issues, the convergence measure has been restricted to comparing the numerical and analytic solutions for the constant region between the rarefaction fan and the shock. This modified convergence measure as $\Delta x$ varies is plotted in Figure \ref{Fig:DB_Comp_Conv}. This figure demonstrates that the scheme retains it's second-order accuracy away from discontinuities, as desired. 
 
-Since the analytic solution contains discontinuities all three conservation laws for $h$, $G$ and $\mathcal{E}$ are not all satisfied simultaneously \cite{Pu-2018-1361}. The result of this is that since we solved equations for $h$ and $G$, these quantities are conserved in the analytic solutions however, $\mathcal{E}$ is no longer conserved and we actually lose energy as the shock propagates. I have taken account of the energy dissipation of the analytic solution by introducing a new measure $\mathcal{E}^*$ which measures the conservation error of the energy by comparing the total energy in the analytic solution at the final time and the numerical solution rather than the initial conditions. The conservation error for mass, momentum and energy as calculated normally and the new dissipated energy are all compared in Figure \ref{Fig:DB_Comp_Cons}. This figure demonstrates that due to the use of the finite volume method even in the presence of discontinuities the conserved quantities $h$ and $G$ are conserved up to round-off error, leading to their conservation error increasing as $\Delta x$ increases. The conservation of $uh$ now only improves with first-order accuracy this is because the reconstruction reduces to first-order accuracy in the presence of discontinuities. Energy is not conserved by the analytic solution, and this can be seen with the conservation error of $\mathcal{E}$ not improving as $\Delta x$ decreases. However, when accounting for the lack of energy conservation as done with $\mathcal{E}^*$ then we are able to recover the first-order accuracy observed in the conservation of $uh$.
+Since the analytic solution contains discontinuities all three conservation laws for $h$, $G$ and $\mathcal{E}$ are not all satisfied simultaneously \cite{Pu-2018-1361}. Since we solved equations for $h$ and $G$, these quantities are conserved in the analytic solutions however, $\mathcal{E}$ is no longer conserved and energy is lost as the shock propagates. I have taken account of the energy dissipation of the analytic solution by introducing a new measure $\mathcal{E}^*$ which measures the conservation error of the energy by comparing the total energy in the analytic solution at the final time and the numerical solution rather than the initial conditions. The conservation error for mass, momentum and energy as calculated normally and the new dissipation corrected energy are all compared in Figure \ref{Fig:DB_Comp_Cons}. This figure demonstrates that due to the use of the finite volume method even in the presence of discontinuities the conserved quantities $h$ and $G$ are conserved up to round-off error, leading to their conservation error increasing as $\Delta x$ increases. Since $G = uh$, this means that $uh$ is also conserved up to round-off error. Energy is not conserved by the analytic solution, and this can be seen as the conservation error of $\mathcal{E}$ doesn't improve as $\Delta x$ decreases. However, when accounting for the lack of energy conservation as done with $\mathcal{E}^*$ then we are able to recover the first-order accuracy. Given that this solution contains a discontinuity these are good conservation results. 
 %
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.49\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/DBSWWE/ConvergenceInConstantState.pdf}
-		\caption{$L_2$ for constant state with $u$ (\trianglet{black})}
+		\caption{$L_2$ for constant state for $h$ (\squaret{blue}) , $G$ (\circlet{red}) and $u$ (\trianglet{black})}
 		\label{Fig:DB_Comp_Conv}
 	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
 		\centering
 	\includegraphics[width=\textwidth]{./Figures/Simulations/Validation/DBSWWE/EnergyResults.pdf}
-\caption{$C_1$ with $uh$ (\trianglet{black})}
+\caption{$C_1$ for $h$ (\squaret{blue}) , $G$ (\circlet{red}), $\mathcal{E}$ (\crosst{green!80!black}) and $\mathcal{E}^*$ (\diamondt{green!80!black})}
 		\label{Fig:DB_Comp_Cons}
 	\end{subfigure}
-	\caption{Convergence and conservation plots for $h$ (\squaret{blue}) , $G$ (\circlet{red}), $\mathcal{E}$ (\crosst{green!80!black}) and $\mathcal{E}^*$ (\diamondt{green!80!black}) as $\Delta x$ varies.}
+	\caption{Convergence and conservation plots.}
 	\label{Fig:DB_Comp}
 \end{figure}
 
-To further justify the ability of the method to resolve the discontinuous analytic solution, I have found lower and upper bounds for the shock speed in the numerical solution. For the lower bound this was accomplished by finding the first cell with $\bar{h}_j \le h_1 + \frac{9}{10} \left(h_2 - h_1\right)$ at the final time which we call $x_\text{lower}$, and for the upper bound this was achieved by finding the first cell with $\bar{h}_j \le h_1 + \frac{1}{10} \left(h_2 - h_1\right)$ denoted $x_\text{upper}$. Consequently, the lower bound for the shock speed $S_\text{lower} = x_\text{lower} / t$ and the upper bound for the shock speed $S_\text{upper} = x_\text{lower} / t$ were calculated and compared to the analytic value $S_2$ in Figure \ref{Fig:DB_ShockSpeed_Comp}. This figure demonstrates that as $\Delta x$ decreases the numerical solutions are better resolving the shock. Additionally it demonstrates that $x_\text{lower}$ and $x_\text{upper}$ do bound the true location of the shock as expected. 
+To further justify the ability of the method to resolve the discontinuous analytic solution, I have found lower and upper bounds for the shock speed in the numerical solution. For the lower bound this was accomplished by finding the first cell with $\bar{h}_j \le h_1 + \frac{9}{10} \left(h_2 - h_1\right)$ at the final time which we call $x_\text{lower}$, and for the upper bound this was achieved by finding the first cell with $\bar{h}_j \le h_1 + \frac{1}{10} \left(h_2 - h_1\right)$ denoted $x_\text{upper}$. Consequently, the lower bound for the shock speed $S^*_{2,-} = x_\text{lower} / t$ and the upper bound for the shock speed $S^*_{2,+} = x_\text{upper} / t$ were calculated and compared to the analytic value $S_2$ given by \eqref{eq:SWWEMiddleState_S2} in Figure \ref{Fig:DB_ShockSpeed_Comp}. This figure demonstrates that as $\Delta x$ decreases the numerical solutions are better resolving the shock. Additionally it demonstrates that $x_\text{lower}$ and $x_\text{upper}$ provide a bound for the true location of the shock as expected. 
 %
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{./Figures/Simulations/Validation/DBSWWE/ShockSpeedEstimates.pdf}
-	\caption{Plot of $S_{\text{upper}}$ (\crosst{blue}),  $S_{\text{lower}}$ (\crosst{red}) and $S_2$ (\dashedrule) as $\Delta x$ varies.}
+	\caption{Plot of $S^*_{2,+} / S_2$ (\crosst{blue}),  $S^*_{2,-} / S_2$ (\crosst{red}) and analytic value (\dashedrule) as $\Delta x$ varies.}
 	\label{Fig:DB_ShockSpeed_Comp}
 \end{figure}
 
@@ -662,7 +656,7 @@ To generate a forced solution the forced gSGN equations are considered
 	\end{multline}
 	\label{eq:gSGN_Forced}
 \end{subequations}
-The forced gSGN admit the solutions $h^*$, $u^*$ and $G^*$ assuming $G^*$ appropriately satisfies \eqref{eq:G_divergent}. Since these equations are satisfied for any chosen $h^*$, $u^*$ and $G^*$ and any $\beta$ values, forced solutions can be used to verify the method for a larger class of problems than permitted by currently known analytic solutions. In particular, problems were $\beta_2 \neq 0$ which were not covered in the above validation with analytic solutions. Since the left hand-side of these modified equations are approximated by the numerical method, combining the numerical method with the analytic expressions for the right hand-side, produces a method that approximates the forced gSGN equation \eqref{eq:gSGN_Forced} with the same convergence properties as the underlying numerical method for the gSGN equations. 
+The forced gSGN admit the solutions $h^*$, $u^*$ and $G^*$ assuming $G^*$ appropriately satisfies \eqref{eq:G_divergent}. Since these equations are satisfied for any chosen $h^*$, $u^*$ and $G^*$ and any $\beta$ values, forced solutions can be used to verify the method for a larger class of problems than permitted by currently known analytic solutions. In particular, problems were $\beta_2 \neq 0$ which were not covered in the above validation using analytic solutions. Since the left hand-side of these modified equations are approximated by the numerical method, combining the numerical method with the analytic expressions for the right hand-side, produces a method that approximates the forced gSGN equation \eqref{eq:gSGN_Forced} with the same convergence properties as the underlying numerical method for the gSGN equations. 
 
 The following forced solution
 \begin{subequations}
@@ -677,13 +671,11 @@ The following forced solution
 	\beta_2(x,t) &= a_7
 	\end{align}
 \end{subequations}
-where $G^*$ is given by \eqref{eq:G_divergent}, were used. These forced solutions describe Gaussian bumps in $h$ and $u$ that travel at a constant speed $a_2$. This forced solution was chosen because it is smooth and also none of the terms in \eqref{eq:gSGN_Forced} are constant over the whole domain. Smoothness is necessary for the current description of the forced solutions, since it requires the derivatives to be defined in the classical strong sense. While the last point ensures that we haven't picked a problem that is too simple, and thus doesn't require accurately modelling all the terms in \eqref{eq:gSGN_Forced}. This ensures that the forced solutions are assessing the whole numerical method. 
+where $G^*$ is given by \eqref{eq:G_divergent}, were used. These forced solutions describe Gaussian bumps in $h$ and $u$ that travel at a constant speed $a_2$. This forced solution was chosen because it is smooth and because the terms in \eqref{eq:gSGN_Forced} are not constant over the whole domain. Smoothness is necessary for the current description of the forced solutions, since it requires the derivatives to be defined in the classical strong sense. This ensures that the forced solutions include all the terms in the gSGN when assessing the numerical method. 
 
 The particular parameter values $a_0=1$, $a_1=0.5$, $a_3=20$ and $a_4=0.3$ were chosen in this investigation, while multiple $\beta$ values were tested we will be focusing on $a_6 = 2/15 + 2/3$ and $a_7=2/15$ below. 
 
-The numerical solutions were produced over the domain $\left[-100,100\right]$ with a final time of $t=10$. The spatial resolution was varied like so $\Delta x = 200 / (100 \times 2^{l})$, while the CFL condition was satisfied by setting $\Delta t = \Delta x  / \left( 2 \left[a_4 + a_2+ \sqrt{g \left(a_0 + a_1\right)}\right] \right)$. The acceleration due to gravity $g=9.81m^2/s$ was used. 
-
-For the forced solutions the limiting on the reconstruction on $h$, $u$ and $G$ was removed. Firstly, because these forced solutions are smooth, such reconstruction is not necessary. Secondly, because when the slope limiting is included errors at the peak of the Gaussian bump are produced due to the change in finite difference stencils and the setting of the slope to zero when one of the finite difference approximations is zero or a different sign. These errors pollute the errors of the underlying numerical method and so to remove them the limiting was removed. This error pollution from the limiting is not observed for the analytic solution of the SGN equations, or forced solutions with $\beta_2 =0$. Therefore, it seems that the numerical approximation to the $\beta_2$ term is highly sensitive to the limiting. 
+The numerical solutions were produced over the domain $\left[-100,100\right]$ with a final time of $t=10$. The spatial resolution was varied like so $\Delta x = 200 / (100 \times 2^{l})$, while the CFL condition was satisfied by setting $\Delta t = \Delta x  / \left( 2 \left[a_4 + a_2+ \sqrt{g \left(a_0 + a_1\right)}\right] \right)$. The acceleration due to gravity $g=9.81m^2/s$ was used. For the forced solutions the limiting on the reconstruction on $h$, $u$ and $G$ was removed. Because these forced solutions are smooth, such reconstruction is not necessary.
 
 Figure \ref{Fig:FS_Ex} compares an example numerical solution at the final time for $h$, $G$ and $u$ with $\Delta x = 200 / (100 \times 2^{5}) \approx 0.06$ with the analytic solution. These example solutions demonstrate that the numerical method is able to reproduce the forced solution well, validating the numerical methods approximation to all terms in \eqref{eq:gSGN_G}. 
 %
@@ -708,7 +700,7 @@ Figure \ref{Fig:FS_Ex} compares an example numerical solution at the final time 
 	\label{Fig:FS_Ex}
 \end{figure}
 
-Figure \ref{Fig:FS_Conv} demonstrates the convergence of the numerical scheme as $\Delta x$ decreases. All quantities of interest are converging at the expected second-order. Since the RHS is given analytically, the observed error is caused by the numerical method. Therefore, these results demonstrate that the scheme is second-order for all terms in gSGN equations. Unfortunately as stated above, to accurately reproduce the forced solutions and achieve the theoretical accuracy the reconstruction limiting had to be removed. Therefore, these forced solutions only validate the method without this limiting. However, given that the limiting only affects extrema and discontinuities this study is sufficient to justify the example numerical method and thus the proposed numerical scheme for the gSGN equations.
+Figure \ref{Fig:FS_Conv} demonstrates the convergence of the numerical scheme as $\Delta x$ decreases. All quantities of interest are converging at the expected second-order. Since the right hand sides of \eqref{eq:gSGN_Forced} are evaluated analytically, the observed error is caused by the numerical method. Therefore, these results demonstrate that the scheme is second-order for all terms in the gSGN equations.
 %
 \begin{figure}
 	\centering
@@ -718,8 +710,57 @@ Figure \ref{Fig:FS_Conv} demonstrates the convergence of the numerical scheme as
 \end{figure}
 
 
+\subsection{Numerical Comparison of Different $\beta$ values}
+The validation results in Sections 5.2 and 5.3 demonstrate the ability of the numerical method to accurately solve the gSGN equations for smooth solutions and in the presence of discontinuities when $\beta_1 = \beta_2 = 0$ where the gSGN equations reduce to the SWWE. We will now illustrate the different behaviours of this family of equations using numerical solutions to the dam-break problem \eqref{eqn:DB_Init} described in Section 5.2 at $t=35s$. Figure \ref{Fig:DBgSGN_Ex} demonstrates the numerical solutions to $h$ for a variety of $\beta$ values with Figure \ref{Fig:DBgSGN_Ex_Beta} showing the location of the numerical solutions on the plot of $\beta$ values shown in Figure \ref{Fig:WaveSpeedReg}. 
+
+These numerical solutions are well resolved and compare well to analytic solutions for the SWWE, and the numerical study of the dam-break problem performed by \citet{Pitt-2018-61} for the SGN. By comparing the numerical solution to its location in the $\beta$ plot we can see that the behaviour of solutions is described well by the chain of inequalities \eqref{eq:wavespeedbound1} when $\beta_1 \ge \beta_2$ and \eqref{eq:wavespeedbound2} when $\beta_1 < \beta_2$. In particular, for the SWWE and the regularised SWWE $\beta_1 = \beta_2$ which results in a phase speed which is independent of $k$ and thus a non-dispersive wave model we observe no wave train between the shock and the rarefaction fan in Figures \ref{Fig:DBgSGN_Ex_SWWE} and \ref{Fig:DBgSGN_Ex_rSWWE}. For the dispersive wave models of the improved dispersion SGN equations with $\mathcal{O}(k^5)$ accuracy in the dispersion relationship and the classical SGN equations with $\mathcal{O}(k^3)$ accuracy in the dispersion relationship, we observe a dispersive wave train between the shock and the rarefaction fan. While for an illustrative example in Region 2 of the $\beta$ plot we observe dispersive wave trains advancing behind the rarefaction fan and ahead of the shock due to the flipping of the chain of inequalities when $\beta_2 > \beta_1$ in \eqref{eq:wavespeedbound2}. 
+
+Interestingly in Figure \ref{Fig:DBgSGN_Ex_iSGN} although the dispersion relationship of the improved dispersion relationship is $\mathcal{O}(k^5)$ accurate, there is a significant trade-off for large $k$ values, as can be seen by the appearance of a non-physical flat region between the two dispersive wave trains. This behaviour is an artefact of the way we have improved the dispersion relationship of the gSGN and does not agree with the linear theory of water waves under gravity. 
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Comparison/hEx03.pdf}
+		\caption{SWWE ($\beta_1  = \beta_2 = 0$)}
+		\label{Fig:DBgSGN_Ex_SWWE}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Comparison/hEx02.pdf}
+		\caption{Regularised SWWE ($\beta_1  = \beta_2 = 1$)}
+		\label{Fig:DBgSGN_Ex_rSWWE}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Comparison/hEx01.pdf}
+		\caption{Improved SGN ($\beta_1  = \beta_2  +  2/3$, $\beta_2 = 2/15$)}
+		\label{Fig:DBgSGN_Ex_iSGN}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./Figures/Simulations/Comparison/hEx00.pdf}
+		\caption{SGN ($\beta_1  = \beta_2  +  2/3$, $\beta_2 = 0$)}
+		\label{Fig:DBgSGN_Ex_SGN}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{./Figures/Simulations/Comparison/hEx04.pdf}
+	\caption{Region 2 ($\beta_1  = 1/3$, $\beta_2 = 2/3$)}
+	\label{Fig:DBgSGN_Ex_Reg2}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+	\centering
+	\includegraphics[width=0.95\textwidth]{./Figures/Explanation/BetaPlotAllExamples.pdf}
+	\caption{Location of equations of figures on $\beta$ value plot as in Figure \ref{Fig:WaveSpeedReg} }
+	\label{Fig:DBgSGN_Ex_Beta}
+	\end{subfigure}
+	\caption{Water profile for numerical solution to dam-break problem \eqref{eqn:DB_Init} with $\Delta x = 500 / (100 \times 2^8) \approx 0.19 m$ at $t = 35s$ for different $\beta$ values.}
+	\label{Fig:DBgSGN_Ex}
+\end{figure}
+
 \section{Conclusion}
-A modified version of the numerical scheme for the SGN outlined by \citet{Zoppou-etal-2017} was used to solved the gSGN equations \cite{Clamond-et.al-2017-245,Clamond-Dutykh-2018-237}. This numerical scheme for the gSGN was validated by describing a fully second-order order implementation as an example numerical method. This example numerical method was validated against analytic solutions of the SGN and SWWE equations and forced solutions. The analytic solutions demonstrate that the gSGN solver accurately reproduces important members of the gSGN family of equations whilst conserving the quantities of interest, and the forced solutions demonstrate that the method remains second-order for all values of the free parameters, $\beta_1$ and $\beta_2$. The gSGN method described above is the first well validated numerical method for the gSGN equations
+A modified version of the numerical scheme for the SGN outlined by \citet{Zoppou-etal-2017} was used to solved the gSGN equations \cite{Clamond-Dutykh-2018-237,Clamond-et.al-2017-245}. This numerical scheme for the gSGN was validated by describing a fully second-order order implementation as an example numerical method. This example numerical method was validated against analytic solutions of the SGN and SWWE equations and forced solutions. The analytic solutions demonstrate that the gSGN solver accurately reproduces important members of the gSGN family of equations whilst conserving the quantities of interest, and the forced solutions demonstrate that the method remains second-order for all values of the free parameters, $\beta_1$ and $\beta_2$. The gSGN method described above is the first validated numerical method for the gSGN equations
  
 
 \bibliographystyle{unsrtnat}

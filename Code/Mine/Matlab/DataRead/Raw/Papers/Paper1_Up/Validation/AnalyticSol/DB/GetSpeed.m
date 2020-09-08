@@ -44,8 +44,8 @@ for k = 0:12
     xubloc = x(UBloc);
     xlbloc = x(LBloc);
     
-    SpeedUB(k+1) = xubloc / t;
-    SpeedLB(k+1) = xlbloc / t;
+    SpeedUB(k+1) = (xubloc / t)/S2;
+    SpeedLB(k+1) = (xlbloc / t)/S2;
     
     dxs(k+1) = dx;
 
@@ -55,13 +55,13 @@ end
 
 semilogx(dxs,SpeedUB,'x b',dxs,SpeedLB,'x r');
 hold on;
-plot([10^(-4),10],[S2,S2],'--k');
+plot([10^(-4),10],[1,1],'--k');
 legend('hide');
 xlabel('\Delta x');
-ylabel('Shock Speed');
-axis([10^-3 10 4 4.5]);
+ylabel('S_2 / S_2 ');
+axis([10^-3 10 0.96 1.08]);
 xticks([10^-3,10^-2,10^-1,10^0,10]);
-yticks([4,4.1,4.2,4.3,4.4,4.5]);
+yticks([0.96, 0.98,1,1.02,1.04,1.06,1.08]);
 matlab2tikz('ShockSpeedEstimates.tex');
 close all;
 

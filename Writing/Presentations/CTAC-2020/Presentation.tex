@@ -33,12 +33,14 @@
 };
 \end{tikzpicture}
 \end{frame}
-
+	
+	
 %% title frame
 \begin{frame}
-	\titlepage
+\titlepage
 \end{frame}
 %% normal frame
+	
 
 %Do a brief show pictures of water waves, hazards posed
 %Move onto the equations, with a picture
@@ -124,7 +126,7 @@ Phase speed ($c$)
 \end{frame}
 
 \begin{frame}{Taylor Expansion of Phase Speed in $k$}
-\[c^2  = \frac{g}{k} \tanh\left(kH\right) = gH - {\color{blue}\frac{g}{3} H^3 k^2} + {\color{red}\frac{2}{15} g H^5 k^4} + \mathcal{O}\left(k^5\right) \]
+\[c^2  = \frac{g}{k} \tanh\left(kH\right) = gH - {\color{blue}\frac{1}{3} gH^3 k^2} + {\color{red}\frac{2}{15} g H^5 k^4} + \mathcal{O}\left(k^5\right) \]
 \pause
 Resulting non-linear equations
 \begin{itemize}
@@ -132,6 +134,7 @@ Resulting non-linear equations
 	\item \color{blue} Serre Equations
 	\item \color{red} Improved Dispersion Serre Equations
 \end{itemize}
+Modified Dispersive Wave Equations generalise all these. 
 \end{frame}
 
 
@@ -151,10 +154,10 @@ Equations for conservation of mass and momentum written in terms of the water de
 
 %Only need blue term to get the relevant blue term in dispersion
 %need both to get the red term
-\begin{frame}{Generalised Dispersive Equations}
+\begin{frame}{Modified Dispersive Wave Equations}
 \begin{align*}
 &\dfrac{\partial h}{\partial t} + \dfrac{\partial (hu)}{\partial x} = 0\\
-&\dfrac{\partial (hu)}{\partial t} + \dfrac{\partial }{\partial x} \left( hu^2 + \frac{1}{2}gh^2  +  {\color{blue} \frac{h^3}{2}\beta_1 \Phi } -   {\color{red} \frac{gh^2}{2} \beta_2 \Psi}  \right)= 0 \\
+&\dfrac{\partial (hu)}{\partial t} + \dfrac{\partial }{\partial x} \left( hu^2 + \frac{1}{2}gh^2  +  {\color{blue} \frac{1}{2}h^3\beta_1 \Phi } -   {\color{red} \frac{1}{2}gh^2 \beta_2 \Psi}  \right)= 0 \\
 \end{align*}
 where
 \begin{align*}
@@ -166,9 +169,16 @@ where
 \begin{frame}{Dispersion Relation of Linearised Equations}
 \begin{align*}
 c_{\text{model}}^2 & = gH \dfrac{\beta_2 H^2 k^2 + 2}{ \beta_1H^2 k^2 + 2}
-\\& = gH - {\color{blue} \frac{1}{2}gH^3 \left(\beta_1 - \beta_2\right)k^2} + {\color{red}\frac{1}{4}\beta_1 H^5 k^4\left(\beta_1 - \beta_2\right)}  + \mathcal{O}\left(k^5\right) \\
+\\& = gH - {\color{blue} \frac{\left(\beta_1 - \beta_2\right)}{2}gH^3 k^2} + {\color{red}\frac{\beta_1\left(\beta_1 - \beta_2\right)}{4} g H^5 k^4}  + \mathcal{O}\left(k^5\right)
+\end{align*}
+\end{frame}
+
+\begin{frame}{Dispersion Relation of Linearised Equations}
+\begin{align*}
+c_{\text{model}}^2 & = gH \dfrac{\beta_2 H^2 k^2 + 2}{ \beta_1H^2 k^2 + 2}
+\\& = gH - {\color{blue} \frac{\left(\beta_1 - \beta_2\right)}{2}gH^3 k^2} + {\color{red}\frac{\beta_1\left(\beta_1 - \beta_2\right)}{4} g H^5 k^4}  + \mathcal{O}\left(k^5\right) \\
 \text{Want} \\c^2  &= \frac{g}{k} \tanh\left(kH\right) \\
- &= gH - {\color{blue}\frac{g}{3} H^3 k^2} + {\color{red}\frac{2}{15} g H^5 k^4} + \mathcal{O}\left(k^5\right)
+ &= gH - {\color{blue}\frac{1}{3}g H^3 k^2} + {\color{red}\frac{2}{15} g H^5 k^4} + \mathcal{O}\left(k^5\right)
 \end{align*}
 \end{frame}
 
@@ -230,7 +240,7 @@ where
 \begin{frame}{Reformulation}
 \begin{align*}
 &\dfrac{\partial h}{\partial t} + \dfrac{\partial (hu)}{\partial x} = 0\\
-&\dfrac{\partial {\color{blue} G} }{\partial t}  + \dfrac{\partial}{\partial x} \Bigg( u{\color{blue} G} + \dfrac{gh^2}{2} - {\color{blue} \frac{2}{3} \beta_1 h^3\dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x} } \\ &- {\color{red}\frac{1}{2} \beta_2 g h^2  \left[h\frac{\partial^2 h}{\partial x^2} +   \frac{1}{2}\frac{\partial h}{\partial x}\frac{\partial h}{\partial x}\right] } \Bigg) = 0.
+&\dfrac{\partial {\color{blue} G} }{\partial t}  + \dfrac{\partial}{\partial x} \Bigg( u{\color{blue} G} + \dfrac{gh^2}{2} - {\color{blue} \beta_1 h^3\dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x} } \\ &- {\color{red}\frac{1}{2} \beta_2 g h^2  \left[h\frac{\partial^2 h}{\partial x^2} +   \frac{1}{2}\frac{\partial h}{\partial x}\frac{\partial h}{\partial x}\right] } \Bigg) = 0.
 \end{align*}
 where
 \begin{gather*}
@@ -251,7 +261,7 @@ to obtain $u$.
 Then solve
 \begin{align*}
 &\dfrac{\partial h}{\partial t} + \dfrac{\partial (hu)}{\partial x} = 0\\
-&\dfrac{\partial {\color{blue} G} }{\partial t}  + \dfrac{\partial}{\partial x} \Bigg( u{\color{blue} G} + \dfrac{gh^2}{2} - {\color{blue} \frac{2}{3} \beta_1 h^3\dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x} } \\ &- {\color{red}\frac{1}{2} \beta_2 g h^2  \left[h\frac{\partial^2 h}{\partial x^2} +   \frac{1}{2}\frac{\partial h}{\partial x}\frac{\partial h}{\partial x}\right] } \Bigg) = 0.
+&\dfrac{\partial {\color{blue} G} }{\partial t}  + \dfrac{\partial}{\partial x} \Bigg( u{\color{blue} G} + \dfrac{gh^2}{2} - {\color{blue} \beta_1 h^3\dfrac{\partial u}{\partial x}\dfrac{\partial u}{\partial x} } \\ &- {\color{red}\frac{1}{2} \beta_2 g h^2  \left[h\frac{\partial^2 h}{\partial x^2} +   \frac{1}{2}\frac{\partial h}{\partial x}\frac{\partial h}{\partial x}\right] } \Bigg) = 0.
 \end{align*}
 with a finite volume method to update $h$ and $G$ to next time. 
 \end{frame}

@@ -36,8 +36,8 @@ for k = 0:n
     xUB = x(PeakLocj) + 0.5*dx;
     xLB = x(PeakLocj) - 0.5*dx;
     
-    SpeedUB(k+1) = xUB / t;
-    SpeedLB(k+1) = xLB / t;
+    SpeedUB(k+1) = (xUB / t)/c;
+    SpeedLB(k+1) = (xLB / t)/c;
     dxs(k+1) = dx;
 
 
@@ -45,12 +45,12 @@ end
 
 semilogx(dxs,SpeedUB,'x b',dxs,SpeedLB,'x r');
 hold on;
-plot([10^(-4),1],[c,c],'--k');
+plot([10^(-4),10],[1,1],'--k');
 legend('hide');
 xlabel('\Delta x');
-ylabel('Peak Speed');
-axis([10^-3 10 3.1 4.1]);
+ylabel('c/c');
+axis([10^-3 10 0.75 1.05]);
 xticks([10^-3,10^-2,10^-1,10^0,10]);
-yticks([3.1,3.3,3.5,3.7,3.9,4.1]);
+yticks([0.75,0.8,0.85,0.9,0.95,1,1.05]);
 matlab2tikz('PeakSpeedEstimates.tex');
 
