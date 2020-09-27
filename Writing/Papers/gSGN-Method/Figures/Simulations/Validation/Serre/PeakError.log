@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  8 SEP 2020 09:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  10 SEP 2020 09:23
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -801,8 +801,8 @@ Non-PDF special ignored!{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 (./PeakError.aux) ) 
 Here is how much of TeX's memory you used:
  26059 strings out of 492982
- 677805 string characters out of 6134896
- 846531 words of memory out of 5000000
+ 677823 string characters out of 6134896
+ 847959 words of memory out of 5000000
  29181 multiletter control sequences out of 15000+600000
  5004 words of font info for 19 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -811,7 +811,7 @@ Here is how much of TeX's memory you used:
 m/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
 0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on PeakError.pdf (1 page, 35339 bytes).
+Output written on PeakError.pdf (1 page, 35756 bytes).
 PDF statistics:
  27 PDF objects out of 1000 (max. 8388607)
  19 compressed objects within 1 object stream

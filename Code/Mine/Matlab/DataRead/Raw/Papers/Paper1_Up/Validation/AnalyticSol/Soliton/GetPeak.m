@@ -13,10 +13,12 @@ g = 9.81;
 c = sqrt(g*(a0 + a1));
 htop = a0 + a1;
 utop = c*(1 - a0/htop);
+Gtop = utop*htop;
 
 n = 12;
 peakherror = zeros(n+1,1);
 peakuerror = zeros(n+1,1);
+peakGerror = zeros(n+1,1);
 dxs = zeros(n+1,1);
 
 for k = 0:n
@@ -34,23 +36,27 @@ for k = 0:n
     dx = str2double(dxstr{1,1});
 
     PeakLochj = find(h==max(h));
+    PeakLocGj = find(G==max(G));
     PeakLocuj = find(u==max(u));
     hj = h(PeakLochj);
+    Gj = G(PeakLocGj);
     uj = u(PeakLocuj);
     peakh = hj;
+    peakG = Gj;
     peaku = uj;
-    peakherror(k+1) = abs(peakh - htop)/(htop);
-    peakuerror(k+1) = abs(peaku - utop)/(utop);
+    peakherror(k+1) = sqrt((peakh - htop)^2/(htop)^2);
+    peakuerror(k+1) = sqrt((peaku - utop)^2/(utop)^2);
+    peakGerror(k+1) = sqrt((peakG - Gtop)^2/(Gtop)^2);
     dxs(k+1) = dx;
 
 
 end
 
-loglog(dxs,peakherror,'s b', dxs,peakuerror,'^ k');
+loglog(dxs,peakherror,'s b', dxs,peakuerror,'^ k' );
 xlabel('\Delta x')
 ylabel('Peak Error')
 legend('hide')
-axis([10^-3 1 10^-9 10]);
+axis([10^-4 1 10^-9 10]);
 xticks([10^-4,10^-3,10^-2,10^-1,10^0,10]);
 yticks([10^-9,10^-7,10^-5,10^-3,10^-1,10]);
  matlab2tikz('PeakError.tex');

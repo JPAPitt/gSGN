@@ -3,7 +3,7 @@ from sympy.solvers.solveset import linsolve
 
 k = 4
 
-qaj,qajm1,qajm2,qajm3,qajp1,qajp2,qajp3,dx = symbols('qA[j] qA[j-1] qA[j-2] qA[j-3] qA[j+1] qA[j+2] qA[j+3] dx')
+qaj,qajm1,qajm2,qajm3,qajp1,qajp2,qajp3,dx = symbols('cellavgbc_q(i) cellavgbc_q(i-1) cellavgbc_q(i-2) cellavgbc_q(i-3) cellavgbc_q(i+1) cellavgbc_q(i+2) cellavgbc_q(i+3) dx')
 
 pa,pb,pc,pd = symbols('p_a p_b p_c p_d')
 
@@ -77,6 +77,31 @@ Bjm2tojp1 =Bjm2tojp1.simplify()
 Bjm1tojp2 =Bjm1tojp2.simplify()
 Bjtojp3 =Bjtojp3.simplify()
 
+print('pjm3toj')
+print(CubicSoljm3toj_Coeff[0])
+print(CubicSoljm3toj_Coeff[1])
+print(CubicSoljm3toj_Coeff[2])
+print(CubicSoljm3toj_Coeff[3])
+
+print('pjm2tojp1')
+print(CubicSoljm2tojp1_Coeff[0])
+print(CubicSoljm2tojp1_Coeff[1])
+print(CubicSoljm2tojp1_Coeff[2])
+print(CubicSoljm2tojp1_Coeff[3])
+
+print('pjm1tojp2')
+print(CubicSoljm1tojp2_Coeff[0])
+print(CubicSoljm1tojp2_Coeff[1])
+print(CubicSoljm1tojp2_Coeff[2])
+print(CubicSoljm1tojp2_Coeff[3])
+
+print('pjtojp3')
+print(CubicSoljtojp3_Coeff[0])
+print(CubicSoljtojp3_Coeff[1])
+print(CubicSoljtojp3_Coeff[2])
+print(CubicSoljtojp3_Coeff[3])
+
+print('Bs')
 print(Bjm3toj)
 print(Bjm2tojp1)
 print(Bjm1tojp2)

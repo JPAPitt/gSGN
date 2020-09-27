@@ -42,7 +42,7 @@ C.~Zoppou.
 
 \bibitem[Zoppou et~al.(2016)Zoppou, Roberts, and Pitt]{Zoppou-etal-2016}
 C.~Zoppou, S.G Roberts, and J.~Pitt.
-\newblock A solution of the conservation law form of the serre equations.
+\newblock A solution of the conservation law form of the {S}erre equations.
 \newblock \emph{The Australia and New Zealand Industrial and Applied
   Mathematics Journal}, 57\penalty0 (4):\penalty0 385--394, 2016.
 
@@ -94,6 +94,13 @@ O.~Le~M\'{e}tayer, S.~Gavrilyuk, and S.~Hank.
 \newblock \emph{Journal of Computational Physics}, 229\penalty0 (6):\penalty0
   2034--2045, 2010.
 
+\bibitem[Li et~al.(2014)Li, Guyenne, Li, and Xu]{Li-2014-169}
+M.~Li, P.~Guyenne, F.~Li, and L.~Xu.
+\newblock High order well-balanced {C}{D}{G}-{F}{E} methods for shallow water
+  waves by a {G}reen-{N}aghdi model.
+\newblock \emph{Journal of Computational Physics}, 257\penalty0 (1):\penalty0
+  169--192, 2014.
+
 \bibitem[Kurganov et~al.(2002)Kurganov, Noelle, and
   Petrova]{Kurganov-etal-2001-707}
 A.~Kurganov, S.~Noelle, and G.~Petrova.
@@ -101,13 +108,6 @@ A.~Kurganov, S.~Noelle, and G.~Petrova.
   and {H}amilton-{J}acobi equations.
 \newblock \emph{Journal of Scientific Computing, Society for Industrial and
   Applied Mathematics}, 23\penalty0 (3):\penalty0 707--740, 2002.
-
-\bibitem[Li et~al.(2014)Li, Guyenne, Li, and Xu]{Li-2014-169}
-M.~Li, P.~Guyenne, F.~Li, and L.~Xu.
-\newblock High order well-balanced {C}{D}{G}-{F}{E} methods for shallow water
-  waves by a {G}reen-{N}aghdi model.
-\newblock \emph{Journal of Computational Physics}, 257\penalty0 (1):\penalty0
-  169--192, 2014.
 
 \bibitem[Gottlieb et~al.(2001)Gottlieb, Shu, and Tadmor]{Gottlieb-etal-2003-89}
 S.~Gottlieb, C.~Shu, and E.~Tadmor.

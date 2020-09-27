@@ -72,8 +72,8 @@ at={(0.758in,0.481in)},
 every axis plot/.append style={ultra thick},
 scale only axis,
 xmode=log,
-xmin=0.001,
-xmax=1,
+xmin=0.0001,
+xmax=10,
 xtick={0.0001,  0.001,   0.01,    0.1,      1,     10},
 xminorticks=false,
 xlabel style={font=\color{white!15!black}},
@@ -87,7 +87,7 @@ ylabel style={font=\color{white!15!black}},
 ylabel={\Large $L_2$ for Peak},
 axis background/.style={fill=white}
 ]
- \logLogSlopeTriangle{0.4}{0.3}{0.1}{2}{black};
+ \logLogSlopeTriangle{0.45}{0.2}{0.09}{2}{black};
 
 \addplot [color=blue, draw=none, mark=square, mark size=4pt, mark options={solid, blue}, forget plot]
   table[row sep=crcr]{%
@@ -107,7 +107,7 @@ axis background/.style={fill=white}
 };
 \addplot [color=black, draw=none, mark=triangle, mark size=4pt, mark options={solid, black}, forget plot]
   table[row sep=crcr]{%
-4.04040404040404	0.88413364665956\\
+4.04040404040404	0.884133646659559\\
 2.01005025125628	0.750902343165237\\
 1.00250626566416	0.649994885480656\\
 0.500625782227785	0.463780898088146\\

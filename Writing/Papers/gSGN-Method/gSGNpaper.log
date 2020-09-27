@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  8 SEP 2020 15:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  22 SEP 2020 12:22
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1113,216 +1113,159 @@ Non-PDF special ignored!
 Non-PDF special ignored!
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 168.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 153.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 168.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 153.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 168.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 153.
  [2] [3]
-<./Figures/Explanation/BetaPlotAll.pdf, id=201, 349.98956pt x 291.76604pt>
-File: ./Figures/Explanation/BetaPlotAll.pdf Graphic file (type pdf)
-<use ./Figures/Explanation/BetaPlotAll.pdf>
-Package pdftex.def Info: ./Figures/Explanation/BetaPlotAll.pdf  used on input l
-ine 217.
-(pdftex.def)             Requested size: 242.1044pt x 201.83075pt.
- [4 <./Figures/Explanation/BetaPlotAll.pdf>] [5] [6] [7] [8]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 452.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\beta' on input line 452.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 452.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 452.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 452.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\beta' on input line 452.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 452.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 452.
-
-[9]
-<./Figures/Simulations/Validation/Serre/hEx.pdf, id=367, 390.6334pt x 313.01543
-pt>
+<./Figures/Simulations/Comparison/3x3Grid.pdf, id=215, 359.57536pt x 328.25536p
+t>
+File: ./Figures/Simulations/Comparison/3x3Grid.pdf Graphic file (type pdf)
+<use ./Figures/Simulations/Comparison/3x3Grid.pdf>
+Package pdftex.def Info: ./Figures/Simulations/Comparison/3x3Grid.pdf  used on 
+input line 214.
+(pdftex.def)             Requested size: 484.2088pt x 442.0437pt.
+ [4] [5 <./Figures/Simulations/Comparison/3x3Grid.pdf>] [6] [7] [8] [9] [10]
+<./Figures/Simulations/Validation/Serre/hEx.pdf, id=468, 393.48305pt x 315.8650
+7pt>
 File: ./Figures/Simulations/Validation/Serre/hEx.pdf Graphic file (type pdf)
 <use ./Figures/Simulations/Validation/Serre/hEx.pdf>
 Package pdftex.def Info: ./Figures/Simulations/Validation/Serre/hEx.pdf  used o
-n input line 483.
-(pdftex.def)             Requested size: 154.95035pt x 124.16273pt.
-<./Figures/Simulations/Validation/Serre/GEx.pdf, id=368, 404.94286pt x 313.0154
-3pt>
+n input line 488.
+(pdftex.def)             Requested size: 154.95035pt x 124.38698pt.
+<./Figures/Simulations/Validation/Serre/GEx.pdf, id=469, 407.99727pt x 315.8650
+7pt>
 File: ./Figures/Simulations/Validation/Serre/GEx.pdf Graphic file (type pdf)
 <use ./Figures/Simulations/Validation/Serre/GEx.pdf>
 Package pdftex.def Info: ./Figures/Simulations/Validation/Serre/GEx.pdf  used o
-n input line 488.
-(pdftex.def)             Requested size: 154.95035pt x 119.77338pt.
-<./Figures/Simulations/Validation/Serre/uEx.pdf, id=369, 404.0726pt x 313.01543
-pt>
+n input line 493.
+(pdftex.def)             Requested size: 154.95035pt x 119.9625pt.
+<./Figures/Simulations/Validation/Serre/uEx.pdf, id=470, 406.95338pt x 315.8650
+7pt>
 File: ./Figures/Simulations/Validation/Serre/uEx.pdf Graphic file (type pdf)
 <use ./Figures/Simulations/Validation/Serre/uEx.pdf>
 Package pdftex.def Info: ./Figures/Simulations/Validation/Serre/uEx.pdf  used o
-n input line 493.
-(pdftex.def)             Requested size: 154.95035pt x 120.0313pt.
-<./Figures/Simulations/Validation/Serre/NormResults.pdf, id=374, 392.97514pt x 
+n input line 498.
+(pdftex.def)             Requested size: 154.95035pt x 120.27095pt.
+<./Figures/Simulations/Validation/Serre/NormResults.pdf, id=475, 392.97514pt x 
 302.12672pt>
 File: ./Figures/Simulations/Validation/Serre/NormResults.pdf Graphic file (type
  pdf)
 <use ./Figures/Simulations/Validation/Serre/NormResults.pdf>
 Package pdftex.def Info: ./Figures/Simulations/Validation/Serre/NormResults.pdf
-  used on input line 507.
+  used on input line 512.
 (pdftex.def)             Requested size: 237.26497pt x 182.4161pt.
-<./Figures/Simulations/Validation/Serre/PeakError.pdf, id=375, 393.13173pt x 30
+<./Figures/Simulations/Validation/Serre/PeakError.pdf, id=476, 393.13574pt x 30
 2.12672pt>
 File: ./Figures/Simulations/Validation/Serre/PeakError.pdf Graphic file (type p
 df)
 <use ./Figures/Simulations/Validation/Serre/PeakError.pdf>
 Package pdftex.def Info: ./Figures/Simulations/Validation/Serre/PeakError.pdf  
-used on input line 513.
+used on input line 518.
 (pdftex.def)             Requested size: 237.26497pt x 182.34235pt.
-<./Figures/Simulations/Validation/Serre/EnergyResults.pdf, id=378, 397.97484pt 
+<./Figures/Simulations/Validation/Serre/EnergyResults.pdf, id=481, 397.97484pt 
 x 302.12173pt>
 File: ./Figures/Simulations/Validation/Serre/EnergyResults.pdf Graphic file (ty
 pe pdf)
 <use ./Figures/Simulations/Validation/Serre/EnergyResults.pdf>
 Package pdftex.def Info: ./Figures/Simulations/Validation/Serre/EnergyResults.p
-df  used on input line 525.
+df  used on input line 530.
 (pdftex.def)             Requested size: 237.26497pt x 180.11732pt.
- [10 <./Figures/Simulations/Validation/Serre/hEx.pdf> <./Figures/Simulations/Va
-lidation/Serre/GEx.pdf> <./Figures/Simulations/Validation/Serre/uEx.pdf>]
-<./Figures/Simulations/Validation/Serre/PeakSpeedEstimates.pdf, id=441, 393.067
+<./Figures/Simulations/Validation/Serre/PeakSpeedEstimates.pdf, id=484, 393.067
 49pt x 306.61751pt>
 File: ./Figures/Simulations/Validation/Serre/PeakSpeedEstimates.pdf Graphic fil
 e (type pdf)
 <use ./Figures/Simulations/Validation/Serre/PeakSpeedEstimates.pdf>
 Package pdftex.def Info: ./Figures/Simulations/Validation/Serre/PeakSpeedEstima
-tes.pdf  used on input line 534.
+tes.pdf  used on input line 539.
 (pdftex.def)             Requested size: 237.26497pt x 185.08073pt.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 541.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\beta' on input line 541.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 541.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\beta' on input line 541.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 541.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 541.
-
-[11 <./Figures/Simulations/Validation/Serre/NormResults.pdf> <./Figures/Simulat
-ions/Validation/Serre/PeakError.pdf> <./Figures/Simulations/Validation/Serre/En
-ergyResults.pdf>] [12 <./Figures/Simulations/Validation/Serre/PeakSpeedEstimate
-s.pdf>]
-<./Figures/Simulations/Validation/DBSWWE/hEx.pdf, id=520, 390.6334pt x 307.3271
-6pt>
+ [11] [12 <./Figures/Simulations/Validation/Serre/hEx.pdf> <./Figures/Simulatio
+ns/Validation/Serre/GEx.pdf> <./Figures/Simulations/Validation/Serre/uEx.pdf> <
+./Figures/Simulations/Validation/Serre/NormResults.pdf> <./Figures/Simulations/
+Validation/Serre/PeakError.pdf> <./Figures/Simulations/Validation/Serre/EnergyR
+esults.pdf>]
+[13 <./Figures/Simulations/Validation/Serre/PeakSpeedEstimates.pdf>]
+<./Figures/Simulations/Validation/DBSWWE/hEx.pdf, id=623, 393.48305pt x 315.867
+08pt>
 File: ./Figures/Simulations/Validation/DBSWWE/hEx.pdf Graphic file (type pdf)
 <use ./Figures/Simulations/Validation/DBSWWE/hEx.pdf>
 Package pdftex.def Info: ./Figures/Simulations/Validation/DBSWWE/hEx.pdf  used 
-on input line 593.
-(pdftex.def)             Requested size: 154.95035pt x 121.90639pt.
-<./Figures/Simulations/Validation/DBSWWE/GEx.pdf, id=521, 391.50266pt x 307.325
-16pt>
+on input line 598.
+(pdftex.def)             Requested size: 154.95035pt x 124.38777pt.
+<./Figures/Simulations/Validation/DBSWWE/GEx.pdf, id=624, 394.55707pt x 315.865
+07pt>
 File: ./Figures/Simulations/Validation/DBSWWE/GEx.pdf Graphic file (type pdf)
 <use ./Figures/Simulations/Validation/DBSWWE/GEx.pdf>
 Package pdftex.def Info: ./Figures/Simulations/Validation/DBSWWE/GEx.pdf  used 
-on input line 598.
-(pdftex.def)             Requested size: 154.95035pt x 121.6336pt.
-<./Figures/Simulations/Validation/DBSWWE/uEx.pdf, id=522, 390.6334pt x 307.3261
-7pt>
+on input line 603.
+(pdftex.def)             Requested size: 154.95035pt x 124.04478pt.
+<./Figures/Simulations/Validation/DBSWWE/uEx.pdf, id=625, 393.51315pt x 315.866
+07pt>
 File: ./Figures/Simulations/Validation/DBSWWE/uEx.pdf Graphic file (type pdf)
 <use ./Figures/Simulations/Validation/DBSWWE/uEx.pdf>
 Package pdftex.def Info: ./Figures/Simulations/Validation/DBSWWE/uEx.pdf  used 
-on input line 603.
-(pdftex.def)             Requested size: 154.95035pt x 121.90599pt.
-<./Figures/Simulations/Validation/DBSWWE/ConvergenceInConstantState.pdf, id=526
+on input line 608.
+(pdftex.def)             Requested size: 154.95035pt x 124.37773pt.
+<./Figures/Simulations/Validation/DBSWWE/ConvergenceInConstantState.pdf, id=629
 , 397.9718pt x 304.96935pt>
 File: ./Figures/Simulations/Validation/DBSWWE/ConvergenceInConstantState.pdf Gr
 aphic file (type pdf)
 <use ./Figures/Simulations/Validation/DBSWWE/ConvergenceInConstantState.pdf>
 Package pdftex.def Info: ./Figures/Simulations/Validation/DBSWWE/ConvergenceInC
-onstantState.pdf  used on input line 619.
+onstantState.pdf  used on input line 623.
 (pdftex.def)             Requested size: 237.26497pt x 181.815pt.
-<./Figures/Simulations/Validation/DBSWWE/EnergyResults.pdf, id=527, 397.9718pt 
+<./Figures/Simulations/Validation/DBSWWE/EnergyResults.pdf, id=630, 397.9718pt 
 x 302.12173pt>
 File: ./Figures/Simulations/Validation/DBSWWE/EnergyResults.pdf Graphic file (t
 ype pdf)
 <use ./Figures/Simulations/Validation/DBSWWE/EnergyResults.pdf>
 Package pdftex.def Info: ./Figures/Simulations/Validation/DBSWWE/EnergyResults.
-pdf  used on input line 625.
+pdf  used on input line 629.
 (pdftex.def)             Requested size: 237.26497pt x 180.11732pt.
-<./Figures/Simulations/Validation/DBSWWE/ShockSpeedEstimates.pdf, id=530, 393.0
+ [14 <./Figures/Simulations/Validation/DBSWWE/hEx.pdf> <./Figures/Simulations/V
+alidation/DBSWWE/GEx.pdf> <./Figures/Simulations/Validation/DBSWWE/uEx.pdf>]
+<./Figures/Simulations/Validation/DBSWWE/ShockSpeedEstimates.pdf, id=677, 393.0
 6749pt x 306.61852pt>
 File: ./Figures/Simulations/Validation/DBSWWE/ShockSpeedEstimates.pdf Graphic f
 ile (type pdf)
 <use ./Figures/Simulations/Validation/DBSWWE/ShockSpeedEstimates.pdf>
 Package pdftex.def Info: ./Figures/Simulations/Validation/DBSWWE/ShockSpeedEsti
-mates.pdf  used on input line 637.
+mates.pdf  used on input line 641.
 (pdftex.def)             Requested size: 242.1044pt x 188.857pt.
- [13 <./Figures/Simulations/Validation/DBSWWE/hEx.pdf> <./Figures/Simulations/V
-alidation/DBSWWE/GEx.pdf> <./Figures/Simulations/Validation/DBSWWE/uEx.pdf>] [1
-4 <./Figures/Simulations/Validation/DBSWWE/ConvergenceInConstantState.pdf> <./F
-igures/Simulations/Validation/DBSWWE/EnergyResults.pdf> <./Figures/Simulations/
-Validation/DBSWWE/ShockSpeedEstimates.pdf>]
-<./Figures/Simulations/Validation/Forced/iSGN/h.pdf, id=632, 386.6756pt x 313.0
-074pt>
+ [15 <./Figures/Simulations/Validation/DBSWWE/ConvergenceInConstantState.pdf> <
+./Figures/Simulations/Validation/DBSWWE/EnergyResults.pdf> <./Figures/Simulatio
+ns/Validation/DBSWWE/ShockSpeedEstimates.pdf>]
+<./Figures/Simulations/Validation/Forced/iSGN/h.pdf, id=730, 389.52628pt x 315.
+85805pt>
 File: ./Figures/Simulations/Validation/Forced/iSGN/h.pdf Graphic file (type pdf
 )
 <use ./Figures/Simulations/Validation/Forced/iSGN/h.pdf>
 Package pdftex.def Info: ./Figures/Simulations/Validation/Forced/iSGN/h.pdf  us
 ed on input line 686.
-(pdftex.def)             Requested size: 154.95035pt x 125.43pt.
-<./Figures/Simulations/Validation/Forced/iSGN//G.pdf, id=633, 400.98608pt x 313
-.01543pt>
+(pdftex.def)             Requested size: 154.95035pt x 125.64696pt.
+<./Figures/Simulations/Validation/Forced/iSGN//G.pdf, id=731, 404.0405pt x 315.
+86507pt>
 File: ./Figures/Simulations/Validation/Forced/iSGN//G.pdf Graphic file (type pd
 f)
 <use ./Figures/Simulations/Validation/Forced/iSGN//G.pdf>
 Package pdftex.def Info: ./Figures/Simulations/Validation/Forced/iSGN//G.pdf  u
 sed on input line 691.
-(pdftex.def)             Requested size: 154.95035pt x 120.95311pt.
-<./Figures/Simulations/Validation/Forced/iSGN/u.pdf, id=634, 400.11583pt x 313.
-01642pt>
+(pdftex.def)             Requested size: 154.95035pt x 121.13368pt.
+<./Figures/Simulations/Validation/Forced/iSGN/u.pdf, id=732, 402.99557pt x 315.
+86708pt>
 File: ./Figures/Simulations/Validation/Forced/iSGN/u.pdf Graphic file (type pdf
 )
 <use ./Figures/Simulations/Validation/Forced/iSGN/u.pdf>
 Package pdftex.def Info: ./Figures/Simulations/Validation/Forced/iSGN/u.pdf  us
 ed on input line 696.
-(pdftex.def)             Requested size: 154.95035pt x 121.22095pt.
-<./Figures/Simulations/Validation/Forced/iSGN/NormResults.pdf, id=637, 397.9748
+(pdftex.def)             Requested size: 154.95035pt x 121.45255pt.
+<./Figures/Simulations/Validation/Forced/iSGN/NormResults.pdf, id=735, 397.9748
 4pt x 302.12672pt>
 File: ./Figures/Simulations/Validation/Forced/iSGN/NormResults.pdf Graphic file
  (type pdf)
@@ -1330,119 +1273,59 @@ File: ./Figures/Simulations/Validation/Forced/iSGN/NormResults.pdf Graphic file
 Package pdftex.def Info: ./Figures/Simulations/Validation/Forced/iSGN/NormResul
 ts.pdf  used on input line 707.
 (pdftex.def)             Requested size: 237.26497pt x 180.1203pt.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 713.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\beta' on input line 713.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 713.
-
-[15] [16 <./Figures/Simulations/Validation/Forced/iSGN/h.pdf> <./Figures/Simula
-tions/Validation/Forced/iSGN//G.pdf> <./Figures/Simulations/Validation/Forced/i
-SGN/u.pdf> <./Figures/Simulations/Validation/Forced/iSGN/NormResults.pdf>]
-<./Figures/Simulations/Comparison/hEx03.pdf, id=723, 390.63039pt x 313.01642pt>
-
-File: ./Figures/Simulations/Comparison/hEx03.pdf Graphic file (type pdf)
-<use ./Figures/Simulations/Comparison/hEx03.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Comparison/hEx03.pdf  used on in
-put line 724.
-(pdftex.def)             Requested size: 217.89247pt x 174.6002pt.
-<./Figures/Simulations/Comparison/hEx02.pdf, id=724, 390.63039pt x 313.01642pt>
-
-File: ./Figures/Simulations/Comparison/hEx02.pdf Graphic file (type pdf)
-<use ./Figures/Simulations/Comparison/hEx02.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Comparison/hEx02.pdf  used on in
-put line 730.
-(pdftex.def)             Requested size: 217.89247pt x 174.6002pt.
-<./Figures/Simulations/Comparison/hEx01.pdf, id=725, 390.63039pt x 313.01642pt>
-
-File: ./Figures/Simulations/Comparison/hEx01.pdf Graphic file (type pdf)
-<use ./Figures/Simulations/Comparison/hEx01.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Comparison/hEx01.pdf  used on in
-put line 736.
-(pdftex.def)             Requested size: 217.89247pt x 174.6002pt.
-<./Figures/Simulations/Comparison/hEx00.pdf, id=726, 390.63039pt x 313.01642pt>
-
-File: ./Figures/Simulations/Comparison/hEx00.pdf Graphic file (type pdf)
-<use ./Figures/Simulations/Comparison/hEx00.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Comparison/hEx00.pdf  used on in
-put line 742.
-(pdftex.def)             Requested size: 217.89247pt x 174.6002pt.
-<./Figures/Simulations/Comparison/hEx04.pdf, id=727, 390.63039pt x 313.01642pt>
-
-File: ./Figures/Simulations/Comparison/hEx04.pdf Graphic file (type pdf)
-<use ./Figures/Simulations/Comparison/hEx04.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Comparison/hEx04.pdf  used on in
-put line 748.
-(pdftex.def)             Requested size: 217.89247pt x 174.6002pt.
-<./Figures/Explanation/BetaPlotAllExamples.pdf, id=728, 349.98956pt x 291.76604
-pt>
-File: ./Figures/Explanation/BetaPlotAllExamples.pdf Graphic file (type pdf)
-<use ./Figures/Explanation/BetaPlotAllExamples.pdf>
-Package pdftex.def Info: ./Figures/Explanation/BetaPlotAllExamples.pdf  used on
- input line 754.
-(pdftex.def)             Requested size: 206.99718pt x 172.5634pt.
-
-(./gSGNpaper.bbl
+ [16] [17 <./Figures/Simulations/Validation/Forced/iSGN/h.pdf> <./Figures/Simul
+ations/Validation/Forced/iSGN//G.pdf> <./Figures/Simulations/Validation/Forced/
+iSGN/u.pdf> <./Figures/Simulations/Validation/Forced/iSGN/NormResults.pdf>] (./
+gSGNpaper.bbl
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no “ in font cmr10!
- [17] [18 <./Figures/Simulations/Comparison/hEx03.pdf> <./Figures/Simulations/C
-omparison/hEx02.pdf> <./Figures/Simulations/Comparison/hEx01.pdf> <./Figures/Si
-mulations/Comparison/hEx00.pdf> <./Figures/Simulations/Comparison/hEx04.pdf> <.
-/Figures/Explanation/BetaPlotAllExamples.pdf>]) [19]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 770.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 770.
-
-(./gSGNpaper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 770.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 770.
+ [18]) [19]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 722.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 722.
+ (./gSGNpaper.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 722.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 722.
 Package rerunfilecheck Info: File `gSGNpaper.out' has not changed.
-(rerunfilecheck)             Checksum: E9FBD36F2DC0B53AF98DE343EED10A6C;1891.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 770.
+(rerunfilecheck)             Checksum: EF22AC7B305508CDEEA85B3913B54F51;1802.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 722.
  ) 
 Here is how much of TeX's memory you used:
- 31950 strings out of 492982
- 740144 string characters out of 6134896
- 956261 words of memory out of 5000000
- 34823 multiletter control sequences out of 15000+600000
- 11947 words of font info for 42 fonts, out of 8000000 for 9000
+ 31916 strings out of 492982
+ 738632 string characters out of 6134896
+ 1072765 words of memory out of 5000000
+ 34790 multiletter control sequences out of 15000+600000
+ 12115 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,18n,128p,1590b,972s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 74i,18n,128p,1429b,972s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb>
-Output written on gSGNpaper.pdf (19 pages, 900367 bytes).
+ts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on gSGNpaper.pdf (19 pages, 935500 bytes).
 PDF statistics:
- 934 PDF objects out of 1000 (max. 8388607)
- 848 compressed objects within 9 object streams
- 139 named destinations out of 1000 (max. 500000)
- 313 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 918 PDF objects out of 1000 (max. 8388607)
+ 829 compressed objects within 9 object streams
+ 137 named destinations out of 1000 (max. 500000)
+ 283 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -331,7 +331,7 @@ for expi in range(expn):
 
     up = solve(Au, bu.dot(Gp))
     
-    # L2 = norm(u[30:] - up[30:] ,ord=2)/norm(u[30:] ,ord=2)
+    L2 = norm(u[30:] - up[30:] ,ord=2)/norm(u[30:] ,ord=2)
 
     
     dxs.append(dx)

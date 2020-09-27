@@ -26,12 +26,13 @@ xmin=-175,
 xmax=175,
 xtick={ -175, -87.5,     0,  87.5,   175},
 xlabel style={font=\color{white!15!black}},
-xlabel={\Large$x(m)$},
+xlabel={\LARGE$x(m)$},
 ymin=0,
 ymax=2,
-ytick={  0, 0.2, 0.4, 0.6, 0.8,   1, 1.2, 1.4, 1.6, 1.8,   2},
+ytick={  0, 0.4, 0.8, 1.2, 1.6,   2},
 ylabel style={font=\color{white!15!black}},
-ylabel={\Large$G(m/s^2)$},
+ylabel={\LARGE$G(m^2/s)$},
+xticklabel style = {yshift=-0.2cm},
 axis background/.style={fill=white}
 ]
 \addplot [color=red, draw=none, mark=*,mark size = 2pt, mark options={solid, red}, forget plot]

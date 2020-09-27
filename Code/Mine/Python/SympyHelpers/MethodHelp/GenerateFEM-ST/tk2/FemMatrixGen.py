@@ -49,7 +49,7 @@ def Cubic1(x,x0,x1,x2,x3,loc1):
 def PrintElements(Matrix,MatName,CoeffTerm):
     for i in range(Matrix.shape[0]):
         for j in range(Matrix.shape[1]):
-            term = MatName + '['+str(i) + ',' + str(j)+']' + " = " + CoeffTerm + '('+ str(Matrix[i,j]) + ')'
+            term = MatName + '('+str(i+1 ) + ',' + str(j+1)+')' + " = " + CoeffTerm + '('+ str(Matrix[i,j]) + ')'
             print(term)
 
 
@@ -57,7 +57,7 @@ def PrintElements(Matrix,MatName,CoeffTerm):
 #
 # ---------------- Defintions ----------------------------------
 #
-x,dx = symbols('x dx')
+x,dx,beta1 = symbols('x dx beta1')
 
 # special locations in the cell in the \xi-space
 # xjm1o2 = x_{j - 1/2}
@@ -102,18 +102,18 @@ DW = diff(W, x) #Matrix([[dwjm1o2],[dwjm1o6],[dwjp1o6],[dwjp1o2]])
 
 #G term
 # # (G . W)  W = (W^T G)W = W(W^T G) = WW^T G
-# GM = W * W.T
-# GMint = integrate(GM.replace(wjmh,wjmh_v ).replace(wjms,wjms_v).replace(wjps,wjps_v ).replace(wjph,wjph_v )  , (x,-1,1))
+GM = W * W.T
+GMint = integrate(GM.replace(wjmh,wjmh_v ).replace(wjms,wjms_v).replace(wjps,wjps_v ).replace(wjph,wjph_v )  , (x,-1,1))
 
-# PrintElements(GMint,'Ge','dx/2*')
+PrintElements(GMint,'Ge','dx/2*')
 
 
 #UH term
 # # (H . W) (U . W)  W =  (H^T W) (W^T U) W = (H^T W) W (W^T U) = = (H^T W W W^T) U
-# UHM = (H.T * W)[0] *(W * W.T)
-# UHMint = integrate(UHM.replace(wjmh,wjmh_v ).replace(wjms,wjms_v).replace(wjps,wjps_v ).replace(wjph,wjph_v )  , (x,-1,1))
+UHM = (H.T * W)[0] *(W * W.T)
+UHMint = integrate(UHM.replace(wjmh,wjmh_v ).replace(wjms,wjms_v).replace(wjps,wjps_v ).replace(wjph,wjph_v )  , (x,-1,1))
 
-# PrintElements(UHMint,'uhe','dx/2*')
+PrintElements(UHMint,'uhe','dx/2*')
 
 # h^3/3 ux wx term
 # # (H . W)  (H . W) (H . W) (U . DW)  DW =  (H . W)  (H . W) (H . W) (DW DW^T) U
@@ -121,4 +121,4 @@ H3DUM = (H.T * W)[0]*(H.T * W)[0]*(H.T * W)[0] *(DW * DW.T)
 H3DUMRep = H3DUM.replace(wjmh,wjmh_v ).replace(wjms,wjms_v).replace(wjps,wjps_v ).replace(wjph,wjph_v ).doit()
 H3DUMint = integrate(H3DUMRep, (x,-1,1))
 
-PrintElements(H3DUMint,'h3uxe','(1.0/3.0)*2/dx*')
+PrintElements(H3DUMint,'h3uxe','beta1/dx*')
