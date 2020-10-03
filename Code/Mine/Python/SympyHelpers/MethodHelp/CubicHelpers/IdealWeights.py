@@ -1,7 +1,7 @@
 from sympy import *
 from sympy.solvers.solveset import linsolve
 
-k = 4
+k = 3
 
 qaj,qajm1,qajm2,qajm3,qajp1,qajp2,qajp3,dx = symbols('qA[j] qA[j-1] qA[j-2] qA[j-3] qA[j+1] qA[j+2] qA[j+3] dx')
 

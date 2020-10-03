@@ -19,88 +19,99 @@ c function will update interior using up to date values of h and G.
 c
 c 2. Solver assumes beta's are constant and ghost cell values are constant- constant dirichlet boundary conditions
 c=====================================
-c      subroutine NumericalSolveTSPrint(tstart,tend,
-c     . ga,beta1,beta2,theta,dx,dt,n_GhstCells,xbc_len,
-c     . xbc,hbc_init,Gbc_init,ubc_init,
-c     . currenttime,hbc_fin,Gbc_fin,ubc_fin,
-c     . Energ_Init, Energ_Fin,
-c     . tlist,tlist_len,ExpWdir,expwdirlen)
-c     
-c     
-c      implicit none
-c      
-c      integer n_GhstCells,xbc_len,expwdirlen,tlist_len
-cc      CHARACTER(len=expwdirlen) ExpWdir
-c     DOUBLE PRECISION tstart,tend,ga,beta1,beta2,
-c    . theta,dx,dt,currenttime
-c     DOUBLE PRECISION xbc(xbc_len),hbc_init(xbc_len),
-c     . Gbc_init(xbc_len),
-c     . ubc_init(xbc_len),hbc_fin(xbc_len),
-c     . Gbc_fin(xbc_len), ubc_fin(xbc_len)
-c     
-c      DOUBLE PRECISION tlist(tlist_len)
-c      
-c      DOUBLE PRECISION Energ_Init(4), Energ_Fin(4)
-c      
-c      integer i,ileft,iright,filecount
-c      CHARACTER(len=2) strct
-c      
-c      
-c      
-c      !initial time
-c      currenttime  = tstart
-c      filecount = 1
-c     
-c     !loop over and set hbc_fin,Gbc_fin to initial conditions
-c     ileft = 1
-c     iright = xbc_len
-cc      do i = ileft,iright
-c         hbc_fin(i) = hbc_init(i) 
-c         Gbc_fin(i) = Gbc_init(i) 
-c         ubc_fin(i) = ubc_init(i)
-c      end do
-c      
-c      
-c      !calculate initial Energies
-c      call GetufromhG(xbc_len,hbc_fin,Gbc_fin,ubc_fin,
-c     . beta1,dx,n_GhstCells)
-c     
-c      call TotalEnergy(xbc_len,hbc_fin,ubc_fin,Gbc_fin,ga,beta1,beta2,
-c     . n_GhstCells,dx,Energ_Init)
-c
-c      !evolve the system through time
-c      do while (currenttime  .LT. tend )   
-c      
-c         if ((currenttime + dt .GE. tlist(filecount)) 
-c     .      .OR. (filecount .EQ. 1 ))  then
-c              
-c            write (strct,'(I2)') filecount
-c            open(8, file = ExpWdir// strct //'.dat') 
-c            do i = 1,xbc_len
-c               write(8,*) currenttime,xbc(i),hbc_fin(i),
-c     .            Gbc_fin(i),ubc_fin(i)
-c            end do
-c            close(8)
-c            
-c            filecount = filecount + 1
-c         end if
-
-         
-c         call EvolveStepWrap(xbc_len,hbc_fin,Gbc_fin,ubc_fin,ga,
-c     .   beta1,beta2,theta,n_GhstCells,dx,dt)
+      subroutine NumericalSolveTSPrint(tstart,tend,
+     . ga,beta1,beta2,tolcalc,dx,dt,n_GhstCells,xbc_len,cubbc_len,
+     . xbc,hcubbc_init,Gcubbc_init,ucubbc_init,
+     . hcubbc_fin,Gcubbc_fin,ucubbc_fin,
+     . currenttime,Energ_Init, Energ_Fin,
+     . tlist,tlist_len,ExpWdir,expwdirlen)
      
-c         currenttime  = currenttime  + dt
-c         print *, 'Current Time : ', currenttime 
-c      end do
-       
-      !calculate end energies  
-c      call GetufromhG(xbc_len,hbc_fin,Gbc_fin,ubc_fin,
-c     . beta1,dx,n_GhstCells)
+     
+      implicit none
       
-c      call TotalEnergy(xbc_len,hbc_fin,ubc_fin,Gbc_fin,ga,beta1,beta2,
-c     . n_GhstCells,dx,Energ_Fin)
-c                 
-c      end
+      integer n_GhstCells,xbc_len,cubbc_len,expwdirlen,tlist_len
+      CHARACTER(len=expwdirlen) ExpWdir
+      DOUBLE PRECISION tstart,tend,ga,beta1,beta2,
+     . tolcalc,dx,dt,currenttime
+      DOUBLE PRECISION xbc(xbc_len),hcubbc_init(cubbc_len),
+     . Gcubbc_init(cubbc_len),ucubbc_init(cubbc_len),
+     . hcubbc_fin(cubbc_len),Gcubbc_fin(cubbc_len),
+     . ucubbc_fin(cubbc_len), habc(xbc_len),Gabc(xbc_len)
+
+     
+      DOUBLE PRECISION tlist(tlist_len)
+      
+      DOUBLE PRECISION Energ_Init(4), Energ_Fin(4)
+      
+      integer i,filecount
+      CHARACTER(len=2) strct
+      
+      !initial time
+      currenttime  = tstart
+      filecount = 1
+
+      !loop over and set hbc_fin,Gbc_fin to initial conditions
+      do i = 1,cubbc_len
+         hcubbc_fin(i) = hcubbc_init(i) 
+         Gcubbc_fin(i) = Gcubbc_init(i) 
+         ucubbc_fin(i) = ucubbc_init(i) 
+      end do
+      
+      !calculate initial Energies     
+      call FEMforU(hcubbc_fin,Gcubbc_fin,ucubbc_fin,beta1,dx,xbc_len,
+     .   cubbc_len,3*xbc_len + 1,n_GhstCells)
+
+      call TotalEnergy(xbc_len,cubbc_len,hcubbc_fin,ucubbc_fin,
+     . Gcubbc_fin,ga, beta1,beta2,n_GhstCells,dx,Energ_Init)
+     
+      ! calculate initial cell averages
+      call CubicToCellAverage(cubbc_len,xbc_len,hcubbc_init,
+     .   dx,habc)
+      call CubicToCellAverage(cubbc_len,xbc_len,Gcubbc_init,
+     .   dx,Gabc)
+     
+      !evolve the system through time
+      do while (currenttime  .LT. tend )   
+      
+         if ((currenttime + dt .GE. tlist(filecount)) 
+     .      .OR. (filecount .EQ. 1 ))  then
+              
+            write (strct,'(I2)') filecount
+            open(21, file = ExpWdir// strct //'.dat') 
+            do i = 1,xbc_len
+               write(21,*) currenttime,xbc(i),hcubbc_fin(i),
+     .            Gcubbc_fin(i),ucubbc_fin(i)
+            end do
+            close(21)
+            
+            filecount = filecount + 1
+         end if   
+         
+         call EvolveStepWrap(xbc_len,cubbc_len,habc,Gabc,
+     . ga,beta1,beta2,tolcalc,n_GhstCells,dx,dt,
+     . hcubbc_fin,Gcubbc_fin,ucubbc_fin)
+
+     
+         currenttime  = currenttime  + dt
+         print *, 'Current Time : ', currenttime 
+         
+      end do  
+      
+      !calculate cubics
+      call CellAverageToCubic(cubbc_len,xbc_len,
+     . n_GhstCells,habc,dx,hcubbc_fin,tolcalc)
+ 
+      call CellAverageToCubic(cubbc_len,xbc_len,
+     . n_GhstCells,Gabc,dx,Gcubbc_fin,tolcalc)
+      
+      !calculate end energies  
+      call FEMforU(hcubbc_fin,Gcubbc_fin,ucubbc_fin,beta1,dx,xbc_len,
+     .   cubbc_len,3*xbc_len + 1,n_GhstCells)
+      
+      call TotalEnergy(xbc_len,cubbc_len,hcubbc_fin,ucubbc_fin,
+     . Gcubbc_fin,ga, beta1,beta2,n_GhstCells,dx,Energ_Fin)
+     
+      end
 
 
 c  ********************************************************************************
@@ -296,7 +307,6 @@ c ******************************************************************************
       INTEGER IPIV(ncubbc_len),INFO,i,j
       
       
-      !print *, 1
       ! Zero out
       do i = 1, ncubbc_len
        B(i) = 0.0
@@ -691,45 +701,74 @@ c ====
 
      
       integer i,j
-         
+     
       !Reconstruct h,G   
-      
-      print *, 1
       call CellAverageToCubic(cubbc_len,xbc_len,
      . nGhstCells,habc,dx,hcub,calctol)
-     
-      print *, 2
       call CellAverageToCubic(cubbc_len,xbc_len,
      . nGhstCells,Gabc,dx,Gcub,calctol)
      
-      print *, 3
       !Calculate u
       call FEMforU(hcub,Gcub,ucub,beta1,dx,xbc_len,
      .   cubbc_len, 3*xbc_len + 1,nGhstCells)
      
-      print *, 4
+      !Euler Step
       call SingleEulerStep(xbc_len,cubbc_len,hcub,Gcub,ucub,ga,
      . beta1,beta2,nGhstCells,dt,dx,habc,Gabc,hapbc,Gapbc)
-      print *, 5
-            
-      !Update cell averages (first order approximation to h^{n+1}, G^{n+1})
-!      call SingleEulerStep(xbc_len,hbc,Gbc,ubc,ga,beta1,beta2
-!     . ,theta,n_GhstCells,dt,dx,hpbc,Gpbc)
      
-      !Get ubc, from hp and Gp from FD method (upbc must be initialised with BC properly)
-!      call GetufromhG(xbc_len,hpbc,Gpbc,ubc,beta1,dx,n_GhstCells)
-      
-      !Update cell averages (first order approximation to h^{n+2}, G^{n+2})
-!      call SingleEulerStep(xbc_len,hpbc,Gpbc,ubc,ga,beta1,beta2
-!     . ,theta,n_GhstCells,dt,dx,hppbc,Gppbc)
-      
+      ! BC
+      call CubicToCellAverage(4*nGhstCells,nGhstCells,
+     . hcub(1:4*nGhstCells),
+     .   dx,hapbc(1:nGhstCells))
+      call CubicToCellAverage(4*nGhstCells,nGhstCells,
+     . Gcub(1:4*nGhstCells),
+     .   dx,Gapbc(1:nGhstCells)) 
+      call CubicToCellAverage(4*nGhstCells,nGhstCells,
+     . hcub(cubbc_len - 4*nGhstCells + 1 : cubbc_len),
+     .   dx,hapbc(xbc_len - nGhstCells + 1:xbc_len))
+      call CubicToCellAverage(4*nGhstCells,nGhstCells,
+     . Gcub(cubbc_len - 4*nGhstCells + 1 : cubbc_len),
+     .   dx,Gapbc(xbc_len - nGhstCells + 1:xbc_len))   
+     
+     
+c ====== second time step 
+
+      !Reconstruct h,G   
+      call CellAverageToCubic(cubbc_len,xbc_len,
+     . nGhstCells,hapbc,dx,hcub,calctol)
+      call CellAverageToCubic(cubbc_len,xbc_len,
+     . nGhstCells,Gapbc,dx,Gcub,calctol)   
+
+
+      !Calculate u
+      call FEMforU(hcub,Gcub,ucub,beta1,dx,xbc_len,
+     .   cubbc_len, 3*xbc_len + 1,nGhstCells)
+     
+      !Euler Step
+      call SingleEulerStep(xbc_len,cubbc_len,hcub,Gcub,ucub,ga,
+     . beta1,beta2,nGhstCells,dt,dx,hapbc,Gapbc,happbc,Gappbc)
+                  
       !use RK timestepping to convert h^n,G^n and first order approximation to h^{n+2}, G^{n+2}
       ! to second order approximation to approximation to h^{n+1}, G^{n+1}
       !since boundary conditions are constant, the average will be the initial value
-!      do i= 1,xbc_len
-!         hbc(i) = ( hbc(i ) + hppbc(i))/2d0
-!         Gbc(i) = ( Gbc(i ) + Gppbc(i))/2d0
-!      end do
+      do i= 1,xbc_len
+         habc(i) =  ( habc(i ) + happbc(i))/2d0
+         Gabc(i) = ( Gabc(i ) + Gappbc(i))/2d0
+      end do
+      
+      ! BC
+      call CubicToCellAverage(4*nGhstCells,nGhstCells,
+     . hcub(1:4*nGhstCells),
+     .   dx,habc(1:nGhstCells))
+      call CubicToCellAverage(4*nGhstCells,nGhstCells,
+     . Gcub(1:4*nGhstCells),
+     .   dx,Gabc(1:nGhstCells)) 
+      call CubicToCellAverage(4*nGhstCells,nGhstCells,
+     . hcub(cubbc_len - 4*nGhstCells + 1 : cubbc_len),
+     .   dx,habc(xbc_len - nGhstCells + 1:xbc_len))
+      call CubicToCellAverage(4*nGhstCells,nGhstCells,
+     . Gcub(cubbc_len - 4*nGhstCells + 1 : cubbc_len),
+     .   dx,Gabc(xbc_len - nGhstCells + 1:xbc_len))   
           
       
       end 
@@ -753,33 +792,23 @@ c ====
       DOUBLE PRECISION cdhi,cdGi, fih,fiG,foh,foG
       
       integer i,ileft,iright
-      
-     
-      
-      
+
       !Now we update interior, first calculating flux across left interior boundary 
       !then loop over cells to get flux in/out and thus updating cell average values
       
       !Do left boundary
       i = nGhstCells
-      
-      !print *,i, xbc_len,cubbc_len,ga,beta1,beta2,nGhstCells,dt,dx
             
       !calculates foh,foG which is flux across x_{i +1/2}
       ! it also updates cdhi,cdGi to be gradient across cell i + 1
       call Fluxxiph(hcub,Gcub,ucub,cubbc_len,i,ga,beta1,beta2,
      .   dx,foh,foG)
      
-     
-      !print *, i
-     
       !flux out becomes flux in on next cell
       fih = foh
       fiG = foG
       do i = nGhstCells + 1, xbc_len - nGhstCells
-      
-         print *, i
-      
+            
          !calculates foh,foG which is flux across x_{i +1/2}
          ! it also updates cdhi,cdGi to be gradient across cell i + 1
          call Fluxxiph(hcub,Gcub,ucub,cubbc_len,i,ga,beta1,beta2,
@@ -811,9 +840,7 @@ c subroutine that cubics, calculates flux across
      . dhir,ddhir,dhip1l,ddhip1l, alpha,
      . pua,pub,puc,pud,pha,phb,phc,phd,
      . pup1a,pup1b,pup1c,pup1d,php1a,php1b,php1c,php1d
-     
-      print *, cubbc_len,i,ga,beta1,beta2,dx,foh,foG
-                
+                     
 
       uir = ucub(4*i)
       hir = hcub(4*i)
@@ -834,18 +861,17 @@ c subroutine that cubics, calculates flux across
      . + 9*hcub(4*i)  )/ (4*dx**2)
       phc = (hcub(4*i-3) - 27*hcub(4*i-2) + 27*hcub(4*i -1) 
      . - hcub(4*i) )/ (8*dx)
-      phd = (-ucub(4*i-3) + 9*hcub(4*i-2) + 9*hcub(4*i-1) 
+      phd = (-hcub(4*i-3) + 9*hcub(4*i-2) + 9*hcub(4*i-1) 
      . - hcub(4*i))/ 16.0
           
       duir = 3*pua*(dx/2)**2 + 2*pub*(dx/2) + puc
       dhir = 3*pha*(dx/2)**2 + 2*phb*(dx/2) + phc
       ddhir = 6*pha*(dx/2) + 2*phb
+
       
-      print *, 'edge mid'
-      
-      uip1l = ucub(4*(i+1))
-      hip1l = hcub(4*(i+1))
-      Gip1l = Gcub(4*(i+1))
+      uip1l = ucub(4*i + 1)
+      hip1l = hcub(4*i + 1)
+      Gip1l = Gcub(4*i + 1)
       
       pup1a = (-9*ucub(4*(i+1)-3) + 27*ucub(4*(i+1)-2) 
      . - 27*ucub(4*(i+1)-1)  + 9*ucub(4*(i+1)) )/ (2*dx**3)
@@ -862,14 +888,13 @@ c subroutine that cubics, calculates flux across
      . - 9*hcub(4*(i+1)-1)  + 9*hcub(4*(i+1))  )/ (4*dx**2)
       php1c = (hcub(4*(i+1)-3) - 27*hcub(4*(i+1)-2) 
      . + 27*hcub(4*(i+1) -1)  - hcub(4*(i+1)) )/ (8*dx)
-      php1d = (-ucub(4*(i+1)-3) + 9*hcub(4*(i+1)-2) 
+      php1d = (-hcub(4*(i+1)-3) + 9*hcub(4*(i+1)-2) 
      . + 9*hcub(4*(i+1)-1)  - hcub(4*(i+1)))/ 16.0
      
       duip1l = 3*pup1a*(-dx/2)**2 + 2*pup1b*(-dx/2) + pup1c
       dhip1l = 3*php1a*(-dx/2)**2 + 2*php1b*(-dx/2) + php1c
       ddhip1l = 6*php1a*(-dx/2) + 2*php1b
       
-      print *, 'edge end'
       
       if  (dabs(beta1) < 10d0**(-10))  then
          alpha = 1
@@ -906,125 +931,7 @@ c subroutine that cubics, calculates flux across
 
       end
 
-c ====
-c ReconLinLimGrad - produces the gradient across cell i using neighbouring values
-c and a limiting function, with limiting parameter theta
-c ====
-      subroutine ReconLinLimGrad(qim1,qi,qip1,theta,cdq)
-      DOUBLE PRECISION qim1,qi,qip1,theta,cdq,
-     . fdq,mdq,bdq
-      
-      fdq = qip1 - qi
-      mdq = 0.5*(qip1 - qim1)
-      bdq = qi - qim1
-      
-      call minmod(theta*fdq,mdq,theta*bdq,cdq)
-      
-      end
 
-c ====
-c RecondqmLimGrad - produces the gradient across cell i using neighbouring values
-c and a limiting function, with limiting parameter theta
-c ====
-      subroutine RecondqmLimGrad(qim2,qim1,qi,qip1,dx,cdq)
-      DOUBLE PRECISION qim2,qim1,qi,qip1,dx,cdq
-      DOUBLE PRECISION mdq,bdq
-      
-c      bdq = (2*qi - 3*qim1 + qim2)  /dx
-      cdq = (qip1 - qi) /dx
-      
-c      call minmod(bdq,mdq,bdq,cdq)
-      
-      end
-
-c ====
-c RecondqpLimGrad - produces the gradient across cell i using neighbouring values
-c and a limiting function, with limiting parameter theta
-c ====
-
-      subroutine RecondqpLimGrad(qi,qip1,qip2,qip3,dx,cdq)
-      DOUBLE PRECISION qi,qip1,qip2,qip3,dx,cdq
-      DOUBLE PRECISION fdq,mdq
-      
-      cdq = (qip1 - qi) /dx
-c      fdq = (-2*qip1 + 3*qip2 - qip3) /dx
-c      
-c      call minmod(fdq,mdq,fdq,cdq)
-      
-      end
-           
-c ====
-c RecondqmLimGrad - produces the gradient across cell i using neighbouring values
-c and a limiting function, with limiting parameter theta
-c ====
-      subroutine RecondqpmLimGrad(qim2,qim1,qi,qip1,
-     . qip2,dx,cdq)
-      DOUBLE PRECISION qim2,qim1,qi,qip1,qip2,dx,cdq
-      DOUBLE PRECISION mdq,bdq,fdq
-      
-c      bdq = (qim2 - 4*qim1 + 3*qi)  /(2d0*dx)
-      cdq = (qip1 - qim1) /(2d0*dx)
-c      fdq = (-3*qi + 4*qip1 - qip2)  /(2d0*dx)
-c      
-c      call minmod(bdq,mdq,fdq,cdq)
-      
-      end
-
-c ====
-c ReconddqmLimGrad - produces the gradient across cell i using neighbouring values
-c and a limiting function, with limiting parameter theta
-c ====
-
-      subroutine ReconddqmLimGrad(qim3,qim2,qim1,qi,qip1,
-     . qip2,dx,cddq)
-     
-      DOUBLE PRECISION qim3,qim2,qim1,qi,qip1,qip2,dx,cddq
-      DOUBLE PRECISION mddq,bddq,bpddq
-      
-c      bddq = (5*qi - 13*qim1 + 11*qim2 - 3*qim3)/(2*dx**2)
-c      bpddq = (3*qip1 - 7*qi + 5*qim1 - qim2)/(2*dx**2)
-     
-      cddq = (qip2  - qip1 - qi + qim1 )/(2*dx**2)   
-c      
-c      call minmod(bpddq,bpddq,mddq,cddq)
-      
-      end
-
-      
-c ====
-c ReconddqpLimGrad - produces the gradient across cell i using neighbouring values
-c and a limiting function, with limiting parameter theta
-c ====
-      subroutine ReconddqpLimGrad(qim1,qi,qip1,qip2,qip3,
-     . qip4,dx,cddq)
-      DOUBLE PRECISION qim1,qi,qip1,qip2,qip3,qip4,dx,cddq
-      DOUBLE PRECISION mddq,fddq,fpddq
-      
-      cddq = (qip2  - qip1 - qi + qim1 )/(2*dx**2)
-
-c      fddq  = (5*qip1 - 13*qip2 + 11*qip3 - 3*qip4) /(2*dx**2)
-c      fpddq = (3*qi - 7*qip1 + 5*qip2 - qip3) /(2*dx**2)
-c      
-c      call minmod(fpddq,fpddq,mddq,cddq)
-      
-      end
-c ===
-c minmod is used for limiting and returns smallest size argument if all arguments have same sign,
-c otherwise it returns 0.
-c ===      
-      subroutine minmod(a,b,c,d)
-      implicit none
-      DOUBLE PRECISION a,b,c, d
-      
-      if ((a .gt. 0d0) .and. (b .gt. 0d0) .and. (c .gt. 0d0)) then
-         d = min(a,b,c)
-      else if ((a .lt. 0d0) .and. (b .lt. 0d0) .and. (c .lt. 0d0)) then
-         d = max(a,b,c)
-      else
-         d = 0d0
-      end if
-      
-      end 
 
 c  ********************************************************************************
 c  Part 4 : Analysis Functions
@@ -1039,20 +946,17 @@ c =====
 c Function to generate quartic coefficients using
 c f(x_{j-2}),f(x_{j-1}),f(x_{j}),f(x_{j+1}),f(x_{j+2})
 c =====      
-      subroutine QuarticInterp(qjm2,qjm1,qj,qjp1,qjp2,dx,QuartCoeff)
+      subroutine CubicInterp(qjmh,qjms,qjps,qjph,dx,CubicCoeff)
      
-      DOUBLE PRECISION qjm2,qjm1,qj,qjp1,qjp2,dx
-      DOUBLE PRECISION QuartCoeff(5)
+      DOUBLE PRECISION qjmh,qjms,qjps,qjph,dx
+      DOUBLE PRECISION CubicCoeff(4)
       
-      QuartCoeff(1) = (qjp2 - 4*qjp1 + 6*qj - 4*qjm1 + qjm2) /
-     . (24* (dx**4))
-      QuartCoeff(2) = (qjp2 - 2*qjp1 + 2*qjm1 - qjm2) /
-     . (12* (dx**3))  
-      QuartCoeff(3) = (-qjp2 + 16*qjp1 - 30*qj + 16*qjm1 - qjm2) /
-     . (24* (dx**2))  
-      QuartCoeff(4) = (-qjp2 + 8*qjp1 - 8*qjm1 + qjm2) /
-     . (12*dx)
-      QuartCoeff(5) = qj
+      CubicCoeff(1) = (-9*qjmh + 27*qjms - 27*qjps  + 9*qjph )/ 
+     . (2*dx**3)
+      CubicCoeff(2) = (9*qjmh - 9*qjms - 9*qjps  + 9*qjph )/ (4*dx**2)
+      CubicCoeff(3) = (qjmh - 27*qjms + 27*qjps  - qjph )/ (8*dx)
+      CubicCoeff(4) = (-qjmh + 9*qjms + 9*qjps  - qjph )/ 16.0
+
       end
 
 
@@ -1060,24 +964,23 @@ c ========================
 c Functions to evaluate Quartic at x, with quartic centered around x_j
 c xmxj = x - x_j 
 c ====================      
-      subroutine QuarticCoeffEvalxj(QuarticCoeff,xmxj,qatxj)
+      subroutine CubicCoeffEvalxj(CubicCoeff,xmxj,qatxj)
       
-      DOUBLE PRECISION QuarticCoeff(5)
+      DOUBLE PRECISION CubicCoeff(4)
       DOUBLE PRECISION xmxj,qatxj
       
-      qatxj = QuarticCoeff(1)*xmxj**4 + QuarticCoeff(2)*xmxj**3 +
-     . QuarticCoeff(3)*xmxj**2 + QuarticCoeff(4)*xmxj +
-     . QuarticCoeff(5)
+      qatxj = CubicCoeff(1)*xmxj**3 + CubicCoeff(2)*xmxj**2 +
+     . CubicCoeff(3)*xmxj + CubicCoeff(4)
      
       end
       
-      subroutine QuarticCoeffEvalGradxj(QuarticCoeff,xmxj,dqatxj)
+      subroutine CubicCoeffEvalGradxj(CubicCoeff,xmxj,dqatxj)
       
-      DOUBLE PRECISION QuarticCoeff(5)
+      DOUBLE PRECISION CubicCoeff(4)
       DOUBLE PRECISION xmxj,dqatxj
       
-      dqatxj = 4*QuarticCoeff(1)*xmxj**3 + 3*QuarticCoeff(2)*xmxj**2 +
-     . 2*QuarticCoeff(3)*xmxj + QuarticCoeff(4)
+      dqatxj = 3*CubicCoeff(1)*xmxj**2 + 2*CubicCoeff(2)*xmxj +
+     . CubicCoeff(3) 
      
       end
 
@@ -1085,11 +988,11 @@ c =====
 c Functions to get integrals over cell
 c ====
       ! Energy function for cell
-      subroutine AllEnergiesIntegralCell(xbc_len,h,u,G,ga,beta1,beta2,j
-     . ,dx,CellEnergies)
+      subroutine AllEnergiesIntegralCell(xbc_len,cubbc_len,h,u,G,ga,
+     . beta1,beta2,j,dx,CellEnergies)
       
-      integer j,xbc_len
-      DOUBLE PRECISION h(xbc_len),u(xbc_len),G(xbc_len)
+      integer j,xbc_len,cubbc_len
+      DOUBLE PRECISION h(cubbc_len),u(cubbc_len),G(cubbc_len)
       DOUBLE PRECISION dx,ga,beta1,beta2
       DOUBLE PRECISION CellEnergies(4)
       
@@ -1097,52 +1000,58 @@ c ====
       DOUBLE PRECISION fGPe(4),sGPe(4),tGPe(4)
       
       DOUBLE PRECISION GPmxj,hGP,GGP,uGP,uxGP,hxGP
-      DOUBLE PRECISION hCoeff(5), uCoeff(5), GCoeff(5)
+      DOUBLE PRECISION hCoeff(4), uCoeff(4), GCoeff(4)
       
-      call QuarticInterp(h(j-2),h(j-1),h(j),h(j+1),h(j+2),dx,hCoeff)
-      call QuarticInterp(u(j-2),u(j-1),u(j),u(j+1),u(j+2),dx,uCoeff)
-      call QuarticInterp(G(j-2),G(j-1),G(j),G(j+1),G(j+2),dx,GCoeff)
+      call CubicInterp(h(4*j-3),h(4*j-2),h(4*j-1),h(4*j),dx,hCoeff)
+      call CubicInterp(u(4*j-3),u(4*j-2),u(4*j-1),u(4*j),dx,uCoeff)
+      call CubicInterp(G(4*j-3),G(4*j-2),G(4*j-1),G(4*j),dx,GCoeff)
+
       
       !first gauss point
       GPmxj = -dx*DSQRT(3.0d0/5.0d0)/2
-      call QuarticCoeffEvalxj(hCoeff,GPmxj,hGP)
-      call QuarticCoeffEvalGradxj(hCoeff,GPmxj,hxGP)
-      call QuarticCoeffEvalxj(GCoeff,GPmxj,GGP)
-      call QuarticCoeffEvalxj(uCoeff,GPmxj,uGP)
-      call QuarticCoeffEvalGradxj(uCoeff,GPmxj,uxGP)
+
+      call CubicCoeffEvalxj(hCoeff,GPmxj,hGP)
+      call CubicCoeffEvalxj(uCoeff,GPmxj,uGP)
+      call CubicCoeffEvalxj(GCoeff,GPmxj,GGP)
+      
+      call CubicCoeffEvalGradxj(hCoeff,xmxj,hxGP)
+      call CubicCoeffEvalGradxj(uCoeff,xmxj,uxGP)
+      
       
       fGPe(1) = hGP
       fGPe(2) = GGP
       fGPe(3) = hGP*uGP
-      fGPe(4) = (hGP*uGP**2 + (1d0/3d0 + beta1/2d0)*(uxGP**2)*(hGP**3)
+      fGPe(4) = (hGP*uGP**2 + 0.5*beta1*(uxGP**2)*(hGP**3)
      . + ga*hGP**2*(1d0 + beta2/2d0*hxGP**2 )   )/2d0
 
       !second gauss point
       GPmxj = 0.0 
-      call QuarticCoeffEvalxj(hCoeff,GPmxj,hGP)
-      call QuarticCoeffEvalGradxj(hCoeff,GPmxj,hxGP)
-      call QuarticCoeffEvalxj(GCoeff,GPmxj,GGP)
-      call QuarticCoeffEvalxj(uCoeff,GPmxj,uGP)
-      call QuarticCoeffEvalGradxj(uCoeff,GPmxj,uxGP)
+      call CubicCoeffEvalxj(hCoeff,GPmxj,hGP)
+      call CubicCoeffEvalxj(uCoeff,GPmxj,uGP)
+      call CubicCoeffEvalxj(GCoeff,GPmxj,GGP)
+      
+      call CubicCoeffEvalGradxj(hCoeff,xmxj,hxGP)
+      call CubicCoeffEvalGradxj(uCoeff,xmxj,uxGP)
       
       sGPe(1) = hGP
       sGPe(2) = GGP
       sGPe(3) = hGP*uGP
-      sGPe(4) = (hGP*uGP**2 + (1d0/3d0 + beta1/2d0)*(uxGP**2)*(hGP**3)
+      sGPe(4) = (hGP*uGP**2 + 0.5*beta1*(uxGP**2)*(hGP**3)
      . + ga*hGP**2*(1d0 + beta2/2d0*hxGP**2 )   )/2d0
       
       !third gauss point
       GPmxj = dx*DSQRT(3.0d0/5.0d0)/2
-      call QuarticCoeffEvalxj(hCoeff,GPmxj,hGP)
-      call QuarticCoeffEvalGradxj(hCoeff,GPmxj,hxGP)
-      call QuarticCoeffEvalxj(GCoeff,GPmxj,GGP)
-      call QuarticCoeffEvalxj(uCoeff,GPmxj,uGP)
-      call QuarticCoeffEvalGradxj(uCoeff,GPmxj,uxGP)
+      call CubicCoeffEvalxj(hCoeff,GPmxj,hGP)
+      call CubicCoeffEvalxj(uCoeff,GPmxj,uGP)
+      call CubicCoeffEvalxj(GCoeff,GPmxj,GGP)
+      
+      call CubicCoeffEvalGradxj(hCoeff,xmxj,hxGP)
+      call CubicCoeffEvalGradxj(uCoeff,xmxj,uxGP)
       
       tGPe(1) = hGP
       tGPe(2) = GGP
       tGPe(3) = hGP*uGP
-      tGPe(4) = (hGP*uGP**2 + (1d0/3d0 + beta1/2d0)*(uxGP**2)*(hGP**3)
+      tGPe(4) = (hGP*uGP**2 + 0.5*beta1*(uxGP**2)*(hGP**3)
      . + ga*hGP**2*(1d0 + beta2/2d0*hxGP**2 )   )/2d0
       
       !weight the values at gauss points to get approximate integral over cell
@@ -1154,17 +1063,18 @@ c ====
       end
       
       !Function to sum all energies
-      subroutine TotalEnergy(xbc_len,hbc,ubc,Gbc,ga,beta1,beta2,
-     . n_GhstCells,dx,TotEnergVals)
+      subroutine TotalEnergy(xbc_len,cubbc_len,hcubbc,ucubbc,Gcubbc,ga,
+     . beta1,beta2,n_GhstCells,dx,TotEnergVals)
       
-      integer xbc_len,n_GhstCells
-      DOUBLE PRECISION hbc(xbc_len),ubc(xbc_len),Gbc(xbc_len)
+      integer xbc_len,n_GhstCells,cubbc_len
+      DOUBLE PRECISION hcubbc(cubbc_len),ucubbc(cubbc_len),
+     . Gcubbc(cubbc_len)
       DOUBLE PRECISION dx,ga,beta1,beta2
       DOUBLE PRECISION TotEnergVals(4)
       
       DOUBLE PRECISION CellEnergVals(4)
       integer i,j
-            
+
       !running totals for energy values, start at 0
       do i = 1,4
          TotEnergVals(i) = 0.0
@@ -1172,7 +1082,9 @@ c ====
       
       !just loop over interior of hbc,Gbc, ubc which have interior values + ghost cell values
       do j= n_GhstCells + 1, xbc_len - n_GhstCells
-         call  AllEnergiesIntegralCell(xbc_len,hbc,ubc,Gbc,ga,
+      
+         call  AllEnergiesIntegralCell(xbc_len,cubbc_len,hcubbc,
+     .    ucubbc,Gcubbc,ga,
      .      beta1,beta2,j,dx,CellEnergVals)
      
          !add cell energy value to running total

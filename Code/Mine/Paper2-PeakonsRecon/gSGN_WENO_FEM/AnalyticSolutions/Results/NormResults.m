@@ -5,17 +5,17 @@ clear all;
 close all;
 
 % Get list of directories to loop over when reading data
-wdir = "./Validation/Recon/Test1/"
+wdir = "./Validation/Run/30s/"
 
 
-OutEps = importdata(strcat(wdir, 'L2err.dat'));
+OutEps = importdata(strcat(wdir, 'Norms.dat'));
 dxseps = OutEps(:,1);
 Normhseps = OutEps(:,2);
 NormGseps = OutEps(:,3);
 Normuseps = OutEps(:,4);
 
 figure;
-loglog(dxseps,Normhseps,'s b',dxseps,NormGseps,'o r',dxseps,Normuseps,'^ k',dxseps,dxseps.^2,'-',dxseps,0.001*dxseps.^3,'-',dxseps,0.001*dxseps.^4,'-')
+loglog(dxseps,Normhseps,'s b',dxseps,NormGseps,'o r',dxseps,Normuseps,'^ k',dxseps,dxseps.^1,'-',dxseps,dxseps.^2,'-')
 grid off
 legend('hide')
 xlabel('\Delta x')

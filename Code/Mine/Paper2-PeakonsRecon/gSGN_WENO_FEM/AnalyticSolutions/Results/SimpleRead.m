@@ -5,10 +5,10 @@ clear all;
 close all;
 
 % Get list of directories to loop over when reading data
-wdir = "./Validation/Recon/Test1/01/"
+wdir = "./Validation/Recon/Test1/00/"
 
 
-xhuG = importdata(strcat(wdir, 'xhuG.dat'));
+xhuG = importdata(strcat(wdir, 'xhuGInit.dat'));
 x = xhuG(:,1);
 h = xhuG(:,2);
 u = xhuG(:,3);

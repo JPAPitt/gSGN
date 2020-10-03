@@ -1,4 +1,4 @@
-\begin{thebibliography}{20}
+\begin{thebibliography}{21}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -137,5 +137,11 @@ R.~Courant, K.~Friedrichs, and H.~Lewy.
 G.A. El, R.H.J. Grimshaw, and N.F. Smyth.
 \newblock Unsteady undular bores in fully nonlinear shallow-water theory.
 \newblock \emph{Physics of Fluids}, 18\penalty0 (2):\penalty0 027104, 2006.
+
+\bibitem[Shu(2012)]{Shu-2012-59-5}
+C.W. Shu.
+\newblock Efficient algorithms for solving partial differential equations with
+  discontinuous solutions.
+\newblock \emph{Notices of the AMS}, 59\penalty0 (5):\penalty0 615--621, 2012.
 
 \end{thebibliography}

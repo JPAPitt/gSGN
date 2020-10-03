@@ -1,7 +1,7 @@
 from sympy import *
 from sympy.solvers.solveset import linsolve
 
-k = 4
+k = 3
 
 qaj,qajm1,qajm2,qajm3,qajp1,qajp2,qajp3,dx = symbols('cellavgbc_q(i) cellavgbc_q(i-1) cellavgbc_q(i-2) cellavgbc_q(i-3) cellavgbc_q(i+1) cellavgbc_q(i+2) cellavgbc_q(i+3) dx')
 
@@ -62,10 +62,10 @@ Bjm2tojp1 = 0
 Bjm1tojp2 = 0
 Bjtojp3 = 0
 for l in range(1,k):
-    Bjm3tojlterm = integrate( dx**(2*l - 1) *diff(Polyjm3toj,(x,l))**2, (x,-dx/2,dx/2))
-    Bjm2tojp1lterm = integrate( dx**(2*l - 1) *diff(Polyjm2tojp1,(x,l))**2, (x,-dx/2,dx/2))
-    Bjm1tojp2lterm = integrate( dx**(2*l - 1) *diff(Polyjm1tojp2,(x,l))**2, (x,-dx/2,dx/2))
-    Bjtojp3lterm = integrate( dx**(2*l - 1) *diff(Polyjtojp3,(x,l))**2, (x,-dx/2,dx/2))
+    Bjm3tojlterm = dx**(2*l - 1) *integrate( diff(Polyjm3toj,(x,l))**2, (x,-dx/2,dx/2))
+    Bjm2tojp1lterm = dx**(2*l - 1) *integrate( diff(Polyjm2tojp1,(x,l))**2, (x,-dx/2,dx/2))
+    Bjm1tojp2lterm = dx**(2*l - 1) *integrate( diff(Polyjm1tojp2,(x,l))**2, (x,-dx/2,dx/2))
+    Bjtojp3lterm = dx**(2*l - 1) *integrate( diff(Polyjtojp3,(x,l))**2, (x,-dx/2,dx/2))
     
     Bjm3toj = Bjm3toj +  Bjm3tojlterm
     Bjm2tojp1 = Bjm2tojp1 +  Bjm2tojp1lterm

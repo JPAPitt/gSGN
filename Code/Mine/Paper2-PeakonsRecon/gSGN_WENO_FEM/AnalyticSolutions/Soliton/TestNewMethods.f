@@ -1,221 +1,168 @@
+      subroutine SingleSerreSoliton(a0,a1,ga,beta1,beta2,
+     . xstart,xbc_len,n_GhstCells,cubic_len,dx,tstart,tend,
+     . dt,tolcalc,NormFile,AvgNormFile,EnergFile,tlist,tlist_len,
+     . ExpWdir,ExpWdir_len)
+     
+      implicit none
+      DOUBLE PRECISION a0,a1,ga,beta1,beta2,xstart,dx,
+     . tstart,tend,dt,tolcalc
+      integer xbc_len,n_GhstCells,ExpWdir_len,NormFile,EnergFile,
+     . tlist_len,cubic_len,AvgNormFile
+      CHARACTER(len=ExpWdir_len) ExpWdir
       
-c     Sine recont
-      subroutine Simpleq(a0,a1,a2,x_bc,qa_bc,qcubic_bc,
-     . dx,cubic_len,xbc_len)
-      
-      integer xbc_len,cubic_len
-      DOUBLE PRECISION dx,a0,a1,a2
-      DOUBLE PRECISION x_bc(xbc_len),qa_bc(xbc_len),
-     .   qcubic_bc(cubic_len)
-      
-      integer i
-      
-      DOUBLE PRECISION xjmh, xjms, xjps,xjph
-      
-      
-      do i=1,xbc_len
-           xjmh = x_bc(i) - 0.5*dx
-           xjms = x_bc(i) - dx/6.0
-           xjps = x_bc(i) + dx/6.0
-           xjph = x_bc(i) + 0.5*dx
-           
-           qcubic_bc(4*i - 3) = a0 + a1*dsin(a2*xjmh)
-           qcubic_bc(4*i - 2) = a0 + a1*dsin(a2*xjms)
-           qcubic_bc(4*i - 1) = a0 + a1*dsin(a2*xjps)
-           qcubic_bc(4*i ) = a0 + a1*dsin(a2*xjph)
+      DOUBLE PRECISION xbc(xbc_len),hbccub_init(cubic_len),
+     . Gbccub_init(cubic_len),ubccub_init(cubic_len),
+     . hbccub_fin(cubic_len),Gbccub_fin(cubic_len),
+     . ubccub_fin(cubic_len),hbccub_fina(cubic_len),
+     . Gbccub_fina(cubic_len),ubccub_fina(cubic_len),
+     . habc(xbc_len),Gabc(xbc_len),uabc(xbc_len),
+     . habca(xbc_len),Gabca(xbc_len),uabca(xbc_len)
 
-           qa_bc(i) = 1.0/dx*( (a0*xjph - a1/a2*(dcos(a2*xjph))) 
-     .            - (a0*xjmh - a1/a2*(dcos(a2*xjmh))) )
-           
+      DOUBLE PRECISION Energs_init(4), Energs_fin(4),Energ_Err(4)
+      DOUBLE PRECISION Norms(3),AvgNorms(3)
+      DOUBLE PRECISION tlist(tlist_len)
+      integer i
+      DOUBLE PRECISION currenttime
+      
+      
+      !generate cell nodes
+      call Generatexbc(xstart,dx,xbc_len,n_GhstCells,xbc)
+      
+
+      !get initial conditions at all reconstruction points
+      call SerreSoliton(xbc,xbc_len,tstart,
+     . ga,a0,a1,dx,hbccub_init,ubccub_init,Gbccub_init,cubic_len)
+
+
+      do i = 1,cubic_len
+        hbccub_fin(i)= hbccub_init(i)
+        ubccub_fin(i)= ubccub_init(i)
+        Gbccub_fin(i)= Gbccub_init(i)
       end do
       
       
-      end
+      call NumericalSolveTSPrint(tstart,tend,
+     . ga,beta1,beta2,tolcalc,dx,dt,n_GhstCells,xbc_len,cubic_len,
+     . xbc,hbccub_init,Gbccub_init,ubccub_init,
+     . hbccub_fin,Gbccub_fin,ubccub_fin,
+     . currenttime,Energs_init, Energs_fin,
+     . tlist,tlist_len,ExpWdir,ExpWdir_len)
+  
+      !get initial conditions at all reconstruction points
+      call SerreSoliton(xbc,xbc_len,currenttime,
+     . ga,a0,a1,dx,hbccub_fina,ubccub_fina,Gbccub_fina,cubic_len)   
      
-      subroutine SimpleqhuG(a0,a1,a2,a3,a4,beta1,x_bc,
-     . hcub_bc,ucub_bc,Gcub_bc,
-     . dx,cubbc_len,xbc_len)
-      
-      integer xbc_len,cubbc_len
-      DOUBLE PRECISION dx,a0,a1,a2,a3,a4,beta1
-      DOUBLE PRECISION x_bc(xbc_len),
-     .   hcub_bc(cubbc_len), ucub_bc(cubbc_len), Gcub_bc(cubbc_len)
-      
-      integer i
-      
-      DOUBLE PRECISION xjmh, xjms, xjps,xjph,
-     . hxmh,hxms,hxps,hxph,uxmh,uxms,uxps,uxph,
-     . uxxmh,uxxms,uxxps,uxxph
-      
-      do i=1,xbc_len
-           xjmh = x_bc(i) - 0.5*dx
-           xjms = x_bc(i) - dx/6.0
-           xjps = x_bc(i) + dx/6.0
-           xjph = x_bc(i) + 0.5*dx
-           
-           hcub_bc(4*i - 3) = a0 + a1*dsin(a2*xjmh)
-           hcub_bc(4*i - 2) = a0 + a1*dsin(a2*xjms)
-           hcub_bc(4*i - 1) = a0 + a1*dsin(a2*xjps)
-           hcub_bc(4*i ) = a0 + a1*dsin(a2*xjph)
-           
-           hxmh = a1*a2*dcos(a2*xjmh)
-           hxms = a1*a2*dcos(a2*xjms)
-           hxps = a1*a2*dcos(a2*xjps)
-           hxph = a1*a2*dcos(a2*xjph)
-           
-           ucub_bc(4*i - 3) = a3*dcos(a4*xjmh)
-           ucub_bc(4*i - 2) = a3*dcos(a4*xjms)
-           ucub_bc(4*i - 1) = a3*dcos(a4*xjps)
-           ucub_bc(4*i ) = a3*dcos(a4*xjph)
-           
-           uxmh = -a3*a4*dsin(a4*xjmh)
-           uxms = -a3*a4*dsin(a4*xjms)
-           uxps = -a3*a4*dsin(a4*xjps)
-           uxph = -a3*a4*dsin(a4*xjph)
-           
-           uxxmh = -a3*a4*a4*dcos(a4*xjmh)
-           uxxms = -a3*a4*a4*dcos(a4*xjms)
-           uxxps = -a3*a4*a4*dcos(a4*xjps)
-           uxxph = -a3*a4*a4*dcos(a4*xjph)
-                      
-           Gcub_bc(4*i - 3) = ucub_bc(4*i - 3)*hcub_bc(4*i - 3) - 
-     .      beta1/2.0*(3*(hcub_bc(4*i - 3)**2)*hxmh*uxmh +
-     .      (hcub_bc(4*i - 3)**3)*uxxmh)
      
-           Gcub_bc(4*i - 2) = ucub_bc(4*i - 2)*hcub_bc(4*i - 2) - 
-     .      beta1/2.0*(3*(hcub_bc(4*i - 2)**2)*hxms*uxms +
-     .      (hcub_bc(4*i - 2)**3)*uxxms)
+      call CubicToCellAverage(cubic_len,xbc_len,hbccub_fin,
+     .   dx,habc)
+      call CubicToCellAverage(cubic_len,xbc_len,hbccub_fina,
+     .   dx,habca)
+      call CubicToCellAverage(cubic_len,xbc_len,Gbccub_fin,
+     .   dx,Gabc)
+      call CubicToCellAverage(cubic_len,xbc_len,Gbccub_fina,
+     .   dx,Gabca)      
+      call CubicToCellAverage(cubic_len,xbc_len,ubccub_fin,
+     .   dx,uabc)
+      call CubicToCellAverage(cubic_len,xbc_len,ubccub_fina,
+     .   dx,uabca)
 
-           Gcub_bc(4*i - 1) = ucub_bc(4*i - 1)*hcub_bc(4*i - 1) - 
-     .      beta1/2.0*(3*(hcub_bc(4*i - 1)**2)*hxps*uxps +
-     .      (hcub_bc(4*i - 1)**3)*uxxps)
-
-           Gcub_bc(4*i) = ucub_bc(4*i)*hcub_bc(4*i) - 
-     .      beta1/2.0*(3*(hcub_bc(4*i)**2)*hxph*uxph +
-     .      (hcub_bc(4*i)**3)*uxxph)
-           
+      ! calculate norms
+      call L2Norm(xbc_len,habca,habc,AvgNorms(1)) 
+      call L2Norm(xbc_len,Gabca,Gabc,AvgNorms(2)) 
+      call L2Norm(xbc_len,uabca,uabc,AvgNorms(3)) 
+ 
+     
+      ! calculate norms
+      call L2Norm(cubic_len,hbccub_fina,hbccub_fin,Norms(1)) 
+      call L2Norm(cubic_len,Gbccub_fina,Gbccub_fin,Norms(2)) 
+      call L2Norm(cubic_len,ubccub_fina,ubccub_fin,Norms(3)) 
+      
+      ! Conservation Norm Tests  
+      do i = 1,4
+         !if denominator small just return absolute error
+         if (dabs(Energs_init(i)) .lt. 10d0**(-10)) then
+            Energ_Err(i) = dabs(Energs_fin(i) - Energs_init(i))
+         else
+            Energ_Err(i) = dabs(Energs_fin(i) - Energs_init(i))/
+     .       dabs(Energs_init(i))
+         end if
+      end do 
+      
+      
+      
+      open(11, file = ExpWdir//'xhuGInit.dat') 
+      do i = 1,xbc_len
+         write(11,*) xbc(i) -0.5*dx, hbccub_init(4*i -3), 
+     .    ubccub_init(4*i -3) , Gbccub_init(4*i -3)
+         write(11,*) xbc(i) - dx/6.0, hbccub_init(4*i -2), 
+     .    ubccub_init(4*i -2) , Gbccub_init(4*i -2)
+         write(11,*) xbc(i) + dx/6.0, hbccub_init(4*i -1), 
+     .    ubccub_init(4*i -1) , Gbccub_init(4*i -1)
+         write(11,*) xbc(i) + 0.5*dx, hbccub_init(4*i), 
+     .    ubccub_init(4*i) , Gbccub_init(4*i)
       end do
       
+      close(11)
       
-      end
-
-
-c    
-      subroutine L2Norm(xbc_len,qbc_a,qbc_f,L2n) 
+      open(12, file = ExpWdir//'xhuGFin.dat') 
+      do i = 1,xbc_len
+         write(12,*) xbc(i) -0.5*dx, hbccub_fin(4*i -3), 
+     .    ubccub_fin(4*i -3) , Gbccub_fin(4*i -3)
+         write(12,*) xbc(i) - dx/6.0, hbccub_fin(4*i -2), 
+     .    ubccub_fin(4*i -2) , Gbccub_fin(4*i -2)
+         write(12,*) xbc(i) + dx/6.0, hbccub_fin(4*i -1), 
+     .    ubccub_fin(4*i -1) , Gbccub_fin(4*i -1)
+         write(12,*) xbc(i) + 0.5*dx, hbccub_fin(4*i), 
+     .    ubccub_fin(4*i) , Gbccub_fin(4*i)
+      end do
       
-      integer xbc_len
-      DOUBLE PRECISION qbc_a(xbc_len),qbc_f(xbc_len)
-      integer i
+      close(12)
       
-      DOUBLE PRECISION L2num,L2den,L2n
+      open(12, file = ExpWdir//'xhuGFinA.dat') 
+      do i = 1,xbc_len
+         write(12,*) xbc(i) -0.5*dx, hbccub_fina(4*i -3), 
+     .    ubccub_fina(4*i -3) , Gbccub_fina(4*i -3)
+         write(12,*) xbc(i) - dx/6.0, hbccub_fina(4*i -2), 
+     .    ubccub_fina(4*i -2) , Gbccub_fina(4*i -2)
+         write(12,*) xbc(i) + dx/6.0, hbccub_fina(4*i -1), 
+     .    ubccub_fina(4*i -1) , Gbccub_fina(4*i -1)
+         write(12,*) xbc(i) + 0.5*dx, hbccub_fina(4*i), 
+     .    ubccub_fina(4*i) , Gbccub_fina(4*i)
+      end do
       
-      L2num = 0.0
-      L2den = 0.0
+      close(12)
       
-      do i = 1, xbc_len
-         L2num = L2num + (qbc_a(i) - qbc_f(i))**2
-         L2den = L2den+  (qbc_a(i))**2
-      end do  
-      
-      if (L2den .LT. 10.0**(-12)) then
-         L2n = dsqrt(L2num)
-      
-      else 
-         L2n = dsqrt(L2num /L2den)
-      end if 
-      
-      end    
-      
-      
-      subroutine Experiment(a0,a1,a2,a3,a4,beta1,xstart,dx,xbc_len,
-     .   nGhstCells,cubbc_len,L2eG,L2eh,L2eu,wdir,effeclenwdir)
-      
-         Integer xbc_len,cubbc_len,nGhstCells,effeclenwdir,i
-         DOUBLE PRECISION a0,a1,a2,a3,a4,beta1,xstart,dx,L2eG,L2eh
-     .   ,L2eu
-         
-         CHARACTER(len=effeclenwdir) wdir
-         
-         DOUBLE PRECISION x_bc(xbc_len),ha_bc(xbc_len),Ga_bc(xbc_len),
-     .   ucub_bc(cubbc_len),Gcub_bc(cubbc_len),hcub_bc(cubbc_len),
-     .   hcubN_bc(cubbc_len),ucubN_bc(cubbc_len),GcubN_bc(cubbc_len)
-         
-         call Generatexbc(xstart,dx,xbc_len,nGhstCells,x_bc)
-         
+      open(13, file = ExpWdir//'Energy.dat')       
+      write (13,*) 'When , h , G ,  uh , Energy'
+      write(13,*) 'Initial ',Energs_init(1),Energs_init(2),
+     .   Energs_init(3),Energs_init(4)
+      write(13,*) 'End ',Energs_fin(1),Energs_fin(2),
+     .   Energs_fin(3),Energs_fin(4)
+      close(13)
      
-         call SimpleqhuG(a0,a1,a2,a3,a4,beta1,x_bc,
-     . hcub_bc,ucub_bc,Gcub_bc,dx,cubbc_len,xbc_len)
-     
-         do i = 1,cubbc_len
-           hcubN_bc(i)= hcub_bc(i)
-           ucubN_bc(i)= ucub_bc(i)
-           GcubN_bc(i)= Gcub_bc(i)
-         end do
-         
-         open(1, file = wdir//'xhuGInit.dat') 
-         do i = 1,xbc_len
-            write(1,*) x_bc(i) -0.5*dx, hcub_bc(4*i -3), ucub_bc(4*i -3)
-     .        , Gcub_bc(4*i -3)
-            write(1,*) x_bc(i) - dx/6, hcub_bc(4*i -2), ucub_bc(4*i -2)
-     .       , Gcub_bc(4*i -2)
-            write(1,*) x_bc(i) + dx/6, hcub_bc(4*i -1), ucub_bc(4*i -1)
-     .       , Gcub_bc(4*i -1)
-            write(1,*) x_bc(i) + 0.5*dx, hcub_bc(4*i), ucub_bc(4*i)
-     .       , Gcub_bc(4*i )
-         end do
-         
-         close(1)
-
-         call CubicToCellAverage(cubbc_len,xbc_len,hcub_bc,dx,ha_bc)     
-         call CubicToCellAverage(cubbc_len,xbc_len,Gcub_bc,dx,Ga_bc)
-     
-         open(1, file = wdir//'xhaGa.dat') 
-         do i = 1,xbc_len
-            write(1,*) x_bc(i), ha_bc(i), Ga_bc(i)
-         end do
-         
-         close(1)
-         print *, xbc_len,cubbc_len,beta1,beta2,
-     .      nGhstCells,dx,dt
-         call EvolveStepWrap(xbc_len,cubbc_len,ha_bc,Ga_bc,10.0,
-     . beta1,beta2,10.0**(-12),nGhstCells,dx,dx, 
-     . hcubN_bc,GcubN_bc,ucubN_bc)
-     
-c        print *, 'Recon',cubic_len,xbc_len, nGhstCells,dx
-c        call CellAverageToCubic(cubbc_len,xbc_len,
-c     . nGhstCells,ha_bc,dx,hcubN_bc,10.0**(-12))
-
-c        call CellAverageToCubic(cubbc_len,xbc_len,
-c     . nGhstCells,Ga_bc,dx,GcubN_bc,10.0**(-12))     
-        ! test reconstruction
-     
-c        print *, 'Norm 1'
-        call L2Norm(cubbc_len,Gcub_bc,GcubN_bc,L2eG) 
-        
-c        print *, 'Norm 2'
-        call L2Norm(cubbc_len,hcub_bc,hcubN_bc,L2eh) 
-        
-        
-c        call FEM(hcub_bc,Gcub_bc,ucubN_bc,beta1,dx,xbc_len,
-c     .   cubbc_len, 3*xbc_len + 1,nGhstCells)
-     
-     
-     
-        call L2Norm(cubbc_len,ucub_bc,ucubN_bc,L2eu) 
-     
-         open(1, file = wdir//'xhuGNum.dat') 
-         do i = 1,xbc_len
-            write(1,*) x_bc(i) -0.5*dx, hcubN_bc(4*i -3),
-     .        ucubN_bc(4*i -3), Gcubn_bc(4*i -3)
-            write(1,*) x_bc(i) - dx/6, hcubN_bc(4*i -2),
-     .      ucubN_bc(4*i -2) , GcubN_bc(4*i -2)
-            write(1,*) x_bc(i) + dx/6, hcubN_bc(4*i -1),
-     .       ucubN_bc(4*i -1), GcubN_bc(4*i -1)
-            write(1,*) x_bc(i) + 0.5*dx, hcubN_bc(4*i),
-     .       ucubN_bc(4*i), GcubN_bc(4*i )
-         end do   
-         
-         close(1)  
+      open(14, file = ExpWdir//'Params.dat') 
+      write(14,*) 'xstart',xstart
+      write(14,*) 'xend',xbc(xbc_len)
+      write(14,*) 'x_len',xbc_len - 2*n_GhstCells
+      write(14,*) 'n_GhstCells',n_GhstCells
+      write(14,*) 'xbc_len',xbc_len
+      write(14,*) 'dx' , dx
+      write(14,*) 'tstart', tstart
+      write(14,*) 'tend',tend 
+      write(14,*) 'actual_end_time', currenttime
+      write(14,*) 'dt' , dt
+      write(14,*) 'tolcalc' , tolcalc
+      write(14,*) 'gravity' , ga
+      write(14,*) 'a0' , a0
+      write(14,*) 'a1' , a1
+      write(14,*) 'beta1' , beta1
+      write(14,*) 'beta2' , beta2
+      close(14)
+      
+      write(AvgNormFile,*)  dx, AvgNorms(1), AvgNorms(2), AvgNorms(3)
+      write(NormFile,*)  dx, Norms(1), Norms(2), Norms(3)
+      write(EnergFile,*) dx, Energ_Err(1), Energ_Err(2),
+     .  Energ_Err(3), Energ_Err(4)
         
       
       end
@@ -226,8 +173,9 @@ c     .   cubbc_len, 3*xbc_len + 1,nGhstCells)
          
       implicit none
    
-      Integer wdirlen
-      PARAMETER(wdirlen= 300)
+      Integer wdirlen,NormFile,AvgNormFile,EnergFile,tlist_len
+      PARAMETER(wdirlen= 300,NormFile=1,AvgNormFile=2,
+     . EnergFile=3,tlist_len=30)
       
       INTEGER effeclenwdir,n_GhstCells,lowestresx,x_len,xbc_len,
      . cubic_len, expi
@@ -235,32 +183,47 @@ c     .   cubbc_len, 3*xbc_len + 1,nGhstCells)
       CHARACTER(len =wdirlen) wdir
       CHARACTER(len =2) strdiri
       
-      DOUBLE PRECISION a0,a1,a2,a3,a4,beta1,xstart,xend,dx,
-     . L2eG,L2eh,L2eu
+      DOUBLE PRECISION a0,a1,ga,beta2,beta1,xstart,xend,dx,
+     . tolcalc,alpha,Cr,maxwavespeed,dt,tend,tstart
+     
+      DOUBLE PRECISION tlist(tlist_len)
       
-      wdir = "../Results/Validation/Recon/Test1/"
+      wdir = "../Results/Validation/Run/30s/"
       call LenTrim(wdir,wdirlen,effeclenwdir)
       
       CALL SYSTEM('rm -rf '//wdir(1:effeclenwdir))
       CALL SYSTEM('mkdir -p '// wdir(1:effeclenwdir)) 
       
+      open(EnergFile, file = wdir(1:effeclenwdir)//'Energy.dat') 
+      open(NormFile, file = wdir(1:effeclenwdir)//'Norms.dat') 
+      
+      tolcalc = 10.0**(-10)
+      
       a0 = 1.0
-      a1 = 0.5
-      a2 = 0.1
-      a3 = 2.0
-      a4 = 0.1
-      !beta1 = 0.0
+      a1 = 0.7
+      ga = 9.81
+
       beta1 = 2.0/3.0
+      beta2 = 0.0
       
-      xstart = -50d0
-      xend = 50d0
+      xstart = -200d0
+      xend = 200d0
       
-      n_GhstCells = 3
-      lowestresx = 3
+      tstart = 0d0
+      tend = 30.0
       
-      open(2, file = wdir(1:effeclenwdir)//'L2err.dat') 
+      n_GhstCells = 6
+      lowestresx = 100
       
-      do expi = 0,0
+      if  (dabs(beta1) < 10d0**(-10))  then
+         alpha = 1d0
+      else
+         alpha = max(1d0,beta2 / (beta1))
+      end if
+      
+      call EqualSpaced(tstart,tend,tlist_len,0.5, tlist)
+      
+      do expi = 0,10
       
          write (strdiri,'(I2.2)') expi
          
@@ -269,23 +232,27 @@ c     .   cubbc_len, 3*xbc_len + 1,nGhstCells)
          x_len = lowestresx *2**(expi)
          xbc_len = x_len + 2 *n_GhstCells
          cubic_len = 4*xbc_len 
-         
+
          dx = (xend - xstart) / (x_len -1)
-         !dx = (xend - xstart) / (x_len)
-         
-         print *,'++++++++++++ Experiment : ',expi ,' || ', '# Cells :',
-     .    x_len , '++++++++++++'
-         
-         call Experiment(a0,a1,a2,a3,a4,beta1,xstart,dx,xbc_len,
-     .   n_GhstCells,cubic_len,L2eG,L2eh,L2eu,
+         Cr = 0.5
+         maxwavespeed = dsqrt(alpha*ga*(a0 + a1))
+         dt  = (Cr / maxwavespeed) *dx
+
+
+
+
+         call  SingleSerreSoliton(a0,a1,ga,beta1,beta2,
+     . xstart,xbc_len,n_GhstCells,cubic_len,dx,tstart,tend,
+     . dt,tolcalc,NormFile,AvgNormFile,EnergFile,tlist,tlist_len,
      . wdir(1:effeclenwdir)//strdiri//'/',effeclenwdir+3)
-     
-     
-         write(2,*) dx,L2eG,L2eh,L2eu
+         
+
 
       end do
       
-      close(2)
+      close(EnergFile)
+      close(NormFile)
+      
      
       end
  
