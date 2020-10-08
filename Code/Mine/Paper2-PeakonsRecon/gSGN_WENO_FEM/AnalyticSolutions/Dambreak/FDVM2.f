@@ -58,8 +58,8 @@ c=====================================
       end do
       
       !calculate initial Energies     
-      call FEMforU(hcubbc_fin,Gcubbc_fin,ucubbc_fin,beta1,dx,xbc_len,
-     .   cubbc_len,3*xbc_len + 1,n_GhstCells)
+c      call FEMforU(hcubbc_fin,Gcubbc_fin,ucubbc_fin,beta1,dx,xbc_len,
+c     .   cubbc_len,3*xbc_len + 1,n_GhstCells)
 
       call TotalEnergy(xbc_len,cubbc_len,hcubbc_fin,ucubbc_fin,
      . Gcubbc_fin,ga, beta1,beta2,n_GhstCells,dx,Energ_Init)
@@ -171,115 +171,133 @@ c Cell Average To Cubic
       
       do i=nGhstCells + 1,cellavgbc_len - nGhstCells 
            
-         pjm3toja  =(cellavgbc_q(i) - 3*cellavgbc_q(i-1) 
-     .  + 3*cellavgbc_q(i-2) - cellavgbc_q(i-3))/(6*dx**3)    
-         pjm3tojb  =(2*cellavgbc_q(i) - 5*cellavgbc_q(i-1)
-     . + 4*cellavgbc_q(i-2) - cellavgbc_q(i-3))/(2*dx**2)
-         pjm3tojc  =(43*cellavgbc_q(i) - 69*cellavgbc_q(i-1) 
+        !interpolating j-3 to j  
+        pjm3toja  = (cellavgbc_q(i) - 3*cellavgbc_q(i-1) 
+     .   + 3*cellavgbc_q(i-2) - cellavgbc_q(i-3))/(6*dx**3)
+        pjm3tojb  = (2*cellavgbc_q(i) - 5*cellavgbc_q(i-1) 
+     .   + 4*cellavgbc_q(i-2) - cellavgbc_q(i-3))/(2*dx**2)     
+        pjm3tojc  = (43*cellavgbc_q(i) - 69*cellavgbc_q(i-1) 
      .   + 33*cellavgbc_q(i-2) - 7*cellavgbc_q(i-3))/(24*dx)
-         pjm3tojd  = 11*cellavgbc_q(i)/12 + 5*cellavgbc_q(i-1)/24
-     .    - cellavgbc_q(i-2)/6 + cellavgbc_q(i-3)/24
+        pjm3tojd  = 11*cellavgbc_q(i)/12 + 5*cellavgbc_q(i-1)/24 
+     .   - cellavgbc_q(i-2)/6 + cellavgbc_q(i-3)/24
      
-         !interpolating j-2 to j+1    
+        !interpolating j-2 to j+1    
          pjm2tojp1a  = (-3*cellavgbc_q(i) + cellavgbc_q(i+1) 
-     .   + 3*cellavgbc_q(i-1) - cellavgbc_q(i-2))/(6*dx**3)
-         pjm2tojp1b  =(-2*cellavgbc_q(i) + cellavgbc_q(i+1) 
-     .   + cellavgbc_q(i-1))/(2*dx**2)
+     .    + 3*cellavgbc_q(i-1) - cellavgbc_q(i-2))/(6*dx**3)
+         pjm2tojp1b  = (-2*cellavgbc_q(i) + cellavgbc_q(i+1) 
+     .    + cellavgbc_q(i-1))/(2*dx**2)
          pjm2tojp1c  = (15*cellavgbc_q(i) + 7*cellavgbc_q(i+1) 
-     .   - 27*cellavgbc_q(i-1) + 5*cellavgbc_q(i-2))/(24*dx)
-         pjm2tojp1d  =13*cellavgbc_q(i)/12 - cellavgbc_q(i+1)/24 
-     .   - cellavgbc_q(i-1)/24
-     
+     .    - 27*cellavgbc_q(i-1) + 5*cellavgbc_q(i-2))/(24*dx)
+         pjm2tojp1d  = 13*cellavgbc_q(i)/12 - cellavgbc_q(i+1)/24 
+     .    - cellavgbc_q(i-1)/24
+       
          !interpolating j-1 to j+2  
          pjm1tojp2a  = (3*cellavgbc_q(i) - 3*cellavgbc_q(i+1) 
-     .   + cellavgbc_q(i+2) - cellavgbc_q(i-1))/(6*dx**3)
+     .    + cellavgbc_q(i+2) - cellavgbc_q(i-1))/(6*dx**3)
          pjm1tojp2b  = (-2*cellavgbc_q(i) + cellavgbc_q(i+1) 
-     .   + cellavgbc_q(i-1))/(2*dx**2)
+     .    + cellavgbc_q(i-1))/(2*dx**2)
          pjm1tojp2c  = (-15*cellavgbc_q(i) + 27*cellavgbc_q(i+1) 
-     .   - 5*cellavgbc_q(i+2) - 7*cellavgbc_q(i-1))/(24*dx)
-         pjm1tojp2d  = 13*cellavgbc_q(i)/12 
-     .   - cellavgbc_q(i+1)/24 - cellavgbc_q(i-1)/24
-     
+     .    - 5*cellavgbc_q(i+2) - 7*cellavgbc_q(i-1))/(24*dx)
+         pjm1tojp2d  = 13*cellavgbc_q(i)/12 - cellavgbc_q(i+1)/24 
+     .    - cellavgbc_q(i-1)/24
      
          !interpolating j to j+3
-         pjtojp3a  = (-cellavgbc_q(i) + 3*cellavgbc_q(i+1) 
-     .   - 3*cellavgbc_q(i+2) + cellavgbc_q(i+3))/(6*dx**3)
+         pjtojp3a  =  (-cellavgbc_q(i) + 3*cellavgbc_q(i+1) 
+     .    - 3*cellavgbc_q(i+2) + cellavgbc_q(i+3))/(6*dx**3)
          pjtojp3b  = (2*cellavgbc_q(i) - 5*cellavgbc_q(i+1) 
-     .   + 4*cellavgbc_q(i+2) - cellavgbc_q(i+3))/(2*dx**2)
+     .    + 4*cellavgbc_q(i+2) - cellavgbc_q(i+3))/(2*dx**2)
          pjtojp3c  = (-43*cellavgbc_q(i) + 69*cellavgbc_q(i+1) 
-     .   - 33*cellavgbc_q(i+2) + 7*cellavgbc_q(i+3))/(24*dx)
+     .    - 33*cellavgbc_q(i+2) + 7*cellavgbc_q(i+3))/(24*dx)
          pjtojp3d  = 11*cellavgbc_q(i)/12 + 5*cellavgbc_q(i+1)/24 
-     .   - cellavgbc_q(i+2)/6 + cellavgbc_q(i+3)/24 
-     
-         !Smoothness indicators
+     .    - cellavgbc_q(i+2)/6 + cellavgbc_q(i+3)/24
+
+
+
          Bjm3toj = 2107*cellavgbc_q(i)**2/240 
      .    - 1567*cellavgbc_q(i)*cellavgbc_q(i-1)/40 
-     .    + 3521*cellavgbc_q(i)*cellavgbc_q(i-2)/120 
-     .    - 309*cellavgbc_q(i)*cellavgbc_q(i-3)/40 
-     .    + 11003*cellavgbc_q(i-1)**2/240
-     .    - 8623*cellavgbc_q(i-1)*cellavgbc_q(i-2)/120 
-     .    + 2321*cellavgbc_q(i-1)*cellavgbc_q(i-3)/120 
-     .    + 7043*cellavgbc_q(i-2)**2/240 
-     .    - 647*cellavgbc_q(i-2)*cellavgbc_q(i-3)/40 
-     .    + 547*cellavgbc_q(i-3)**2/240
-         
-         Bjm2tojp1 = 3443*cellavgbc_q(i)**2/240 
+     . + 3521*cellavgbc_q(i)*cellavgbc_q(i-2)/120 
+     . - 309*cellavgbc_q(i)*cellavgbc_q(i-3)/40 
+     . + 11003*cellavgbc_q(i-1)**2/240 
+     . - 8623*cellavgbc_q(i-1)*cellavgbc_q(i-2)/120 
+     . + 2321*cellavgbc_q(i-1)*cellavgbc_q(i-3)/120 
+     . + 7043*cellavgbc_q(i-2)**2/240 
+     . - 647*cellavgbc_q(i-2)*cellavgbc_q(i-3)/40 
+     . + 547*cellavgbc_q(i-3)**2/240
+      
+         Bjm2tojp1 =3443*cellavgbc_q(i)**2/240 
      .    - 1261*cellavgbc_q(i)*cellavgbc_q(i+1)/120 
-     .    - 2983*cellavgbc_q(i)*cellavgbc_q(i-1)/120 
-     .    + 267*cellavgbc_q(i)*cellavgbc_q(i-2)/40 
-     .    + 547*cellavgbc_q(i+1)**2/240 
-     .    + 961*cellavgbc_q(i+1)*cellavgbc_q(i-1)/120 
-     .    - 247*cellavgbc_q(i+1)*cellavgbc_q(i-2)/120 
-     .    + 2843*cellavgbc_q(i-1)**2/240 
-     .    - 821*cellavgbc_q(i-1)*cellavgbc_q(i-2)/120 
-     .    + 89*cellavgbc_q(i-2)**2/80
-         
-         Bjm1tojp2 = 3443*cellavgbc_q(i)**2/240 
-     .    - 2983*cellavgbc_q(i)*cellavgbc_q(i+1)/120 
-     .    + 267*cellavgbc_q(i)*cellavgbc_q(i+2)/40 
-     .    - 1261*cellavgbc_q(i)*cellavgbc_q(i-1)/120
-     .    + 2843*cellavgbc_q(i+1)**2/240 
-     .    - 821*cellavgbc_q(i+1)*cellavgbc_q(i+2)/120 
-     .    + 961*cellavgbc_q(i+1)*cellavgbc_q(i-1)/120 
-     .    + 89*cellavgbc_q(i+2)**2/80 
-     .    - 247*cellavgbc_q(i+2)*cellavgbc_q(i-1)/120 
-     .    + 547*cellavgbc_q(i-1)**2/240
+     . - 2983*cellavgbc_q(i)*cellavgbc_q(i-1)/120 
+     . + 267*cellavgbc_q(i)*cellavgbc_q(i-2)/40 
+     . + 547*cellavgbc_q(i+1)**2/240 
+     . + 961*cellavgbc_q(i+1)*cellavgbc_q(i-1)/120 
+     . - 247*cellavgbc_q(i+1)*cellavgbc_q(i-2)/120 
+     . + 2843*cellavgbc_q(i-1)**2/240 
+     . - 821*cellavgbc_q(i-1)*cellavgbc_q(i-2)/120 
+     . + 89*cellavgbc_q(i-2)**2/80
 
-         Bjtojp3 =2107*cellavgbc_q(i)**2/240 
-     .    - 1567*cellavgbc_q(i)*cellavgbc_q(i+1)/40 
-     .    + 3521*cellavgbc_q(i)*cellavgbc_q(i+2)/120 
-     .    - 309*cellavgbc_q(i)*cellavgbc_q(i+3)/40 
-     .    + 11003*cellavgbc_q(i+1)**2/240 
-     .    - 8623*cellavgbc_q(i+1)*cellavgbc_q(i+2)/120 
-     .    + 2321*cellavgbc_q(i+1)*cellavgbc_q(i+3)/120 
-     .    + 7043*cellavgbc_q(i+2)**2/240 
-     .    - 647*cellavgbc_q(i+2)*cellavgbc_q(i+3)/40 
-     .    + 547*cellavgbc_q(i+3)**2/240
+         Bjm1tojp2 =  3443*cellavgbc_q(i)**2/240 
+     . - 2983*cellavgbc_q(i)*cellavgbc_q(i+1)/120 
+     . + 267*cellavgbc_q(i)*cellavgbc_q(i+2)/40 
+     . - 1261*cellavgbc_q(i)*cellavgbc_q(i-1)/120 
+     . + 2843*cellavgbc_q(i+1)**2/240 
+     . - 821*cellavgbc_q(i+1)*cellavgbc_q(i+2)/120 
+     . + 961*cellavgbc_q(i+1)*cellavgbc_q(i-1)/120 
+     . + 89*cellavgbc_q(i+2)**2/80 
+     . - 247*cellavgbc_q(i+2)*cellavgbc_q(i-1)/120 
+     . + 547*cellavgbc_q(i-1)**2/240
+
+         Bjtojp3 = 2107*cellavgbc_q(i)**2/240 
+     . - 1567*cellavgbc_q(i)*cellavgbc_q(i+1)/40 
+     . + 3521*cellavgbc_q(i)*cellavgbc_q(i+2)/120 
+     . - 309*cellavgbc_q(i)*cellavgbc_q(i+3)/40 
+     . + 11003*cellavgbc_q(i+1)**2/240 
+     . - 8623*cellavgbc_q(i+1)*cellavgbc_q(i+2)/120 
+     . + 2321*cellavgbc_q(i+1)*cellavgbc_q(i+3)/120 
+     . + 7043*cellavgbc_q(i+2)**2/240 
+     . - 647*cellavgbc_q(i+2)*cellavgbc_q(i+3)/40 
+     . + 547*cellavgbc_q(i+3)**2/240
      
-         iw1 = (1.0/35.0) *( 1.0 / (calctol +Bjm3toj )**2)
-         iw2 = (12.0/35.0) * ( 1.0/ (calctol +Bjm2tojp1 )**2)
-         iw3 = (18.0/35.0) * (1.0 / (calctol +Bjm1tojp2 )**2)
-         iw4 = (4.0/35.0) * (1.0 / (calctol +Bjtojp3 )**2)
+
+         iw1 = ( (1.0/35.0) / (calctol +Bjm3toj )**2)
+         iw2 = ( (12.0/35.0) / (calctol +Bjm2tojp1 )**2)
+         iw3 = ((18.0/35.0)/ (calctol +Bjm1tojp2 )**2)
+         iw4 = ((4.0/35.0) / (calctol +Bjtojp3 )**2)
+         
          
          w1 = iw1 / (iw1 + iw2 + iw3 + iw4 )
          w2 = iw2 / (iw1 + iw2 + iw3 + iw4 )
          w3 = iw3 / (iw1 + iw2 + iw3 + iw4 )
          w4 = iw4 / (iw1 + iw2 + iw3 + iw4 )
+         
+         if (w1 .LT. calctol) then
+            w1 = 0
+         end if
+         if (w2 .LT. calctol) then
+            w2 = 0
+         end if  
+         if (w3 .LT. calctol) then
+            w3 = 0
+         end if         
+         if (w4 .LT. calctol) then
+            w4 = 0
+         end if
+                
+c         print *, w1,w2,w3,w4
 
          qa = w1*pjm3toja + w2*pjm2tojp1a + w3*pjm1tojp2a + w4*pjtojp3a
          qb = w1*pjm3tojb + w2*pjm2tojp1b + w3*pjm1tojp2b + w4*pjtojp3b
          qc = w1*pjm3tojc + w2*pjm2tojp1c + w3*pjm1tojp2c + w4*pjtojp3c
          qd = w1*pjm3tojd + w2*pjm2tojp1d + w3*pjm1tojp2d + w4*pjtojp3d
                   
-         cubicbc_q(4*i -3) = qa*(-1.0*dx/2)**3 + qb*(-1.0*dx/2)**2 +
+         cubicbc_q(4*i -3) = qa*(-dx/2)**3 + qb*(-dx/2)**2 +
      .   qc*(-1.0*dx/2) + qd
-         cubicbc_q(4*i -2) = qa*(-1.0*dx/6)**3 + qb*(-1.0*dx/6)**2 
-     .   + qc*(-1.0*dx/6) + qd
+         cubicbc_q(4*i -2) = qa*(-dx/6)**3 + qb*(-dx/6)**2 
+     .   + qc*(-dx/6) + qd
          cubicbc_q(4*i -1 ) = qa*(dx/6)**3 + qb*(dx/6)**2 
      .   + qc*(dx/6) + qd
          cubicbc_q(4*i) = qa*(dx/2)**3 + qb*(dx/2)**2 
      .   + qc*(dx/2) + qd
-     
+
 
       end do
      
@@ -305,6 +323,11 @@ c ******************************************************************************
       DOUBLE PRECISION A(2*3 + 3 + 1,ncubbc_len) , B(ncubbc_len)
       INTEGER IPIV(ncubbc_len),INFO,i,j
       
+      if (dabs(beta1) .LE. 10.0**(-10)) then
+          do i = 1, cubbc_len
+            uNcub_bc(i) = Gcub_bc(i) / hcub_bc(i) 
+          end do
+      else
       
       ! Zero out
       do i = 1, ncubbc_len
@@ -416,6 +439,8 @@ c ******************************************************************************
        uNcub_bc(4*i-1) = B(3*i) 
        uNcub_bc(4*i) = B(3*i + 1) 
       end do
+      
+      end if
 
       
       end
@@ -430,54 +455,7 @@ c ******************************************************************************
       
       DOUBLE PRECISION Gelem(elem_len),
      .   uhelem(elem_len,elem_len), h3uxelem(elem_len,elem_len)
-      
-      if  (dabs(beta1) < 10d0**(-10))  then
-      Gelem(1) = Gjmh/2.0
-      Gelem(2) = Gjms
-      Gelem(3) = Gjps
-      Gelem(4) = Gjph/2.0
-      
-      uhelem(1,1) = hjmh/2.0
-      uhelem(1,2) = 0
-      uhelem(1,3) = 0
-      uhelem(1,4) = 0
-
-      uhelem(2,1) = 0
-      uhelem(2,2) = hjms
-      uhelem(2,3) = 0
-      uhelem(2,4) = 0
-
-      uhelem(3,1) = 0
-      uhelem(3,2) = 0
-      uhelem(3,3) = hjps
-      uhelem(3,4) = 0
-
-      uhelem(4,1) = 0.0
-      uhelem(4,2) = 0
-      uhelem(4,3) = 0
-      uhelem(4,4) = hjph/2.0
-      
-      h3uxelem(1,1) = 0
-      h3uxelem(1,2) = 0
-      h3uxelem(1,3) = 0
-      h3uxelem(1,4) = 0
-
-      h3uxelem(2,1) = 0
-      h3uxelem(2,2) = 0
-      h3uxelem(2,3) = 0
-      h3uxelem(2,4) = 0
-
-      h3uxelem(3,1) = 0
-      h3uxelem(3,2) = 0
-      h3uxelem(3,3) = 0
-      h3uxelem(3,4) = 0
-
-      h3uxelem(4,1) = 0
-      h3uxelem(4,2) = 0
-      h3uxelem(4,3) = 0
-      h3uxelem(4,4) = 0
-         
-      else     
+          
           
       Gelem(1) = dx/2*(16.0/105*Gjmh+ 33.0/280*Gjms 
      .   - 3.0/70*Gjps + 19.0/840*Gjph )
@@ -714,7 +692,7 @@ c ******************************************************************************
      . + 490239*hjph**2*hjps/640640 + 19035*hjph*hjps**2/23296 
      . + 235467*hjps**3/366080)   
 
-      end if     
+ 
      
       
       end
@@ -956,16 +934,16 @@ c subroutine that cubics, calculates flux across
      . uip1l + dsqrt(alpha*ga*hip1l)  )
       
       !left and right flux
-      felh = uir*hir
+      felh = Gir
       felG = uir*Gir + ga*(hir**2)/2d0 
-     .      - beta1*hir**3*duir**2
-     .      - beta2/4d0*ga*(hir**2)*(2*hir*ddhir + (dhir**2))
+c     .      - beta1*hir**3*duir**2
+c     .      - beta2/4d0*ga*(hir**2)*(2*hir*ddhir + (dhir**2))
      
            
-      ferh = uip1l*hip1l
+      ferh = Gip1l
       ferG = uip1l*Gip1l + ga*(hip1l**2)/2d0 
-     .      - beta1*hip1l**3*duip1l**2
-     .      - beta2/4d0*ga*(hip1l**2)*(2*hip1l*ddhip1l + (dhip1l**2))
+c     .      - beta1*hip1l**3*duip1l**2
+c     .      - beta2/4d0*ga*(hip1l**2)*(2*hip1l*ddhip1l + (dhip1l**2))
      
       if (sr == sl) then
          isrmsl = 0.0

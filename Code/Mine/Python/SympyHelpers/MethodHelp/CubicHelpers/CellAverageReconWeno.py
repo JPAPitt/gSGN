@@ -1,7 +1,7 @@
 from sympy import *
 from sympy.solvers.solveset import linsolve
 
-k = 3
+k = 4
 
 qaj,qajm1,qajm2,qajm3,qajp1,qajp2,qajp3,dx = symbols('cellavgbc_q(i) cellavgbc_q(i-1) cellavgbc_q(i-2) cellavgbc_q(i-3) cellavgbc_q(i+1) cellavgbc_q(i+2) cellavgbc_q(i+3) dx')
 
@@ -18,23 +18,11 @@ IntCell = integrate(pa*(x)**3 + pb*(x)**2 + pc*(x) + pd  ,x)
 
 IntCelljm3 =  (IntCell.subs(x, -5*dx/2) -  IntCell.subs(x, -7*dx/2)) / dx
 IntCelljm2 =  (IntCell.subs(x, -3*dx/2) -  IntCell.subs(x, -5*dx/2)) / dx
-
 IntCelljm1 =  (IntCell.subs(x, -dx/2) -  IntCell.subs(x, -3*dx/2)) / dx
 IntCellj =  (IntCell.subs(x, dx/2) -  IntCell.subs(x, -dx/2)) / dx
 IntCelljp1 =  (IntCell.subs(x, 3*dx/2) -  IntCell.subs(x, dx/2)) / dx
 IntCelljp2 =  (IntCell.subs(x, 5*dx/2) -  IntCell.subs(x, 3*dx/2)) / dx
-
 IntCelljp3 =  (IntCell.subs(x, 7*dx/2) -  IntCell.subs(x, 5*dx/2)) / dx
-
-IntqCell = integrate(qa*(x)**6 +qb*(x)**5 + qc*(x)**4 + qd*(x)**3 + qe*(x)**2 + qf*(x) + qg  ,x)
-
-IntqCelljm3 =  (IntqCell.subs(x, -5*dx/2) -  IntqCell.subs(x, -7*dx/2)) / dx
-IntqCelljm2 =  (IntqCell.subs(x, -3*dx/2) -  IntqCell.subs(x, -5*dx/2)) / dx
-IntqCelljm1 =  (IntqCell.subs(x, -dx/2) -  IntqCell.subs(x, -3*dx/2)) / dx
-IntqCellj =  (IntqCell.subs(x, dx/2) -  IntqCell.subs(x, -dx/2)) / dx
-IntqCelljp1 =  (IntqCell.subs(x, 3*dx/2) -  IntqCell.subs(x, dx/2)) / dx
-IntqCelljp2 =  (IntqCell.subs(x, 5*dx/2) -  IntqCell.subs(x, 3*dx/2)) / dx
-IntqCelljp3 =  (IntqCell.subs(x, 7*dx/2) -  IntqCell.subs(x, 5*dx/2)) / dx
 
 
 
@@ -55,6 +43,24 @@ Polyjm3toj = CubicSoljm3toj_Coeff[0]*(x)**3 + CubicSoljm3toj_Coeff[1]*(x)**2 + C
 Polyjm2tojp1 = CubicSoljm2tojp1_Coeff[0]*(x)**3 + CubicSoljm2tojp1_Coeff[1]*(x)**2 + CubicSoljm2tojp1_Coeff[2]*(x) + CubicSoljm2tojp1_Coeff[3]
 Polyjm1tojp2 = CubicSoljm1tojp2_Coeff[0]*(x)**3 + CubicSoljm1tojp2_Coeff[1]*(x)**2 + CubicSoljm1tojp2_Coeff[2]*(x) + CubicSoljm1tojp2_Coeff[3]
 Polyjtojp3 = CubicSoljtojp3_Coeff[0]*(x)**3 + CubicSoljtojp3_Coeff[1]*(x)**2 + CubicSoljtojp3_Coeff[2]*(x) + CubicSoljtojp3_Coeff[3]
+
+
+# IntPolyjm3tojatjm3cell = integrate(Polyjm3toj ,x).subs(x, -5*dx/2) -  integrate(Polyjm3toj ,x).subs(x, -7*dx/2)
+# IntPolyjm3tojatjm3cell = IntPolyjm3tojatjm3cell.simplify() /dx
+# print(IntPolyjm3tojatjm3cell)
+
+# IntPolyjm3tojatjm2cell = integrate(Polyjm3toj ,x).subs(x, -3*dx/2) -  integrate(Polyjm3toj ,x).subs(x, -5*dx/2)
+# IntPolyjm3tojatjm2cell = IntPolyjm3tojatjm2cell.simplify()/dx
+# print(IntPolyjm3tojatjm2cell)
+
+# IntPolyjm3tojatjm1cell = integrate(Polyjm3toj ,x).subs(x, -dx/2) -  integrate(Polyjm3toj ,x).subs(x, -3*dx/2)
+# IntPolyjm3tojatjm1cell = IntPolyjm3tojatjm1cell.simplify()/dx
+# print(IntPolyjm3tojatjm1cell)
+
+# IntPolyjm3tojatjcell = integrate(Polyjm3toj ,x).subs(x, dx/2) -  integrate(Polyjm3toj ,x).subs(x, -dx/2)
+# IntPolyjm3tojatjcell = IntPolyjm3tojatjcell.simplify()/dx
+# print(IntPolyjm3tojatjcell)
+
 
 # # #Smoothness indicators
 Bjm3toj = 0
@@ -77,29 +83,29 @@ Bjm2tojp1 =Bjm2tojp1.simplify()
 Bjm1tojp2 =Bjm1tojp2.simplify()
 Bjtojp3 =Bjtojp3.simplify()
 
-print('pjm3toj')
-print(CubicSoljm3toj_Coeff[0])
-print(CubicSoljm3toj_Coeff[1])
-print(CubicSoljm3toj_Coeff[2])
-print(CubicSoljm3toj_Coeff[3])
+# print('pjm3toj')
+# print(CubicSoljm3toj_Coeff[0])
+# print(CubicSoljm3toj_Coeff[1])
+# print(CubicSoljm3toj_Coeff[2])
+# print(CubicSoljm3toj_Coeff[3])
 
-print('pjm2tojp1')
-print(CubicSoljm2tojp1_Coeff[0])
-print(CubicSoljm2tojp1_Coeff[1])
-print(CubicSoljm2tojp1_Coeff[2])
-print(CubicSoljm2tojp1_Coeff[3])
+# print('pjm2tojp1')
+# print(CubicSoljm2tojp1_Coeff[0])
+# print(CubicSoljm2tojp1_Coeff[1])
+# print(CubicSoljm2tojp1_Coeff[2])
+# print(CubicSoljm2tojp1_Coeff[3])
 
-print('pjm1tojp2')
-print(CubicSoljm1tojp2_Coeff[0])
-print(CubicSoljm1tojp2_Coeff[1])
-print(CubicSoljm1tojp2_Coeff[2])
-print(CubicSoljm1tojp2_Coeff[3])
+# print('pjm1tojp2')
+# print(CubicSoljm1tojp2_Coeff[0])
+# print(CubicSoljm1tojp2_Coeff[1])
+# print(CubicSoljm1tojp2_Coeff[2])
+# print(CubicSoljm1tojp2_Coeff[3])
 
-print('pjtojp3')
-print(CubicSoljtojp3_Coeff[0])
-print(CubicSoljtojp3_Coeff[1])
-print(CubicSoljtojp3_Coeff[2])
-print(CubicSoljtojp3_Coeff[3])
+# print('pjtojp3')
+# print(CubicSoljtojp3_Coeff[0])
+# print(CubicSoljtojp3_Coeff[1])
+# print(CubicSoljtojp3_Coeff[2])
+# print(CubicSoljtojp3_Coeff[3])
 
 print('Bs')
 print(Bjm3toj)

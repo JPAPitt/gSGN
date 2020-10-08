@@ -1,7 +1,7 @@
 from sympy import *
 from sympy.solvers.solveset import linsolve
 
-k = 3
+k = 4
 
 qaj,qajm1,qajm2,qajm3,qajp1,qajp2,qajp3,dx = symbols('qA[j] qA[j-1] qA[j-2] qA[j-3] qA[j+1] qA[j+2] qA[j+3] dx')
 
@@ -57,6 +57,30 @@ Sixjm3jp3_Coeff = linsolve([IntqCelljm3 -qajm3,IntqCelljm2 -qajm2, IntqCelljm1 -
 Sixjm3jp3_Coeff = Sixjm3jp3_Coeff.args[0]
 
 Polyjm3jp3 =  Sixjm3jp3_Coeff[0]*x**6 + Sixjm3jp3_Coeff[1]*x**5 + Sixjm3jp3_Coeff[2]*x**4 + Sixjm3jp3_Coeff[3]*x**3 + Sixjm3jp3_Coeff[4]*x**2 + Sixjm3jp3_Coeff[5]*x + Sixjm3jp3_Coeff[6]
+
+#Check it actully integrates them properly
+Checkjm3 = integrate(Polyjm3jp3  ,x).subs(x, -5*dx/2) -  integrate(Polyjm3jp3  ,x).subs(x, -7*dx/2)
+Checkjm3 = Checkjm3.simplify() /dx
+print(Checkjm3)
+Checkjm2 = integrate(Polyjm3jp3  ,x).subs(x, -3*dx/2) -  integrate(Polyjm3jp3  ,x).subs(x, -5*dx/2)
+Checkjm2 = Checkjm2.simplify() /dx
+print(Checkjm2)
+Checkjm1 = integrate(Polyjm3jp3  ,x).subs(x, -dx/2) -  integrate(Polyjm3jp3  ,x).subs(x, -3*dx/2)
+Checkjm1 = Checkjm1.simplify() /dx
+print(Checkjm1)
+Checkj = integrate(Polyjm3jp3  ,x).subs(x, dx/2) -  integrate(Polyjm3jp3  ,x).subs(x, -dx/2)
+Checkj = Checkj.simplify() /dx
+print(Checkj)
+Checkjp1 = integrate(Polyjm3jp3  ,x).subs(x, 3*dx/2) -  integrate(Polyjm3jp3  ,x).subs(x, dx/2)
+Checkjp1 = Checkjp1.simplify() /dx
+print(Checkjp1)
+Checkjp2 = integrate(Polyjm3jp3  ,x).subs(x, 5*dx/2) -  integrate(Polyjm3jp3  ,x).subs(x, 3*dx/2)
+Checkjp2 = Checkjp2.simplify() /dx
+print(Checkjp2)
+Checkjp3 = integrate(Polyjm3jp3  ,x).subs(x, 7*dx/2) -  integrate(Polyjm3jp3  ,x).subs(x, 5*dx/2)
+Checkjp3 = Checkjp3.simplify() /dx
+print(Checkjp3)
+
 
 
 vjph_big = Polyjm3jp3.subs(x,dx/2)

@@ -5,7 +5,8 @@ clear all;
 close all;
 
 % Get list of directories to loop over when reading data
-wdir = "./Validation/Run/DBTest/10s/06/"
+wdir = "./Validation/Run/DBRegSWWE/10s/06/";
+wdir = "./Validation/Run/DBTest/10sNA/06/"
 
 
 xhuGN = importdata(strcat(wdir, 'xhuGFin.dat'));

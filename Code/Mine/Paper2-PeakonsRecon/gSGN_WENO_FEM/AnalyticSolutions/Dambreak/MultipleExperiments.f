@@ -200,7 +200,7 @@
      
       DOUBLE PRECISION tlist(tlist_len)
       
-      wdir = "../Results/Validation/Run/DBRegSWWE/0s/"
+      wdir = "../Results/Validation/Run/DBRegSWWE/10s/"
       call LenTrim(wdir,wdirlen,effeclenwdir)
       
       CALL SYSTEM('rm -rf '//wdir(1:effeclenwdir))
@@ -210,7 +210,7 @@
       open(NormFile, file = wdir(1:effeclenwdir)//'Norms.dat') 
       open(AvgNormFile, file = wdir(1:effeclenwdir)//'AvgNorms.dat') 
       
-      tolcalc = 10.0**(-10)
+      tolcalc = 10.0**(-12)
       
       h0 = 2.0
       h1 = 1.0
@@ -222,7 +222,7 @@
       xstart = -100d0
       xend = 100d0
       
-      tstart = 10d0
+      tstart = 0d0
       tend = 10.0
       
       n_GhstCells = 6
@@ -236,7 +236,7 @@
       
       call EqualSpaced(tstart,tend,tlist_len,0.5, tlist)
       
-      do expi = 0,10
+      do expi = 6,6
       
          write (strdiri,'(I2.2)') expi
          
