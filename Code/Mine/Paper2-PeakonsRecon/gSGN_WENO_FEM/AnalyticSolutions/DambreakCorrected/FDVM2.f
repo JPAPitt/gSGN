@@ -187,7 +187,8 @@ c Cell Average To Cubic
      . pjm1tojp2a,pjm1tojp2b,pjm1tojp2c,pjm1tojp2d,
      . pjtojp3a,pjtojp3b,pjtojp3c,pjtojp3d,Bjm3toj,
      . Bjm2tojp1,Bjm1tojp2,Bjtojp3,
-     . iw1,iw2,iw3,iw4,w1,w2,w3,w4,qa,qb,qc,qd
+     . iw1,iw2,iw3,iw4,w1,w2,w3,w4,qa,qb,qc,qd,
+     . iw1m,iw2m,iw3m,iw4m,w1m,w2m,w3m,w4m
       
       print *,'WENO - Inputs',cubicbc_len,cellavgbc_len,nGhstCells,
      . maxval(cellavgbc_q),dx,calctol
@@ -292,29 +293,54 @@ c Cell Average To Cubic
          w2 = iw2 / (iw1 + iw2 + iw3 + iw4 )
          w3 = iw3 / (iw1 + iw2 + iw3 + iw4 )
          w4 = iw4 / (iw1 + iw2 + iw3 + iw4 )
+ 
+         iw1m = ( (4.0/35.0) / (calctol +Bjm3toj )**2)
+         iw2m = ( (18.0/35.0) / (calctol +Bjm2tojp1 )**2)
+         iw3m = ((12.0/35.0)/ (calctol +Bjm1tojp2 )**2)
+         iw4m = ((1.0/35.0) / (calctol +Bjtojp3 )**2)
          
-         if (w1 .LT. calctol) then
-            w1 = 0
-         end if
-         if (w2 .LT. calctol) then
-            w2 = 0
-         end if  
-         if (w3 .LT. calctol) then
-            w3 = 0
-         end if         
-         if (w4 .LT. calctol) then
-            w4 = 0
-         end if
+         
+         w1m = iw1m / (iw1m + iw2m + iw3m + iw4m )
+         w2m = iw2m / (iw1m + iw2m + iw3m + iw4m )
+         w3m = iw3m / (iw1m + iw2m + iw3m + iw4m )
+         w4m = iw4m / (iw1m + iw2m + iw3m + iw4m ) 
+         
+c         if (w1 .LT. calctol) then
+c            w1 = 0
+c         end if
+c         if (w2 .LT. calctol) then
+c            w2 = 0
+c         end if  
+c         if (w3 .LT. calctol) then
+c            w3 = 0
+c         end if         
+c         if (w4 .LT. calctol) then
+c            w4 = 0
+c         end if
                 
 c         print *, w1,w2,w3,w4
 
-         qa = w1*pjm3toja + w2*pjm2tojp1a + w3*pjm1tojp2a + w4*pjtojp3a
-         qb = w1*pjm3tojb + w2*pjm2tojp1b + w3*pjm1tojp2b + w4*pjtojp3b
-         qc = w1*pjm3tojc + w2*pjm2tojp1c + w3*pjm1tojp2c + w4*pjtojp3c
-         qd = w1*pjm3tojd + w2*pjm2tojp1d + w3*pjm1tojp2d + w4*pjtojp3d
-                  
+         qa = w1m*pjm3toja + w2m*pjm2tojp1a + w3m*pjm1tojp2a 
+     .    + w4m*pjtojp3a
+         qb = w1m*pjm3tojb + w2m*pjm2tojp1b + w3m*pjm1tojp2b 
+     .    + w4m*pjtojp3b
+         qc = w1m*pjm3tojc + w2m*pjm2tojp1c + w3m*pjm1tojp2c 
+     .    + w4m*pjtojp3c
+         qd = w1m*pjm3tojd + w2m*pjm2tojp1d + w3m*pjm1tojp2d 
+     .    + w4m*pjtojp3d
+
          cubicbc_q(4*i -3) = qa*(-dx/2)**3 + qb*(-dx/2)**2 +
      .   qc*(-1.0*dx/2) + qd
+
+         qa = w1*pjm3toja + w2*pjm2tojp1a + w3*pjm1tojp2a 
+     .    + w4*pjtojp3a
+         qb = w1*pjm3tojb + w2*pjm2tojp1b + w3*pjm1tojp2b 
+     .    + w4*pjtojp3b
+         qc = w1*pjm3tojc + w2*pjm2tojp1c + w3*pjm1tojp2c 
+     .    + w4*pjtojp3c
+         qd = w1*pjm3tojd + w2*pjm2tojp1d + w3*pjm1tojp2d 
+     .    + w4*pjtojp3d
+                  
          cubicbc_q(4*i -2) = qa*(-dx/6)**3 + qb*(-dx/6)**2 
      .   + qc*(-dx/6) + qd
          cubicbc_q(4*i -1 ) = qa*(dx/6)**3 + qb*(dx/6)**2 

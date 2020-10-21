@@ -5,7 +5,7 @@ clear all;
 close all;
 
 % Get list of directories to loop over when reading data
-wdir = "./Validation/Run/DBRegSWWE/10s/"
+wdir = "./Validation/Run/DBTests/10s/"
 
 
 OutEps = importdata(strcat(wdir, 'Energy.dat'));

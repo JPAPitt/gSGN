@@ -117,16 +117,16 @@ for k = 0:12
 
 end
 % 
-figure;
-loglog(dxs,L2hMiddle,'s b',dxs,L2uMiddle,'^ r', dxs,L2GMiddle,'o k');
-grid off;
-legend('hide');
-xlabel('\Delta x');
-ylabel('L_2');
-axis([10^-3 1 10^-10 10^-4]);
-xticks([10^-4,10^-3,10^-2,10^-1,10^0,10]);
-yticks([10^-10,10^-09,10^-08,10^-07, 10^-06,10^-05,10^-4]);
-matlab2tikz('ConvergenceInConstantState.tex');
+% figure;
+% loglog(dxs,L2hMiddle,'s b',dxs,L2uMiddle,'^ r', dxs,L2GMiddle,'o k');
+% grid off;
+% legend('hide');
+% xlabel('\Delta x');
+% ylabel('L_2');
+% axis([10^-3 1 10^-10 10^-4]);
+% xticks([10^-4,10^-3,10^-2,10^-1,10^0,10]);
+% yticks([10^-10,10^-09,10^-08,10^-07, 10^-06,10^-05,10^-4]);
+% matlab2tikz('ConvergenceInConstantState.tex');
 
 
 

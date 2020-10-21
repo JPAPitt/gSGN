@@ -99,16 +99,16 @@ def CellAverageToCubic(qA,nGcells,dx):
         pjtojp3c = (69*qA[j+1] - 33*qA[j+2] + 7*qA[j+3] - 43*qA[j])/(24*dx)
         pjtojp3d  = 5*qA[j+1]/24 - qA[j+2]/6 + qA[j+3]/24 + 11*qA[j]/12 
                 
-        # Bjm3toj = 11003*qA[j-1]**2/240 - 8623*qA[j-1]*qA[j-2]/120 + 2321*qA[j-1]*qA[j-3]/120 - 1567*qA[j-1]*qA[j]/40 + 7043*qA[j-2]**2/240 - 647*qA[j-2]*qA[j-3]/40 + 3521*qA[j-2]*qA[j]/120 + 547*qA[j-3]**2/240 - 309*qA[j-3]*qA[j]/40 + 2107*qA[j]**2/240
-        # Bjm2tojp1 = 547*qA[j+1]**2/240 + 961*qA[j+1]*qA[j-1]/120 - 247*qA[j+1]*qA[j-2]/120 - 1261*qA[j+1]*qA[j]/120 + 2843*qA[j-1]**2/240 - 821*qA[j-1]*qA[j-2]/120 - 2983*qA[j-1]*qA[j]/120 + 89*qA[j-2]**2/80 + 267*qA[j-2]*qA[j]/40 + 3443*qA[j]**2/240
-        # Bjm1tojp2 = 2843*qA[j+1]**2/240 - 821*qA[j+1]*qA[j+2]/120 + 961*qA[j+1]*qA[j-1]/120 - 2983*qA[j+1]*qA[j]/120 + 89*qA[j+2]**2/80 - 247*qA[j+2]*qA[j-1]/120 + 267*qA[j+2]*qA[j]/40 + 547*qA[j-1]**2/240 - 1261*qA[j-1]*qA[j]/120 + 3443*qA[j]**2/240
-        # Bjtojp3 = 11003*qA[j+1]**2/240 - 8623*qA[j+1]*qA[j+2]/120 + 2321*qA[j+1]*qA[j+3]/120 - 1567*qA[j+1]*qA[j]/40 + 7043*qA[j+2]**2/240 - 647*qA[j+2]*qA[j+3]/40 + 3521*qA[j+2]*qA[j]/120 + 547*qA[j+3]**2/240 - 309*qA[j+3]*qA[j]/40 + 2107*qA[j]**2/240        
+        Bjm3toj = 11003*qA[j-1]**2/240 - 8623*qA[j-1]*qA[j-2]/120 + 2321*qA[j-1]*qA[j-3]/120 - 1567*qA[j-1]*qA[j]/40 + 7043*qA[j-2]**2/240 - 647*qA[j-2]*qA[j-3]/40 + 3521*qA[j-2]*qA[j]/120 + 547*qA[j-3]**2/240 - 309*qA[j-3]*qA[j]/40 + 2107*qA[j]**2/240
+        Bjm2tojp1 = 547*qA[j+1]**2/240 + 961*qA[j+1]*qA[j-1]/120 - 247*qA[j+1]*qA[j-2]/120 - 1261*qA[j+1]*qA[j]/120 + 2843*qA[j-1]**2/240 - 821*qA[j-1]*qA[j-2]/120 - 2983*qA[j-1]*qA[j]/120 + 89*qA[j-2]**2/80 + 267*qA[j-2]*qA[j]/40 + 3443*qA[j]**2/240
+        Bjm1tojp2 = 2843*qA[j+1]**2/240 - 821*qA[j+1]*qA[j+2]/120 + 961*qA[j+1]*qA[j-1]/120 - 2983*qA[j+1]*qA[j]/120 + 89*qA[j+2]**2/80 - 247*qA[j+2]*qA[j-1]/120 + 267*qA[j+2]*qA[j]/40 + 547*qA[j-1]**2/240 - 1261*qA[j-1]*qA[j]/120 + 3443*qA[j]**2/240
+        Bjtojp3 = 11003*qA[j+1]**2/240 - 8623*qA[j+1]*qA[j+2]/120 + 2321*qA[j+1]*qA[j+3]/120 - 1567*qA[j+1]*qA[j]/40 + 7043*qA[j+2]**2/240 - 647*qA[j+2]*qA[j+3]/40 + 3521*qA[j+2]*qA[j]/120 + 547*qA[j+3]**2/240 - 309*qA[j+3]*qA[j]/40 + 2107*qA[j]**2/240        
  
 
-        Bjm3toj = 8843*qA[j-1]**2/240 - 6463*qA[j-1]*qA[j-2]/120 + 1601*qA[j-1]*qA[j-3]/120 - 1327*qA[j-1]*qA[j]/40 + 4883*qA[j-2]**2/240 - 407*qA[j-2]*qA[j-3]/40 + 2801*qA[j-2]*qA[j]/120 + 307*qA[j-3]**2/240 - 229*qA[j-3]*qA[j]/40 + 1867*qA[j]**2/240
-        Bjm2tojp1 = 307*qA[j+1]**2/240 + 241*qA[j+1]*qA[j-1]/120 - 7*qA[j+1]*qA[j-2]/120 - 541*qA[j+1]*qA[j]/120 + 683*qA[j-1]**2/240 - 101*qA[j-1]*qA[j-2]/120 - 823*qA[j-1]*qA[j]/120 + 9*qA[j-2]**2/80 + 27*qA[j-2]*qA[j]/40 + 1283*qA[j]**2/240
-        Bjm1tojp2 = 683*qA[j+1]**2/240 - 101*qA[j+1]*qA[j+2]/120 + 241*qA[j+1]*qA[j-1]/120 - 823*qA[j+1]*qA[j]/120 + 9*qA[j+2]**2/80 - 7*qA[j+2]*qA[j-1]/120 + 27*qA[j+2]*qA[j]/40 + 307*qA[j-1]**2/240 - 541*qA[j-1]*qA[j]/120 + 1283*qA[j]**2/240
-        Bjtojp3 =8843*qA[j+1]**2/240 - 6463*qA[j+1]*qA[j+2]/120 + 1601*qA[j+1]*qA[j+3]/120 - 1327*qA[j+1]*qA[j]/40 + 4883*qA[j+2]**2/240 - 407*qA[j+2]*qA[j+3]/40 + 2801*qA[j+2]*qA[j]/120 + 307*qA[j+3]**2/240 - 229*qA[j+3]*qA[j]/40 + 1867*qA[j]**2/240       
+        # Bjm3toj = 8843*qA[j-1]**2/240 - 6463*qA[j-1]*qA[j-2]/120 + 1601*qA[j-1]*qA[j-3]/120 - 1327*qA[j-1]*qA[j]/40 + 4883*qA[j-2]**2/240 - 407*qA[j-2]*qA[j-3]/40 + 2801*qA[j-2]*qA[j]/120 + 307*qA[j-3]**2/240 - 229*qA[j-3]*qA[j]/40 + 1867*qA[j]**2/240
+        # Bjm2tojp1 = 307*qA[j+1]**2/240 + 241*qA[j+1]*qA[j-1]/120 - 7*qA[j+1]*qA[j-2]/120 - 541*qA[j+1]*qA[j]/120 + 683*qA[j-1]**2/240 - 101*qA[j-1]*qA[j-2]/120 - 823*qA[j-1]*qA[j]/120 + 9*qA[j-2]**2/80 + 27*qA[j-2]*qA[j]/40 + 1283*qA[j]**2/240
+        # Bjm1tojp2 = 683*qA[j+1]**2/240 - 101*qA[j+1]*qA[j+2]/120 + 241*qA[j+1]*qA[j-1]/120 - 823*qA[j+1]*qA[j]/120 + 9*qA[j+2]**2/80 - 7*qA[j+2]*qA[j-1]/120 + 27*qA[j+2]*qA[j]/40 + 307*qA[j-1]**2/240 - 541*qA[j-1]*qA[j]/120 + 1283*qA[j]**2/240
+        # Bjtojp3 =8843*qA[j+1]**2/240 - 6463*qA[j+1]*qA[j+2]/120 + 1601*qA[j+1]*qA[j+3]/120 - 1327*qA[j+1]*qA[j]/40 + 4883*qA[j+2]**2/240 - 407*qA[j+2]*qA[j+3]/40 + 2801*qA[j+2]*qA[j]/120 + 307*qA[j+3]**2/240 - 229*qA[j+3]*qA[j]/40 + 1867*qA[j]**2/240       
 
        
         iw1 = ((1.0/35.0) / (eps +Bjm3toj )**2)
@@ -122,6 +122,17 @@ def CellAverageToCubic(qA,nGcells,dx):
         w3 = iw3 / (iw1 + iw2 + iw3 + iw4 )
         w4 = iw4 / (iw1 + iw2 + iw3 + iw4 )
         
+        iw1m = ((4.0/35.0) / (eps +Bjm3toj )**2)
+        iw2m = ((18.0/35.0) / (eps +Bjm2tojp1 )**2)
+        iw3m = ((12.0/35.0)  / (eps +Bjm1tojp2 )**2)
+        iw4m = ((1.0/35.0)  / (eps +Bjtojp3 )**2)
+
+        
+        w1m = iw1m / (iw1m + iw2m + iw3m + iw4m )
+        w2m = iw2m / (iw1m + iw2m + iw3m + iw4m )
+        w3m = iw3m / (iw1m + iw2m + iw3m + iw4m )
+        w4m = iw4m / (iw1m + iw2m + iw3m + iw4m )
+        
         if w1 < eps:
             w1 = 0
         if w2 < eps:
@@ -132,6 +143,11 @@ def CellAverageToCubic(qA,nGcells,dx):
             w4 = 0
             
         #print (w1,w2,w3,w4)
+        qa = w1m*pjm3toja + w2m*pjm2tojp1a + w3m*pjm1tojp2a + w4m*pjtojp3a
+        qb = w1m*pjm3tojb + w2m*pjm2tojp1b + w3m*pjm1tojp2b + w4m*pjtojp3b
+        qc = w1m*pjm3tojc + w2m*pjm2tojp1c + w3m*pjm1tojp2c + w4m*pjtojp3c
+        qd = w1m*pjm3tojd + w2m*pjm2tojp1d + w3m*pjm1tojp2d + w4m*pjtojp3d
+        qcubic[4*j] = qa*(-dx/2)**3 + qb*(-dx/2)**2 + qc*(-dx/2) + qd
         
         qa = w1*pjm3toja + w2*pjm2tojp1a + w3*pjm1tojp2a + w4*pjtojp3a
         qb = w1*pjm3tojb + w2*pjm2tojp1b + w3*pjm1tojp2b + w4*pjtojp3b
@@ -290,5 +306,5 @@ GA = GetCellAverage(nx,Gcub,dx)
 
 dt = 0.5*dx/sqrt(2*g)
 
-hAN,GAN = Solver(hA,GA,0,10,g,dx,dt,nGcells)
+hAN,GAN = Solver(hA,GA,0,4,g,dx,dt,nGcells)
 

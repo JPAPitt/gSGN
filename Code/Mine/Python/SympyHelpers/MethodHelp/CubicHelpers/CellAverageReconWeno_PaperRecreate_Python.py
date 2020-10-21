@@ -3,7 +3,8 @@ from sympy.solvers.solveset import linsolve
 
 k = 3
 
-vi,vim1,vim2,vip1,vip2,dx = symbols('vi vim1 vim2 vip1 vip2 dx')
+vi,vim1,vim2,vip1,vip2,dx = symbols('qaj qajm1 qajm2 qajp1 qajp2 dx')
+# vimh,vi,viph = symbols('vimh vi viph')
 
 pa,pb,pc = symbols('p_a p_b p_c')
 
@@ -56,6 +57,28 @@ Bjm1tojp1 =Bjm1tojp1.simplify()
 Bjtojp2 =Bjtojp2.simplify()
 
 
+#Polynomial over cell
+# CellPoly = pa*(x)**2 + pb*(x) + pc
+# CellPoly_Coeffs = linsolve([ CellPoly.subs(x,-dx/2) -vimh, CellPoly.subs(x,0) -vi, CellPoly.subs(x,dx/2) -viph], (pa,pb,pc ))
 #Print same
 
-# Polyjm2toj.subs(x,dx/2)
+print('pjm2toj')
+print(CubicSoljm2toj_Coeff[0])
+print(CubicSoljm2toj_Coeff[1])
+print(CubicSoljm2toj_Coeff[2])
+
+
+print('pjm1tojp1')
+print(CubicSoljm1tojp1_Coeff[0])
+print(CubicSoljm1tojp1_Coeff[1])
+print(CubicSoljm1tojp1_Coeff[2])
+
+print('pjm1tojp1')
+print(CubicSoljtojp2_Coeff[0])
+print(CubicSoljtojp2_Coeff[1])
+print(CubicSoljtojp2_Coeff[2])
+
+print('Bs')
+print(Bjm2toj)
+print(Bjm1tojp1)
+print(Bjtojp2)
