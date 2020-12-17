@@ -1,0 +1,59 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\documentclass[]{standalone}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[pdf]{pstricks}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepackage{sansmath}
+\sansmath
+\usepgfplotslibrary{fillbetween}
+%% the following commands are needed for some matlab2tikz features
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{arrows.meta}
+\usepgfplotslibrary{patchplots}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{shapes.multipart}
+%\usetikzlibrary{external}
+%\tikzexternalize % activate!
+\begin{document}
+\definecolor{mycolor1}{rgb}{0.00000,0.44700,0.74100}%
+\definecolor{mycolor2}{rgb}{0.85000,0.32500,0.09800}%
+\definecolor{mycolor3}{rgb}{0.92900,0.69400,0.12500}%
+%
+\begin{tikzpicture}
+\tikzstyle{every node}=[font=\Large]
+\begin{axis}[%
+width=4.521in,
+height=3.566in,
+at={(0.758in,0.481in)},
+every axis plot/.append style={thick},
+scale only axis,
+xmin=-200,
+xmax=200,
+xtick={-200, -100,    0,  100,  200},
+xlabel style={font=\color{white!15!black}},
+xlabel={$x \;(m)$},
+ymin=0.8,
+ymax=2.2,
+ytick={0.8,   1, 1.2, 1.4, 1.6, 1.8,   2, 2.2},
+ylabel style={font=\color{white!15!black}},
+ylabel={$h \;(m)$},
+axis background/.style={fill=white}
+]
+\addplot[domain=-200:200,samples=5000, smooth, thick,mycolor1] gnuplot{2 -0.5*(1 + tanh(x/0.1))};
+\addlegendentry{$\alpha = 0.1$}
+
+\addplot[domain=-200:200,samples=2000, smooth, thick,black] gnuplot{2 -0.5*(1 + tanh(x/10))};
+\addlegendentry{$\alpha = 10$}
+
+\addplot[domain=-200:200,samples=2000, smooth, thick,mycolor2] gnuplot{2 -0.5*(1 + tanh(x/50))};
+\addlegendentry{$\alpha = 50$}
+\end{axis}
+\end{tikzpicture}%
+\end{document}
