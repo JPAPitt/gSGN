@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  24 JUN 2020 09:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  2 DEC 2020 16:07
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1109,12 +1109,12 @@ OT1/cmr/m/n/10 2[] []  $
  []
 
 [5]
-<./Figures/Explanation/BetaPlotAll.pdf, id=156, 333.20084pt x 273.12238pt>
+<./Figures/Explanation/BetaPlotAll.pdf, id=156, 349.98956pt x 291.76604pt>
 File: ./Figures/Explanation/BetaPlotAll.pdf Graphic file (type pdf)
 <use ./Figures/Explanation/BetaPlotAll.pdf>
 Package pdftex.def Info: ./Figures/Explanation/BetaPlotAll.pdf  used on input l
 ine 369.
-(pdftex.def)             Requested size: 193.68056pt x 158.76115pt.
+(pdftex.def)             Requested size: 193.68056pt x 161.46014pt.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
@@ -1221,126 +1221,261 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 474.
 
-<./Figures/Simulations/Study/RegSWWE/Convergence/h.pdf, id=219, 374.07353pt x 2
-95.27814pt>
-File: ./Figures/Simulations/Study/RegSWWE/Convergence/h.pdf Graphic file (type 
-pdf)
-<use ./Figures/Simulations/Study/RegSWWE/Convergence/h.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/RegSWWE/Convergence/h.pdf 
- used on input line 487.
-(pdftex.def)             Requested size: 154.95035pt x 122.31285pt.
-<./Figures/Simulations/Study/RegSWWE/Convergence/G.pdf, id=220, 376.11316pt x 2
-95.2862pt>
-File: ./Figures/Simulations/Study/RegSWWE/Convergence/G.pdf Graphic file (type 
-pdf)
-<use ./Figures/Simulations/Study/RegSWWE/Convergence/G.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/RegSWWE/Convergence/G.pdf 
- used on input line 492.
-(pdftex.def)             Requested size: 154.95035pt x 121.64935pt.
-<./Figures/Simulations/Study/RegSWWE/Convergence/u.pdf, id=221, 381.85158pt x 2
-95.27716pt>
-File: ./Figures/Simulations/Study/RegSWWE/Convergence/u.pdf Graphic file (type 
-pdf)
-<use ./Figures/Simulations/Study/RegSWWE/Convergence/u.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/RegSWWE/Convergence/u.pdf 
- used on input line 497.
-(pdftex.def)             Requested size: 154.95035pt x 119.82088pt.
-<./Figures/Simulations/Study/RegSWWE/Convergence/hRFtop.pdf, id=222, 382.96175p
-t x 295.27814pt>
-File: ./Figures/Simulations/Study/RegSWWE/Convergence/hRFtop.pdf Graphic file (
-type pdf)
-<use ./Figures/Simulations/Study/RegSWWE/Convergence/hRFtop.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/RegSWWE/Convergence/hRFtop
-.pdf  used on input line 507.
-(pdftex.def)             Requested size: 154.95035pt x 119.47433pt.
-<./Figures/Simulations/Study/RegSWWE/Convergence/GRFtop.pdf, id=223, 380.00067p
-t x 295.2862pt>
-File: ./Figures/Simulations/Study/RegSWWE/Convergence/GRFtop.pdf Graphic file (
-type pdf)
-<use ./Figures/Simulations/Study/RegSWWE/Convergence/GRFtop.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/RegSWWE/Convergence/GRFtop
-.pdf  used on input line 512.
-(pdftex.def)             Requested size: 154.95035pt x 120.41028pt.
-<./Figures/Simulations/Study/RegSWWE/Convergence/uRFtop.pdf, id=224, 390.73979p
-t x 295.27814pt>
-File: ./Figures/Simulations/Study/RegSWWE/Convergence/uRFtop.pdf Graphic file (
-type pdf)
-<use ./Figures/Simulations/Study/RegSWWE/Convergence/uRFtop.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/RegSWWE/Convergence/uRFtop
-.pdf  used on input line 517.
-(pdftex.def)             Requested size: 154.95035pt x 117.0954pt.
-<./Figures/Simulations/Study/RegSWWE/Convergence/hRFBot.pdf, id=225, 380.46239p
-t x 295.27814pt>
-File: ./Figures/Simulations/Study/RegSWWE/Convergence/hRFBot.pdf Graphic file (
-type pdf)
-<use ./Figures/Simulations/Study/RegSWWE/Convergence/hRFBot.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/RegSWWE/Convergence/hRFBot
-.pdf  used on input line 522.
-(pdftex.def)             Requested size: 154.95035pt x 120.25832pt.
-<./Figures/Simulations/Study/RegSWWE/Convergence/GRFBot.pdf, id=226, 377.50134p
-t x 295.26712pt>
-File: ./Figures/Simulations/Study/RegSWWE/Convergence/GRFBot.pdf Graphic file (
-type pdf)
-<use ./Figures/Simulations/Study/RegSWWE/Convergence/GRFBot.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/RegSWWE/Convergence/GRFBot
-.pdf  used on input line 527.
-(pdftex.def)             Requested size: 154.95035pt x 121.19545pt.
-<./Figures/Simulations/Study/RegSWWE/Convergence/uRFBot.pdf, id=227, 380.46239p
-t x 295.27814pt>
-File: ./Figures/Simulations/Study/RegSWWE/Convergence/uRFBot.pdf Graphic file (
-type pdf)
-<use ./Figures/Simulations/Study/RegSWWE/Convergence/uRFBot.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/RegSWWE/Convergence/uRFBot
-.pdf  used on input line 532.
-(pdftex.def)             Requested size: 154.95035pt x 120.25832pt.
-<./Figures/Simulations/Study/RegSWWE/Convergence/hFront.pdf, id=228, 374.0625pt
- x 294.44302pt>
-File: ./Figures/Simulations/Study/RegSWWE/Convergence/hFront.pdf Graphic file (
-type pdf)
-<use ./Figures/Simulations/Study/RegSWWE/Convergence/hFront.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/RegSWWE/Convergence/hFront
-.pdf  used on input line 537.
-(pdftex.def)             Requested size: 154.95035pt x 121.97142pt.
-<./Figures/Simulations/Study/RegSWWE/Convergence/GFront.pdf, id=229, 381.1018pt
- x 294.43402pt>
-File: ./Figures/Simulations/Study/RegSWWE/Convergence/GFront.pdf Graphic file (
-type pdf)
-<use ./Figures/Simulations/Study/RegSWWE/Convergence/GFront.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/RegSWWE/Convergence/GFront
-.pdf  used on input line 542.
-(pdftex.def)             Requested size: 154.95035pt x 119.71236pt.
-<./Figures/Simulations/Study/RegSWWE/Convergence/uFront.pdf, id=230, 374.0625pt
- x 294.44403pt>
-File: ./Figures/Simulations/Study/RegSWWE/Convergence/uFront.pdf Graphic file (
-type pdf)
-<use ./Figures/Simulations/Study/RegSWWE/Convergence/uFront.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/RegSWWE/Convergence/uFront
-.pdf  used on input line 547.
-(pdftex.def)             Requested size: 154.95035pt x 121.97185pt.
-<./Figures/Simulations/Study/RegSWWE/Regions/hRegionsSWWE.pdf, id=231, 374.0695
-2pt x 295.27716pt>
-File: ./Figures/Simulations/Study/RegSWWE/Regions/hRegionsSWWE.pdf Graphic file
- (type pdf)
-<use ./Figures/Simulations/Study/RegSWWE/Regions/hRegionsSWWE.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/RegSWWE/Regions/hRegionsSW
-WE.pdf  used on input line 575.
-(pdftex.def)             Requested size: 237.26497pt x 187.28716pt.
-<./Figures/Simulations/Study/RegSWWE/Regions/hRegionsREGSWWE.pdf, id=232, 374.0
-6952pt x 295.27716pt>
-File: ./Figures/Simulations/Study/RegSWWE/Regions/hRegionsREGSWWE.pdf Graphic f
-ile (type pdf)
-<use ./Figures/Simulations/Study/RegSWWE/Regions/hRegionsREGSWWE.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/RegSWWE/Regions/hRegionsRE
-GSWWE.pdf  used on input line 580.
-(pdftex.def)             Requested size: 237.26497pt x 187.28716pt.
-<./Figures/Simulations/Study/RegSWWE/Energy/EnergyOverTime.pdf, id=233, 383.613
-17pt x 295.41167pt>
-File: ./Figures/Simulations/Study/RegSWWE/Energy/EnergyOverTime.pdf Graphic fil
-e (type pdf)
-<use ./Figures/Simulations/Study/RegSWWE/Energy/EnergyOverTime.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/RegSWWE/Energy/EnergyOverT
-ime.pdf  used on input line 604.
-(pdftex.def)             Requested size: 290.52823pt x 223.73537pt.
+
+LaTeX Warning: File `./Figures/Simulations/Study/RegSWWE/Convergence/h.pdf' not
+ found on input line 487.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/RegSWWE/Convergen
+ce/h.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.487 ...ulations/Study/RegSWWE/Convergence/h.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/RegSWWE/Convergence/G.pdf' not
+ found on input line 492.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/RegSWWE/Convergen
+ce/G.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.492 ...ulations/Study/RegSWWE/Convergence/G.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/RegSWWE/Convergence/u.pdf' not
+ found on input line 497.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/RegSWWE/Convergen
+ce/u.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.497 ...ulations/Study/RegSWWE/Convergence/u.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/RegSWWE/Convergence/hRFtop.pdf
+' not found on input line 507.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/RegSWWE/Convergen
+ce/hRFtop.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.507 ...ons/Study/RegSWWE/Convergence/hRFtop.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/RegSWWE/Convergence/GRFtop.pdf
+' not found on input line 512.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/RegSWWE/Convergen
+ce/GRFtop.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.512 ...ons/Study/RegSWWE/Convergence/GRFtop.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/RegSWWE/Convergence/uRFtop.pdf
+' not found on input line 517.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/RegSWWE/Convergen
+ce/uRFtop.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.517 ...ons/Study/RegSWWE/Convergence/uRFtop.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/RegSWWE/Convergence/hRFBot.pdf
+' not found on input line 522.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/RegSWWE/Convergen
+ce/hRFBot.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.522 ...ons/Study/RegSWWE/Convergence/hRFBot.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/RegSWWE/Convergence/GRFBot.pdf
+' not found on input line 527.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/RegSWWE/Convergen
+ce/GRFBot.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.527 ...ons/Study/RegSWWE/Convergence/GRFBot.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/RegSWWE/Convergence/uRFBot.pdf
+' not found on input line 532.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/RegSWWE/Convergen
+ce/uRFBot.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.532 ...ons/Study/RegSWWE/Convergence/uRFBot.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/RegSWWE/Convergence/hFront.pdf
+' not found on input line 537.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/RegSWWE/Convergen
+ce/hFront.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.537 ...ons/Study/RegSWWE/Convergence/hFront.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/RegSWWE/Convergence/GFront.pdf
+' not found on input line 542.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/RegSWWE/Convergen
+ce/GFront.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.542 ...ons/Study/RegSWWE/Convergence/GFront.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/RegSWWE/Convergence/uFront.pdf
+' not found on input line 547.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/RegSWWE/Convergen
+ce/uFront.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.547 ...ons/Study/RegSWWE/Convergence/uFront.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/RegSWWE/Regions/hRegionsSWWE.p
+df' not found on input line 575.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/RegSWWE/Regions/h
+RegionsSWWE.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.575 ...s/Study/RegSWWE/Regions/hRegionsSWWE.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/RegSWWE/Regions/hRegionsREGSWW
+E.pdf' not found on input line 580.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/RegSWWE/Regions/h
+RegionsREGSWWE.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.580 ...tudy/RegSWWE/Regions/hRegionsREGSWWE.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/RegSWWE/Energy/EnergyOverTime.
+pdf' not found on input line 604.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/RegSWWE/Energy/En
+ergyOverTime.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.604 .../Study/RegSWWE/Energy/EnergyOverTime.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 609.
@@ -1365,94 +1500,193 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 609.
 
-[8 <./Figures/Simulations/Study/RegSWWE/Convergence/h.pdf> <./Figures/Simulatio
-ns/Study/RegSWWE/Convergence/G.pdf> <./Figures/Simulations/Study/RegSWWE/Conver
-gence/u.pdf>] [9 <./Figures/Simulations/Study/RegSWWE/Convergence/hRFtop.pdf> <
-./Figures/Simulations/Study/RegSWWE/Convergence/GRFtop.pdf> <./Figures/Simulati
-ons/Study/RegSWWE/Convergence/uRFtop.pdf> <./Figures/Simulations/Study/RegSWWE/
-Convergence/hRFBot.pdf> <./Figures/Simulations/Study/RegSWWE/Convergence/GRFBot
-.pdf> <./Figures/Simulations/Study/RegSWWE/Convergence/uRFBot.pdf> <./Figures/S
-imulations/Study/RegSWWE/Convergence/hFront.pdf> <./Figures/Simulations/Study/R
-egSWWE/Convergence/GFront.pdf> <./Figures/Simulations/Study/RegSWWE/Convergence
-/uFront.pdf>] [10 <./Figures/Simulations/Study/RegSWWE/Regions/hRegionsSWWE.pdf
-> <./Figures/Simulations/Study/RegSWWE/Regions/hRegionsREGSWWE.pdf> <./Figures/
-Simulations/Study/RegSWWE/Energy/EnergyOverTime.pdf>]
-<./Figures/Simulations/Study/ImpDisp/h.pdf, id=417, 374.07353pt x 295.27814pt>
-File: ./Figures/Simulations/Study/ImpDisp/h.pdf Graphic file (type pdf)
-<use ./Figures/Simulations/Study/ImpDisp/h.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/ImpDisp/h.pdf  used on inp
-ut line 625.
-(pdftex.def)             Requested size: 155.91824pt x 123.0743pt.
-<./Figures/Simulations/Study/ImpDisp/G.pdf, id=418, 376.11316pt x 295.27716pt>
-File: ./Figures/Simulations/Study/ImpDisp/G.pdf Graphic file (type pdf)
-<use ./Figures/Simulations/Study/ImpDisp/G.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/ImpDisp/G.pdf  used on inp
-ut line 630.
-(pdftex.def)             Requested size: 154.95035pt x 121.64563pt.
-<./Figures/Simulations/Study/ImpDisp/u.pdf, id=419, 374.07353pt x 295.27814pt>
-File: ./Figures/Simulations/Study/ImpDisp/u.pdf Graphic file (type pdf)
-<use ./Figures/Simulations/Study/ImpDisp/u.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/ImpDisp/u.pdf  used on inp
-ut line 635.
-(pdftex.def)             Requested size: 154.95035pt x 122.31285pt.
-<./Figures/Simulations/Study/ImpDisp/hMiddle.pdf, id=420, 376.56284pt x 294.443
-02pt>
-File: ./Figures/Simulations/Study/ImpDisp/hMiddle.pdf Graphic file (type pdf)
-<use ./Figures/Simulations/Study/ImpDisp/hMiddle.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/ImpDisp/hMiddle.pdf  used 
-on input line 645.
-(pdftex.def)             Requested size: 154.95035pt x 121.1627pt.
-<./Figures/Simulations/Study/ImpDisp/GMiddle.pdf, id=421, 373.60176pt x 294.443
-02pt>
-File: ./Figures/Simulations/Study/ImpDisp/GMiddle.pdf Graphic file (type pdf)
-<use ./Figures/Simulations/Study/ImpDisp/GMiddle.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/ImpDisp/GMiddle.pdf  used 
-on input line 650.
-(pdftex.def)             Requested size: 154.95035pt x 122.11967pt.
-<./Figures/Simulations/Study/ImpDisp/uMiddle.pdf, id=422, 376.56284pt x 294.440
-02pt>
-File: ./Figures/Simulations/Study/ImpDisp/uMiddle.pdf Graphic file (type pdf)
-<use ./Figures/Simulations/Study/ImpDisp/uMiddle.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/ImpDisp/uMiddle.pdf  used 
-on input line 655.
-(pdftex.def)             Requested size: 154.95035pt x 121.16148pt.
-<./Figures/Simulations/Study/ImpDisp/hFront.pdf, id=423, 374.07353pt x 294.4450
-4pt>
-File: ./Figures/Simulations/Study/ImpDisp/hFront.pdf Graphic file (type pdf)
-<use ./Figures/Simulations/Study/ImpDisp/hFront.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/ImpDisp/hFront.pdf  used o
-n input line 660.
-(pdftex.def)             Requested size: 154.95035pt x 121.96776pt.
-<./Figures/Simulations/Study/ImpDisp/GFront.pdf, id=424, 368.3341pt x 294.43402
-pt>
-File: ./Figures/Simulations/Study/ImpDisp/GFront.pdf Graphic file (type pdf)
-<use ./Figures/Simulations/Study/ImpDisp/GFront.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/ImpDisp/GFront.pdf  used o
-n input line 665.
-(pdftex.def)             Requested size: 154.95035pt x 123.8636pt.
-<./Figures/Simulations/Study/ImpDisp/uFront.pdf, id=425, 374.07353pt x 294.4450
-4pt>
-File: ./Figures/Simulations/Study/ImpDisp/uFront.pdf Graphic file (type pdf)
-<use ./Figures/Simulations/Study/ImpDisp/uFront.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/ImpDisp/uFront.pdf  used o
-n input line 670.
-(pdftex.def)             Requested size: 154.95035pt x 121.96776pt.
-<./Figures/Simulations/Study/ImpDisp/Regions/hRegionsSerre.pdf, id=426, 374.069
-52pt x 295.27716pt>
-File: ./Figures/Simulations/Study/ImpDisp/Regions/hRegionsSerre.pdf Graphic fil
-e (type pdf)
-<use ./Figures/Simulations/Study/ImpDisp/Regions/hRegionsSerre.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/ImpDisp/Regions/hRegionsSe
-rre.pdf  used on input line 681.
-(pdftex.def)             Requested size: 237.26497pt x 187.28716pt.
-<./Figures/Simulations/Study/ImpDisp/Regions/hRegionsImpDisp.pdf, id=427, 374.0
-6952pt x 295.27716pt>
-File: ./Figures/Simulations/Study/ImpDisp/Regions/hRegionsImpDisp.pdf Graphic f
-ile (type pdf)
-<use ./Figures/Simulations/Study/ImpDisp/Regions/hRegionsImpDisp.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/ImpDisp/Regions/hRegionsIm
-pDisp.pdf  used on input line 686.
-(pdftex.def)             Requested size: 237.26497pt x 187.28716pt.
+[8] [9] [10]
+
+LaTeX Warning: File `./Figures/Simulations/Study/ImpDisp/h.pdf' not found on in
+put line 625.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/ImpDisp/h.pdf' no
+t found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.625 .../Figures/Simulations/Study/ImpDisp/h.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/ImpDisp/G.pdf' not found on in
+put line 630.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/ImpDisp/G.pdf' no
+t found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.630 .../Figures/Simulations/Study/ImpDisp/G.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/ImpDisp/u.pdf' not found on in
+put line 635.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/ImpDisp/u.pdf' no
+t found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.635 .../Figures/Simulations/Study/ImpDisp/u.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/ImpDisp/hMiddle.pdf' not found
+ on input line 645.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/ImpDisp/hMiddle.p
+df' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.645 ...es/Simulations/Study/ImpDisp/hMiddle.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/ImpDisp/GMiddle.pdf' not found
+ on input line 650.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/ImpDisp/GMiddle.p
+df' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.650 ...es/Simulations/Study/ImpDisp/GMiddle.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/ImpDisp/uMiddle.pdf' not found
+ on input line 655.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/ImpDisp/uMiddle.p
+df' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.655 ...es/Simulations/Study/ImpDisp/uMiddle.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/ImpDisp/hFront.pdf' not found 
+on input line 660.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/ImpDisp/hFront.pd
+f' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.660 ...res/Simulations/Study/ImpDisp/hFront.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/ImpDisp/GFront.pdf' not found 
+on input line 665.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/ImpDisp/GFront.pd
+f' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.665 ...res/Simulations/Study/ImpDisp/GFront.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/ImpDisp/uFront.pdf' not found 
+on input line 670.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/ImpDisp/uFront.pd
+f' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.670 ...res/Simulations/Study/ImpDisp/uFront.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/ImpDisp/Regions/hRegionsSerre.
+pdf' not found on input line 681.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/ImpDisp/Regions/h
+RegionsSerre.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.681 .../Study/ImpDisp/Regions/hRegionsSerre.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/ImpDisp/Regions/hRegionsImpDis
+p.pdf' not found on input line 686.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/ImpDisp/Regions/h
+RegionsImpDisp.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.686 ...tudy/ImpDisp/Regions/hRegionsImpDisp.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
@@ -1506,113 +1740,197 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 709.
 
-<./Figures/Simulations/Study/Serre2SWWECloser/h.pdf, id=428, 374.07353pt x 295.
-27814pt>
-File: ./Figures/Simulations/Study/Serre2SWWECloser/h.pdf Graphic file (type pdf
-)
-<use ./Figures/Simulations/Study/Serre2SWWECloser/h.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/Serre2SWWECloser/h.pdf  us
-ed on input line 725.
-(pdftex.def)             Requested size: 154.95035pt x 122.31285pt.
-<./Figures/Simulations/Study/Serre2SWWECloser/G.pdf, id=429, 376.11316pt x 295.
-26712pt>
-File: ./Figures/Simulations/Study/Serre2SWWECloser/G.pdf Graphic file (type pdf
-)
-<use ./Figures/Simulations/Study/Serre2SWWECloser/G.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/Serre2SWWECloser/G.pdf  us
-ed on input line 730.
-(pdftex.def)             Requested size: 154.95035pt x 121.6415pt.
-<./Figures/Simulations/Study/Serre2SWWECloser/u.pdf, id=430, 374.07353pt x 295.
-27814pt>
-File: ./Figures/Simulations/Study/Serre2SWWECloser/u.pdf Graphic file (type pdf
-)
-<use ./Figures/Simulations/Study/Serre2SWWECloser/u.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/Serre2SWWECloser/u.pdf  us
-ed on input line 735.
-(pdftex.def)             Requested size: 154.95035pt x 122.31285pt.
-[11 <./Figures/Simulations/Study/ImpDisp/h.pdf> <./Figures/Simulations/Study/Im
-pDisp/G.pdf> <./Figures/Simulations/Study/ImpDisp/u.pdf>] [12 <./Figures/Simula
-tions/Study/ImpDisp/hMiddle.pdf> <./Figures/Simulations/Study/ImpDisp/GMiddle.p
-df> <./Figures/Simulations/Study/ImpDisp/uMiddle.pdf> <./Figures/Simulations/St
-udy/ImpDisp/hFront.pdf> <./Figures/Simulations/Study/ImpDisp/GFront.pdf> <./Fig
-ures/Simulations/Study/ImpDisp/uFront.pdf> <./Figures/Simulations/Study/ImpDisp
-/Regions/hRegionsSerre.pdf> <./Figures/Simulations/Study/ImpDisp/Regions/hRegio
-nsImpDisp.pdf>]
-<./Figures/Simulations/Study/Serre2SWWECloser/hMid.pdf, id=548, 376.56284pt x 2
-94.44302pt>
-File: ./Figures/Simulations/Study/Serre2SWWECloser/hMid.pdf Graphic file (type 
-pdf)
-<use ./Figures/Simulations/Study/Serre2SWWECloser/hMid.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/Serre2SWWECloser/hMid.pdf 
- used on input line 747.
-(pdftex.def)             Requested size: 154.95035pt x 121.1627pt.
-<./Figures/Simulations/Study/Serre2SWWECloser/GMid.pdf, id=549, 373.60176pt x 2
-94.44002pt>
-File: ./Figures/Simulations/Study/Serre2SWWECloser/GMid.pdf Graphic file (type 
-pdf)
-<use ./Figures/Simulations/Study/Serre2SWWECloser/GMid.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/Serre2SWWECloser/GMid.pdf 
- used on input line 752.
-(pdftex.def)             Requested size: 154.95035pt x 122.11844pt.
-<./Figures/Simulations/Study/Serre2SWWECloser/uMiddle.pdf, id=550, 376.56284pt 
-x 294.44002pt>
-File: ./Figures/Simulations/Study/Serre2SWWECloser/uMiddle.pdf Graphic file (ty
-pe pdf)
-<use ./Figures/Simulations/Study/Serre2SWWECloser/uMiddle.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/Serre2SWWECloser/uMiddle.p
-df  used on input line 757.
-(pdftex.def)             Requested size: 154.95035pt x 121.16148pt.
-<./Figures/Simulations/Study/Serre2SWWECloser/hFront.pdf, id=551, 374.07353pt x
- 294.44504pt>
-File: ./Figures/Simulations/Study/Serre2SWWECloser/hFront.pdf Graphic file (typ
-e pdf)
-<use ./Figures/Simulations/Study/Serre2SWWECloser/hFront.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/Serre2SWWECloser/hFront.pd
-f  used on input line 762.
-(pdftex.def)             Requested size: 154.95035pt x 121.96776pt.
-<./Figures/Simulations/Study/Serre2SWWECloser/GFront.pdf, id=552, 368.3341pt x 
-294.436pt>
-File: ./Figures/Simulations/Study/Serre2SWWECloser/GFront.pdf Graphic file (typ
-e pdf)
-<use ./Figures/Simulations/Study/Serre2SWWECloser/GFront.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/Serre2SWWECloser/GFront.pd
-f  used on input line 767.
-(pdftex.def)             Requested size: 154.95035pt x 123.86444pt.
-<./Figures/Simulations/Study/Serre2SWWECloser/uFront.pdf, id=553, 374.07353pt x
- 294.44504pt>
-File: ./Figures/Simulations/Study/Serre2SWWECloser/uFront.pdf Graphic file (typ
-e pdf)
-<use ./Figures/Simulations/Study/Serre2SWWECloser/uFront.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/Serre2SWWECloser/uFront.pd
-f  used on input line 772.
-(pdftex.def)             Requested size: 154.95035pt x 121.96776pt.
-<./Figures/Simulations/Study/Serre2SWWECloser/Regions/hRegionsSerre.pdf, id=554
-, 374.06952pt x 295.27716pt>
-File: ./Figures/Simulations/Study/Serre2SWWECloser/Regions/hRegionsSerre.pdf Gr
-aphic file (type pdf)
-<use ./Figures/Simulations/Study/Serre2SWWECloser/Regions/hRegionsSerre.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/Serre2SWWECloser/Regions/h
-RegionsSerre.pdf  used on input line 783.
-(pdftex.def)             Requested size: 237.26497pt x 187.28716pt.
-<./Figures/Simulations/Study/Serre2SWWECloser/Regions/hRegionsSerreSWWEClose.pd
-f, id=555, 374.06952pt x 295.27716pt>
-File: ./Figures/Simulations/Study/Serre2SWWECloser/Regions/hRegionsSerreSWWEClo
-se.pdf Graphic file (type pdf)
-<use ./Figures/Simulations/Study/Serre2SWWECloser/Regions/hRegionsSerreSWWEClos
-e.pdf>
-Package pdftex.def Info: ./Figures/Simulations/Study/Serre2SWWECloser/Regions/h
-RegionsSerreSWWEClose.pdf  used on input line 788.
-(pdftex.def)             Requested size: 237.26497pt x 187.28716pt.
- [13 <./Figures/Simulations/Study/Serre2SWWECloser/h.pdf> <./Figures/Simulation
-s/Study/Serre2SWWECloser/G.pdf> <./Figures/Simulations/Study/Serre2SWWECloser/u
-.pdf>] [14 <./Figures/Simulations/Study/Serre2SWWECloser/hMid.pdf> <./Figures/S
-imulations/Study/Serre2SWWECloser/GMid.pdf> <./Figures/Simulations/Study/Serre2
-SWWECloser/uMiddle.pdf> <./Figures/Simulations/Study/Serre2SWWECloser/hFront.pd
-f> <./Figures/Simulations/Study/Serre2SWWECloser/GFront.pdf> <./Figures/Simulat
-ions/Study/Serre2SWWECloser/uFront.pdf> <./Figures/Simulations/Study/Serre2SWWE
-Closer/Regions/hRegionsSerre.pdf> <./Figures/Simulations/Study/Serre2SWWECloser
-/Regions/hRegionsSerreSWWEClose.pdf>]
+[11] [12] [13]
+
+LaTeX Warning: File `./Figures/Simulations/Study/Serre2SWWECloser/h.pdf' not fo
+und on input line 725.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/Serre2SWWECloser/
+h.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.725 ...Simulations/Study/Serre2SWWECloser/h.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/Serre2SWWECloser/G.pdf' not fo
+und on input line 730.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/Serre2SWWECloser/
+G.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.730 ...Simulations/Study/Serre2SWWECloser/G.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/Serre2SWWECloser/u.pdf' not fo
+und on input line 735.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/Serre2SWWECloser/
+u.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.735 ...Simulations/Study/Serre2SWWECloser/u.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/Serre2SWWECloser/hMid.pdf' not
+ found on input line 747.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/Serre2SWWECloser/
+hMid.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.747 ...ulations/Study/Serre2SWWECloser/hMid.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/Serre2SWWECloser/GMid.pdf' not
+ found on input line 752.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/Serre2SWWECloser/
+GMid.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.752 ...ulations/Study/Serre2SWWECloser/GMid.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/Serre2SWWECloser/uMiddle.pdf' 
+not found on input line 757.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/Serre2SWWECloser/
+uMiddle.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.757 ...tions/Study/Serre2SWWECloser/uMiddle.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/Serre2SWWECloser/hFront.pdf' n
+ot found on input line 762.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/Serre2SWWECloser/
+hFront.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.762 ...ations/Study/Serre2SWWECloser/hFront.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/Serre2SWWECloser/GFront.pdf' n
+ot found on input line 767.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/Serre2SWWECloser/
+GFront.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.767 ...ations/Study/Serre2SWWECloser/GFront.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/Serre2SWWECloser/uFront.pdf' n
+ot found on input line 772.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/Serre2SWWECloser/
+uFront.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.772 ...ations/Study/Serre2SWWECloser/uFront.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/Serre2SWWECloser/Regions/hRegi
+onsSerre.pdf' not found on input line 783.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/Serre2SWWECloser/
+Regions/hRegionsSerre.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.783 ...rre2SWWECloser/Regions/hRegionsSerre.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `./Figures/Simulations/Study/Serre2SWWECloser/Regions/hRegi
+onsSerreSWWEClose.pdf' not found on input line 788.
+
+
+! Package pdftex.def Error: File `./Figures/Simulations/Study/Serre2SWWECloser/
+Regions/hRegionsSerreSWWEClose.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.788 ...loser/Regions/hRegionsSerreSWWEClose.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[14] [15]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 812.
+ [16]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 812.
  (./gSGNpaperOld.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 812.
@@ -1626,11 +1944,11 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 812.
  ) 
 Here is how much of TeX's memory you used:
- 30988 strings out of 492982
- 730218 string characters out of 6134896
+ 30844 strings out of 492982
+ 720446 string characters out of 6134896
  935723 words of memory out of 5000000
- 33933 multiletter control sequences out of 15000+600000
- 10858 words of font info for 39 fonts, out of 8000000 for 9000
+ 33786 multiletter control sequences out of 15000+600000
+ 11026 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,16n,128p,1017b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
@@ -1651,11 +1969,12 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmti8.pfb>
-Output written on gSGNpaperOld.pdf (14 pages, 2664505 bytes).
+amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmtt10.pfb>
+Output written on gSGNpaperOld.pdf (16 pages, 282362 bytes).
 PDF statistics:
- 757 PDF objects out of 1000 (max. 8388607)
- 673 compressed objects within 7 object streams
- 102 named destinations out of 1000 (max. 500000)
- 311 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 366 PDF objects out of 1000 (max. 8388607)
+ 319 compressed objects within 4 object streams
+ 104 named destinations out of 1000 (max. 500000)
+ 126 words of extra memory for PDF output out of 10000 (max. 10000000)
 

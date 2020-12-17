@@ -1,0 +1,30 @@
+% Process Fortran Outputs
+
+clc;
+clear all;
+close all;
+
+% Get list of directories to loop over when reading data
+%wdir = "/home/jp/Documents/Work/PostDoc/Projects/Steve/1DWaves/RegularisedSerre/Data/RAW/Models/gSGNForcedLimAll/ConstantBeta/AnaSolSolitonLoop/06/";
+
+wdir = './NR/07/';
+
+xhug = importdata(strcat(wdir, 'End.dat'));
+t = xhug(:,1);
+x = xhug(:,1);
+h = xhug(:,2);
+g = xhug(:,3);
+u = xhug(:,4);
+
+xhugA = importdata(strcat(wdir, 'EndAna.dat'));
+xA = xhugA(:,1);
+hA = xhugA(:,2);
+gA = xhugA(:,3);
+uA = xhugA(:,4);
+
+figure;
+plot(xA,hA,'-b');
+hold on;
+plot(x,h,'.r');
+hold off
+

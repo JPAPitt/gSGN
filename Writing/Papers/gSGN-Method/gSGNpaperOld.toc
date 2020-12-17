@@ -11,5 +11,5 @@
 \contentsline {subsection}{\numberline {4.2}Forced Solutions}{7}{subsection.4.2}
 \contentsline {section}{\numberline {5}Smooth Dambreak Study}{8}{section.5}
 \contentsline {subsection}{\numberline {5.1}Regularised SWWE Family $\beta _2 = \frac {2}{3} + \beta _1$}{8}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Modified Dispersion Serre Family $\beta _2 = \beta _1$}{8}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.2}Modified Dispersion Serre Family $\beta _2 = \beta _1$}{11}{subsection.5.2}
 \contentsline {subsection}{\numberline {5.3}Serre To SWWE Family $\beta _2 = 0$ and $-\frac {2}{3} \le \beta _1 \le 0$}{11}{subsection.5.3}

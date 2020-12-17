@@ -3,7 +3,7 @@ from sympy.solvers.solveset import linsolve
 
 k = 4
 
-qaj,qajm1,qajm2,qajm3,qajp1,qajp2,qajp3,dx = symbols('cellavgbc_q(i) cellavgbc_q(i-1) cellavgbc_q(i-2) cellavgbc_q(i-3) cellavgbc_q(i+1) cellavgbc_q(i+2) cellavgbc_q(i+3) dx')
+qaj,qajm1,qajm2,qajm3,qajp1,qajp2,qajp3,dx = symbols('qaj qajm1 qajm2 qajm3 qajp1 qajp2  qajp3 dx')
 
 pa,pb,pc,pd = symbols('p_a p_b p_c p_d')
 
