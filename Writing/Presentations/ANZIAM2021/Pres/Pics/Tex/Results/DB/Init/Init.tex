@@ -46,14 +46,8 @@ ylabel style={font=\color{white!15!black}},
 ylabel={$h \;(m)$},
 axis background/.style={fill=white}
 ]
-\addplot[domain=-200:200,samples=5000, smooth, thick,mycolor1] gnuplot{2 -0.5*(1 + tanh(x/0.1))};
-\addlegendentry{$\alpha = 0.1$}
-
-\addplot[domain=-200:200,samples=2000, smooth, thick,black] gnuplot{2 -0.5*(1 + tanh(x/10))};
-\addlegendentry{$\alpha = 10$}
-
-\addplot[domain=-200:200,samples=2000, smooth, thick,mycolor2] gnuplot{2 -0.5*(1 + tanh(x/50))};
-\addlegendentry{$\alpha = 50$}
+\addplot[domain=-200:200,samples=5000, smooth, thick,blue] gnuplot{2 -0.5*(1 + tanh(x/0.1))};
+\node[] at (axis cs: 100,2) {$t=0s$};
 \end{axis}
 \end{tikzpicture}%
 \end{document}

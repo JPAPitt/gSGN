@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  10 NOV 2020 15:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  12 JAN 2021 12:59
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1009,37 +1009,379 @@ Dictionary: translator-theorem-dictionary, Language: English
 )
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
- (./Presentation.nav)
+ (./Presentation.nav) [1
 
-! Package movie15 Error: File `./Videos/Dambreak.avi' cannot be opened for embe
-dding.
-(movie15)                Did you forget to set option `url' or `inline=false'? 
+<<./Videos/Dambreak.avi>>] [2{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
+}
+
+]
+LaTeX Font Info:    Try loading font information for U+msa on input line 58.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 58.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for OT1+mathkerncmss on input 
+line 58.
+
+(/usr/share/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
+File: ot1mathkerncmss.fd 2013/03/27 Fontinst v1.933 font definitions for OT1/ma
+thkerncmss.
+)
+[3
+
+] [4
+
+]
+<./Pics/Web/SualwesiTsunami.jpg, id=240, 361.35pt x 240.9pt>
+File: ./Pics/Web/SualwesiTsunami.jpg Graphic file (type jpg)
+<use ./Pics/Web/SualwesiTsunami.jpg>
+Package pdftex.def Info: ./Pics/Web/SualwesiTsunami.jpg  used on input line 81.
+
+(pdftex.def)             Requested size: 135.51541pt x 90.34462pt.
+<./Pics/Web/HurricaneFlorence.jpg, id=241, 1003.75pt x 543.02875pt>
+File: ./Pics/Web/HurricaneFlorence.jpg Graphic file (type jpg)
+<use ./Pics/Web/HurricaneFlorence.jpg>
+Package pdftex.def Info: ./Pics/Web/HurricaneFlorence.jpg  used on input line 8
+1.
+(pdftex.def)             Requested size: 165.632pt x 89.60416pt.
+
+Overfull \hbox (15.05829pt too wide) in paragraph at lines 81--81
+[][] 
+ []
+
+[5
+
+ <./Pics/Web/SualwesiTsunami.jpg> <./Pics/Web/HurricaneFlorence.jpg>]
+<./Pics/Web/StormSurgeLaura.jpeg, id=282, 466.1924pt x 355.75162pt>
+File: ./Pics/Web/StormSurgeLaura.jpeg Graphic file (type jpg)
+<use ./Pics/Web/StormSurgeLaura.jpeg>
+Package pdftex.def Info: ./Pics/Web/StormSurgeLaura.jpeg  used on input line 89
 .
+(pdftex.def)             Requested size: 215.10196pt x 164.1417pt.
 
-See the movie15 package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.35 \end{frame}
-                
-Try any of the options `url' or `inline=false'! 
+Overfull \vbox (3.12808pt too high) detected at line 89
+ []
 
-[1
+[6
+
+ <./Pics/Web/StormSurgeLaura.jpeg>] [7
+
+] [8
+
+] [9
+
+] [10
+
+]
+<./Pics/Tex/Explanatory/Setupplot/Waves.pdf, id=490, 411.30565pt x 183.99239pt>
+
+File: ./Pics/Tex/Explanatory/Setupplot/Waves.pdf Graphic file (type pdf)
+<use ./Pics/Tex/Explanatory/Setupplot/Waves.pdf>
+Package pdftex.def Info: ./Pics/Tex/Explanatory/Setupplot/Waves.pdf  used on in
+put line 128.
+(pdftex.def)             Requested size: 276.559pt x 123.72063pt.
+ [11
+
+ <./Pics/Tex/Explanatory/Setupplot/Waves.pdf>] [12
+
+] [13
+
+] [14
+
+]
+<./Pics/Tex/Explanatory/DispersionPlot/Dispersion.pdf, id=674, 415.35677pt x 18
+3.99239pt>
+File: ./Pics/Tex/Explanatory/DispersionPlot/Dispersion.pdf Graphic file (type p
+df)
+<use ./Pics/Tex/Explanatory/DispersionPlot/Dispersion.pdf>
+Package pdftex.def Info: ./Pics/Tex/Explanatory/DispersionPlot/Dispersion.pdf  
+used on input line 174.
+(pdftex.def)             Requested size: 276.559pt x 122.5106pt.
+ [15
+
+ <./Pics/Tex/Explanatory/DispersionPlot/Dispersion.pdf>]
+<./Pics/Tex/Explanatory/DispersionPlot/Dispersion_Analagous.pdf, id=741, 415.35
+677pt x 191.99228pt>
+File: ./Pics/Tex/Explanatory/DispersionPlot/Dispersion_Analagous.pdf Graphic fi
+le (type pdf)
+<use ./Pics/Tex/Explanatory/DispersionPlot/Dispersion_Analagous.pdf>
+Package pdftex.def Info: ./Pics/Tex/Explanatory/DispersionPlot/Dispersion_Anala
+gous.pdf  used on input line 181.
+(pdftex.def)             Requested size: 276.559pt x 127.8373pt.
+ [16
+
+ <./Pics/Tex/Explanatory/DispersionPlot/Dispersion_Analagous.pdf>] [17
+
+]
+Overfull \hbox (17.95668pt too wide) detected at line 204
+[]
+ []
+
+[18
+
+]
+Overfull \hbox (17.95668pt too wide) detected at line 204
+[]
+ []
+
+[19
+
+]
+<./Pics/Tex/Explanatory/RegionsPlot/AccuracySummary.pdf, id=924, 349.98856pt x 
+291.95374pt>
+File: ./Pics/Tex/Explanatory/RegionsPlot/AccuracySummary.pdf Graphic file (type
+ pdf)
+<use ./Pics/Tex/Explanatory/RegionsPlot/AccuracySummary.pdf>
+Package pdftex.def Info: ./Pics/Tex/Explanatory/RegionsPlot/AccuracySummary.pdf
+  used on input line 210.
+(pdftex.def)             Requested size: 230.46739pt x 192.24902pt.
+ [20
+
+ <./Pics/Tex/Explanatory/RegionsPlot/AccuracySummary.pdf>] [21
+
+]
+[22
+
+] [23
+
+]
+Overfull \hbox (16.19856pt too wide) detected at line 251
+\OT1/mathkerncmss/m/sl/9 U \OMS/cmsy/m/n/9 ^^@ [] ^^T \OT1/mathkerncmss/m/sl/9 
+c[] \OMS/cmsy/m/n/9 ^^T \OT1/mathkerncmss/m/sl/9 U \OMS/cmsy/m/n/9 ^^@ [][] ^^T
+ \OT1/cmss/m/n/9 0 \OMS/cmsy/m/n/9 ^^T \OT1/mathkerncmss/m/sl/9 U \OT1/cmss/m/n
+/9 + [][] \OMS/cmsy/m/n/9 ^^T \OT1/mathkerncmss/m/sl/9 c[] \OMS/cmsy/m/n/9 ^^T 
+\OT1/mathkerncmss/m/sl/9 U \OT1/cmss/m/n/9 + []
+ []
 
 
-! pdfTeX error (ext5): cannot open file for embedding.
-\@EveryShipout@Output ...@Org@Shipout \box \@cclv 
-                                                  
-l.35 \end{frame}
-                
+Overfull \hbox (16.19856pt too wide) detected at line 251
+\OT1/mathkerncmss/m/sl/9 U \OMS/cmsy/m/n/9 ^^@ [][] ^^T \OT1/mathkerncmss/m/sl/
+9 c[] \OMS/cmsy/m/n/9 ^^T \OT1/mathkerncmss/m/sl/9 U \OMS/cmsy/m/n/9 ^^@ [] ^^T
+ \OT1/cmss/m/n/9 0 \OMS/cmsy/m/n/9 ^^T \OT1/mathkerncmss/m/sl/9 U \OT1/cmss/m/n
+/9 + [] \OMS/cmsy/m/n/9 ^^T \OT1/mathkerncmss/m/sl/9 c[] \OMS/cmsy/m/n/9 ^^T \O
+T1/mathkerncmss/m/sl/9 U \OT1/cmss/m/n/9 + [][]
+ []
 
- 
+[24
+
+] [25
+
+]
+<./Pics/Tex/Explanatory/RegionsPlot/AccuracySummaryWithRegions.pdf, id=1203, 34
+9.98856pt x 291.95374pt>
+File: ./Pics/Tex/Explanatory/RegionsPlot/AccuracySummaryWithRegions.pdf Graphic
+ file (type pdf)
+<use ./Pics/Tex/Explanatory/RegionsPlot/AccuracySummaryWithRegions.pdf>
+Package pdftex.def Info: ./Pics/Tex/Explanatory/RegionsPlot/AccuracySummaryWith
+Regions.pdf  used on input line 265.
+(pdftex.def)             Requested size: 230.46739pt x 192.24902pt.
+ [26
+
+ <./Pics/Tex/Explanatory/RegionsPlot/AccuracySummaryWithRegions.pdf>] [27
+
+]
+<./Pics/Tex/Results/DB/Init/Init.pdf, id=1298, 382.38356pt x 300.12729pt>
+File: ./Pics/Tex/Results/DB/Init/Init.pdf Graphic file (type pdf)
+<use ./Pics/Tex/Results/DB/Init/Init.pdf>
+Package pdftex.def Info: ./Pics/Tex/Results/DB/Init/Init.pdf  used on input lin
+e 279.
+(pdftex.def)             Requested size: 224.32028pt x 176.06606pt.
+ [28
+
+ <./Pics/Tex/Results/DB/Init/Init.pdf>]
+<./Pics/Tex/Results/DB/SWWE/SWWE.pdf, id=1356, 382.38356pt x 300.12729pt>
+File: ./Pics/Tex/Results/DB/SWWE/SWWE.pdf Graphic file (type pdf)
+<use ./Pics/Tex/Results/DB/SWWE/SWWE.pdf>
+Package pdftex.def Info: ./Pics/Tex/Results/DB/SWWE/SWWE.pdf  used on input lin
+e 284.
+(pdftex.def)             Requested size: 215.10196pt x 168.83034pt.
+<./Pics/Tex/Explanatory/RegionsPlot/SPSWWE.pdf, id=1357, 349.98856pt x 291.9537
+4pt>
+File: ./Pics/Tex/Explanatory/RegionsPlot/SPSWWE.pdf Graphic file (type pdf)
+<use ./Pics/Tex/Explanatory/RegionsPlot/SPSWWE.pdf>
+Package pdftex.def Info: ./Pics/Tex/Explanatory/RegionsPlot/SPSWWE.pdf  used on
+ input line 284.
+(pdftex.def)             Requested size: 52.23871pt x 43.57288pt.
+ [29
+
+ <./Pics/Tex/Explanatory/RegionsPlot/SPSWWE.pdf> <./Pics/Tex/Results/DB/SWWE/SW
+WE.pdf>]
+<./Pics/Tex/Results/DB/SWWE/RegionSWWE.pdf, id=1429, 384.44127pt x 312.02371pt>
+
+File: ./Pics/Tex/Results/DB/SWWE/RegionSWWE.pdf Graphic file (type pdf)
+<use ./Pics/Tex/Results/DB/SWWE/RegionSWWE.pdf>
+Package pdftex.def Info: ./Pics/Tex/Results/DB/SWWE/RegionSWWE.pdf  used on inp
+ut line 289.
+(pdftex.def)             Requested size: 215.10196pt x 174.57973pt.
+File: ./Pics/Tex/Explanatory/RegionsPlot/SPSWWE.pdf Graphic file (type pdf)
+<use ./Pics/Tex/Explanatory/RegionsPlot/SPSWWE.pdf>
+Package pdftex.def Info: ./Pics/Tex/Explanatory/RegionsPlot/SPSWWE.pdf  used on
+ input line 289.
+(pdftex.def)             Requested size: 52.23871pt x 43.57288pt.
+
+Overfull \vbox (2.13899pt too high) detected at line 289
+ []
+
+[30
+
+ <./Pics/Tex/Results/DB/SWWE/RegionSWWE.pdf>]
+<./Pics/Tex/Results/DB/rSV/RegionrSV.pdf, id=1487, 384.44127pt x 312.02371pt>
+File: ./Pics/Tex/Results/DB/rSV/RegionrSV.pdf Graphic file (type pdf)
+<use ./Pics/Tex/Results/DB/rSV/RegionrSV.pdf>
+Package pdftex.def Info: ./Pics/Tex/Results/DB/rSV/RegionrSV.pdf  used on input
+ line 295.
+(pdftex.def)             Requested size: 215.10196pt x 174.57973pt.
+<./Pics/Tex/Explanatory/RegionsPlot/SPrSV.pdf, id=1488, 349.98856pt x 291.95374
+pt>
+File: ./Pics/Tex/Explanatory/RegionsPlot/SPrSV.pdf Graphic file (type pdf)
+<use ./Pics/Tex/Explanatory/RegionsPlot/SPrSV.pdf>
+Package pdftex.def Info: ./Pics/Tex/Explanatory/RegionsPlot/SPrSV.pdf  used on 
+input line 295.
+(pdftex.def)             Requested size: 52.23871pt x 43.57288pt.
+
+Overfull \vbox (2.13899pt too high) detected at line 295
+ []
+
+[31
+
+ <./Pics/Tex/Explanatory/RegionsPlot/SPrSV.pdf> <./Pics/Tex/Results/DB/rSV/Regi
+onrSV.pdf>]
+<./Pics/Tex/Results/DB/Serre/Serre.pdf, id=1559, 382.38356pt x 300.12729pt>
+File: ./Pics/Tex/Results/DB/Serre/Serre.pdf Graphic file (type pdf)
+<use ./Pics/Tex/Results/DB/Serre/Serre.pdf>
+Package pdftex.def Info: ./Pics/Tex/Results/DB/Serre/Serre.pdf  used on input l
+ine 300.
+(pdftex.def)             Requested size: 215.10196pt x 168.83034pt.
+<./Pics/Tex/Explanatory/RegionsPlot/SPSerre.pdf, id=1560, 349.98856pt x 291.953
+74pt>
+File: ./Pics/Tex/Explanatory/RegionsPlot/SPSerre.pdf Graphic file (type pdf)
+<use ./Pics/Tex/Explanatory/RegionsPlot/SPSerre.pdf>
+Package pdftex.def Info: ./Pics/Tex/Explanatory/RegionsPlot/SPSerre.pdf  used o
+n input line 300.
+(pdftex.def)             Requested size: 52.23871pt x 43.57288pt.
+ [32
+
+ <./Pics/Tex/Explanatory/RegionsPlot/SPSerre.pdf> <./Pics/Tex/Results/DB/Serre/
+Serre.pdf>]
+<./Pics/Tex/Results/DB/Serre/RegionSerre.pdf, id=1631, 384.44127pt x 312.02371p
+t>
+File: ./Pics/Tex/Results/DB/Serre/RegionSerre.pdf Graphic file (type pdf)
+<use ./Pics/Tex/Results/DB/Serre/RegionSerre.pdf>
+Package pdftex.def Info: ./Pics/Tex/Results/DB/Serre/RegionSerre.pdf  used on i
+nput line 305.
+(pdftex.def)             Requested size: 215.10196pt x 174.57973pt.
+File: ./Pics/Tex/Explanatory/RegionsPlot/SPSerre.pdf Graphic file (type pdf)
+<use ./Pics/Tex/Explanatory/RegionsPlot/SPSerre.pdf>
+Package pdftex.def Info: ./Pics/Tex/Explanatory/RegionsPlot/SPSerre.pdf  used o
+n input line 305.
+(pdftex.def)             Requested size: 52.23871pt x 43.57288pt.
+
+Overfull \vbox (2.13899pt too high) detected at line 305
+ []
+
+[33
+
+ <./Pics/Tex/Results/DB/Serre/RegionSerre.pdf>]
+<./Pics/Tex/Results/DB/iSGN/RegioniSGN.pdf, id=1689, 384.44127pt x 350.55669pt>
+
+File: ./Pics/Tex/Results/DB/iSGN/RegioniSGN.pdf Graphic file (type pdf)
+<use ./Pics/Tex/Results/DB/iSGN/RegioniSGN.pdf>
+Package pdftex.def Info: ./Pics/Tex/Results/DB/iSGN/RegioniSGN.pdf  used on inp
+ut line 310.
+(pdftex.def)             Requested size: 190.51822pt x 173.72667pt.
+<./Pics/Tex/Explanatory/RegionsPlot/SPiSGN.pdf, id=1690, 349.98856pt x 291.9537
+4pt>
+File: ./Pics/Tex/Explanatory/RegionsPlot/SPiSGN.pdf Graphic file (type pdf)
+<use ./Pics/Tex/Explanatory/RegionsPlot/SPiSGN.pdf>
+Package pdftex.def Info: ./Pics/Tex/Explanatory/RegionsPlot/SPiSGN.pdf  used on
+ input line 310.
+(pdftex.def)             Requested size: 52.23871pt x 43.57288pt.
+
+Overfull \vbox (1.28593pt too high) detected at line 310
+ []
+
+[34
+
+ <./Pics/Tex/Explanatory/RegionsPlot/SPiSGN.pdf> <./Pics/Tex/Results/DB/iSGN/Re
+gioniSGN.pdf>] [35
+
+]
+<./Pics/Tex/Explanatory/RegDBV/3x3Grid.pdf, id=1810, 359.57536pt x 231.20277pt>
+
+File: ./Pics/Tex/Explanatory/RegDBV/3x3Grid.pdf Graphic file (type pdf)
+<use ./Pics/Tex/Explanatory/RegDBV/3x3Grid.pdf>
+Package pdftex.def Info: ./Pics/Tex/Explanatory/RegDBV/3x3Grid.pdf  used on inp
+ut line 319.
+(pdftex.def)             Requested size: 304.21866pt x 195.61308pt.
+ [36
+
+ <./Pics/Tex/Explanatory/RegDBV/3x3Grid.pdf>]
+[37
+
+] [38
+
+]
+\tf@nav=\write6
+\openout6 = `Presentation.nav'.
+
+\tf@toc=\write7
+\openout7 = `Presentation.toc'.
+
+\tf@snm=\write8
+\openout8 = `Presentation.snm'.
+
+
+
+Package movie15 Warning: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+(movie15)                @@ Package `movie15' is obsolete and @@
+(movie15)                @@ superseded by `media9'.           @@
+(movie15)                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 335.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 335.
+(./Presentation.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 335.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 335.
+Package rerunfilecheck Info: File `Presentation.out' has not changed.
+(rerunfilecheck)             Checksum: E50D662C6FBE15D19D4B38FD29D58C19;215.
+ ) 
 Here is how much of TeX's memory you used:
- 21834 strings out of 492982
- 424730 string characters out of 6134896
- 632719 words of memory out of 5000000
- 24940 multiletter control sequences out of 15000+600000
- 4545 words of font info for 17 fonts, out of 8000000 for 9000
+ 22320 strings out of 492982
+ 436618 string characters out of 6134896
+ 657034 words of memory out of 5000000
+ 25282 multiletter control sequences out of 15000+600000
+ 18437 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,12n,59p,800b,633s stack positions out of 5000i,500n,10000p,200000b,80000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 56i,19n,59p,800b,766s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+sbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/symbols/msam10.pfb>
+Output written on Presentation.pdf (38 pages, 17293989 bytes).
+PDF statistics:
+ 2094 PDF objects out of 2487 (max. 8388607)
+ 1938 compressed objects within 20 object streams
+ 83 named destinations out of 1000 (max. 500000)
+ 235 words of extra memory for PDF output out of 10000 (max. 10000000)
+

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  18 AUG 2020 09:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  12 JAN 2021 11:53
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -803,16 +803,6 @@ s been generated with the most recent feature set (\pgfplotsset{compat=1.15}).
 runsystem(gnuplot Init.pgf-plot.gnuplot)...executed.
 
 PGFPlots: reading {Init.pgf-plot.table}
-\openout3 = `Init.pgf-plot.gnuplot'.
-
-runsystem(gnuplot Init.pgf-plot.gnuplot)...executed.
-
-PGFPlots: reading {Init.pgf-plot.table}
-\openout3 = `Init.pgf-plot.gnuplot'.
-
-runsystem(gnuplot Init.pgf-plot.gnuplot)...executed.
-
-PGFPlots: reading {Init.pgf-plot.table}
 [1
 Non-PDF special ignored!
 Non-PDF special ignored!
@@ -825,19 +815,19 @@ Non-PDF special ignored!
 Non-PDF special ignored!{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 (./Init.aux) ) 
 Here is how much of TeX's memory you used:
- 26025 strings out of 492982
- 676903 string characters out of 6134896
- 3374765 words of memory out of 5000000
- 29135 multiletter control sequences out of 15000+600000
+ 26006 strings out of 492982
+ 676560 string characters out of 6134896
+ 3072262 words of memory out of 5000000
+ 29116 multiletter control sequences out of 15000+600000
  9277 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,18n,128p,727b,2078s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
-i12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Init.pdf (1 page, 187359 bytes).
+ 74i,10n,128p,727b,1883s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+s10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on Init.pdf (1 page, 103879 bytes).
 PDF statistics:
  31 PDF objects out of 1000 (max. 8388607)
  22 compressed objects within 1 object stream
