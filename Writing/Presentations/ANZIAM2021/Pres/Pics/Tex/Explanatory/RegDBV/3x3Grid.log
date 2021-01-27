@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  12 JAN 2021 12:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  20 JAN 2021 10:28
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -793,26 +793,26 @@ File: AllText.pdf Graphic file (type pdf)
 <use AllText.pdf>
 Package pdftex.def Info: AllText.pdf  used on input line 20.
 (pdftex.def)             Requested size: 155.24895pt x 129.50247pt.
-<RegionSWWE.pdf, id=5, 384.44127pt x 330.14743pt>
+<RegionSWWE.pdf, id=5, 382.38356pt x 330.14743pt>
 File: RegionSWWE.pdf Graphic file (type pdf)
 <use RegionSWWE.pdf>
 Package pdftex.def Info: RegionSWWE.pdf  used on input line 22.
-(pdftex.def)             Requested size: 103.50105pt x 88.88406pt.
-<RegionrSV.pdf, id=6, 384.44127pt x 330.14743pt>
+(pdftex.def)             Requested size: 103.50105pt x 89.36264pt.
+<RegionrSV.pdf, id=6, 382.38356pt x 330.14743pt>
 File: RegionrSV.pdf Graphic file (type pdf)
 <use RegionrSV.pdf>
 Package pdftex.def Info: RegionrSV.pdf  used on input line 27.
-(pdftex.def)             Requested size: 103.50105pt x 88.88406pt.
-<RegionSerre.pdf, id=7, 384.44127pt x 330.14743pt>
+(pdftex.def)             Requested size: 103.50105pt x 89.36264pt.
+<RegionSerre.pdf, id=7, 382.38356pt x 330.14743pt>
 File: RegionSerre.pdf Graphic file (type pdf)
 <use RegionSerre.pdf>
 Package pdftex.def Info: RegionSerre.pdf  used on input line 32.
-(pdftex.def)             Requested size: 103.50105pt x 88.88406pt.
-<RegioniSGN.pdf, id=8, 384.44127pt x 372.82687pt>
+(pdftex.def)             Requested size: 103.50105pt x 89.36264pt.
+<RegioniSGN.pdf, id=8, 382.38356pt x 372.82687pt>
 File: RegioniSGN.pdf Graphic file (type pdf)
 <use RegioniSGN.pdf>
 Package pdftex.def Info: RegioniSGN.pdf  used on input line 37.
-(pdftex.def)             Requested size: 103.50105pt x 100.37447pt.
+(pdftex.def)             Requested size: 103.50105pt x 100.9149pt.
 [1
 Non-PDF special ignored!
 Non-PDF special ignored!
@@ -840,7 +840,7 @@ mss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on 3x3Grid.pdf (1 page, 108382 bytes).
+Output written on 3x3Grid.pdf (1 page, 108210 bytes).
 PDF statistics:
  118 PDF objects out of 1000 (max. 8388607)
  101 compressed objects within 2 object streams
