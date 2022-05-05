@@ -1,0 +1,100 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+
+\documentclass[pt]{standalone}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[pdf]{pstricks}
+\usepackage{pgfplots}
+\usepackage{sansmath}
+\sansmath
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{fillbetween}
+%% the following commands are needed for some matlab2tikz features
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{arrows.meta}
+\usepgfplotslibrary{patchplots}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{shapes.multipart}
+%\usetikzlibrary{external}
+%\tikzexternalize % activate!
+
+\begin{document}
+\begin{tikzpicture}[every text node part/.style={align=center}]
+\tikzstyle{every node}=[font=\Large]
+\begin{axis}[%
+width=4.521in,
+height=3.566in,
+enlarge x limits=true,
+enlarge y limits=true,
+clip=true,
+axis x line=bottom, 
+axis y line=left,
+at={(0.758in,0.481in)},
+scale only axis,
+axis x line = middle,
+axis y line = middle,
+xmin=0,
+xmax=1,
+xtick={-0.66666,-0.33333,0.33333,0.66666,1},
+xticklabels = {$-\frac23$,$-\frac13$,$\frac13$,$\frac23$,$1$},
+extra x ticks={0},
+xlabel style={font=\color{white!15!black}},
+xlabel={\large $\beta_1$},
+ymin=0,
+ymax=1,
+ytick={0.33333,0.66666,1},
+yticklabels = {$\frac13$,$\frac23$,$1$,$\frac43$},
+ylabel style={font=\color{white!15!black}},
+ylabel={\large $\beta_2$},
+axis background/.style={fill=white},
+];
+\addplot+[name path=Above,mark=none, draw=none] coordinates {(-3,1) (-10,1)};
+
+\draw[densely dashed,black,ultra thick] (0,0) --   (1,1) ;
+
+\draw[-,black,ultra thick, loosely dotted] (2/3,0) --   (1,1/3) ;
+
+
+\path[name path=Critical ] (0,0) -- (1,1) ;
+
+\addplot+[name path=Below,mark=none, draw=none] coordinates {(-2,0) (2,0)};
+
+%\addplot[draw=none,black,decoration={text along path,
+%	text={|\Large|  {Non Dispersive Boundary}},
+%	raise=2ex,
+%	text color={black},
+%	text align={left indent={0.3\dimexpr\pgfdecoratedpathlength\relax}}},
+%postaction={decorate}]
+%coordinates {(0,0) (1,1)};
+%\node[] at (axis cs: 0.3,0.8) {Dispersive Waves Ahead};
+%\node[] at (axis cs: 0.7,0.3)  {Dispersive Waves Behind};
+
+\addplot[yellow,opacity=0.1] fill between[of=Critical and Below];
+\addplot[magenta,opacity=0.1] fill between[of=Critical and Above];
+
+\node[] at (axis cs: 0.55,0.05) {$0s \le t \le 50s$};
+\addplot[mark=*,black, mark size = 6pt] coordinates {(0,0)};
+\draw[->,red,ultra thick] (0.666,0) --  (0.785,0.117333); 
+
+\node[] at (axis cs: 0.73,0.25) {$50s \le t \le 100s$};
+\addplot[mark=*,black, mark size = 6pt] coordinates {(0.666,0)};
+
+\addplot[mark=*,black, mark size = 6pt] coordinates {(0.133333,0.133333)};
+\node[] at (axis cs: 0.36,0.17) {$100s \le t \le 150s$};
+\draw[->,red,ultra thick] (0.8,0.133333) --  (0.149,0.133333) ;
+%
+\addplot[mark=*,black, mark size = 6pt] coordinates {(0.8,0.133333)};
+\draw[->,red,ultra thick] (0.133333,0.133333) --  (0.015,0.015) ;
+\node[] at (axis cs: 0.15,0.03) {$150s \le t $};
+
+
+\end{axis}
+
+\end{tikzpicture}%
+
+\end{document}

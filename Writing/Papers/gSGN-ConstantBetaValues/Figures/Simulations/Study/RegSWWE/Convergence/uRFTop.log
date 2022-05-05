@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  17 JUN 2020 13:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.14)  13 JUL 2020 15:19
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
-**uRFTop.tex
-(./uRFTop.tex
+**uRFtop.tex
+(./uRFtop.tex
 LaTeX2e <2017-04-15>
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/standalone/standalone.cls
@@ -703,8 +703,8 @@ File: pgflibraryshapes.multipart.code.tex 2010/01/07 v3.0.1a (rcs-revision 1.2)
 \pgfnodepartsevenbox=\box63
 \pgfnodepartsixbox=\box64
 \pgfnodepartfivebox=\box65
-)) (./uRFTop.aux)
-\openout1 = `uRFTop.aux'.
+)) (./uRFtop.aux)
+\openout1 = `uRFtop.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
 LaTeX Font Info:    ... okay on input line 22.
@@ -793,24 +793,22 @@ Non-PDF special ignored!
 Non-PDF special ignored!
 Non-PDF special ignored!
 Non-PDF special ignored!{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-(./uRFTop.aux) ) 
+(./uRFtop.aux) ) 
 Here is how much of TeX's memory you used:
- 25973 strings out of 492982
- 676387 string characters out of 6134896
- 2102982 words of memory out of 5000000
- 29097 multiletter control sequences out of 15000+600000
- 4094 words of font info for 16 fonts, out of 8000000 for 9000
+ 25983 strings out of 492982
+ 676530 string characters out of 6134896
+ 2484714 words of memory out of 5000000
+ 29105 multiletter control sequences out of 15000+600000
+ 5915 words of font info for 22 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,10n,128p,729b,1879s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 74i,10n,128p,729b,1901s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on uRFTop.pdf (1 page, 78966 bytes).
+mmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on uRFtop.pdf (1 page, 80315 bytes).
 PDF statistics:
- 31 PDF objects out of 1000 (max. 8388607)
- 22 compressed objects within 1 object stream
+ 23 PDF objects out of 1000 (max. 8388607)
+ 16 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

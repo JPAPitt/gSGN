@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{Motivation}{3}{0}{1}
+\beamer@sectionintoc {2}{Family of Equations}{9}{0}{2}
+\beamer@sectionintoc {3}{Linear Theory}{13}{0}{3}
+\beamer@sectionintoc {4}{Comparison To Numerical Solutions}{22}{0}{4}
